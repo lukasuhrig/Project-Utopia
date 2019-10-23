@@ -174,12 +174,6 @@
     </ClCompile>
     <ClCompile Include="Vektor2d.cpp" />
   </ItemGroup>
-  <ItemGroup>
-    <Image Include="planet1.png" />
-    <Image Include="planet2.png" />
-    <Image Include="planet3.png" />
-    <Image Include="rakete.png" />
-  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

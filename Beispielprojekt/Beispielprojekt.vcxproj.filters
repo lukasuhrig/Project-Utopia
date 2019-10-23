@@ -35,28 +35,14 @@
     <ClCompile Include="stdafx.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Planet.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Vektor2d.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Project Utopia.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-  </ItemGroup>
-  <ItemGroup>
-    <Image Include="planet1.png">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="planet2.png">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="planet3.png">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="rakete.png">
-      <Filter>Resource Files</Filter>
-    </Image>
+    <ClCompile Include="Planet.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

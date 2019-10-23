@@ -18,7 +18,7 @@ public:
 	Gosu::Image bild;
 	GameWindow()
 		: Window(800, 600)
-		
+		,bild("HELD.png")
 	{
 		set_caption("Project Utopia");
 	}
@@ -26,14 +26,35 @@ public:
 	// wird bis zu 60x pro Sekunde aufgerufen.
 	// Wenn die Grafikkarte oder der Prozessor nicht mehr hinterherkommen,
 	// dann werden `draw` Aufrufe ausgelassen und die Framerate sinkt
+	double x = 100;
+	double y = 500;
+	void update() override
+	{
+		if (input().down(Gosu::KB_D) == true) {
+			x = x + 10;
+		}
+		if (input().down(Gosu::KB_A) == true) {
+			x = x - 10;
+		}
+		
+	}
 	void draw() override
 	{
+		bild.draw_rot(x, y, 0.0,	//Position
+			0.0,					//rotation
+			0.5, 1					//Position in relation zu der angegebenen POsition
+		);
+		graphics().draw_quad(
+			0, 500, Gosu::Color::WHITE,
+			800, 500, Gosu::Color::WHITE,
+			800, 600, Gosu::Color::WHITE,
+			0, 600, Gosu::Color::WHITE,
+			0.0
+		);
 	}
 
 	// Wird 60x pro Sekunde aufgerufen
-	void update() override
-	{
-	}
+	
 };
 
 // C++ Hauptprogramm

@@ -28,7 +28,7 @@ public:
 	// dann werden `draw` Aufrufe ausgelassen und die Framerate sinkt
 	double x = 100;
 	double y = 500;
-	
+	double jumptime = 0;
 	void update() override
 	{
 		if (input().down(Gosu::KB_D) == true) {
@@ -38,18 +38,20 @@ public:
 			x = x - 10;
 		}
 		if (input().down(Gosu::KB_W) == true) {
-			
-			if (y != 200) {
-				y = y - 20;
-			
-			};
-			
+			jumptime=jumptime+(1.0/60.0);
+			if (jumptime < 0.5) {
+				if (y != 200) {
+					y = y-20;
+				};
+			}
+		}
+		if (y >= 500) {
+			jumptime = 0;
 		}
 		
 		if (y < 500.0) {
-				y=y+10;
+			y=y+10;
 		};
-		
 	}
 	void draw() override
 	{

@@ -19,23 +19,30 @@ public:
 	GameWindow()
 		: Window(800, 600)
 		,bild("HELD.png")
+
 	{
 		set_caption("Project Utopia");
 	}
-
 	// wird bis zu 60x pro Sekunde aufgerufen.
 	// Wenn die Grafikkarte oder der Prozessor nicht mehr hinterherkommen,
 	// dann werden `draw` Aufrufe ausgelassen und die Framerate sinkt
 	double x = 100;
+	double hintergrund_x = 100;
 	double y = 500;
 	double jumptime = 0;
 	void update() override
 	{
-		if (input().down(Gosu::KB_D) == true) {
+		if (input().down(Gosu::KB_D) == true &&x<=700) {
 			x = x + 10;
 		}
-		if (input().down(Gosu::KB_A) == true) {
+		if (input().down(Gosu::KB_D) == true && x > 700) {
+			hintergrund_x = hintergrund_x - 10;
+		}
+		if (input().down(Gosu::KB_A) == true && x >= 100) {
 			x = x - 10;
+		}
+		if (input().down(Gosu::KB_A) == true && x < 100) {
+			hintergrund_x = hintergrund_x + 10;
 		}
 		if (input().down(Gosu::KB_W) == true||y<499) {
 
@@ -59,6 +66,13 @@ public:
 				0.0,					//rotation
 				0.5, 1					//Position in relation zu der angegebenen POsition
 			); 
+			
+		Gosu::Image("Background.png").draw_rot(hintergrund_x, 200, 0.0,
+				0.0,
+				0.5,1
+				
+
+			);
 		
 			
 		graphics().draw_quad(

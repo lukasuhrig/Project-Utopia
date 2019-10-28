@@ -37,21 +37,20 @@ public:
 		if (input().down(Gosu::KB_A) == true) {
 			x = x - 10;
 		}
-		if (input().down(Gosu::KB_W) == true) {
+		if (input().down(Gosu::KB_W) == true||y<499) {
+
 			jumptime=jumptime+(1.0/60.0);
-			if (jumptime < 0.5) {
-				if (y != 200) {
-					y = y-20;
+	
+				if (y != 200&&y<=500) {
+					y = 499+jumptime*jumptime*1000-900*jumptime;
 				};
-			}
+
 		}
-		if (y >= 500) {
+		if (y >= 499) {
 			jumptime = 0;
 		}
+
 		
-		if (y < 500.0) {
-			y=y+10;
-		};
 	}
 	void draw() override
 	{

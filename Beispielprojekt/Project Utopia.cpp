@@ -6,6 +6,7 @@
 #include <vector>
 #include <string>
 #include <iostream>
+#include <ctime>
 
 #include <Gosu/GraphicsBase.hpp>
 
@@ -20,7 +21,73 @@ const double DT = 100.0;
 
 
 
-//**********************CLASS**********************//
+
+//**********************KLASSEN**********************//
+
+
+
+//**********************Hilfsklassen für FPS-Berechnung**********************//
+class Interval
+{
+private:
+	unsigned int initial_;
+
+public:
+	// Ctor
+	inline Interval() : initial_(GetTickCount64())
+	{
+	}
+
+	// Dtor
+	virtual ~Interval()
+	{
+	}
+
+	inline unsigned int value() const
+	{
+		return GetTickCount64() - initial_;
+	}
+};
+class Fps
+{
+protected:
+	unsigned int m_fps;
+	unsigned int m_fpscount;
+	Interval m_fpsinterval;
+
+public:
+	// Constructor
+	Fps() : m_fps(0), m_fpscount(0)
+	{
+	}
+
+	// Update
+	void update()
+	{
+		// increase the counter by one
+		m_fpscount++;
+
+		// one second elapsed? (= 1000 milliseconds)
+		if (m_fpsinterval.value() > 1000)
+		{
+			// save the current counter value to m_fps
+			m_fps = m_fpscount;
+
+			// reset the counter and the interval
+			m_fpscount = 0;
+			m_fpsinterval = Interval();
+		}
+	}
+
+	// Get fps
+	unsigned int get() const
+	{
+		return m_fps;
+	}
+};
+//**********************Hilfsklassen für FPS-Berechnung ENDE**********************//
+
+
 
 class Player
 {
@@ -117,15 +184,20 @@ public:
 	}
 };
 
+//FPS
+Fps fps;
+
 class GameWindow : public Gosu::Window
-{
+{	
+	Gosu::Font fps_anzeige;
+
 public:
 		
 
 	Player player;
 	Background background;
 
-	GameWindow() : Window(800, 600)
+	GameWindow() : Window(800, 600),fps_anzeige(20)
 	{
 		set_caption("Project Utopia");
 
@@ -165,14 +237,18 @@ public:
 			player.resetJumpTime();
 		}
 
-
-		
+		//Berechnet FPS
+		fps.update();
 	}
 	void draw() override //ca. 60x pro Sekunde
 	{
 	
 		player.draw();
 		background.draw();
+
+		//MERKER: Erstellen von Enum für Reihenfolge von Images/fonts
+		fps_anzeige.draw("FPS: " + std::to_string(fps.get()),15,15, 1, //Die 1 ist die Reihenfolge in diesem Fall
+			1, 1, Gosu::Color::YELLOW);
 			
 		graphics().draw_quad(
 			0, 500, Gosu::Color::WHITE,
@@ -195,3 +271,5 @@ int main()
 
 
 //*****************************Funktionen*****************************//
+
+

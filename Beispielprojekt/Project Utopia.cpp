@@ -95,15 +95,16 @@ class Player
 
 	double pos_x;
 	double pos_y;
+	double rot;
 	bool lookingRight;
 	float health;
 	unsigned score;
 	double jumptime = 0;
 
 public:
-	Player() : character("Held.png")
+	Player() : character("Hero.png")
 	{
-		pos_x = pos_y = score = 0;
+		pos_x = pos_y = score = rot = 0;
 		health = 100.0;
 		lookingRight = true;
 	}
@@ -118,6 +119,24 @@ public:
 		lookingRight = true;
 		pos_x = pos_x + 10;
 	}
+	void tilt_left() {
+		if (rot > -15.0) {
+			rot = rot - 1.0;
+		}
+	}
+	void tilt_right() {
+		if (rot < 15.0) {
+			rot = rot + 1.0;
+		}
+	}
+	void reset_rot() {
+		if (rot < 0) {
+			rot = rot + 3;
+		}
+		if (rot > 0) {
+			rot = rot - 3;
+		}
+	}
 	void jump()
 	{
 		jumptime = jumptime + (1.0 / 60.0);
@@ -128,8 +147,8 @@ public:
 	}
 	void draw() const
 	{
-		character.draw_rot(pos_x, pos_y, 0.0,	//Position
-			0.0,					//rotation
+		character.draw_rot(pos_x, pos_y, 0.1,	//Position
+			rot,					//rotation
 			0.5, 1					//Position in relation zu der angegebenen POsition
 		);
 	}
@@ -158,7 +177,6 @@ class Background
 	Gosu::Image background_image;
 	double pos_x;
 	double pos_y;
-
 public:
 	Background() : background_image("Background.png")
 	{
@@ -197,7 +215,7 @@ public:
 	Player player;
 	Background background;
 
-	GameWindow() : Window(800, 600),fps_anzeige(20)
+	GameWindow() : Window(800, 600,true),fps_anzeige(20)
 	{
 		set_caption("Project Utopia");
 
@@ -210,28 +228,34 @@ public:
 		if (input().down(Gosu::KB_D) == true &&player.actual_pos_x()<=(width()-100)) 
 		{
 			player.turn_right();
+			player.tilt_right();
 		}
 
 		if (input().down(Gosu::KB_D) == true && player.actual_pos_x() > (width() - 100))
 		{
 			background.move_left();
+			player.tilt_right();
 		}
 
 		if (input().down(Gosu::KB_A) == true && player.actual_pos_x() >= 100) 
 		{
 			player.turn_left();
+			player.tilt_left();
 		}
 
 		if (input().down(Gosu::KB_A) == true && player.actual_pos_x() < 100) 
 		{
 			background.move_right();
+			player.tilt_left();
 		}
 
 		if (input().down(Gosu::KB_W) == true||player.actual_pos_y()< (height()-101)) 
 		{
 			player.jump();
 		}
-
+		if (input().down(Gosu::KB_A) == false && input().down(Gosu::KB_D) == false) {
+			player.reset_rot();
+		}
 		if (player.actual_pos_y() >= (height() - 101))
 		{
 			player.resetJumpTime();

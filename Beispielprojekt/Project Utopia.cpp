@@ -188,26 +188,26 @@ public:
 Fps fps;
 
 class GameWindow : public Gosu::Window
-{	
+{
 	Gosu::Font fps_anzeige;
 
 public:
-		
+
 
 	Player player;
 	Background background;
 
-	GameWindow() : Window(800, 600),fps_anzeige(20)
+	GameWindow() : Window(800, 600), fps_anzeige(20)
 	{
 		set_caption("Project Utopia");
 
-		player.set_pos(100,500);
-		background.set_pos(100,200);
+		player.set_pos(100, 500);
+		background.set_pos(100, 200);
 	}
 
 	void update() override //ca. 60x pro Sekunde
 	{
-		if (input().down(Gosu::KB_D) == true &&player.actual_pos_x()<=(width()-100)) 
+		if (input().down(Gosu::KB_D) == true && player.actual_pos_x() <= (width() - 100))
 		{
 			player.turn_right();
 		}
@@ -217,17 +217,17 @@ public:
 			background.move_left();
 		}
 
-		if (input().down(Gosu::KB_A) == true && player.actual_pos_x() >= 100) 
+		if (input().down(Gosu::KB_A) == true && player.actual_pos_x() >= 100)
 		{
 			player.turn_left();
 		}
 
-		if (input().down(Gosu::KB_A) == true && player.actual_pos_x() < 100) 
+		if (input().down(Gosu::KB_A) == true && player.actual_pos_x() < 100)
 		{
 			background.move_right();
 		}
 
-		if (input().down(Gosu::KB_W) == true||player.actual_pos_y()< (height()-101)) 
+		if (input().down(Gosu::KB_W) == true || player.actual_pos_y() < (height() - 101))
 		{
 			player.jump();
 		}
@@ -242,14 +242,14 @@ public:
 	}
 	void draw() override //ca. 60x pro Sekunde
 	{
-	
+
 		player.draw();
 		background.draw();
 
 		//MERKER: Erstellen von Enum für Reihenfolge von Images/fonts
-		fps_anzeige.draw("FPS: " + std::to_string(fps.get()),15,15, 1, //Die 1 ist die Reihenfolge in diesem Fall
+		fps_anzeige.draw("FPS: " + std::to_string(fps.get()), 15, 15, 1, //Die 1 ist die Reihenfolge in diesem Fall
 			1, 1, Gosu::Color::YELLOW);
-			
+
 		graphics().draw_quad(
 			0, 500, Gosu::Color::WHITE,
 			800, 500, Gosu::Color::WHITE,
@@ -258,7 +258,7 @@ public:
 			0.0
 		);
 	}
-	
+
 };
 
 

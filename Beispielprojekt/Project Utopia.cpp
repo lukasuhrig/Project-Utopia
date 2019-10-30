@@ -102,7 +102,7 @@ class Player
 	double jumptime = 0;
 
 public:
-	Player() : character("Hero.png")
+	Player() : character("player1.png")
 	{
 		pos_x = pos_y = score = rot = 0;
 		health = 100.0;
@@ -178,7 +178,7 @@ class Background
 	double pos_x;
 	double pos_y;
 public:
-	Background() : background_image("Background.png")
+	Background() : background_image("background_new.png")
 	{
 		pos_x = pos_y = 0;
 	}
@@ -194,6 +194,10 @@ public:
 	{
 		background_image.draw_rot(pos_x, pos_y, 0.0,
 			0.0, 0.5, 1);
+		background_image.draw_rot(pos_x + 1024, pos_y, 0.0, 0.0, 0.5, 1);
+		background_image.draw_rot(pos_x+2048, pos_y, 0.0,
+			0.0, 0.5, 1);
+		background_image.draw_rot(pos_x + 3072, pos_y, 0.0, 0.0, 0.5, 1);
 	}
 	void set_pos(double x, double y)
 	{
@@ -215,12 +219,12 @@ public:
 	Player player;
 	Background background;
 
-	GameWindow() : Window(800, 600,true),fps_anzeige(20)
+	GameWindow() : Window(800, 600),fps_anzeige(20)
 	{
 		set_caption("Project Utopia");
 
 		player.set_pos(100, 500);
-		background.set_pos(100, 200);
+		background.set_pos(300, 500);
 	}
 
 	void update() override //ca. 60x pro Sekunde
@@ -275,10 +279,10 @@ public:
 			1, 1, Gosu::Color::YELLOW);
 
 		graphics().draw_quad(
-			0, 500, Gosu::Color::WHITE,
+			0, 500, Gosu::Color::GREEN,
 			800, 500, Gosu::Color::WHITE,
 			800, 600, Gosu::Color::WHITE,
-			0, 600, Gosu::Color::WHITE,
+			0, 600, Gosu::Color::GREEN,
 			0.0
 		);
 	}

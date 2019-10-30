@@ -46,5 +46,11 @@
     <Image Include="Hero.png">
       <Filter>Resource Files</Filter>
     </Image>
+    <Image Include="background_new.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="player1.png">
+      <Filter>Resource Files</Filter>
+    </Image>
   </ItemGroup>
 </Project>

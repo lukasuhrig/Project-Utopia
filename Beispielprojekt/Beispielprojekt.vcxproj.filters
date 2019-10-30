@@ -40,10 +40,10 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <Image Include="HELD.png">
+    <Image Include="..\..\..\..\Background.png">
       <Filter>Resource Files</Filter>
     </Image>
-    <Image Include="..\..\..\..\Background.png">
+    <Image Include="Hero.png">
       <Filter>Resource Files</Filter>
     </Image>
   </ItemGroup>

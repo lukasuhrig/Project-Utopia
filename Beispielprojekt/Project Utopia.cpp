@@ -192,13 +192,21 @@ public:
 	}
 	void draw() const
 	{
+		
 		background_image.draw_rot(pos_x, pos_y, 0.0,
-			0.0, 0.5, 1);
+			0.0, 0.0, 1);
+
 	}
 	void set_pos(double x, double y)
 	{
 		pos_x = x;
 		pos_y = y;
+		if (pos_x > 1900) {
+			pos_x = 0;
+		}
+		if (pos_x < 1900) {
+			pos_x = 0;
+		}
 	}
 };
 
@@ -220,7 +228,7 @@ public:
 		set_caption("Project Utopia");
 
 		player.set_pos(100,500);
-		background.set_pos(100,200);
+		background.set_pos(0,300);
 	}
 
 	void update() override //ca. 60x pro Sekunde
@@ -253,9 +261,11 @@ public:
 		{
 			player.jump();
 		}
+
 		if (input().down(Gosu::KB_A) == false && input().down(Gosu::KB_D) == false) {
 			player.reset_rot();
 		}
+
 		if (player.actual_pos_y() >= (height() - 101))
 		{
 			player.resetJumpTime();

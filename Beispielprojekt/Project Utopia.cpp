@@ -4,6 +4,7 @@
 #include <Gosu/AutoLink.hpp>
 
 #include <vector>
+#include <list>
 #include <string>
 #include <iostream>
 #include <ctime>
@@ -14,6 +15,17 @@
 
 // Simulationsgeschwindigkeit
 const double DT = 100.0;
+
+
+//**********************ENUMS**********************//
+
+enum ZOrder //Reihenfolge von Elementen
+{
+	Z_BACKGROUND,
+	Z_OBJECT,
+	Z_PLAYER,
+	Z_UI //Text etc.
+};
 
 
 //**********************FUNCTIONS**********************//
@@ -33,12 +45,10 @@ private:
 	unsigned int initial_;
 
 public:
-	// Ctor
 	inline Interval() : initial_(GetTickCount64())
 	{
 	}
 
-	// Dtor
 	virtual ~Interval()
 	{
 	}
@@ -56,12 +66,11 @@ protected:
 	Interval m_fpsinterval;
 
 public:
-	// Constructor
+
 	Fps() : m_fps(0), m_fpscount(0)
 	{
 	}
 
-	// Update
 	void update()
 	{
 		// increase the counter by one
@@ -79,7 +88,6 @@ public:
 		}
 	}
 
-	// Get fps
 	unsigned int get() const
 	{
 		return m_fps;
@@ -89,47 +97,91 @@ public:
 
 
 
+//TEST_TEST_TEST_TEST_TEST_TEST_TEST_TEST_TEST_TEST_TEST_TEST_TEST_TEST
+typedef std::vector<Gosu::Image> Animation; //Das muss noch als eigene Klasse (Animation) programmiert werden, dazu müsste man sich jedoch mehr Gedanken machen
+class Cloud
+{
+	Animation animation;
+	double pos_x, pos_y;
+
+public:
+	explicit Cloud(Animation animation) : animation(animation)
+	{
+		pos_x = Gosu::random(100, 700);
+		pos_y = Gosu::random(50, 450);
+	}
+
+	double x() const
+	{
+		return pos_x;
+	}
+
+	double y() const
+	{
+		return pos_y;
+	}
+
+	void draw() const
+	{
+		const Gosu::Image& image = animation.at(Gosu::milliseconds() / 100 % animation.size());
+
+		image.draw(pos_x - image.width() / 2.0, pos_y - image.height() / 2.0, Z_OBJECT,
+			0.3,
+			0.3
+		);
+	}
+
+};
+//TEST_TEST_TEST_TEST_TEST_TEST_TEST_TEST_TEST_TEST_TEST_TEST_TEST_TEST
+
 class Player
 {
-	Gosu::Image character;
+	std::vector<Gosu::Image> character;
 
 	double pos_x;
 	double pos_y;
 	double rot;
+	double angle;
 	bool lookingRight;
 	float health;
 	unsigned score;
 	double jumptime = 0;
 
 public:
-	Player() : character("player1.png")
+	Player()
 	{
-		pos_x = pos_y = score = rot = 0;
+		pos_x = pos_y = score = rot = angle = 0;
 		health = 100.0;
 		lookingRight = true;
+		character = Gosu::load_tiles("player_blue.png", 400, 483);
 	}
 
-	void turn_left()
+	void turn_left() 
 	{
 		lookingRight = false;
+		angle = 180.0;
 		pos_x = pos_x - 10;
 	}
 	void turn_right()
 	{
 		lookingRight = true;
+		angle = 0.0;
 		pos_x = pos_x + 10;
 	}
-	void tilt_left() {
+	void tilt_left() 
+	{
 		if (rot > -15.0) {
 			rot = rot - 1.0;
 		}
 	}
-	void tilt_right() {
+	void tilt_right() 
+	{
 		if (rot < 15.0) {
 			rot = rot + 1.0;
 		}
 	}
-	void reset_rot() {
+	void reset_rot() 
+	{
 		if (rot < 0) {
 			rot = rot + 3;
 		}
@@ -147,21 +199,37 @@ public:
 	}
 	void draw() const
 	{
-		character.draw_rot(pos_x, pos_y, 0.1,	//Position
-			rot,					//rotation
-			0.5, 1					//Position in relation zu der angegebenen POsition
-		);
+		if (lookingRight == true)
+		{
+			character.at(1).draw_rot(pos_x, pos_y, Z_PLAYER,
+				0, 
+				1,
+				1,
+				0.2, //Skalierung Charakter X
+				0.2 //Skalierung Charakter Y
+			);
+		}
+		else if (lookingRight == false)
+		{
+			character.at(0).draw_rot(pos_x, pos_y, Z_PLAYER,
+				0,
+				1,
+				1,
+				0.2, //Skalierung Charakter X
+				0.2 //Skalierung Charakter Y
+			);
+		}
 	}
 	void set_pos(double x, double y)
 	{
 		pos_x = x;
 		pos_y = y;
 	}
-	double actual_pos_x()
+	double actual_pos_x() const
 	{
 		return pos_x;
 	}
-	double actual_pos_y()
+	double actual_pos_y() const
 	{
 		return pos_y;
 	}
@@ -177,7 +245,6 @@ class Background
 	Gosu::Image background_image;
 	double pos_x;
 	double pos_y;
-	double shift = 0;
 public:
 	Background() : background_image("background_new.png")
 	{
@@ -191,16 +258,14 @@ public:
 	{
 		pos_x = pos_x + 10;
 	}
-	void draw()
+	void draw() const
 	{
-		background_image.draw_rot(pos_x + shift, pos_y, 0.0, 0.0, 0.5, 1);
-		background_image.draw_rot(pos_x + shift + 1025, pos_y, 0.0, 0.0, 0.5, 1);
-		background_image.draw_rot(pos_x + shift + 2050, pos_y, 0.0, 0.0, 0.5, 1);
-		background_image.draw_rot(pos_x + shift + 3075, pos_y, 0.0, 0.0, 0.5, 1);
-			if (int32_t(pos_x)%2050==0 && pos_x!=0) {
-
-				shift = shift - pos_x;
-			}
+		background_image.draw_rot(pos_x, pos_y, Z_BACKGROUND,
+			0.0, 0.5, 1);
+		background_image.draw_rot(pos_x + 1024, pos_y, Z_BACKGROUND, 0.0, 0.5, 1);
+		background_image.draw_rot(pos_x+2048, pos_y, Z_BACKGROUND,
+			0.0, 0.5, 1);
+		background_image.draw_rot(pos_x + 3072, pos_y, Z_BACKGROUND, 0.0, 0.5, 1);
 	}
 	void set_pos(double x, double y)
 	{
@@ -222,52 +287,72 @@ public:
 	Player player;
 	Background background;
 
+	//TEST
+	std::list<Cloud> clouds;
+	Animation cloud_anim;
+
 	GameWindow() : Window(800, 600),fps_anzeige(20)
 	{
 		set_caption("Project Utopia");
 
 		player.set_pos(100, 500);
 		background.set_pos(300, 500);
+
+		//TEST
+		std::string filename = "clouds.png";
+		cloud_anim = Gosu::load_tiles(filename, 666, 300);
+
 	}
 
 	void update() override //ca. 60x pro Sekunde
 	{
-		if (input().down(Gosu::KB_D) == true && player.actual_pos_x() <= (width() - 100))
+		if (input().down(Gosu::KB_D) == true) //Taste D
 		{
-			player.turn_right();
-			player.tilt_right();
-		}
+			if (player.actual_pos_x() <= (width() - 100))
+			{
+				player.turn_right();
+				player.tilt_right();
+			}
+			if (player.actual_pos_x() > (width() - 100))
+			{
+				background.move_left();
+				player.tilt_right();
+			}
 
-		if (input().down(Gosu::KB_D) == true && player.actual_pos_x() > (width() - 100))
-		{
-			background.move_left();
-			player.tilt_right();
 		}
-
-		if (input().down(Gosu::KB_A) == true && player.actual_pos_x() >= 100)
+		if (input().down(Gosu::KB_A) == true) //Taste A
 		{
-			player.turn_left();
-			player.tilt_left();
-		}
+			if (player.actual_pos_x() >= 100)
+			{
+				player.turn_left();
+				player.tilt_left();
+			}
+			if (player.actual_pos_x() < 100)
+			{
+				background.move_right();
+				player.tilt_left();
+			}
 
-		if (input().down(Gosu::KB_A) == true && player.actual_pos_x() < 100)
-		{
-			background.move_right();
-			player.tilt_left();
 		}
 
 		if (input().down(Gosu::KB_W) == true || player.actual_pos_y() < (height() - 101))
 		{
 			player.jump();
 		}
-
-		if (input().down(Gosu::KB_A) == false && input().down(Gosu::KB_D) == false) {
+		if (input().down(Gosu::KB_A) == false && input().down(Gosu::KB_D) == false) //Taste A & D nicht gedrückt
+		{
 			player.reset_rot();
 		}
 
 		if (player.actual_pos_y() >= (height() - 101))
 		{
 			player.resetJumpTime();
+		}
+
+		//TEST
+		if (std::rand() % 25 == 0 && clouds.size() < 5) 
+		{
+			clouds.push_back(Cloud(cloud_anim));
 		}
 
 		//Berechnet FPS
@@ -280,7 +365,7 @@ public:
 		background.draw();
 
 		//MERKER: Erstellen von Enum für Reihenfolge von Images/fonts
-		fps_anzeige.draw("FPS: " + std::to_string(fps.get()), 15, 15, 1, //Die 1 ist die Reihenfolge in diesem Fall
+		fps_anzeige.draw("FPS: " + std::to_string(fps.get()), 15, 15, Z_UI,
 			1, 1, Gosu::Color::YELLOW);
 		
 		graphics().draw_quad(
@@ -288,8 +373,15 @@ public:
 			800, 500, Gosu::Color::WHITE,
 			800, 600, Gosu::Color::WHITE,
 			0, 600, Gosu::Color::GREEN,
-			0.0
+			Z_BACKGROUND
 		);
+	
+		//TEST
+		for (Cloud& cloud : clouds) 
+		{
+			cloud.draw();
+		}
+	
 	}
 
 };

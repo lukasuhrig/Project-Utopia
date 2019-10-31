@@ -52,5 +52,11 @@
     <Image Include="player1.png">
       <Filter>Resource Files</Filter>
     </Image>
+    <Image Include="clouds.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="player_blue.png">
+      <Filter>Resource Files</Filter>
+    </Image>
   </ItemGroup>
 </Project>

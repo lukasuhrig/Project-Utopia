@@ -102,7 +102,7 @@ class Player
 	double jumptime = 0;
 
 public:
-	Player() : character("Hero.png")
+	Player() : character("player1.png")
 	{
 		pos_x = pos_y = score = rot = 0;
 		health = 100.0;
@@ -178,7 +178,7 @@ class Background
 	double pos_x;
 	double pos_y;
 public:
-	Background() : background_image("Background.png")
+	Background() : background_image("background_new.png")
 	{
 		pos_x = pos_y = 0;
 	}
@@ -194,8 +194,11 @@ public:
 	{
 		
 		background_image.draw_rot(pos_x, pos_y, 0.0,
-			0.0, 0.0, 1);
-
+			0.0, 0.5, 1);
+		background_image.draw_rot(pos_x + 1024, pos_y, 0.0, 0.0, 0.5, 1);
+		background_image.draw_rot(pos_x+2048, pos_y, 0.0,
+			0.0, 0.5, 1);
+		background_image.draw_rot(pos_x + 3072, pos_y, 0.0, 0.0, 0.5, 1);
 	}
 	void set_pos(double x, double y)
 	{
@@ -214,26 +217,26 @@ public:
 Fps fps;
 
 class GameWindow : public Gosu::Window
-{	
+{
 	Gosu::Font fps_anzeige;
 
 public:
-		
+
 
 	Player player;
 	Background background;
 
-	GameWindow() : Window(800, 600,true),fps_anzeige(20)
+	GameWindow() : Window(800, 600),fps_anzeige(20)
 	{
 		set_caption("Project Utopia");
 
-		player.set_pos(100,500);
-		background.set_pos(0,300);
+		player.set_pos(100, 500);
+		background.set_pos(300, 500);
 	}
 
 	void update() override //ca. 60x pro Sekunde
 	{
-		if (input().down(Gosu::KB_D) == true &&player.actual_pos_x()<=(width()-100)) 
+		if (input().down(Gosu::KB_D) == true && player.actual_pos_x() <= (width() - 100))
 		{
 			player.turn_right();
 			player.tilt_right();
@@ -245,19 +248,19 @@ public:
 			player.tilt_right();
 		}
 
-		if (input().down(Gosu::KB_A) == true && player.actual_pos_x() >= 100) 
+		if (input().down(Gosu::KB_A) == true && player.actual_pos_x() >= 100)
 		{
 			player.turn_left();
 			player.tilt_left();
 		}
 
-		if (input().down(Gosu::KB_A) == true && player.actual_pos_x() < 100) 
+		if (input().down(Gosu::KB_A) == true && player.actual_pos_x() < 100)
 		{
 			background.move_right();
 			player.tilt_left();
 		}
 
-		if (input().down(Gosu::KB_W) == true||player.actual_pos_y()< (height()-101)) 
+		if (input().down(Gosu::KB_W) == true || player.actual_pos_y() < (height() - 101))
 		{
 			player.jump();
 		}
@@ -276,23 +279,23 @@ public:
 	}
 	void draw() override //ca. 60x pro Sekunde
 	{
-	
+
 		player.draw();
 		background.draw();
 
 		//MERKER: Erstellen von Enum für Reihenfolge von Images/fonts
-		fps_anzeige.draw("FPS: " + std::to_string(fps.get()),15,15, 1, //Die 1 ist die Reihenfolge in diesem Fall
+		fps_anzeige.draw("FPS: " + std::to_string(fps.get()), 15, 15, 1, //Die 1 ist die Reihenfolge in diesem Fall
 			1, 1, Gosu::Color::YELLOW);
-			
+
 		graphics().draw_quad(
-			0, 500, Gosu::Color::WHITE,
+			0, 500, Gosu::Color::GREEN,
 			800, 500, Gosu::Color::WHITE,
 			800, 600, Gosu::Color::WHITE,
-			0, 600, Gosu::Color::WHITE,
+			0, 600, Gosu::Color::GREEN,
 			0.0
 		);
 	}
-	
+
 };
 
 

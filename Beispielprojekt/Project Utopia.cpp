@@ -24,6 +24,7 @@ enum ZOrder //Reihenfolge von Elementen
 	Z_BACKGROUND,
 	Z_OBJECT,
 	Z_PLAYER,
+	Z_Blocks,
 	Z_UI //Text etc.
 };
 
@@ -39,6 +40,33 @@ enum ZOrder //Reihenfolge von Elementen
 
 
 //**********************Hilfsklassen für FPS-Berechnung**********************//
+class Blocks
+{
+	std::vector<Gosu::Image> Block;
+	double pos_x;
+	double pos_y;
+
+public:
+	void set_pos_left()
+	{
+		pos_x = pos_x - 10;
+	}
+	void set_pos_right()
+	{
+		pos_x = pos_x + 10;
+	}
+	void draw_Blocks(int number,double pos_x,double pos_y) {
+		Block.at(number).draw_rot(pos_x, pos_y, Z_Blocks,
+			0,
+			1,
+			1,
+			1, //Skalierung Charakter X
+			1 //Skalierung Charakter Y
+		);
+
+	}
+
+};
 class Interval
 {
 private:
@@ -141,7 +169,6 @@ class Player
 	double pos_x;
 	double pos_y;
 	double rot;
-	double angle;
 	bool lookingRight;
 	float health;
 	unsigned score;
@@ -150,7 +177,7 @@ class Player
 public:
 	Player()
 	{
-		pos_x = pos_y = score = rot = angle = 0;
+		pos_x = pos_y = score = rot  = 0;
 		health = 100.0;
 		lookingRight = true;
 		character = Gosu::load_tiles("player_blue.png", 400, 483);
@@ -159,13 +186,11 @@ public:
 	void turn_left() 
 	{
 		lookingRight = false;
-		angle = 180.0;
 		pos_x = pos_x - 10;
 	}
 	void turn_right()
 	{
 		lookingRight = true;
-		angle = 0.0;
 		pos_x = pos_x + 10;
 	}
 	void tilt_left() 
@@ -286,7 +311,7 @@ public:
 
 	Player player;
 	Background background;
-
+	Blocks block_blue;
 	//TEST
 	std::list<Cloud> clouds;
 	Animation cloud_anim;
@@ -363,7 +388,7 @@ public:
 
 		player.draw();
 		background.draw();
-
+		block_blue.draw_Blocks();
 		//MERKER: Erstellen von Enum für Reihenfolge von Images/fonts
 		fps_anzeige.draw("FPS: " + std::to_string(fps.get()), 15, 15, Z_UI,
 			1, 1, Gosu::Color::YELLOW);

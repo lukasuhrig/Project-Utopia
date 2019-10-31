@@ -177,6 +177,7 @@ class Background
 	Gosu::Image background_image;
 	double pos_x;
 	double pos_y;
+	double shift = 0;
 public:
 	Background() : background_image("background_new.png")
 	{
@@ -190,26 +191,21 @@ public:
 	{
 		pos_x = pos_x + 10;
 	}
-	void draw() const
+	void draw()
 	{
-		
-		background_image.draw_rot(pos_x, pos_y, 0.0,
-			0.0, 0.5, 1);
-		background_image.draw_rot(pos_x + 1024, pos_y, 0.0, 0.0, 0.5, 1);
-		background_image.draw_rot(pos_x+2048, pos_y, 0.0,
-			0.0, 0.5, 1);
-		background_image.draw_rot(pos_x + 3072, pos_y, 0.0, 0.0, 0.5, 1);
+		background_image.draw_rot(pos_x + shift, pos_y, 0.0, 0.0, 0.5, 1);
+		background_image.draw_rot(pos_x + shift + 1025, pos_y, 0.0, 0.0, 0.5, 1);
+		background_image.draw_rot(pos_x + shift + 2050, pos_y, 0.0, 0.0, 0.5, 1);
+		background_image.draw_rot(pos_x + shift + 3075, pos_y, 0.0, 0.0, 0.5, 1);
+			if (int32_t(pos_x)%2050==0 && pos_x!=0) {
+
+				shift = shift - pos_x;
+			}
 	}
 	void set_pos(double x, double y)
 	{
 		pos_x = x;
 		pos_y = y;
-		if (pos_x > 1900) {
-			pos_x = 0;
-		}
-		if (pos_x < 1900) {
-			pos_x = 0;
-		}
 	}
 };
 
@@ -286,7 +282,7 @@ public:
 		//MERKER: Erstellen von Enum für Reihenfolge von Images/fonts
 		fps_anzeige.draw("FPS: " + std::to_string(fps.get()), 15, 15, 1, //Die 1 ist die Reihenfolge in diesem Fall
 			1, 1, Gosu::Color::YELLOW);
-
+		
 		graphics().draw_quad(
 			0, 500, Gosu::Color::GREEN,
 			800, 500, Gosu::Color::WHITE,

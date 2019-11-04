@@ -25,6 +25,7 @@ enum ZOrder //Reihenfolge von Elementen
 	Z_OBJECT,
 	Z_PLAYER,
 	Z_UI //Text etc.
+	//Vordergrund/Hintegrund/Ebenen
 };
 
 
@@ -141,7 +142,6 @@ class Player
 	double pos_x;
 	double pos_y;
 	double rot;
-	double angle;
 	bool lookingRight;
 	float health;
 	unsigned score;
@@ -150,7 +150,7 @@ class Player
 public:
 	Player()
 	{
-		pos_x = pos_y = score = rot = angle = 0;
+		pos_x = pos_y = score = rot = 0;
 		health = 100.0;
 		lookingRight = true;
 		character = Gosu::load_tiles("player_blue.png", 400, 483);
@@ -159,13 +159,11 @@ public:
 	void turn_left() 
 	{
 		lookingRight = false;
-		angle = 180.0;
 		pos_x = pos_x - 10;
 	}
 	void turn_right()
 	{
 		lookingRight = true;
-		angle = 0.0;
 		pos_x = pos_x + 10;
 	}
 	void tilt_left() 
@@ -203,7 +201,7 @@ public:
 		{
 			character.at(1).draw_rot(pos_x, pos_y, Z_PLAYER,
 				0, 
-				1,
+				0.5,
 				1,
 				0.2, //Skalierung Charakter X
 				0.2 //Skalierung Charakter Y
@@ -213,7 +211,7 @@ public:
 		{
 			character.at(0).draw_rot(pos_x, pos_y, Z_PLAYER,
 				0,
-				1,
+				0.5,
 				1,
 				0.2, //Skalierung Charakter X
 				0.2 //Skalierung Charakter Y
@@ -245,8 +243,9 @@ class Background
 	Gosu::Image background_image;
 	double pos_x;
 	double pos_y;
+	double shift=0;
 public:
-	Background() : background_image("background_new.png")
+	Background() : background_image("Background1.png")
 	{
 		pos_x = pos_y = 0;
 	}
@@ -258,14 +257,20 @@ public:
 	{
 		pos_x = pos_x + 10;
 	}
-	void draw() const
-	{
-		background_image.draw_rot(pos_x, pos_y, Z_BACKGROUND,
-			0.0, 0.5, 1);
-		background_image.draw_rot(pos_x + 1024, pos_y, Z_BACKGROUND, 0.0, 0.5, 1);
-		background_image.draw_rot(pos_x+2048, pos_y, Z_BACKGROUND,
-			0.0, 0.5, 1);
-		background_image.draw_rot(pos_x + 3072, pos_y, Z_BACKGROUND, 0.0, 0.5, 1);
+	
+	void draw() 
+	{	
+		if (int32_t(pos_x) % (2*background_image.width()) == 0 && pos_x != 0) {
+			shift = - pos_x;
+		}
+		background_image.draw_rot(pos_x + shift - (3.0* double(background_image.width())), pos_y, Z_BACKGROUND, 0.0, 0.5, 1);
+		background_image.draw_rot(pos_x + shift - (2.0*double( background_image.width())), pos_y, Z_BACKGROUND, 0.0, 0.5, 1);
+		background_image.draw_rot(pos_x + shift - double(background_image.width()), pos_y, Z_BACKGROUND, 0.0, 0.5, 1);
+		background_image.draw_rot(pos_x + shift, pos_y, Z_BACKGROUND, 0.0, 0.5, 1);
+		background_image.draw_rot(pos_x + shift + double(background_image.width()), pos_y, Z_BACKGROUND, 0.0, 0.5, 1);
+		background_image.draw_rot(pos_x + shift + (2.0* double(background_image.width())), pos_y, Z_BACKGROUND, 0.0, 0.5, 1);
+		background_image.draw_rot(pos_x + shift + (3.0* double(background_image.width())), pos_y, Z_BACKGROUND, 0.0, 0.5, 1);
+		
 	}
 	void set_pos(double x, double y)
 	{

@@ -48,6 +48,7 @@ public:
 	//TEST
 	std::list<Cloud> clouds;
 	Animation cloud_anim;
+	
 
 	GameWindow() : Window(800, 600),fps_anzeige(20)
 	{
@@ -55,7 +56,7 @@ public:
 
 		player.set_pos(100, 500);
 		background.set_pos(300, 500);
-
+		
 		//TEST
 		std::string filename = "clouds.png";
 		cloud_anim = Gosu::load_tiles(filename, 666, 300);

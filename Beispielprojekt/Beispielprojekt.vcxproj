@@ -190,6 +190,7 @@
     <Image Include="Brick_Block.png" />
     <Image Include="clouds.png" />
     <Image Include="Hero.png" />
+    <Image Include="Normaler_Block.png" />
     <Image Include="player1.png" />
     <Image Include="player_blue.png" />
   </ItemGroup>

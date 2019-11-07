@@ -24,7 +24,9 @@ public:
 		lookingRight = true;
 		character = Gosu::load_tiles("player_blue.png", 400, 483);
 	}
-
+	void stop() {
+		pos_x = pos_x;
+	}
 	void turn_left()
 	{
 		lookingRight = false;

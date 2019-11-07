@@ -16,7 +16,7 @@
 #include "Block.h"
 #include "FPS.h"
 #include "Cloud.h"
-#include "Vektor2d.h"
+//#include "Vektor2d.h"
 
 // Simulationsgeschwindigkeit
 const double DT = 100.0;
@@ -54,7 +54,7 @@ public:
 
 	void update() override //ca. 60x pro Sekunde
 	{
-		if (input().down(Gosu::KB_D) == true) //Taste D
+		if (input().down(Gosu::KB_D) == true&& input().down(Gosu::KB_A) == false) //Taste D
 		{
 			if (player.actual_pos_x() <= (width() - 100))
 			{
@@ -68,7 +68,7 @@ public:
 			}
 
 		}
-		if (input().down(Gosu::KB_A) == true) //Taste A
+		if (input().down(Gosu::KB_A) == true&& input().down(Gosu::KB_D) == false) //Taste A
 		{
 			if (player.actual_pos_x() >= 100)
 			{
@@ -81,6 +81,9 @@ public:
 				player.tilt_left();
 			}
 
+		}
+		if (input().down(Gosu::KB_A) == true && input().down(Gosu::KB_D) == true) {
+			player.stop();
 		}
 
 		if (input().down(Gosu::KB_W) == true || player.actual_pos_y() < (height() - 101))
@@ -114,7 +117,7 @@ public:
 	
 		//MERKER: Erstellen von Enum für Reihenfolge von Images/fonts
 		fps_anzeige.draw("FPS: " + std::to_string(fps.get()), 15, 15, Z_UI,
-			1, 1, Gosu::Color::YELLOW);
+			1, 1, Gosu::Color::RED);
 		
 		graphics().draw_quad(
 			0, 500, Gosu::Color::GREEN,

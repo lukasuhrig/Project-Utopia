@@ -2,6 +2,7 @@
 
 #include <Gosu/Gosu.hpp>
 #include <Gosu/AutoLink.hpp>
+#include <Gosu/GraphicsBase.hpp>
 
 #include <vector>
 #include <list>
@@ -9,8 +10,11 @@
 #include <iostream>
 #include <ctime>
 
-#include <Gosu/GraphicsBase.hpp>
-
+#include "ZOrder.h"
+#include "Player.h"
+#include "Background.h"
+#include "Block.h"
+#include "FPS.h"
 #include "Vektor2d.h"
 
 // Simulationsgeschwindigkeit
@@ -19,115 +23,13 @@ const double DT = 100.0;
 
 //**********************ENUMS**********************//
 
-enum ZOrder //Reihenfolge von Elementen
-{
-	Z_BACKGROUND,
-	Z_OBJECT,
-	Z_PLAYER,
-	Z_Blocks,
-	Z_UI //Text etc.
-	//Vordergrund/Hintegrund/Ebenen
-};
-
-
 //**********************FUNCTIONS**********************//
-
-
-
-
 
 //**********************KLASSEN**********************//
 
-
-class Blocks
-{
-	
-	double pos_x;
-	double pos_y;
-	double block_look;		// Nummer des Images welches man aufrufen will
-	const Gosu::Image& image;
-public:
-	void set_pos_left()
-	{
-		pos_x = pos_x - 10;
-	}
-	void set_pos_right()
-	{
-		pos_x = pos_x + 10;
-	}
-	//WIR WAREN HIER!!
-	void draw_Blocks() {
-		image.draw_rot(pos_x, pos_y, Z_Blocks, // Blöcke sollen vor allem anderen auf dem Bildschirm angezeigt werden
-			0,
-			1,
-			1,
-			1, //Skalierung Charakter X
-			1 //Skalierung Charakter Y
-		);
-
-	}
-
-};
-
 //**********************Hilfsklassen für FPS-Berechnung**********************//
 
-class Interval
-{
-private:
-	unsigned int initial_;
-
-public:
-	inline Interval() : initial_(GetTickCount64())
-	{
-	}
-
-	virtual ~Interval()
-	{
-	}
-
-	inline unsigned int value() const
-	{
-		return GetTickCount64() - initial_;
-	}
-};
-class Fps
-{
-protected:
-	unsigned int m_fps;
-	unsigned int m_fpscount;
-	Interval m_fpsinterval;
-
-public:
-
-	Fps() : m_fps(0), m_fpscount(0)
-	{
-	}
-
-	void update()
-	{
-		// increase the counter by one
-		m_fpscount++;
-
-		// one second elapsed? (= 1000 milliseconds)
-		if (m_fpsinterval.value() > 1000)
-		{
-			// save the current counter value to m_fps
-			m_fps = m_fpscount;
-
-			// reset the counter and the interval
-			m_fpscount = 0;
-			m_fpsinterval = Interval();
-		}
-	}
-
-	unsigned int get() const
-	{
-		return m_fps;
-	}
-};
 //**********************Hilfsklassen für FPS-Berechnung ENDE**********************//
-
-
 
 //TEST_TEST_TEST_TEST_TEST_TEST_TEST_TEST_TEST_TEST_TEST_TEST_TEST_TEST
 typedef std::vector<Gosu::Image> Animation; //Das muss noch als eigene Klasse (Animation) programmiert werden, dazu müsste man sich jedoch mehr Gedanken machen
@@ -166,149 +68,6 @@ public:
 };
 //TEST_TEST_TEST_TEST_TEST_TEST_TEST_TEST_TEST_TEST_TEST_TEST_TEST_TEST
 
-class Player
-{
-	std::vector<Gosu::Image> character;
-
-	double pos_x;
-	double pos_y;
-	double rot;
-	bool lookingRight;
-	float health;
-	unsigned score;
-	double jumptime = 0;
-
-public:
-	Player()
-	{
-		pos_x = pos_y = score = rot  = 0;
-		health = 100.0;
-		lookingRight = true;
-		character = Gosu::load_tiles("player_blue.png", 400, 483);
-	}
-
-	void turn_left() 
-	{
-		lookingRight = false;
-		pos_x = pos_x - 10;
-	}
-	void turn_right()
-	{
-		lookingRight = true;
-		pos_x = pos_x + 10;
-	}
-	void tilt_left() 
-	{
-		if (rot > -15.0) {
-			rot = rot - 1.0;
-		}
-	}
-	void tilt_right() 
-	{
-		if (rot < 15.0) {
-			rot = rot + 1.0;
-		}
-	}
-	void reset_rot() 
-	{
-		if (rot < 0) {
-			rot = rot + 3;
-		}
-		if (rot > 0) {
-			rot = rot - 3;
-		}
-	}
-	void jump()
-	{
-		jumptime = jumptime + (1.0 / 60.0);
-
-		if (pos_y != 200 && pos_y <= 500) {
-			pos_y = 499 + jumptime * jumptime * 1000 - 900 * jumptime;
-		};
-	}
-	void draw() const
-	{
-		if (lookingRight == true)
-		{
-			character.at(1).draw_rot(pos_x, pos_y, Z_PLAYER,
-				0, 
-				0.5,
-				1,
-				0.2, //Skalierung Charakter X
-				0.2 //Skalierung Charakter Y
-			);
-		}
-		else if (lookingRight == false)
-		{
-			character.at(0).draw_rot(pos_x, pos_y, Z_PLAYER,
-				0,
-				0.5,
-				1,
-				0.2, //Skalierung Charakter X
-				0.2 //Skalierung Charakter Y
-			);
-		}
-	}
-	void set_pos(double x, double y)
-	{
-		pos_x = x;
-		pos_y = y;
-	}
-	double actual_pos_x() const
-	{
-		return pos_x;
-	}
-	double actual_pos_y() const
-	{
-		return pos_y;
-	}
-	void resetJumpTime()
-	{
-		jumptime = 0;
-	}
-
-};
-
-class Background
-{
-	Gosu::Image background_image;
-	double pos_x;
-	double pos_y;
-	double shift=0;
-public:
-	Background() : background_image("background_new.png")
-	{
-		pos_x = pos_y = 0;
-	}
-	void move_left()
-	{
-		pos_x = pos_x - 10;
-	}
-	void move_right()
-	{
-		pos_x = pos_x + 10;
-	}
-	
-	void draw() 
-	{	
-		if (int32_t(pos_x) % (2*background_image.width()) == 0 && pos_x != 0) {
-			shift = - pos_x;
-		}
-		background_image.draw_rot(pos_x + shift - (3.0* double(background_image.width())), pos_y, Z_BACKGROUND, 0.0, 0.5, 1);
-		background_image.draw_rot(pos_x + shift - (2.0*double( background_image.width())), pos_y, Z_BACKGROUND, 0.0, 0.5, 1);
-		background_image.draw_rot(pos_x + shift - double(background_image.width()), pos_y, Z_BACKGROUND, 0.0, 0.5, 1);
-		background_image.draw_rot(pos_x + shift, pos_y, Z_BACKGROUND, 0.0, 0.5, 1);
-		background_image.draw_rot(pos_x + shift + double(background_image.width()), pos_y, Z_BACKGROUND, 0.0, 0.5, 1);
-		background_image.draw_rot(pos_x + shift + (2.0* double(background_image.width())), pos_y, Z_BACKGROUND, 0.0, 0.5, 1);
-		background_image.draw_rot(pos_x + shift + (3.0* double(background_image.width())), pos_y, Z_BACKGROUND, 0.0, 0.5, 1);
-		
-	}
-	void set_pos(double x, double y)
-	{
-		pos_x = x;
-		pos_y = y;
-	}
-};
 
 //FPS
 Fps fps;
@@ -336,11 +95,9 @@ public:
 		background.set_pos(300, 500);
 		
 		//TEST
-		std::string filename_clouds = "clouds.png";
-		cloud_anim = Gosu::load_tiles(filename_clouds, 666, 300);
-
+		std::string filename = "clouds.png";
+		cloud_anim = Gosu::load_tiles(filename, 666, 300);
 		
-
 	}
 
 	void update() override //ca. 60x pro Sekunde

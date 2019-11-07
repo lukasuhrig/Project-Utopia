@@ -21,17 +21,6 @@
 // Simulationsgeschwindigkeit
 const double DT = 100.0;
 
-
-//**********************ENUMS**********************//
-
-//**********************FUNCTIONS**********************//
-
-//**********************KLASSEN**********************//
-
-//**********************Hilfsklassen für FPS-Berechnung**********************//
-
-//**********************Hilfsklassen für FPS-Berechnung ENDE**********************//
-
 //FPS
 Fps fps;
 

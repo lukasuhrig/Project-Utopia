@@ -17,24 +17,8 @@ public:
 		pos_y = Gosu::random(50, 450);			//zufällige Zahl zwischen 50 und 450
 	}
 
-	double x() const
-	{
-		return pos_x;			//gibt die X Position der Wolke zurück
-	}
-
-	double y() const
-	{
-		return pos_y;			//gubt die Y Position der Wolke zurück
-	}
-
-	void draw() const
-	{
-		const Gosu::Image& image = animation.at(Gosu::milliseconds() / 100 % animation.size());  //HEXENWERK
-
-		image.draw(pos_x - image.width() / 2.0, pos_y - image.height() / 2.0, Z_OBJECT,			//Zeichnen der Wolke
-			0.3,
-			0.3
-		);
-	}
+	double x() const;
+	double y() const;
+	void draw() const;
 
 };

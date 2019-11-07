@@ -15,59 +15,11 @@
 #include "Background.h"
 #include "Block.h"
 #include "FPS.h"
-#include "Vektor2d.h"
+#include "Cloud.h"
+//#include "Vektor2d.h"
 
 // Simulationsgeschwindigkeit
 const double DT = 100.0;
-
-
-//**********************ENUMS**********************//
-
-//**********************FUNCTIONS**********************//
-
-//**********************KLASSEN**********************//
-
-//**********************Hilfsklassen für FPS-Berechnung**********************//
-
-//**********************Hilfsklassen für FPS-Berechnung ENDE**********************//
-
-//TEST_TEST_TEST_TEST_TEST_TEST_TEST_TEST_TEST_TEST_TEST_TEST_TEST_TEST
-typedef std::vector<Gosu::Image> Animation; //Das muss noch als eigene Klasse (Animation) programmiert werden, dazu müsste man sich jedoch mehr Gedanken machen
-class Cloud
-{
-	Animation animation;
-	double pos_x, pos_y;
-
-public:
-	explicit Cloud(Animation animation) : animation(animation)
-	{
-		pos_x = Gosu::random(100, 700);
-		pos_y = Gosu::random(50, 450);
-	}
-
-	double x() const
-	{
-		return pos_x;
-	}
-
-	double y() const
-	{
-		return pos_y;
-	}
-
-	void draw() const
-	{
-		const Gosu::Image& image = animation.at(Gosu::milliseconds() / 100 % animation.size());
-
-		image.draw(pos_x - image.width() / 2.0, pos_y - image.height() / 2.0, Z_OBJECT,
-			0.3,
-			0.3
-		);
-	}
-
-};
-//TEST_TEST_TEST_TEST_TEST_TEST_TEST_TEST_TEST_TEST_TEST_TEST_TEST_TEST
-
 
 //FPS
 Fps fps;
@@ -105,7 +57,7 @@ public:
 
 	void update() override //ca. 60x pro Sekunde
 	{
-		if (input().down(Gosu::KB_D) == true) //Taste D
+		if (input().down(Gosu::KB_D) == true&& input().down(Gosu::KB_A) == false) //Taste D
 		{
 			if (player.actual_pos_x() <= (width() - 100))
 			{
@@ -120,7 +72,7 @@ public:
 			}
 
 		}
-		if (input().down(Gosu::KB_A) == true) //Taste A
+		if (input().down(Gosu::KB_A) == true&& input().down(Gosu::KB_D) == false) //Taste A
 		{
 			if (player.actual_pos_x() >= 100)
 			{
@@ -134,6 +86,9 @@ public:
 				normal_block.set_pos_right();
 			}
 
+		}
+		if (input().down(Gosu::KB_A) == true && input().down(Gosu::KB_D) == true) {
+			player.stop();
 		}
 
 		if (input().down(Gosu::KB_W) == true || player.actual_pos_y() < (height() - 101))
@@ -167,7 +122,7 @@ public:
 		normal_block.draw_Blocks(0);
 		//MERKER: Erstellen von Enum für Reihenfolge von Images/fonts
 		fps_anzeige.draw("FPS: " + std::to_string(fps.get()), 15, 15, Z_UI,
-			1, 1, Gosu::Color::YELLOW);
+			1, 1, Gosu::Color::RED);
 		
 		graphics().draw_quad(
 			0, 500, Gosu::Color::GREEN,

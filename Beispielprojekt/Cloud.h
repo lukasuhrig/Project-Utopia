@@ -3,8 +3,8 @@
 #include <Gosu/AutoLink.hpp>
 #include <vector>
 #include "ZOrder.h"
+#include "Animation.h"
 
-typedef std::vector<Gosu::Image> Animation; //Das muss noch als eigene Klasse (Animation) programmiert werden, dazu müsste man sich jedoch mehr Gedanken machen
 class Cloud
 {
 	Animation animation;
@@ -13,25 +13,25 @@ class Cloud
 public:
 	explicit Cloud(Animation animation) : animation(animation)
 	{
-		pos_x = Gosu::random(100, 700);
-		pos_y = Gosu::random(50, 450);
+		pos_x = Gosu::random(100, 700);			//zufällige Zahl zwischen 100 und 700
+		pos_y = Gosu::random(50, 450);			//zufällige Zahl zwischen 50 und 450
 	}
 
 	double x() const
 	{
-		return pos_x;
+		return pos_x;			//gibt die X Position der Wolke zurück
 	}
 
 	double y() const
 	{
-		return pos_y;
+		return pos_y;			//gubt die Y Position der Wolke zurück
 	}
 
 	void draw() const
 	{
-		const Gosu::Image& image = animation.at(Gosu::milliseconds() / 100 % animation.size());
+		const Gosu::Image& image = animation.at(Gosu::milliseconds() / 100 % animation.size());  //HEXENWERK
 
-		image.draw(pos_x - image.width() / 2.0, pos_y - image.height() / 2.0, Z_OBJECT,
+		image.draw(pos_x - image.width() / 2.0, pos_y - image.height() / 2.0, Z_OBJECT,			//Zeichnen der Wolke
 			0.3,
 			0.3
 		);

@@ -24,9 +24,6 @@
     <ClInclude Include="targetver.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Vektor2d.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Player.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -45,12 +42,12 @@
     <ClInclude Include="Cloud.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Animation.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Vektor2d.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Project Utopia.cpp">
@@ -74,6 +71,9 @@
     <ClCompile Include="Cloud.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Animation.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Image Include="..\..\..\..\Background.png">
@@ -95,6 +95,9 @@
       <Filter>Resource Files</Filter>
     </Image>
     <Image Include="Brick_Block.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Normaler_Block.png">
       <Filter>Resource Files</Filter>
     </Image>
   </ItemGroup>

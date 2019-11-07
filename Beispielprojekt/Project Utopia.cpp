@@ -39,19 +39,17 @@ enum ZOrder //Reihenfolge von Elementen
 //**********************KLASSEN**********************//
 
 
-
-//**********************Hilfsklassen für FPS-Berechnung**********************//
 class Blocks
 {
-	std::vector<Gosu::Image> Block; // hier werden alle Images gespeichert, die Images sollten eine ähnliche größe haben.
+	
 	double pos_x;
 	double pos_y;
 	double block_look;		// Nummer des Images welches man aufrufen will
-
+	const Gosu::Image& image;
 public:
 	void set_pos_left()
 	{
-		pos_x = pos_x - 10; 
+		pos_x = pos_x - 10;
 	}
 	void set_pos_right()
 	{
@@ -59,7 +57,7 @@ public:
 	}
 	//WIR WAREN HIER!!
 	void draw_Blocks() {
-		Block.at(block_look).draw_rot(pos_x, pos_y, Z_Blocks, // Blöcke sollen vor allem anderen auf dem Bildschirm angezeigt werden
+		image.draw_rot(pos_x, pos_y, Z_Blocks, // Blöcke sollen vor allem anderen auf dem Bildschirm angezeigt werden
 			0,
 			1,
 			1,
@@ -70,11 +68,9 @@ public:
 	}
 
 };
-class Block_Look : Blocks {
 
-public:
-		
-};
+//**********************Hilfsklassen für FPS-Berechnung**********************//
+
 class Interval
 {
 private:
@@ -330,6 +326,7 @@ public:
 	//TEST
 	std::list<Cloud> clouds;
 	Animation cloud_anim;
+	
 
 	GameWindow() : Window(800, 600),fps_anzeige(20)
 	{
@@ -337,10 +334,12 @@ public:
 
 		player.set_pos(100, 500);
 		background.set_pos(300, 500);
-
+		
 		//TEST
-		std::string filename = "clouds.png";
-		cloud_anim = Gosu::load_tiles(filename, 666, 300);
+		std::string filename_clouds = "clouds.png";
+		cloud_anim = Gosu::load_tiles(filename_clouds, 666, 300);
+
+		
 
 	}
 

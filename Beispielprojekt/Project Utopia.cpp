@@ -56,7 +56,7 @@ public:
 	{
 		pos_x = pos_x + 10;
 	}
-
+	//WIR WAREN HIER!!
 	void draw_Blocks() {
 		Block.at(block_look).draw_rot(pos_x, pos_y, Z_Blocks, // Blöcke sollen vor allem anderen auf dem Bildschirm angezeigt werden
 			0,

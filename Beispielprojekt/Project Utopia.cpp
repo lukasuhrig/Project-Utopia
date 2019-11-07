@@ -280,7 +280,7 @@ class Background
 	double pos_y;
 	double shift=0;
 public:
-	Background() : background_image("Background1.png")
+	Background() : background_image("background_new.png")
 	{
 		pos_x = pos_y = 0;
 	}

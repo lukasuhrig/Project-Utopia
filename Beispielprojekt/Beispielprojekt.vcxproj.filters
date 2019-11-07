@@ -58,8 +58,5 @@
     <Image Include="player_blue.png">
       <Filter>Resource Files</Filter>
     </Image>
-    <Image Include="Background1.png">
-      <Filter>Resource Files</Filter>
-    </Image>
   </ItemGroup>
 </Project>

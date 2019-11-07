@@ -174,7 +174,6 @@
   </ItemGroup>
   <ItemGroup>
     <Image Include="..\..\..\..\Background.png" />
-    <Image Include="Background1.png" />
     <Image Include="background_new.png" />
     <Image Include="clouds.png" />
     <Image Include="Hero.png" />

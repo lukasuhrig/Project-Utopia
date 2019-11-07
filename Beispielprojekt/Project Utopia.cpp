@@ -81,10 +81,11 @@ public:
 
 	Player player;
 	Background background;
-	Blocks block_blue;
+	Blocks normal_block;
 	//TEST
 	std::list<Cloud> clouds;
 	Animation cloud_anim;
+	//Animation_Blocks Animation_Block;
 	
 
 	GameWindow() : Window(800, 600),fps_anzeige(20)
@@ -94,7 +95,9 @@ public:
 		player.set_pos(100, 500);
 		background.set_pos(300, 500);
 		
+		normal_block.set_pos(400, 400);
 		//TEST
+		std::string filename_block = "Brick_Blocks.png";
 		std::string filename = "clouds.png";
 		cloud_anim = Gosu::load_tiles(filename, 666, 300);
 
@@ -113,6 +116,7 @@ public:
 			{
 				background.move_left();
 				player.tilt_right();
+				normal_block.set_pos_left();
 			}
 
 		}
@@ -127,6 +131,7 @@ public:
 			{
 				background.move_right();
 				player.tilt_left();
+				normal_block.set_pos_right();
 			}
 
 		}
@@ -159,7 +164,7 @@ public:
 
 		player.draw();
 		background.draw();
-	
+		normal_block.draw_Blocks(0);
 		//MERKER: Erstellen von Enum für Reihenfolge von Images/fonts
 		fps_anzeige.draw("FPS: " + std::to_string(fps.get()), 15, 15, Z_UI,
 			1, 1, Gosu::Color::YELLOW);

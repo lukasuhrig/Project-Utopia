@@ -10,7 +10,8 @@
 #include <ctime>
 
 #include <Gosu/GraphicsBase.hpp>
-
+#include "ZOrder.h"
+#include "Player.h"
 #include "Vektor2d.h"
 
 // Simulationsgeschwindigkeit
@@ -19,15 +20,6 @@ const double DT = 100.0;
 
 //**********************ENUMS**********************//
 
-enum ZOrder //Reihenfolge von Elementen
-{
-	Z_BACKGROUND,
-	Z_OBJECT,
-	Z_PLAYER,
-	Z_Blocks,
-	Z_UI //Text etc.
-	//Vordergrund/Hintegrund/Ebenen
-};
 
 
 //**********************FUNCTIONS**********************//
@@ -170,108 +162,7 @@ public:
 };
 //TEST_TEST_TEST_TEST_TEST_TEST_TEST_TEST_TEST_TEST_TEST_TEST_TEST_TEST
 
-class Player
-{
-	std::vector<Gosu::Image> character;
 
-	double pos_x;
-	double pos_y;
-	double rot;
-	bool lookingRight;
-	float health;
-	unsigned score;
-	double jumptime = 0;
-
-public:
-	Player()
-	{
-		pos_x = pos_y = score = rot  = 0;
-		health = 100.0;
-		lookingRight = true;
-		character = Gosu::load_tiles("player_blue.png", 400, 483);
-	}
-
-	void turn_left() 
-	{
-		lookingRight = false;
-		pos_x = pos_x - 10;
-	}
-	void turn_right()
-	{
-		lookingRight = true;
-		pos_x = pos_x + 10;
-	}
-	void tilt_left() 
-	{
-		if (rot > -15.0) {
-			rot = rot - 1.0;
-		}
-	}
-	void tilt_right() 
-	{
-		if (rot < 15.0) {
-			rot = rot + 1.0;
-		}
-	}
-	void reset_rot() 
-	{
-		if (rot < 0) {
-			rot = rot + 3;
-		}
-		if (rot > 0) {
-			rot = rot - 3;
-		}
-	}
-	void jump()
-	{
-		jumptime = jumptime + (1.0 / 60.0);
-
-		if (pos_y != 200 && pos_y <= 500) {
-			pos_y = 499 + jumptime * jumptime * 1000 - 900 * jumptime;
-		};
-	}
-	void draw() const
-	{
-		if (lookingRight == true)
-		{
-			character.at(1).draw_rot(pos_x, pos_y, Z_PLAYER,
-				0, 
-				0.5,
-				1,
-				0.2, //Skalierung Charakter X
-				0.2 //Skalierung Charakter Y
-			);
-		}
-		else if (lookingRight == false)
-		{
-			character.at(0).draw_rot(pos_x, pos_y, Z_PLAYER,
-				0,
-				0.5,
-				1,
-				0.2, //Skalierung Charakter X
-				0.2 //Skalierung Charakter Y
-			);
-		}
-	}
-	void set_pos(double x, double y)
-	{
-		pos_x = x;
-		pos_y = y;
-	}
-	double actual_pos_x() const
-	{
-		return pos_x;
-	}
-	double actual_pos_y() const
-	{
-		return pos_y;
-	}
-	void resetJumpTime()
-	{
-		jumptime = 0;
-	}
-
-};
 
 class Background
 {
@@ -329,6 +220,7 @@ public:
 	Blocks block_blue;
 	//TEST
 	std::list<Cloud> clouds;
+	std::list<Blocks> blocks;
 	Animation cloud_anim;
 
 	GameWindow() : Window(800, 600),fps_anzeige(20)
@@ -341,7 +233,7 @@ public:
 		//TEST
 		std::string filename = "clouds.png";
 		cloud_anim = Gosu::load_tiles(filename, 666, 300);
-
+		
 	}
 
 	void update() override //ca. 60x pro Sekunde

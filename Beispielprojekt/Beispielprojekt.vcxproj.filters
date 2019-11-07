@@ -27,6 +27,12 @@
     <ClInclude Include="Vektor2d.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Player.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ZOrder.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -36,6 +42,12 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Project Utopia.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Player.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ZOrder.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -56,6 +68,9 @@
       <Filter>Resource Files</Filter>
     </Image>
     <Image Include="player_blue.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Brick_Block.png">
       <Filter>Resource Files</Filter>
     </Image>
   </ItemGroup>

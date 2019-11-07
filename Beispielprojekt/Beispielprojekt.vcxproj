@@ -158,12 +158,16 @@
     <Text Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="ZOrder.h" />
+    <ClInclude Include="Player.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
     <ClInclude Include="Vektor2d.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Project Utopia.cpp" />
+    <ClCompile Include="Player.cpp" />
+    <ClCompile Include="ZOrder.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
@@ -175,6 +179,7 @@
   <ItemGroup>
     <Image Include="..\..\..\..\Background.png" />
     <Image Include="background_new.png" />
+    <Image Include="Brick_Block.png" />
     <Image Include="clouds.png" />
     <Image Include="Hero.png" />
     <Image Include="player1.png" />

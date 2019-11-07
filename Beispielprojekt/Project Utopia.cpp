@@ -2,6 +2,7 @@
 
 #include <Gosu/Gosu.hpp>
 #include <Gosu/AutoLink.hpp>
+#include <Gosu/GraphicsBase.hpp>
 
 #include <vector>
 #include <list>
@@ -9,9 +10,11 @@
 #include <iostream>
 #include <ctime>
 
-#include <Gosu/GraphicsBase.hpp>
 #include "ZOrder.h"
 #include "Player.h"
+#include "Background.h"
+#include "Block.h"
+#include "FPS.h"
 #include "Vektor2d.h"
 
 // Simulationsgeschwindigkeit
@@ -20,110 +23,13 @@ const double DT = 100.0;
 
 //**********************ENUMS**********************//
 
-
-
 //**********************FUNCTIONS**********************//
-
-
-
-
 
 //**********************KLASSEN**********************//
 
-
-
 //**********************Hilfsklassen für FPS-Berechnung**********************//
-class Blocks
-{
-	std::vector<Gosu::Image> Block; // hier werden alle Images gespeichert, die Images sollten eine ähnliche größe haben.
-	double pos_x;
-	double pos_y;
-	double block_look;		// Nummer des Images welches man aufrufen will
 
-public:
-	void set_pos_left()
-	{
-		pos_x = pos_x - 10; 
-	}
-	void set_pos_right()
-	{
-		pos_x = pos_x + 10;
-	}
-
-	void draw_Blocks() {
-		Block.at(block_look).draw_rot(pos_x, pos_y, Z_Blocks, // Blöcke sollen vor allem anderen auf dem Bildschirm angezeigt werden
-			0,
-			1,
-			1,
-			1, //Skalierung Charakter X
-			1 //Skalierung Charakter Y
-		);
-
-	}
-
-};
-class Block_Look : Blocks {
-
-public:
-		
-};
-class Interval
-{
-private:
-	unsigned int initial_;
-
-public:
-	inline Interval() : initial_(GetTickCount64())
-	{
-	}
-
-	virtual ~Interval()
-	{
-	}
-
-	inline unsigned int value() const
-	{
-		return GetTickCount64() - initial_;
-	}
-};
-class Fps
-{
-protected:
-	unsigned int m_fps;
-	unsigned int m_fpscount;
-	Interval m_fpsinterval;
-
-public:
-
-	Fps() : m_fps(0), m_fpscount(0)
-	{
-	}
-
-	void update()
-	{
-		// increase the counter by one
-		m_fpscount++;
-
-		// one second elapsed? (= 1000 milliseconds)
-		if (m_fpsinterval.value() > 1000)
-		{
-			// save the current counter value to m_fps
-			m_fps = m_fpscount;
-
-			// reset the counter and the interval
-			m_fpscount = 0;
-			m_fpsinterval = Interval();
-		}
-	}
-
-	unsigned int get() const
-	{
-		return m_fps;
-	}
-};
 //**********************Hilfsklassen für FPS-Berechnung ENDE**********************//
-
-
 
 //TEST_TEST_TEST_TEST_TEST_TEST_TEST_TEST_TEST_TEST_TEST_TEST_TEST_TEST
 typedef std::vector<Gosu::Image> Animation; //Das muss noch als eigene Klasse (Animation) programmiert werden, dazu müsste man sich jedoch mehr Gedanken machen
@@ -163,48 +69,6 @@ public:
 //TEST_TEST_TEST_TEST_TEST_TEST_TEST_TEST_TEST_TEST_TEST_TEST_TEST_TEST
 
 
-
-class Background
-{
-	Gosu::Image background_image;
-	double pos_x;
-	double pos_y;
-	double shift=0;
-public:
-	Background() : background_image("background_new.png")
-	{
-		pos_x = pos_y = 0;
-	}
-	void move_left()
-	{
-		pos_x = pos_x - 10;
-	}
-	void move_right()
-	{
-		pos_x = pos_x + 10;
-	}
-	
-	void draw() 
-	{	
-		if (int32_t(pos_x) % (2*background_image.width()) == 0 && pos_x != 0) {
-			shift = - pos_x;
-		}
-		background_image.draw_rot(pos_x + shift - (3.0* double(background_image.width())), pos_y, Z_BACKGROUND, 0.0, 0.5, 1);
-		background_image.draw_rot(pos_x + shift - (2.0*double( background_image.width())), pos_y, Z_BACKGROUND, 0.0, 0.5, 1);
-		background_image.draw_rot(pos_x + shift - double(background_image.width()), pos_y, Z_BACKGROUND, 0.0, 0.5, 1);
-		background_image.draw_rot(pos_x + shift, pos_y, Z_BACKGROUND, 0.0, 0.5, 1);
-		background_image.draw_rot(pos_x + shift + double(background_image.width()), pos_y, Z_BACKGROUND, 0.0, 0.5, 1);
-		background_image.draw_rot(pos_x + shift + (2.0* double(background_image.width())), pos_y, Z_BACKGROUND, 0.0, 0.5, 1);
-		background_image.draw_rot(pos_x + shift + (3.0* double(background_image.width())), pos_y, Z_BACKGROUND, 0.0, 0.5, 1);
-		
-	}
-	void set_pos(double x, double y)
-	{
-		pos_x = x;
-		pos_y = y;
-	}
-};
-
 //FPS
 Fps fps;
 
@@ -220,7 +84,6 @@ public:
 	Blocks block_blue;
 	//TEST
 	std::list<Cloud> clouds;
-	std::list<Blocks> blocks;
 	Animation cloud_anim;
 
 	GameWindow() : Window(800, 600),fps_anzeige(20)

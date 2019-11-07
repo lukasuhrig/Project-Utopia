@@ -158,6 +158,9 @@
     <Text Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Background.h" />
+    <ClInclude Include="Block.h" />
+    <ClInclude Include="FPS.h" />
     <ClInclude Include="ZOrder.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="stdafx.h" />
@@ -167,6 +170,9 @@
   <ItemGroup>
     <ClCompile Include="Project Utopia.cpp" />
     <ClCompile Include="Player.cpp" />
+    <ClCompile Include="Background.cpp" />
+    <ClCompile Include="Block.cpp" />
+    <ClCompile Include="FPS.cpp" />
     <ClCompile Include="ZOrder.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>

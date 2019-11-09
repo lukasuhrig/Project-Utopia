@@ -12,7 +12,7 @@ class Blocks
 	double pos_y;
 	double block_look;		// Nummer des Images welches man aufrufen will
 
-	
+
 
 public:
 	Animation_Blocks Animation_Block;

@@ -47,7 +47,7 @@ public:
 		player.set_pos(100, 500);
 		background.set_pos(300, 500);
 		
-		normal_block.set_pos(400, 400);
+		normal_block.set_pos(400, 300);
 		//TEST
 		std::string filename_block = "Brick_Blocks.png";
 		std::string filename = "clouds.png";
@@ -90,8 +90,7 @@ public:
 		if (input().down(Gosu::KB_A) == true && input().down(Gosu::KB_D) == true) {
 			player.stop();
 		}
-
-		if (input().down(Gosu::KB_W) == true || player.actual_pos_y() < (height() - 101))
+		if (input().down(Gosu::KB_W) == true || player.get_jump()==true)
 		{
 			player.jump();
 		}
@@ -99,10 +98,28 @@ public:
 		{
 			player.reset_rot();
 		}
-
 		if (player.actual_pos_y() >= (height() - 101))
 		{
 			player.resetJumpTime();
+		}
+		if (player.actual_pos_y() > normal_block.y_pos() - 5.0 && 
+			player.actual_pos_y() < (normal_block.y_pos() +200.0) && 
+			player.actual_pos_x() > normal_block.x_pos() - 5.0 && 
+			player.actual_pos_x() < normal_block.x_pos() +normal_block.width()+ 5.0 &&
+			player.get_jumptime() > 0.6)
+		{
+			player.set_pos(player.actual_pos_x(),normal_block.y_pos());
+			player.resetJumpTime();
+			player.jumpposition();
+		}
+		if (((player.actual_pos_x() < normal_block.x_pos() - 5.0 || player.actual_pos_x() > normal_block.x_pos() + normal_block.width() + 5.0))&&
+			player.get_jump()==false)
+		{
+			player.drop();
+		}
+		if (player.actual_pos_y() > 500) {
+			player.set_pos(player.actual_pos_x(),500.0);
+			player.jumpposition();
 		}
 
 		//TEST

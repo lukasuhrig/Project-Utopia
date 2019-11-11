@@ -26,5 +26,8 @@ public:
 	void set_pos_left();
 	void set_pos_right();
 	void draw_Blocks(int a);
-
+	double x_pos();
+	double y_pos();
+	double width();
+	double height();
 };

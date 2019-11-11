@@ -3,6 +3,7 @@
 
 	void Player:: stop() {
 		pos_x = pos_x;
+		pos_y = pos_y;
 	}
 	void Player:: turn_left()
 	{
@@ -39,9 +40,26 @@
 	{
 		jumptime = jumptime + (1.0 / 60.0);
 
-		if (pos_y != 200 && pos_y <= 500) {
-			pos_y = 499 + jumptime * jumptime * 1000 - 900 * jumptime;
+		if (pos_y != 200.0 && pos_y -10.0 <= 500.0) {
+			pos_y = jump_y + jumptime * jumptime * gravity - 1000.0 * jumptime;
+			jumping = true;
 		};
+	}
+	double Player::get_jumpposition() {
+		return jump_y;
+	}
+	void Player::drop() {
+		droptime = droptime + (1.0 / 60.0);
+		if (pos_y < 500.0) {
+			pos_y = jump_y + droptime * droptime * gravity;
+		}
+	}
+	double Player:: get_jumptime() {
+		return jumptime;
+	}
+	void Player::jumpposition()
+	{
+		jump_y = pos_y;
 	}
 	void Player:: draw() const
 	{
@@ -82,4 +100,9 @@
 	void Player:: resetJumpTime()
 	{
 		jumptime = 0;
+		droptime = 0;
+		jumping = false;
+	}
+	bool Player::get_jump() {
+		return jumping;
 	}

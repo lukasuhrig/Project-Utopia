@@ -103,7 +103,7 @@ public:
 			player.resetJumpTime();
 		}
 		if (player.actual_pos_y() > normal_block.y_pos() - 5.0 && 
-			player.actual_pos_y() < (normal_block.y_pos() +200.0) && 
+			player.actual_pos_y() < (normal_block.y_pos() +5.0+ normal_block.height()) && 
 			player.actual_pos_x() > normal_block.x_pos() - 5.0 && 
 			player.actual_pos_x() < normal_block.x_pos() +normal_block.width()+ 5.0 &&
 			player.get_jumptime() > 0.6)
@@ -112,7 +112,9 @@ public:
 			player.resetJumpTime();
 			player.jumpposition();
 		}
-		if (((player.actual_pos_x() < normal_block.x_pos() - 5.0 || player.actual_pos_x() > normal_block.x_pos() + normal_block.width() + 5.0))&&
+		if ((player.actual_pos_x() < normal_block.x_pos() - 5.0 || player.actual_pos_x() > normal_block.x_pos() + normal_block.width() + 5.0) &&
+			//|| 
+			//(player.actual_pos_x() > normal_block.x_pos() - 5.0 && player.actual_pos_x() < normal_block.x_pos() + normal_block.width() + 5.0 &&player.actual_pos_y()> normal_block.y_pos() +normal_block.height() && player.actual_pos_y() <=500) &&
 			player.get_jump()==false)
 		{
 			player.drop();

@@ -16,11 +16,13 @@
 #include "Block.h"
 #include "FPS.h"
 #include "Cloud.h"
+#include "mainmenu.h"
+#include "mouse.h"
 //#include "Vektor2d.h"
 
 // Simulationsgeschwindigkeit
 const double DT = 100.0;
-
+bool menuing;
 //FPS
 Fps fps;
 
@@ -34,11 +36,12 @@ public:
 	Player player;
 	Background background;
 	Blocks normal_block;
+	Mouse mouse;
 	//TEST
 	std::list<Cloud> clouds;
 	Animation cloud_anim;
 	//Animation_Blocks Animation_Block;
-	
+	Menu menu;
 
 	GameWindow() : Window(800, 600),fps_anzeige(20)
 	{
@@ -57,85 +60,94 @@ public:
 
 	void update() override //ca. 60x pro Sekunde
 	{
-		if (input().down(Gosu::KB_D) == true&& input().down(Gosu::KB_A) == false) //Taste D
-		{
-			if (player.actual_pos_x() <= (width() - 100))
+		mouse.mouse(input().mouse_x(), input().mouse_y());
+		if ((input().mouse_x() > 200.0 && input().mouse_x() < 200.0 + menu.Button_width() && input().mouse_y() > 400.0 && input().mouse_y() < 400.0 + menu.Button_heigth() && input().down(Gosu::MS_LEFT))||menuing==true) {
+			menuing = true;
+			menu.noMenu();
+			mouse.noMouse();
+			if (input().down(Gosu::KB_D) == true && input().down(Gosu::KB_A) == false) //Taste D
 			{
-				player.turn_right();
-				player.tilt_right();
+				if (player.actual_pos_x() <= (width() - 100))
+				{
+					player.turn_right();
+					player.tilt_right();
+				}
+				if (player.actual_pos_x() > (width() - 100))
+				{
+					background.move_left();
+					player.tilt_right();
+					normal_block.set_pos_left();
+				}
+
 			}
-			if (player.actual_pos_x() > (width() - 100))
+			if (input().down(Gosu::KB_A) == true && input().down(Gosu::KB_D) == false) //Taste A
 			{
-				background.move_left();
-				player.tilt_right();
-				normal_block.set_pos_left();
+				if (player.actual_pos_x() >= 100)
+				{
+					player.turn_left();
+					player.tilt_left();
+				}
+				if (player.actual_pos_x() < 100)
+				{
+					background.move_right();
+					player.tilt_left();
+					normal_block.set_pos_right();
+				}
+
+			}
+			if (input().down(Gosu::KB_A) == true && input().down(Gosu::KB_D) == true) {
+				player.stop();
+			}
+			if (input().down(Gosu::KB_W) == true || player.get_jump() == true)
+			{
+				player.jump();
+			}
+			if (input().down(Gosu::KB_A) == false && input().down(Gosu::KB_D) == false) //Taste A & D nicht gedrückt
+			{
+				player.reset_rot();
+			}
+			if (player.actual_pos_y() >= (height() - 101))
+			{
+				player.resetJumpTime();
+			}
+			if (player.actual_pos_y() > normal_block.y_pos() - 5.0 &&
+				player.actual_pos_y() < (normal_block.y_pos() + 5.0 + normal_block.height()) &&
+				player.actual_pos_x() > normal_block.x_pos() - 5.0 &&
+				player.actual_pos_x() < normal_block.x_pos() + normal_block.width() + 5.0 &&
+				player.get_jumptime() > 0.6)
+			{
+				player.set_pos(player.actual_pos_x(), normal_block.y_pos());
+				player.resetJumpTime();
+				player.jumpposition();
+			}
+			if ((player.actual_pos_x() < normal_block.x_pos() - 5.0 ||
+				player.actual_pos_x() > normal_block.x_pos() + normal_block.width() + 5.0) &&
+				//|| 
+				//(player.actual_pos_x() > normal_block.x_pos() - 5.0 && player.actual_pos_x() < normal_block.x_pos() + normal_block.width() + 5.0 &&player.actual_pos_y()> normal_block.y_pos() +normal_block.height() && player.actual_pos_y() <=500) &&
+				player.get_jump() == false)
+			{
+				player.drop();
+			}
+			if (player.actual_pos_y() > 500) {
+				player.set_pos(player.actual_pos_x(), 500.0);
+				player.jumpposition();
 			}
 
-		}
-		if (input().down(Gosu::KB_A) == true&& input().down(Gosu::KB_D) == false) //Taste A
-		{
-			if (player.actual_pos_x() >= 100)
+			//TEST
+			if (std::rand() % 25 == 0 && clouds.size() < 5)
 			{
-				player.turn_left();
-				player.tilt_left();
+				clouds.push_back(Cloud(cloud_anim));
 			}
-			if (player.actual_pos_x() < 100)
-			{
-				background.move_right();
-				player.tilt_left();
-				normal_block.set_pos_right();
-			}
-
 		}
-		if (input().down(Gosu::KB_A) == true && input().down(Gosu::KB_D) == true) {
-			player.stop();
-		}
-		if (input().down(Gosu::KB_W) == true || player.get_jump()==true)
-		{
-			player.jump();
-		}
-		if (input().down(Gosu::KB_A) == false && input().down(Gosu::KB_D) == false) //Taste A & D nicht gedrückt
-		{
-			player.reset_rot();
-		}
-		if (player.actual_pos_y() >= (height() - 101))
-		{
-			player.resetJumpTime();
-		}
-		if (player.actual_pos_y() > normal_block.y_pos() - 5.0 && 
-			player.actual_pos_y() < (normal_block.y_pos() +5.0+ normal_block.height()) && 
-			player.actual_pos_x() > normal_block.x_pos() - 5.0 && 
-			player.actual_pos_x() < normal_block.x_pos() +normal_block.width()+ 5.0 &&
-			player.get_jumptime() > 0.6)
-		{
-			player.set_pos(player.actual_pos_x(),normal_block.y_pos());
-			player.resetJumpTime();
-			player.jumpposition();
-		}
-		if ((player.actual_pos_x() < normal_block.x_pos() - 5.0 || player.actual_pos_x() > normal_block.x_pos() + normal_block.width() + 5.0) &&
-			//|| 
-			//(player.actual_pos_x() > normal_block.x_pos() - 5.0 && player.actual_pos_x() < normal_block.x_pos() + normal_block.width() + 5.0 &&player.actual_pos_y()> normal_block.y_pos() +normal_block.height() && player.actual_pos_y() <=500) &&
-			player.get_jump()==false)
-		{
-			player.drop();
-		}
-		if (player.actual_pos_y() > 500) {
-			player.set_pos(player.actual_pos_x(),500.0);
-			player.jumpposition();
-		}
-
-		//TEST
-		if (std::rand() % 25 == 0 && clouds.size() < 5) 
-		{
-			clouds.push_back(Cloud(cloud_anim));
-		}
-
 		//Berechnet FPS
 		fps.update();
 	}
 	void draw() override //ca. 60x pro Sekunde
 	{
-
+		mouse.draw();
+		menu.Background();
+		menu.Button(200, 400);
+		menu.Level(200, 400, "Level1");
 		player.draw();
 		background.draw();
 		normal_block.draw_Blocks(0);

@@ -1,6 +1,10 @@
 #include "stdafx.h"
 #include "Player.h"
 
+bool Player::direction() const
+{
+	return this->lookingRight;
+}
 	void Player:: stop() //Spieler hält an
 	{
 		pos_x = pos_x;

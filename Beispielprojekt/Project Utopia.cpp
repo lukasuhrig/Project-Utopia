@@ -19,12 +19,16 @@
 #include "mainmenu.h"
 #include "mouse.h"
 //#include "Vektor2d.h"
+#include "pet.h"
 
 // Simulationsgeschwindigkeit
 const double DT = 100.0;
 bool menuing =true;
 //FPS
 Fps fps;
+
+//VOLUME/SOUND
+float master_vol = 1;
 
 class GameWindow : public Gosu::Window
 {
@@ -35,6 +39,7 @@ public:
 
 	Player player;
 	Background background;
+	Pet pet_1;
 	Blocks normal_block;
 	Mouse mouse;
 	//TEST
@@ -48,7 +53,7 @@ public:
 		set_caption("Project Utopia");
 
 		player.set_pos(100, 500);
-		background.set_pos(300, 500);
+		background.set_pos(300, 590);
 		
 		normal_block.set_pos(400, 300);
 		//TEST
@@ -68,11 +73,11 @@ public:
 			if (input().down(Gosu::KB_D) == true && input().down(Gosu::KB_A) == false) //Taste D und nicht Taste A
 			{
 				//***************RECHTS*******************
-				if (player.actual_pos_x() <= (width() - 100))//wenn spieler in dem Feld ist, in dem er sich bewegen kann
+				if (player.actual_pos_x() <= (width() - 120))//wenn spieler in dem Feld ist, in dem er sich bewegen kann
 				{
 					player.turn_right();
 				}
-				if (player.actual_pos_x() > (width() - 100))//wenn Spieler heruslaufen würde
+				if (player.actual_pos_x() > (width() - 120))//wenn Spieler heruslaufen würde
 				{
 					background.move_left();
 					normal_block.set_pos_left();
@@ -82,11 +87,11 @@ public:
 			if (input().down(Gosu::KB_A) == true && input().down(Gosu::KB_D) == false) //Taste A und nicht Taste D
 			{
 				//***************LINKS*******************
-				if (player.actual_pos_x() >= 100)//wenn spieler in dem Feld ist, in dem er sich bewegen kann
+				if (player.actual_pos_x() >= 120)//wenn spieler in dem Feld ist, in dem er sich bewegen kann
 				{
 					player.turn_left();
 				}
-				if (player.actual_pos_x() < 100)//wenn Spieler heruslaufen würde
+				if (player.actual_pos_x() < 120)//wenn Spieler heruslaufen würde
 				{
 					background.move_right();
 					normal_block.set_pos_right();
@@ -150,6 +155,9 @@ public:
 			menu.Level(200, 400, "Level1"); //drawt den Text für das Level
 		}
 		player.draw(); //drawt den player
+
+		pet_1.draw(player.direction(), player.actual_pos_x(), player.actual_pos_y()); //draw pet_1
+
 		background.draw(); //drawt den Background
 		normal_block.draw_Blocks(0); //drawt einen Block
 		//MERKER: Erstellen von Enum für Reihenfolge von Images/fonts
@@ -158,8 +166,8 @@ public:
 		
 		graphics().draw_quad//drawt Boden
 		(
-			0, 500, Gosu::Color::GREEN,
-			800, 500, Gosu::Color::GREEN,
+			0, 590, Gosu::Color::GREEN,
+			800, 590, Gosu::Color::GREEN,
 			800, 600, Gosu::Color::WHITE,
 			0, 600, Gosu::Color::WHITE,
 			Z_BACKGROUND

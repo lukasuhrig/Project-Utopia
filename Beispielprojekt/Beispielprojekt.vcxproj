@@ -165,12 +165,14 @@
     <ClInclude Include="Animation.h" />
     <ClInclude Include="mouse.h" />
     <ClInclude Include="mainmenu.h" />
+    <ClInclude Include="pet.h" />
     <ClInclude Include="ZOrder.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="pet.cpp" />
     <ClCompile Include="Project Utopia.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="Background.cpp" />
@@ -197,6 +199,7 @@
     <Image Include="clouds.png" />
     <Image Include="Hero.png" />
     <Image Include="Normaler_Block.png" />
+    <Image Include="pet_1.png" />
     <Image Include="player_blue.png" />
     <Image Include="pointerimg.png" />
   </ItemGroup>

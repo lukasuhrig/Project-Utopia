@@ -7,6 +7,7 @@ enum ZOrder //Reihenfolge von Elementen
 	Z_BACKGROUND,
 	Z_OBJECT,
 	Z_Blocks,
+	Z_PET,
 	Z_PLAYER,
 	Z_Menu_back,
 	Z_Menu_button,

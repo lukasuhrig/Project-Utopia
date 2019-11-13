@@ -37,6 +37,7 @@ public:
 	void set_pos(double x, double y);
 	double actual_pos_x() const;
 	double actual_pos_y() const;
+	bool direction() const;
 	void resetJumpTime();
 	void jumpposition();
 	void drop();

@@ -97,9 +97,6 @@
     <Image Include="background_new.png">
       <Filter>Resource Files</Filter>
     </Image>
-    <Image Include="player1.png">
-      <Filter>Resource Files</Filter>
-    </Image>
     <Image Include="player_blue.png">
       <Filter>Resource Files</Filter>
     </Image>
@@ -118,7 +115,7 @@
     <Image Include="..\..\..\..\..\..\..\Desktop\button.png">
       <Filter>Resource Files</Filter>
     </Image>
-    <Image Include="..\..\..\..\..\..\..\Desktop\pointerimg.png">
+    <Image Include="pointerimg.png">
       <Filter>Resource Files</Filter>
     </Image>
   </ItemGroup>

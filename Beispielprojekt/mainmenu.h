@@ -17,7 +17,6 @@ public:
 	void Background();
 	void Button(double,double);
 	void Level(double,double,std::string);
-	void noMenu();
 	double Button_heigth();
 	double Button_width();
 

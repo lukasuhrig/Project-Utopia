@@ -22,7 +22,7 @@
     <ProjectGuid>{7CD4BEC1-594C-493C-A14D-D63349A71DD1}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
     <RootNamespace>Beispielprojekt</RootNamespace>
-    <WindowsTargetPlatformVersion>10.0.18362.0</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
     <ProjectName>Project Utopia</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -191,15 +191,14 @@
   <ItemGroup>
     <Image Include="..\..\..\..\..\..\..\Desktop\button.png" />
     <Image Include="..\..\..\..\..\..\..\Desktop\Menu_Background.png" />
-    <Image Include="..\..\..\..\..\..\..\Desktop\pointerimg.png" />
     <Image Include="..\..\..\..\Background.png" />
     <Image Include="background_new.png" />
     <Image Include="Brick_Block.png" />
     <Image Include="clouds.png" />
     <Image Include="Hero.png" />
     <Image Include="Normaler_Block.png" />
-    <Image Include="player1.png" />
     <Image Include="player_blue.png" />
+    <Image Include="pointerimg.png" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

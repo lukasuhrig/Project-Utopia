@@ -3,7 +3,8 @@
 
 
 
-void Menu::Background() {
+void Menu::Background() //drawt den Menühintergrund
+{
 	background_image.draw_rot(
 		0, 0,Layer_background,
 		0,
@@ -13,7 +14,8 @@ void Menu::Background() {
 		1.9
 	);
 }
-void Menu::Button(double x, double y) {
+void Menu::Button(double x, double y)  //drawt den Button
+{
 	button_image.draw_rot(
 		x, y, Layer_button,
 		0, 
@@ -23,20 +25,19 @@ void Menu::Button(double x, double y) {
 		0.2
 	);
 }
-void Menu::Level(double x, double y, std::string lvl) {
+void Menu::Level(double x, double y, std::string lvl) //drawt die Levelbezeichnung
+{
 	Level_name.draw(lvl, x, y, Layer_text, 3, 3
 
 	);
 }
-void Menu::noMenu() {
-	Layer_background = Z_Menu_back_2;
-	Layer_text = Z_Menu_Text_2;
-	Layer_button = Z_Menu_button_2;
-}
-double Menu::Button_heigth() {
+
+double Menu::Button_heigth() //returned die Höhe des Buttons
+{
 	return button_image.height();
 };
-double Menu::Button_width() {
+double Menu::Button_width() // returned die Breite des Buttons
+{
 	return button_image.width();
 
 };

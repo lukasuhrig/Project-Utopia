@@ -22,7 +22,7 @@
 
 // Simulationsgeschwindigkeit
 const double DT = 100.0;
-bool menuing;
+bool menuing =true;
 //FPS
 Fps fps;
 
@@ -61,74 +61,72 @@ public:
 	void update() override //ca. 60x pro Sekunde
 	{
 		mouse.mouse(input().mouse_x(), input().mouse_y());
-		if ((input().mouse_x() > 200.0 && input().mouse_x() < 200.0 + menu.Button_width() && input().mouse_y() > 400.0 && input().mouse_y() < 400.0 + menu.Button_heigth() && input().down(Gosu::MS_LEFT))||menuing==true) {
-			menuing = true;
-			menu.noMenu();
+		if ((input().mouse_x() > 200.0 && input().mouse_x() < 200.0 + menu.Button_width() && input().mouse_y() > 400.0 && input().mouse_y() < 400.0 + menu.Button_heigth() && input().down(Gosu::MS_LEFT))||menuing==false) {
+			menuing = false;
+	
 			mouse.noMouse();
-			if (input().down(Gosu::KB_D) == true && input().down(Gosu::KB_A) == false) //Taste D
+			if (input().down(Gosu::KB_D) == true && input().down(Gosu::KB_A) == false) //Taste D und nicht Taste A
 			{
-				if (player.actual_pos_x() <= (width() - 100))
+				//***************RECHTS*******************
+				if (player.actual_pos_x() <= (width() - 100))//wenn spieler in dem Feld ist, in dem er sich bewegen kann
 				{
 					player.turn_right();
-					player.tilt_right();
 				}
-				if (player.actual_pos_x() > (width() - 100))
+				if (player.actual_pos_x() > (width() - 100))//wenn Spieler heruslaufen würde
 				{
 					background.move_left();
-					player.tilt_right();
 					normal_block.set_pos_left();
 				}
 
-			}
-			if (input().down(Gosu::KB_A) == true && input().down(Gosu::KB_D) == false) //Taste A
+			} 
+			if (input().down(Gosu::KB_A) == true && input().down(Gosu::KB_D) == false) //Taste A und nicht Taste D
 			{
-				if (player.actual_pos_x() >= 100)
+				//***************LINKS*******************
+				if (player.actual_pos_x() >= 100)//wenn spieler in dem Feld ist, in dem er sich bewegen kann
 				{
 					player.turn_left();
-					player.tilt_left();
 				}
-				if (player.actual_pos_x() < 100)
+				if (player.actual_pos_x() < 100)//wenn Spieler heruslaufen würde
 				{
 					background.move_right();
-					player.tilt_left();
 					normal_block.set_pos_right();
 				}
 
 			}
-			if (input().down(Gosu::KB_A) == true && input().down(Gosu::KB_D) == true) {
+			if (input().down(Gosu::KB_A) == true && input().down(Gosu::KB_D) == true) // Wenn Taste A und D gedrückt werden, stoppt der Spieler
+			{
 				player.stop();
 			}
-			if (input().down(Gosu::KB_W) == true || player.get_jump() == true)
+			if (input().down(Gosu::KB_W) == true || player.get_jump() == true) //wenn Taste W gedrückt wurde, oder die Sprungfunktion noch nicht beendet wurde
 			{
-				player.jump();
+				player.jump();//Spieler läuft Sprungfunktion ab
 			}
-			if (input().down(Gosu::KB_A) == false && input().down(Gosu::KB_D) == false) //Taste A & D nicht gedrückt
+			if (player.actual_pos_y() >= (height() - 101)) //Wenn Spieler den Boden wieder berührt
 			{
-				player.reset_rot();
+				player.resetJumpTime();//Resete die Sprungdauer
 			}
-			if (player.actual_pos_y() >= (height() - 101))
+			if //Spieler in Kasten, der die Oberfläche des Blockes umrahmt
+				(player.actual_pos_y() > normal_block.y_pos() - 5.0 && //Begrenzung nach oben
+				player.actual_pos_y() < (normal_block.y_pos() + 5.0 + normal_block.height()) && //Begrenzung nach unten
+				player.actual_pos_x() > normal_block.x_pos() - 5.0 && //Begrenzun nach links
+				player.actual_pos_x() < normal_block.x_pos() + normal_block.width() + 5.0 &&//Begrenzung nach rechts
+				player.get_jumptime() > 0.6)//sodass er nicht gleich mit der Sprungfunktion ab dem block weitermacht, sondern erst landen muss
+
 			{
-				player.resetJumpTime();
+				player.set_pos(player.actual_pos_x(), normal_block.y_pos()); //setzt den Spieler ordentlich auf den Block
+				player.resetJumpTime();//Resete die Sprungdauer
+				player.jumpposition();//Setzt die Absrpunghöhe auf Höhe des Blockes
 			}
-			if (player.actual_pos_y() > normal_block.y_pos() - 5.0 &&
-				player.actual_pos_y() < (normal_block.y_pos() + 5.0 + normal_block.height()) &&
-				player.actual_pos_x() > normal_block.x_pos() - 5.0 &&
-				player.actual_pos_x() < normal_block.x_pos() + normal_block.width() + 5.0 &&
-				player.get_jumptime() > 0.6)
-			{
-				player.set_pos(player.actual_pos_x(), normal_block.y_pos());
-				player.resetJumpTime();
-				player.jumpposition();
-			}
-			if ((player.actual_pos_x() < normal_block.x_pos() - 5.0 ||
-				player.actual_pos_x() > normal_block.x_pos() + normal_block.width() + 5.0) &&
+			if ((player.actual_pos_x() < normal_block.x_pos() - 5.0 || //Spieler befindet sich links vom Block
+				player.actual_pos_x() > normal_block.x_pos() + normal_block.width() + 5.0) &&//Spieler befindet sich rechts vom Block
 				//|| 
 				//(player.actual_pos_x() > normal_block.x_pos() - 5.0 && player.actual_pos_x() < normal_block.x_pos() + normal_block.width() + 5.0 &&player.actual_pos_y()> normal_block.y_pos() +normal_block.height() && player.actual_pos_y() <=500) &&
-				player.get_jump() == false)
+				player.get_jump() == false) //und der Spieler nicht abspringen will
 			{
-				player.drop();
+				player.drop(); //Spieler fällt
 			}
-			if (player.actual_pos_y() > 500) {
+			if (player.actual_pos_y() > 500) //wenn der Spieler durch den Boden glitcht setzt es ihn wieder auf den Boden
+			{
 				player.set_pos(player.actual_pos_x(), 500.0);
 				player.jumpposition();
 			}
@@ -145,21 +143,25 @@ public:
 	void draw() override //ca. 60x pro Sekunde
 	{
 		mouse.draw();
-		menu.Background();
-		menu.Button(200, 400);
-		menu.Level(200, 400, "Level1");
-		player.draw();
-		background.draw();
-		normal_block.draw_Blocks(0);
+		if (menuing == true) //wenn das Menü da sein soll
+		{
+			menu.Background();//drawt den Background
+			menu.Button(200, 400);//drawt den Button
+			menu.Level(200, 400, "Level1"); //drawt den Text für das Level
+		}
+		player.draw(); //drawt den player
+		background.draw(); //drawt den Background
+		normal_block.draw_Blocks(0); //drawt einen Block
 		//MERKER: Erstellen von Enum für Reihenfolge von Images/fonts
 		fps_anzeige.draw("FPS: " + std::to_string(fps.get()), 15, 15, Z_UI,
 			1, 1, Gosu::Color::RED);
 		
-		graphics().draw_quad(
+		graphics().draw_quad//drawt Boden
+		(
 			0, 500, Gosu::Color::GREEN,
-			800, 500, Gosu::Color::WHITE,
+			800, 500, Gosu::Color::GREEN,
 			800, 600, Gosu::Color::WHITE,
-			0, 600, Gosu::Color::GREEN,
+			0, 600, Gosu::Color::WHITE,
 			Z_BACKGROUND
 		);
 	
@@ -172,7 +174,6 @@ public:
 	}
 
 };
-
 
 // C++ Hauptprogramm
 int main()

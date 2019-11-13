@@ -32,9 +32,6 @@ public:
 	void stop();
 	void turn_left();
 	void turn_right();
-	void tilt_left();
-	void tilt_right();
-	void reset_rot();
 	void jump();
 	void draw() const;
 	void set_pos(double x, double y);

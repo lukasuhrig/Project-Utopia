@@ -16,6 +16,7 @@
 #include "Block.h"
 #include "FPS.h"
 #include "Cloud.h"
+#include "Camera.h"
 //#include "Vektor2d.h"
 
 // Simulationsgeschwindigkeit

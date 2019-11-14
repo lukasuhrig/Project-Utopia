@@ -18,6 +18,7 @@
 #include "Cloud.h"
 #include "mainmenu.h"
 #include "mouse.h"
+#include "Ground.h"
 //#include "Vektor2d.h"
 #include "pet.h"
 
@@ -40,7 +41,9 @@ public:
 	Player player;
 	Background background;
 	Blocks normal_block;
+	Blocks normal_block2;
 	Mouse mouse;
+	Ground ground;
 	//TEST
 	std::list<Cloud> clouds;
 	Animation cloud_anim;
@@ -55,10 +58,11 @@ public:
 
 		player.set_pos(150, 500);
 		pet_1.set_pos((player.actual_pos_x()-80),(player.actual_pos_y()-80));
-		background.set_pos(300, 590);
 
+		background.set_pos(300, ground.get_Ground());
 		
-		normal_block.set_pos(400, 380);
+		normal_block.set_pos(400, 380,0.3,0.3);
+		normal_block2.set_pos(0,500,0.3,0.3);
 		//TEST
 		std::string filename_block = "Brick_Blocks.png";
 		std::string filename = "clouds.png";
@@ -75,6 +79,7 @@ public:
 			mouse.noMouse();
 			if (input().down(Gosu::KB_D) == true && input().down(Gosu::KB_A) == false) //Taste D und nicht Taste A
 			{
+				player.score_set_up();
 				//***************RECHTS*******************
 				if (player.actual_pos_x() <= (width() - 120))//wenn spieler in dem Feld ist, in dem er sich bewegen kann
 				{
@@ -84,11 +89,13 @@ public:
 				{
 					background.move_left();
 					normal_block.set_pos_left();
+					normal_block2.set_pos_left();
 				}
 
 			} 
 			if (input().down(Gosu::KB_A) == true && input().down(Gosu::KB_D) == false) //Taste A und nicht Taste D
 			{
+				player.score_set_down();
 				//***************LINKS*******************
 				if (player.actual_pos_x() >= 120)//wenn spieler in dem Feld ist, in dem er sich bewegen kann
 				{
@@ -98,6 +105,7 @@ public:
 				{
 					background.move_right();
 					normal_block.set_pos_right();
+					normal_block2.set_pos_right();
 				}
 
 			}
@@ -119,8 +127,7 @@ public:
 			{
 				player.set_idle(false);
 			}
-
-			if (player.actual_pos_y() >= (height() - 101)) //Wenn Spieler den Boden wieder berührt
+			if (player.actual_pos_y() >= (ground.get_Ground()-1)) //Wenn Spieler den Boden wieder berührt
 			{
 				player.resetJumpTime();//Resete die Sprungdauer
 			}
@@ -139,14 +146,14 @@ public:
 			if ((player.actual_pos_x() < normal_block.x_pos() - 5.0 || //Spieler befindet sich links vom Block
 				player.actual_pos_x() > normal_block.x_pos() + normal_block.width() + 5.0) &&//Spieler befindet sich rechts vom Block
 				//|| 
-				//(player.actual_pos_x() > normal_block.x_pos() - 5.0 && player.actual_pos_x() < normal_block.x_pos() + normal_block.width() + 5.0 &&player.actual_pos_y()> normal_block.y_pos() +normal_block.height() && player.actual_pos_y() <=500) &&
+				///(player.actual_pos_x() > normal_block.x_pos() - 5.0 && player.actual_pos_x() < normal_block.x_pos() + normal_block.width() + 5.0 &&player.actual_pos_y()> normal_block.y_pos() +normal_block.height() && player.actual_pos_y() <=500) &&
 				player.get_jump() == false) //und der Spieler nicht abspringen will
 			{
 				player.drop(); //Spieler fällt
 			}
-			if (player.actual_pos_y() > 500) //wenn der Spieler durch den Boden glitcht setzt es ihn wieder auf den Boden
+			if (player.actual_pos_y() > ground.get_Ground()+2) //wenn der Spieler durch den Boden glitcht setzt es ihn wieder auf den Boden
 			{
-				player.set_pos(player.actual_pos_x(), 500.0);
+				player.set_pos(player.actual_pos_x(), ground.get_Ground());
 				player.jumpposition();
 			}
 
@@ -170,25 +177,39 @@ public:
 			menu.Button(200, 400);//drawt den Button
 			menu.Level(217, 410, "Level1"); //drawt den Text für das Level
 		}
+		
 		player.draw(); //drawt den player
 		player.score_draw();
 		pet_1.draw(player.direction()); //draw pet_1
 
 		background.draw(); //drawt den Background
-		normal_block.draw_Blocks(0); //drawt einen Block
-
-
+		normal_block.draw_Blocks(0,0,0); //drawt einen Block
+		normal_block.draw_Blocks(0,100,100);
+		normal_block2.draw_Blocks(0,0, 0);
+		normal_block2.draw_Blocks(0, 75, 0);
+		normal_block2.draw_Blocks(0, 75*2, 0);
+		normal_block2.draw_Blocks(0, 75*3, 0);
+		normal_block2.draw_Blocks(0, 75*4, 0);
+		normal_block2.draw_Blocks(0, 75 * 5, 0);
+		normal_block2.draw_Blocks(0, 75 * 6, 0);
+		normal_block2.draw_Blocks(0, 75 * 7, 0);
+		normal_block2.draw_Blocks(0, 75 * 8, 0);
+		normal_block2.draw_Blocks(0, 75 * 9, 0);
+		normal_block2.draw_Blocks(0, 75 * 10, 0);
+		normal_block2.draw_Blocks(0, 75 * 11, 0);
+		normal_block2.draw_Blocks(0, 75 * 12, 0);
+		normal_block2.draw_Blocks(0, 75 * 13, 0);
+		normal_block2.draw_Blocks(0, 75 * 14, 0);
+		normal_block2.draw_Blocks(0, 75 * 15, 0);
+		normal_block2.draw_Blocks(0, 75 * 16, 0);
+		normal_block2.draw_Blocks(0, 75 * 17, 0);
+		normal_block2.draw_Blocks(0, 75 * 18, 0);
+		normal_block2.draw_Blocks(0, 75 * 19, 0);
+		//MERKER: Erstellen von Enum für Reihenfolge von Images/fonts
 		fps_anzeige.draw("FPS: " + std::to_string(fps.get()), 15, 15, Z_UI,
 			1, 1, Gosu::Color::RED);
+		ground.draw();
 		
-		graphics().draw_quad//drawt Boden
-		(
-			0, 590, Gosu::Color::GREEN,
-			800, 590, Gosu::Color::GREEN,
-			800, 600, Gosu::Color::WHITE,
-			0, 600, Gosu::Color::WHITE,
-			Z_BACKGROUND
-		);
 	
 		//TEST
 		for (Cloud& cloud : clouds) 

@@ -1,8 +1,10 @@
 #include "stdafx.h"
 #include "Block.h"
-void Blocks:: set_pos(double x, double y) {
+void Blocks:: set_pos(double x, double y, double scal_x, double scal_y) {
 	pos_x = x;
 	pos_y = y;
+	scale_x = scal_x;
+	scale_y = scal_y;
 };
 void Blocks::set_pos_left()
 {
@@ -19,19 +21,19 @@ double Blocks::y_pos() {
 	return pos_y;
 }
 double Blocks::width() {
-	return 0.3*250.0;
+	return scale_x*250.0;
 }
 double Blocks::height() {
-	return 0.3 * 250.0;
+	return scale_y * 250.0;
 }
-void Blocks::draw_Blocks(int a) {
+void Blocks::draw_Blocks(int a,int b, int c) {
 
-	Animation_Block.at(a).draw_rot(pos_x, pos_y, Z_Blocks, // Blöcke sollen vor allem anderen auf dem Bildschirm angezeigt werden
+	Animation_Block.at(a).draw_rot(pos_x+b, pos_y-c, Z_Blocks, // Blöcke sollen vor allem anderen auf dem Bildschirm angezeigt werden
 		0,
 		0,
 		0,
-		0.3, //Skalierung Charakter X
-		0.3 //Skalierung Charakter Y
+		scale_x, //Skalierung Charakter X
+		scale_y //Skalierung Charakter Y
 	);
 
 }

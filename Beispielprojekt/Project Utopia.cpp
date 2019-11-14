@@ -41,6 +41,7 @@ public:
 	Background background;
 	Pet pet_1;
 	Blocks normal_block;
+	Blocks normal_block2;
 	Mouse mouse;
 	//TEST
 	std::list<Cloud> clouds;
@@ -56,6 +57,7 @@ public:
 		background.set_pos(300, 590);
 		
 		normal_block.set_pos(400, 380);
+		normal_block2.set_pos(0,500);
 		//TEST
 		std::string filename_block = "Brick_Blocks.png";
 		std::string filename = "clouds.png";
@@ -72,6 +74,7 @@ public:
 			mouse.noMouse();
 			if (input().down(Gosu::KB_D) == true && input().down(Gosu::KB_A) == false) //Taste D und nicht Taste A
 			{
+				player.score_set_up();
 				//***************RECHTS*******************
 				if (player.actual_pos_x() <= (width() - 120))//wenn spieler in dem Feld ist, in dem er sich bewegen kann
 				{
@@ -81,11 +84,13 @@ public:
 				{
 					background.move_left();
 					normal_block.set_pos_left();
+					normal_block2.set_pos_left();
 				}
 
 			} 
 			if (input().down(Gosu::KB_A) == true && input().down(Gosu::KB_D) == false) //Taste A und nicht Taste D
 			{
+				player.score_set_down();
 				//***************LINKS*******************
 				if (player.actual_pos_x() >= 120)//wenn spieler in dem Feld ist, in dem er sich bewegen kann
 				{
@@ -95,6 +100,7 @@ public:
 				{
 					background.move_right();
 					normal_block.set_pos_right();
+					normal_block2.set_pos_right();
 				}
 
 			}
@@ -159,7 +165,28 @@ public:
 		pet_1.draw(player.direction(), player.actual_pos_x(), player.actual_pos_y()); //draw pet_1
 
 		background.draw(); //drawt den Background
-		normal_block.draw_Blocks(0); //drawt einen Block
+		normal_block.draw_Blocks(0,0,0); //drawt einen Block
+		normal_block.draw_Blocks(0,100,100);
+		normal_block2.draw_Blocks(0,0, 0);
+		normal_block2.draw_Blocks(0, 75, 0);
+		normal_block2.draw_Blocks(0, 75*2, 0);
+		normal_block2.draw_Blocks(0, 75*3, 0);
+		normal_block2.draw_Blocks(0, 75*4, 0);
+		normal_block2.draw_Blocks(0, 75 * 5, 0);
+		normal_block2.draw_Blocks(0, 75 * 6, 0);
+		normal_block2.draw_Blocks(0, 75 * 7, 0);
+		normal_block2.draw_Blocks(0, 75 * 8, 0);
+		normal_block2.draw_Blocks(0, 75 * 9, 0);
+		normal_block2.draw_Blocks(0, 75 * 10, 0);
+		normal_block2.draw_Blocks(0, 75 * 11, 0);
+		normal_block2.draw_Blocks(0, 75 * 12, 0);
+		normal_block2.draw_Blocks(0, 75 * 13, 0);
+		normal_block2.draw_Blocks(0, 75 * 14, 0);
+		normal_block2.draw_Blocks(0, 75 * 15, 0);
+		normal_block2.draw_Blocks(0, 75 * 16, 0);
+		normal_block2.draw_Blocks(0, 75 * 17, 0);
+		normal_block2.draw_Blocks(0, 75 * 18, 0);
+		normal_block2.draw_Blocks(0, 75 * 19, 0);
 		//MERKER: Erstellen von Enum für Reihenfolge von Images/fonts
 		fps_anzeige.draw("FPS: " + std::to_string(fps.get()), 15, 15, Z_UI,
 			1, 1, Gosu::Color::RED);

@@ -24,9 +24,9 @@ double Blocks::width() {
 double Blocks::height() {
 	return 0.3 * 250.0;
 }
-void Blocks::draw_Blocks(int a) {
+void Blocks::draw_Blocks(int a,int b, int c) {
 
-	Animation_Block.at(a).draw_rot(pos_x, pos_y, Z_Blocks, // Blöcke sollen vor allem anderen auf dem Bildschirm angezeigt werden
+	Animation_Block.at(a).draw_rot(pos_x+b, pos_y-c, Z_Blocks, // Blöcke sollen vor allem anderen auf dem Bildschirm angezeigt werden
 		0,
 		0,
 		0,

@@ -11,7 +11,7 @@ class Blocks
 	double pos_x;
 	double pos_y;
 	double block_look;		// Nummer des Images welches man aufrufen will
-
+	int block_shift = 0;
 
 
 public:
@@ -23,11 +23,12 @@ public:
 	
 
 	void set_pos(double x, double y);
-	void draw_Blocks(int a);
+	void draw_Blocks(int a, int b, int c);
 	double x_pos();
 	double y_pos();
 	double width();
 	double height();
 	void set_pos_left();
 	void set_pos_right();
+	void row_blocks(int a);
 };

@@ -10,17 +10,17 @@ bool Player::direction() const
 		pos_x = pos_x;
 		pos_y = pos_y;
 	}
-	void Player:: turn_left() //Spieler dreht sich nach links und läuft nach links
+	void Player:: turn_left() //Spieler dreht sich nach links, läuft nach links und Score zählt runter
 	{
 		lookingRight = false;
 		pos_x = pos_x - 10;
-		score = score - 10;
+		
 	}
-	void Player:: turn_right() //Spieler dreht sich nach rechts und läuft nach rechts
+	void Player:: turn_right() //Spieler dreht sich nach rechts, läuft nach rechts und Score zählt hoch
 	{
 		lookingRight = true;
 		pos_x = pos_x + 10;
-		score = score + 10;
+	
 	}
 	void Player:: jump() //Spieler springt
 	{
@@ -101,4 +101,13 @@ bool Player::direction() const
 
 	void Player::score_draw() {
 		score_draw1.draw(score_number, 600, 50, Z_PLAYER, 1, 1, Gosu::Color::RED, Gosu::AlphaMode::AM_DEFAULT);
+		std::string s = std::to_string(score);
+		score_draw1.draw(s, 660, 50, Z_PLAYER, 1, 1, Gosu::Color::RED, Gosu::AlphaMode::AM_DEFAULT);
+	}
+
+	void Player::score_set_up() {
+		score++;
+	}
+	void Player::score_set_down() {
+		score--;
 	}

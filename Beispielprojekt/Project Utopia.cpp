@@ -56,7 +56,7 @@ public:
 	{
 		set_caption("Project Utopia");
 
-		player.set_pos(150, 500);
+		player.set_pos(150, ground.get_Ground());
 		pet_1.set_pos((player.actual_pos_x()-80),(player.actual_pos_y()-80));
 
 		background.set_pos(300, ground.get_Ground());

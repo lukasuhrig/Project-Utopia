@@ -1,8 +1,10 @@
 #include "stdafx.h"
 #include "pet.h"
+#include <math.h>
 
 double animationSpeed = 2.5; //1.2
 double animationSpeedIdle = 0.25;
+double animationSpeed_x = 10;
 
 double Pet::actual_pos_x() const
 {
@@ -53,10 +55,19 @@ void Pet::set_idle(bool state)
 void Pet::update(bool lookingRight, double player_x, double player_y, bool player_idle)
 {
 
+	double x_d = abs(pos_x - player_x);
+	double y_d = abs(pos_y - player_y);
+	double D = sqrt(x_d * x_d + y_d * y_d);
+	double x_n = x_d / D;
+	double y_n = y_d / D;
+	//this->pos_x = x_n * 2;
+	//this->pos_y = y_n * 2;
+
 	if (lookingRight == true) //wenn Spieler nach rechts schaut
 	{
 		this->pos_x = player_x - 80; //links vom Spieler setzen
 
+		//this->pos_x = (pos_x + (x_n * animationSpeed_x));
 
 		if ((this->pos_y >= (player_y - 85)) && (this->pos_y <= (player_y - 75)))//wenn über Spieler links dann...
 		{
@@ -68,6 +79,8 @@ void Pet::update(bool lookingRight, double player_x, double player_y, bool playe
 	{
 
 		this->pos_x = player_x + 80; //rechts vom Spieler setzen
+
+		//this->pos_x = pos_x - (x_n * animationSpeed_x);
 
 		if ((this->pos_y >= (player_y - 85)) && (this->pos_y <= (player_y - 75))) //wenn über Spieler rechts dann...
 		{

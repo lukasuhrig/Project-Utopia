@@ -3,6 +3,7 @@
 #include <Gosu/Gosu.hpp>
 #include <Gosu/AutoLink.hpp>
 #include "ZOrder.h"
+#include "Ground.h"
 
 class Player
 {
@@ -20,6 +21,7 @@ class Player
 	double gravity = 1000.0;
 	bool jumping=false;
 	double droptime = 0;
+	Ground ground;
 	std::string score_number = "Score : ";
 
 public:
@@ -27,7 +29,7 @@ public:
 	{
 
 		pos_x = pos_y = score = rot =0;
-		jump_y = 500;
+		jump_y = ground.get_Ground();
 		health = 100.0;
 		lookingRight = true;
 		character = Gosu::load_tiles("player_blue.png", 400, 483);

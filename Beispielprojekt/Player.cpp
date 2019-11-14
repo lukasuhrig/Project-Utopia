@@ -24,13 +24,10 @@ bool Player::direction() const
 	}
 	void Player:: jump() //Spieler springt
 	{
-		jumptime = jumptime + (1.0 / 60.0); //Sprungzeit in sekunden
-
-		if (pos_y -10.0 <= 500.0) //Wenn spieler durch das drücken von w schon in der luft ist
-		{
+		jumptime = jumptime + (1.0 / 60.0);
+	
 			pos_y = jump_y + jumptime * jumptime * gravity - 1000.0 * jumptime; //Sprungfunktion
 			jumping = true;//Springen =wahr
-		};
 	}
 	double Player::get_jumpposition() //returned die Absprunghöhe
 	{
@@ -39,7 +36,7 @@ bool Player::direction() const
 	void Player::drop() //Fallen
 	{
 		droptime = droptime + (1.0 / 60.0); //Fallzeit in Sekunden
-		if (pos_y < 500.0)  //wenn Spieler in der Luft
+		if (pos_y < ground.get_Ground())  //wenn Spieler in der Luft
 		{
 			pos_y = jump_y + droptime * droptime * gravity; //Fallfunktion
 		}

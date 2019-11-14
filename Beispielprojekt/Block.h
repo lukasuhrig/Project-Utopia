@@ -8,9 +8,11 @@ typedef std::vector<Gosu::Image> Animation_Blocks;
 class Blocks 
 {
 	std::vector<Gosu::Image> Block; // hier werden alle Images gespeichert, die Images sollten eine ähnliche größe haben.
-	double pos_x;
-	double pos_y;
-	double block_look;		// Nummer des Images welches man aufrufen will
+	double pos_x=0.0;
+	double pos_y=0.0;
+	double block_look=0.0;		// Nummer des Images welches man aufrufen will
+	double scale_x;
+	double scale_y;
 
 
 
@@ -22,7 +24,7 @@ public:
 	};
 	
 
-	void set_pos(double x, double y);
+	 void set_pos(double x, double y, double scal_x, double scal_y);
 	void draw_Blocks(int a);
 	double x_pos();
 	double y_pos();

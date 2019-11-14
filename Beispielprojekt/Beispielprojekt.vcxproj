@@ -163,6 +163,7 @@
     <ClInclude Include="FPS.h" />
     <ClInclude Include="Cloud.h" />
     <ClInclude Include="Animation.h" />
+    <ClInclude Include="Ground.h" />
     <ClInclude Include="mouse.h" />
     <ClInclude Include="mainmenu.h" />
     <ClInclude Include="pet.h" />
@@ -182,6 +183,7 @@
     <ClCompile Include="Animation.cpp" />
     <ClCompile Include="mainmenu.cpp" />
     <ClCompile Include="mouse.cpp" />
+    <ClCompile Include="Ground.cpp" />
     <ClCompile Include="ZOrder.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
@@ -195,6 +197,7 @@
     <Image Include="..\..\..\..\..\..\..\Desktop\Menu_Background.png" />
     <Image Include="..\..\..\..\Background.png" />
     <Image Include="background_new.png" />
+    <Image Include="background_v1.png" />
     <Image Include="Brick_Block.png" />
     <Image Include="clouds.png" />
     <Image Include="Hero.png" />

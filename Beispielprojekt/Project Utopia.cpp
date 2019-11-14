@@ -18,6 +18,7 @@
 #include "Cloud.h"
 #include "mainmenu.h"
 #include "mouse.h"
+#include "Ground.h"
 //#include "Vektor2d.h"
 #include "pet.h"
 
@@ -42,6 +43,7 @@ public:
 	Pet pet_1;
 	Blocks normal_block;
 	Mouse mouse;
+	Ground ground;
 	//TEST
 	std::list<Cloud> clouds;
 	Animation cloud_anim;
@@ -53,9 +55,9 @@ public:
 		set_caption("Project Utopia");
 
 		player.set_pos(150, 100);
-		background.set_pos(300, 590);
+		background.set_pos(300, ground.get_Ground());
 		
-		normal_block.set_pos(400, 380);
+		normal_block.set_pos(400, 380, 0.3,0.3);
 		//TEST
 		std::string filename_block = "Brick_Blocks.png";
 		std::string filename = "clouds.png";
@@ -106,7 +108,7 @@ public:
 			{
 				player.jump();//Spieler läuft Sprungfunktion ab
 			}
-			if (player.actual_pos_y() >= (height() - 101)) //Wenn Spieler den Boden wieder berührt
+			if (player.actual_pos_y() >= (ground.get_Ground()-1)) //Wenn Spieler den Boden wieder berührt
 			{
 				player.resetJumpTime();//Resete die Sprungdauer
 			}
@@ -125,14 +127,14 @@ public:
 			if ((player.actual_pos_x() < normal_block.x_pos() - 5.0 || //Spieler befindet sich links vom Block
 				player.actual_pos_x() > normal_block.x_pos() + normal_block.width() + 5.0) &&//Spieler befindet sich rechts vom Block
 				//|| 
-				//(player.actual_pos_x() > normal_block.x_pos() - 5.0 && player.actual_pos_x() < normal_block.x_pos() + normal_block.width() + 5.0 &&player.actual_pos_y()> normal_block.y_pos() +normal_block.height() && player.actual_pos_y() <=500) &&
+				///(player.actual_pos_x() > normal_block.x_pos() - 5.0 && player.actual_pos_x() < normal_block.x_pos() + normal_block.width() + 5.0 &&player.actual_pos_y()> normal_block.y_pos() +normal_block.height() && player.actual_pos_y() <=500) &&
 				player.get_jump() == false) //und der Spieler nicht abspringen will
 			{
 				player.drop(); //Spieler fällt
 			}
-			if (player.actual_pos_y() > 500) //wenn der Spieler durch den Boden glitcht setzt es ihn wieder auf den Boden
+			if (player.actual_pos_y() > ground.get_Ground()+2) //wenn der Spieler durch den Boden glitcht setzt es ihn wieder auf den Boden
 			{
-				player.set_pos(player.actual_pos_x(), 500.0);
+				player.set_pos(player.actual_pos_x(), ground.get_Ground());
 				player.jumpposition();
 			}
 
@@ -154,6 +156,7 @@ public:
 			menu.Button(200, 400);//drawt den Button
 			menu.Level(217, 410, "Level1"); //drawt den Text für das Level
 		}
+		
 		player.draw(); //drawt den player
 		player.score_draw();
 		pet_1.draw(player.direction(), player.actual_pos_x(), player.actual_pos_y()); //draw pet_1
@@ -163,15 +166,8 @@ public:
 		//MERKER: Erstellen von Enum für Reihenfolge von Images/fonts
 		fps_anzeige.draw("FPS: " + std::to_string(fps.get()), 15, 15, Z_UI,
 			1, 1, Gosu::Color::RED);
+		ground.draw();
 		
-		graphics().draw_quad//drawt Boden
-		(
-			0, 590, Gosu::Color::GREEN,
-			800, 590, Gosu::Color::GREEN,
-			800, 600, Gosu::Color::WHITE,
-			0, 600, Gosu::Color::WHITE,
-			Z_BACKGROUND
-		);
 	
 		//TEST
 		for (Cloud& cloud : clouds) 

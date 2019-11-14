@@ -54,6 +54,9 @@
     <ClInclude Include="pet.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Ground.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -92,6 +95,9 @@
     <ClCompile Include="pet.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Ground.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Image Include="..\..\..\..\Background.png">
@@ -125,6 +131,9 @@
       <Filter>Resource Files</Filter>
     </Image>
     <Image Include="pet_1.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="background_v1.png">
       <Filter>Resource Files</Filter>
     </Image>
   </ItemGroup>

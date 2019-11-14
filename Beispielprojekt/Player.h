@@ -11,6 +11,9 @@ class Player
 	double pos_x;
 	double pos_y;
 	double rot;
+
+	bool idle;
+
 	bool lookingRight;
 	float health;
 	unsigned score;
@@ -30,11 +33,16 @@ public:
 		jump_y = 500;
 		health = 100.0;
 		lookingRight = true;
+		idle = true;
 		character = Gosu::load_tiles("player_blue.png", 400, 483);
 	}
 	void stop();
 	void turn_left();
 	void turn_right();
+
+	void set_idle(bool state);
+	bool isIdle() const;
+
 	void jump();
 	void draw() const;
 	void set_pos(double x, double y);

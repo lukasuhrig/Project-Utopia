@@ -39,7 +39,6 @@ public:
 
 	Player player;
 	Background background;
-	Pet pet_1;
 	Blocks normal_block;
 	Mouse mouse;
 	//TEST
@@ -48,12 +47,16 @@ public:
 	//Animation_Blocks Animation_Block;
 	Menu menu;
 
+	Pet pet_1; //Erstellen Pet
+
 	GameWindow() : Window(800, 600),fps_anzeige(20)
 	{
 		set_caption("Project Utopia");
 
-		player.set_pos(150, 100);
+		player.set_pos(150, 500);
+		pet_1.set_pos((player.actual_pos_x()-80),(player.actual_pos_y()-80));
 		background.set_pos(300, 590);
+
 		
 		normal_block.set_pos(400, 380);
 		//TEST
@@ -106,6 +109,17 @@ public:
 			{
 				player.jump();//Spieler läuft Sprungfunktion ab
 			}
+
+
+			if (input().down(Gosu::KB_D) == false && input().down(Gosu::KB_A) == false && player.get_jumptime() == 0) //****************W und D NICHT gedrückt und Spieler im IDLE-Zustand****************
+			{
+				player.set_idle(true);
+			}
+			if (player.get_jump() == true)
+			{
+				player.set_idle(false);
+			}
+
 			if (player.actual_pos_y() >= (height() - 101)) //Wenn Spieler den Boden wieder berührt
 			{
 				player.resetJumpTime();//Resete die Sprungdauer
@@ -141,6 +155,8 @@ public:
 			{
 				clouds.push_back(Cloud(cloud_anim));
 			}
+
+			pet_1.animation(player.direction(),player.actual_pos_x(),player.actual_pos_y(),player.isIdle()); //PET Animation
 		}
 		//Berechnet FPS
 		fps.update();
@@ -156,11 +172,12 @@ public:
 		}
 		player.draw(); //drawt den player
 		player.score_draw();
-		pet_1.draw(player.direction(), player.actual_pos_x(), player.actual_pos_y()); //draw pet_1
+		pet_1.draw(player.direction()); //draw pet_1
 
 		background.draw(); //drawt den Background
 		normal_block.draw_Blocks(0); //drawt einen Block
-		//MERKER: Erstellen von Enum für Reihenfolge von Images/fonts
+
+
 		fps_anzeige.draw("FPS: " + std::to_string(fps.get()), 15, 15, Z_UI,
 			1, 1, Gosu::Color::RED);
 		

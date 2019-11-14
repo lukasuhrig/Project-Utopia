@@ -14,7 +14,7 @@ class Player
 	double rot;
 	bool lookingRight;
 	float health;
-	unsigned score;
+	long score;
 	Gosu::Font score_draw1;
 	double jumptime = 0;
 	double jump_y;
@@ -50,4 +50,6 @@ public:
 	bool get_jump();
 	double get_jumptime();
 	void score_draw();
+	void score_set_up();
+	void score_set_down();
 };

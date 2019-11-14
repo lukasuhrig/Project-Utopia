@@ -13,8 +13,7 @@ class Blocks
 	double block_look=0.0;		// Nummer des Images welches man aufrufen will
 	double scale_x;
 	double scale_y;
-
-
+	int block_shift=0
 
 public:
 	Animation_Blocks Animation_Block;
@@ -24,12 +23,13 @@ public:
 	};
 	
 
-	 void set_pos(double x, double y, double scal_x, double scal_y);
-	void draw_Blocks(int a);
+	void set_pos(double x, double y, double scal_x, double scal_y);
+	void draw_Blocks(int a, int b, int c);
 	double x_pos();
 	double y_pos();
 	double width();
 	double height();
 	void set_pos_left();
 	void set_pos_right();
+	void row_blocks(int a);
 };

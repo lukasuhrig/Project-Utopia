@@ -13,7 +13,7 @@ class Blocks
 	double block_look=0.0;		// Nummer des Images welches man aufrufen will
 	double scale_x;
 	double scale_y;
-	int block_shift=0
+	int block_shift = 0;
 
 public:
 	Animation_Blocks Animation_Block;

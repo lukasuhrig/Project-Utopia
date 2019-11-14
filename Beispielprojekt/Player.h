@@ -14,15 +14,18 @@ class Player
 	bool lookingRight;
 	float health;
 	unsigned score;
+	Gosu::Font score_draw1;
 	double jumptime = 0;
 	double jump_y;
 	double gravity = 1000.0;
 	bool jumping=false;
 	double droptime = 0;
+	std::string score_number = "Score : ";
 
 public:
-	Player()
+	Player(): score_draw1(20)
 	{
+
 		pos_x = pos_y = score = rot =0;
 		jump_y = 500;
 		health = 100.0;
@@ -44,4 +47,5 @@ public:
 	double get_jumpposition();
 	bool get_jump();
 	double get_jumptime();
+	void score_draw();
 };

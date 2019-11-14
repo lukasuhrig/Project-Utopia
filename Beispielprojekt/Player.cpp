@@ -14,11 +14,13 @@ bool Player::direction() const
 	{
 		lookingRight = false;
 		pos_x = pos_x - 10;
+		score = score - 10;
 	}
 	void Player:: turn_right() //Spieler dreht sich nach rechts und läuft nach rechts
 	{
 		lookingRight = true;
 		pos_x = pos_x + 10;
+		score = score + 10;
 	}
 	void Player:: jump() //Spieler springt
 	{
@@ -95,4 +97,8 @@ bool Player::direction() const
 	bool Player::get_jump() //true, wenn der Spieler in der Luft ist
 	{
 		return jumping;
+	}
+
+	void Player::score_draw() {
+		score_draw1.draw(score_number, 600, 50, Z_PLAYER, 1, 1, Gosu::Color::RED, Gosu::AlphaMode::AM_DEFAULT);
 	}

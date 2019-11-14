@@ -52,10 +52,10 @@ public:
 	{
 		set_caption("Project Utopia");
 
-		player.set_pos(100, 500);
+		player.set_pos(150, 100);
 		background.set_pos(300, 590);
 		
-		normal_block.set_pos(400, 300);
+		normal_block.set_pos(400, 380);
 		//TEST
 		std::string filename_block = "Brick_Blocks.png";
 		std::string filename = "clouds.png";
@@ -152,10 +152,10 @@ public:
 		{
 			menu.Background();//drawt den Background
 			menu.Button(200, 400);//drawt den Button
-			menu.Level(200, 400, "Level1"); //drawt den Text für das Level
+			menu.Level(217, 410, "Level1"); //drawt den Text für das Level
 		}
 		player.draw(); //drawt den player
-
+		player.score_draw();
 		pet_1.draw(player.direction(), player.actual_pos_x(), player.actual_pos_y()); //draw pet_1
 
 		background.draw(); //drawt den Background

@@ -2,7 +2,7 @@
 #include <Gosu/Gosu.hpp>
 #include <Gosu/AutoLink.hpp>
 #include "ZOrder.h"
-class Background : camera
+class Background 
 {
 	Gosu::Image background_image;
 	double pos_x;

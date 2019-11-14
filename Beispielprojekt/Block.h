@@ -5,7 +5,7 @@
 #include "ZOrder.h"
 
 typedef std::vector<Gosu::Image> Animation_Blocks;
-class Blocks : camera
+class Blocks 
 {
 	std::vector<Gosu::Image> Block; // hier werden alle Images gespeichert, die Images sollten eine ähnliche größe haben.
 	double pos_x;
@@ -28,4 +28,6 @@ public:
 	double y_pos();
 	double width();
 	double height();
+	void set_pos_left();
+	void set_pos_right();
 };

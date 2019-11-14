@@ -45,6 +45,15 @@
     <ClInclude Include="Animation.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="mainmenu.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="mouse.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="pet.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -74,6 +83,15 @@
     <ClCompile Include="Animation.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="mainmenu.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="mouse.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="pet.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Image Include="..\..\..\..\Background.png">
@@ -83,9 +101,6 @@
       <Filter>Resource Files</Filter>
     </Image>
     <Image Include="background_new.png">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="player1.png">
       <Filter>Resource Files</Filter>
     </Image>
     <Image Include="player_blue.png">
@@ -98,6 +113,18 @@
       <Filter>Resource Files</Filter>
     </Image>
     <Image Include="clouds.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="..\..\..\..\..\..\..\Desktop\Menu_Background.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="..\..\..\..\..\..\..\Desktop\button.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="pointerimg.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="pet_1.png">
       <Filter>Resource Files</Filter>
     </Image>
   </ItemGroup>

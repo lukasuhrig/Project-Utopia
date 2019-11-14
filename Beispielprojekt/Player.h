@@ -15,11 +15,16 @@ class Player
 	float health;
 	unsigned score;
 	double jumptime = 0;
+	double jump_y;
+	double gravity = 1000.0;
+	bool jumping=false;
+	double droptime = 0;
 
 public:
 	Player()
 	{
-		pos_x = pos_y = score = rot = 0;
+		pos_x = pos_y = score = rot =0;
+		jump_y = 500;
 		health = 100.0;
 		lookingRight = true;
 		character = Gosu::load_tiles("player_blue.png", 400, 483);
@@ -27,13 +32,16 @@ public:
 	void stop();
 	void turn_left();
 	void turn_right();
-	void tilt_left();
-	void tilt_right();
-	void reset_rot();
 	void jump();
 	void draw() const;
 	void set_pos(double x, double y);
 	double actual_pos_x() const;
 	double actual_pos_y() const;
+	bool direction() const;
 	void resetJumpTime();
+	void jumpposition();
+	void drop();
+	double get_jumpposition();
+	bool get_jump();
+	double get_jumptime();
 };

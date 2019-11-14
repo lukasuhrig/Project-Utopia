@@ -16,14 +16,19 @@
 #include "Block.h"
 #include "FPS.h"
 #include "Cloud.h"
-#include "Camera.h"
+#include "mainmenu.h"
+#include "mouse.h"
 //#include "Vektor2d.h"
+#include "pet.h"
 
 // Simulationsgeschwindigkeit
 const double DT = 100.0;
-
+bool menuing =true;
 //FPS
 Fps fps;
+
+//VOLUME/SOUND
+float master_vol = 1;
 
 class GameWindow : public Gosu::Window
 {
@@ -34,21 +39,23 @@ public:
 
 	Player player;
 	Background background;
+	Pet pet_1;
 	Blocks normal_block;
+	Mouse mouse;
 	//TEST
 	std::list<Cloud> clouds;
 	Animation cloud_anim;
 	//Animation_Blocks Animation_Block;
-	
+	Menu menu;
 
 	GameWindow() : Window(800, 600),fps_anzeige(20)
 	{
 		set_caption("Project Utopia");
 
 		player.set_pos(100, 500);
-		background.set_pos(300, 500);
+		background.set_pos(300, 590);
 		
-		normal_block.set_pos(400, 400);
+		normal_block.set_pos(400, 300);
 		//TEST
 		std::string filename_block = "Brick_Blocks.png";
 		std::string filename = "clouds.png";
@@ -58,78 +65,111 @@ public:
 
 	void update() override //ca. 60x pro Sekunde
 	{
-		if (input().down(Gosu::KB_D) == true&& input().down(Gosu::KB_A) == false) //Taste D
-		{
-			if (player.actual_pos_x() <= (width() - 100))
+		mouse.mouse(input().mouse_x(), input().mouse_y());
+		if ((input().mouse_x() > 200.0 && input().mouse_x() < 200.0 + menu.Button_width() && input().mouse_y() > 400.0 && input().mouse_y() < 400.0 + menu.Button_heigth() && input().down(Gosu::MS_LEFT))||menuing==false) {
+			menuing = false;
+	
+			mouse.noMouse();
+			if (input().down(Gosu::KB_D) == true && input().down(Gosu::KB_A) == false) //Taste D und nicht Taste A
 			{
-				player.turn_right();
-				player.tilt_right();
-			}
-			if (player.actual_pos_x() > (width() - 100))
+				//***************RECHTS*******************
+				if (player.actual_pos_x() <= (width() - 120))//wenn spieler in dem Feld ist, in dem er sich bewegen kann
+				{
+					player.turn_right();
+				}
+				if (player.actual_pos_x() > (width() - 120))//wenn Spieler heruslaufen würde
+				{
+					background.move_left();
+					normal_block.set_pos_left();
+				}
+
+			} 
+			if (input().down(Gosu::KB_A) == true && input().down(Gosu::KB_D) == false) //Taste A und nicht Taste D
 			{
-				background.move_left();
-				player.tilt_right();
-				normal_block.set_pos_left();
-			}
+				//***************LINKS*******************
+				if (player.actual_pos_x() >= 120)//wenn spieler in dem Feld ist, in dem er sich bewegen kann
+				{
+					player.turn_left();
+				}
+				if (player.actual_pos_x() < 120)//wenn Spieler heruslaufen würde
+				{
+					background.move_right();
+					normal_block.set_pos_right();
+				}
 
-		}
-		if (input().down(Gosu::KB_A) == true&& input().down(Gosu::KB_D) == false) //Taste A
-		{
-			if (player.actual_pos_x() >= 100)
+			}
+			if (input().down(Gosu::KB_A) == true && input().down(Gosu::KB_D) == true) // Wenn Taste A und D gedrückt werden, stoppt der Spieler
 			{
-				player.turn_left();
-				player.tilt_left();
+				player.stop();
 			}
-			if (player.actual_pos_x() < 100)
+			if (input().down(Gosu::KB_W) == true || player.get_jump() == true) //wenn Taste W gedrückt wurde, oder die Sprungfunktion noch nicht beendet wurde
 			{
-				background.move_right();
-				player.tilt_left();
-				normal_block.set_pos_right();
+				player.jump();//Spieler läuft Sprungfunktion ab
+			}
+			if (player.actual_pos_y() >= (height() - 101)) //Wenn Spieler den Boden wieder berührt
+			{
+				player.resetJumpTime();//Resete die Sprungdauer
+			}
+			if //Spieler in Kasten, der die Oberfläche des Blockes umrahmt
+				(player.actual_pos_y() > normal_block.y_pos() - 5.0 && //Begrenzung nach oben
+				player.actual_pos_y() < (normal_block.y_pos() + 5.0 + normal_block.height()) && //Begrenzung nach unten
+				player.actual_pos_x() > normal_block.x_pos() - 5.0 && //Begrenzun nach links
+				player.actual_pos_x() < normal_block.x_pos() + normal_block.width() + 5.0 &&//Begrenzung nach rechts
+				player.get_jumptime() > 0.6)//sodass er nicht gleich mit der Sprungfunktion ab dem block weitermacht, sondern erst landen muss
+
+			{
+				player.set_pos(player.actual_pos_x(), normal_block.y_pos()); //setzt den Spieler ordentlich auf den Block
+				player.resetJumpTime();//Resete die Sprungdauer
+				player.jumpposition();//Setzt die Absrpunghöhe auf Höhe des Blockes
+			}
+			if ((player.actual_pos_x() < normal_block.x_pos() - 5.0 || //Spieler befindet sich links vom Block
+				player.actual_pos_x() > normal_block.x_pos() + normal_block.width() + 5.0) &&//Spieler befindet sich rechts vom Block
+				//|| 
+				//(player.actual_pos_x() > normal_block.x_pos() - 5.0 && player.actual_pos_x() < normal_block.x_pos() + normal_block.width() + 5.0 &&player.actual_pos_y()> normal_block.y_pos() +normal_block.height() && player.actual_pos_y() <=500) &&
+				player.get_jump() == false) //und der Spieler nicht abspringen will
+			{
+				player.drop(); //Spieler fällt
+			}
+			if (player.actual_pos_y() > 500) //wenn der Spieler durch den Boden glitcht setzt es ihn wieder auf den Boden
+			{
+				player.set_pos(player.actual_pos_x(), 500.0);
+				player.jumpposition();
 			}
 
+			//TEST
+			if (std::rand() % 25 == 0 && clouds.size() < 5)
+			{
+				clouds.push_back(Cloud(cloud_anim));
+			}
 		}
-		if (input().down(Gosu::KB_A) == true && input().down(Gosu::KB_D) == true) {
-			player.stop();
-		}
-
-		if (input().down(Gosu::KB_W) == true || player.actual_pos_y() < (height() - 101))
-		{
-			player.jump();
-		}
-		if (input().down(Gosu::KB_A) == false && input().down(Gosu::KB_D) == false) //Taste A & D nicht gedrückt
-		{
-			player.reset_rot();
-		}
-
-		if (player.actual_pos_y() >= (height() - 101))
-		{
-			player.resetJumpTime();
-		}
-
-		//TEST
-		if (std::rand() % 25 == 0 && clouds.size() < 5) 
-		{
-			clouds.push_back(Cloud(cloud_anim));
-		}
-
 		//Berechnet FPS
 		fps.update();
 	}
 	void draw() override //ca. 60x pro Sekunde
 	{
+		mouse.draw();
+		if (menuing == true) //wenn das Menü da sein soll
+		{
+			menu.Background();//drawt den Background
+			menu.Button(200, 400);//drawt den Button
+			menu.Level(200, 400, "Level1"); //drawt den Text für das Level
+		}
+		player.draw(); //drawt den player
 
-		player.draw();
-		background.draw();
-		normal_block.draw_Blocks(0);
+		pet_1.draw(player.direction(), player.actual_pos_x(), player.actual_pos_y()); //draw pet_1
+
+		background.draw(); //drawt den Background
+		normal_block.draw_Blocks(0); //drawt einen Block
 		//MERKER: Erstellen von Enum für Reihenfolge von Images/fonts
 		fps_anzeige.draw("FPS: " + std::to_string(fps.get()), 15, 15, Z_UI,
 			1, 1, Gosu::Color::RED);
 		
-		graphics().draw_quad(
-			0, 500, Gosu::Color::GREEN,
-			800, 500, Gosu::Color::WHITE,
+		graphics().draw_quad//drawt Boden
+		(
+			0, 590, Gosu::Color::GREEN,
+			800, 590, Gosu::Color::GREEN,
 			800, 600, Gosu::Color::WHITE,
-			0, 600, Gosu::Color::GREEN,
+			0, 600, Gosu::Color::WHITE,
 			Z_BACKGROUND
 		);
 	
@@ -142,7 +182,6 @@ public:
 	}
 
 };
-
 
 // C++ Hauptprogramm
 int main()

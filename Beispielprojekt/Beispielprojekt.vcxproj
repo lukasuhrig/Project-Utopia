@@ -22,7 +22,7 @@
     <ProjectGuid>{7CD4BEC1-594C-493C-A14D-D63349A71DD1}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
     <RootNamespace>Beispielprojekt</RootNamespace>
-    <WindowsTargetPlatformVersion>10.0.18362.0</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
     <ProjectName>Project Utopia</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -163,12 +163,16 @@
     <ClInclude Include="FPS.h" />
     <ClInclude Include="Cloud.h" />
     <ClInclude Include="Animation.h" />
+    <ClInclude Include="mouse.h" />
+    <ClInclude Include="mainmenu.h" />
+    <ClInclude Include="pet.h" />
     <ClInclude Include="ZOrder.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="pet.cpp" />
     <ClCompile Include="Project Utopia.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="Background.cpp" />
@@ -176,6 +180,8 @@
     <ClCompile Include="FPS.cpp" />
     <ClCompile Include="Cloud.cpp" />
     <ClCompile Include="Animation.cpp" />
+    <ClCompile Include="mainmenu.cpp" />
+    <ClCompile Include="mouse.cpp" />
     <ClCompile Include="ZOrder.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
@@ -185,14 +191,17 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
+    <Image Include="..\..\..\..\..\..\..\Desktop\button.png" />
+    <Image Include="..\..\..\..\..\..\..\Desktop\Menu_Background.png" />
     <Image Include="..\..\..\..\Background.png" />
     <Image Include="background_new.png" />
     <Image Include="Brick_Block.png" />
     <Image Include="clouds.png" />
     <Image Include="Hero.png" />
     <Image Include="Normaler_Block.png" />
-    <Image Include="player1.png" />
+    <Image Include="pet_1.png" />
     <Image Include="player_blue.png" />
+    <Image Include="pointerimg.png" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

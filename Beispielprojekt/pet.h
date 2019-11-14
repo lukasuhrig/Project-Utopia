@@ -36,7 +36,7 @@ public:
 
 	void draw(bool lookingRight);
 
-	void animation(bool lookingRight, double player_x, double player_y, bool player_idle);
+	void update(bool lookingRight, double player_x, double player_y, bool player_idle);
 
 };
 

@@ -156,7 +156,7 @@ public:
 				clouds.push_back(Cloud(cloud_anim));
 			}
 
-			pet_1.animation(player.direction(),player.actual_pos_x(),player.actual_pos_y(),player.isIdle()); //PET Animation
+			pet_1.update(player.direction(),player.actual_pos_x(),player.actual_pos_y(),player.isIdle()); //PET Animation
 		}
 		//Berechnet FPS
 		fps.update();

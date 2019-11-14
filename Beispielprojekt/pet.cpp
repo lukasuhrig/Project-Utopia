@@ -50,8 +50,9 @@ void Pet::set_idle(bool state)
 	this->idle = state;
 }
 
-void Pet::animation(bool lookingRight, double player_x, double player_y, bool player_idle)
+void Pet::update(bool lookingRight, double player_x, double player_y, bool player_idle)
 {
+
 	if (lookingRight == true) //wenn Spieler nach rechts schaut
 	{
 		this->pos_x = player_x - 80; //links vom Spieler setzen
@@ -65,8 +66,8 @@ void Pet::animation(bool lookingRight, double player_x, double player_y, bool pl
 	}	
 	else if (lookingRight == false) //wenn Spieler nach links schaut
 	{
-		this->pos_x = player_x + 80; //rechts vom Spieler setzen
 
+		this->pos_x = player_x + 80; //rechts vom Spieler setzen
 
 		if ((this->pos_y >= (player_y - 85)) && (this->pos_y <= (player_y - 75))) //wenn über Spieler rechts dann...
 		{

@@ -16,9 +16,10 @@ class Menu{
 public:
 	Menu() : background_image("Menu_Background.png"),button_image("button.png"),Level_name(20){};
 	void Background();
-	void Button(double,double);
-	void Level(double,double,std::string);
-	bool Menu::pressedButton(Mouse mouse, bool ms_pressed, Menu menu);
+	void Level(uint16_t lvl_num,std::string);
+	double Position_x(uint16_t lvl_num);
+	double Position_y(uint16_t lvl_num);
+	bool pressedButton(uint16_t lvl_num,Mouse mouse, bool ms_pressed, Menu menu);
 	double Button_heigth();
 	double Button_width();
 

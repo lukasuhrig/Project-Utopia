@@ -13,23 +13,49 @@ void Menu::Background() //drawt den Menühintergrund
 		1.9
 	);
 }
-void Menu::Button(double x, double y)  //drawt den Button
+
+void Menu::Level(uint16_t lvl_num, std::string lvl) //drawt die Levelbezeichnung
 {
+	Level_name.draw(lvl, Position_x(lvl_num)+17, Position_y(lvl_num)+10, Layer_text, 3, 3
+
+	);
 	button_image.draw_rot(
-		x, y, Layer_button,
-		0, 
+		Position_x(lvl_num), Position_y(lvl_num), Layer_button,
+		0,
 		0,
 		0,
 		0.2,
 		0.2
 	);
 }
-void Menu::Level(double x, double y, std::string lvl) //drawt die Levelbezeichnung
-{
-	Level_name.draw(lvl, x, y, Layer_text, 3, 3
-
-	);
-}
+double Menu::Position_x(uint16_t lvl_num) {
+	switch (lvl_num) {
+	case 1: {return 100.0; break; }
+	case 2: {return 300.0; break; }
+	case 3: {return 500.0; break; }
+	case 4: {return 100.0; break; }
+	case 5: {return 300.0; break; }
+	case 6: {return 500.0; break; }
+	case 7: {return 100.0; break; }
+	case 8: {return 300.0; break; }
+	case 9: {return 500.0; break; }
+	default: {return 0; }
+	}
+	};
+double Menu::Position_y(uint16_t lvl_num) {
+	switch (lvl_num) {
+	case 1: {return 150.0; break; }
+	case 2: {return 150.0; break; }
+	case 3: {return 150.0; break; }
+	case 4: {return 300.0; break; }
+	case 5: {return 300.0; break; }
+	case 6: {return 300.0; break; }
+	case 7: {return 450.0; break; }
+	case 8: {return 450.0; break; }
+	case 9: {return 450.0; break; }
+	default: {return 0; }
+	}
+};
 
 
 double Menu::Button_heigth() //returned die Höhe des Buttons
@@ -41,6 +67,6 @@ double Menu::Button_width() // returned die Breite des Buttons
 	return button_image.width();
 
 };
-bool Menu::pressedButton(Mouse mouse,bool ms_pressed, Menu menu) {
-	return (mouse.mouse_x() > 200.0 && mouse.mouse_x() < 200.0 + menu.Button_width() && mouse.mouse_y() > 400.0 && mouse.mouse_y() < 400.0 + menu.Button_heigth() && ms_pressed);
+bool Menu::pressedButton(uint16_t lvl_num,Mouse mouse,bool ms_pressed,Menu menu) {
+	return (mouse.mouse_x() > Position_x(lvl_num) && mouse.mouse_x() < Position_x(lvl_num) + menu.Button_width() && mouse.mouse_y() > Position_y(lvl_num) && mouse.mouse_y() < Position_y(lvl_num) + menu.Button_heigth() && ms_pressed);
 }

@@ -78,7 +78,7 @@ public:
 	void update() override //ca. 60x pro Sekunde
 	{
 		mouse.mouse(input().mouse_x(), input().mouse_y());
-		if (menu.pressedButton(mouse,input().down(Gosu::MS_LEFT),menu)||menuing==false) {
+		if (menu.pressedButton(1,mouse,input().down(Gosu::MS_LEFT),menu)||menuing==false) {
 			frames++;
 			if (frames % 60 == 0) {
 				playtime++;
@@ -179,8 +179,15 @@ public:
 		if (menuing == true) //wenn das Menü da sein soll
 		{
 			menu.Background();//drawt den Background
-			menu.Button(200, 400);//drawt den Button
-			menu.Level(217, 410, "Level1"); //drawt den Text für das Level
+			menu.Level(1, "Level1"); //drawt den Text für das Level
+			menu.Level(2, "Level2"); //drawt den Text für das Level
+			menu.Level(3, "Level3"); //drawt den Text für das Level
+			menu.Level(4, "Level4"); //drawt den Text für das Level
+			menu.Level(5, "Level5"); //drawt den Text für das Level
+			menu.Level(6, "Level6"); //drawt den Text für das Level
+			menu.Level(7, "Level7"); //drawt den Text für das Level
+			menu.Level(8, "Level8"); //drawt den Text für das Level
+			menu.Level(9, "Level9"); //drawt den Text für das Level
 		}
 		
 		player.draw(); //drawt den player

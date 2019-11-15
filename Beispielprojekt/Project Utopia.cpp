@@ -40,8 +40,9 @@ public:
 
 	Player player;
 	Background background;
-	Blocks normal_block;
-	Blocks normal_block2;
+	std::vector<Blocks>normal_block;
+	Blocks Block0;
+	Blocks Block1;
 	Mouse mouse;
 	Ground ground;
 	//TEST
@@ -60,9 +61,11 @@ public:
 		pet_1.set_pos((player.actual_pos_x()-80),(player.actual_pos_y()-80));
 
 		background.set_pos(300, ground.get_Ground());
-		
-		normal_block.set_pos(400, 380,0.3,0.3);
-		normal_block2.set_pos(0,500,0.3,0.3);
+		Block0.set_pos(400, 380, 0.3, 0.3);
+		Block1.set_pos(200, 180, 0.3, 0.3);
+
+		normal_block.push_back(Block0);
+		normal_block.push_back(Block1);
 		//TEST
 		std::string filename_block = "Brick_Blocks.png";
 		std::string filename = "clouds.png";
@@ -88,8 +91,8 @@ public:
 				if (player.actual_pos_x() > (width() - 120))//wenn Spieler heruslaufen würde
 				{
 					background.move_left();
-					normal_block.set_pos_left();
-					normal_block2.set_pos_left();
+					normal_block.at(0).set_pos_left();
+					normal_block.at(1).set_pos_left();
 				}
 
 			} 
@@ -104,8 +107,8 @@ public:
 				if (player.actual_pos_x() < 120)//wenn Spieler heruslaufen würde
 				{
 					background.move_right();
-					normal_block.set_pos_right();
-					normal_block2.set_pos_right();
+					normal_block.at(0).set_pos_right();
+					normal_block.at(1).set_pos_right();
 				}
 
 			}
@@ -132,22 +135,20 @@ public:
 				player.resetJumpTime();//Resete die Sprungdauer
 			}
 			if //Spieler in Kasten, der die Oberfläche des Blockes umrahmt
-				(player.actual_pos_y() > normal_block.y_pos() - 5.0 && //Begrenzung nach oben
-				player.actual_pos_y() < (normal_block.y_pos() + 5.0 + normal_block.height()) && //Begrenzung nach unten
-				player.actual_pos_x() > normal_block.x_pos() - 5.0 && //Begrenzun nach links
-				player.actual_pos_x() < normal_block.x_pos() + normal_block.width() + 5.0 &&//Begrenzung nach rechts
-				player.get_jumptime() > 0.6)//sodass er nicht gleich mit der Sprungfunktion ab dem block weitermacht, sondern erst landen muss
-
+				(player.topBlock(normal_block,0) &&player.get_jumptime() > 0.5)//sodass er nicht gleich mit der Sprungfunktion ab dem block weitermacht, sondern erst landen muss
 			{
-				player.set_pos(player.actual_pos_x(), normal_block.y_pos()); //setzt den Spieler ordentlich auf den Block
+				player.set_pos(player.actual_pos_x(), normal_block.at(0).y_pos()); //setzt den Spieler ordentlich auf den Block
 				player.resetJumpTime();//Resete die Sprungdauer
 				player.jumpposition();//Setzt die Absrpunghöhe auf Höhe des Blockes
 			}
-			if ((player.actual_pos_x() < normal_block.x_pos() - 5.0 || //Spieler befindet sich links vom Block
-				player.actual_pos_x() > normal_block.x_pos() + normal_block.width() + 5.0) &&//Spieler befindet sich rechts vom Block
-				//|| 
-				///(player.actual_pos_x() > normal_block.x_pos() - 5.0 && player.actual_pos_x() < normal_block.x_pos() + normal_block.width() + 5.0 &&player.actual_pos_y()> normal_block.y_pos() +normal_block.height() && player.actual_pos_y() <=500) &&
-				player.get_jump() == false) //und der Spieler nicht abspringen will
+			if //Spieler in Kasten, der die Oberfläche des Blockes umrahmt
+				(player.topBlock(normal_block,1) && player.get_jumptime() > 0.5)//sodass er nicht gleich mit der Sprungfunktion ab dem block weitermacht, sondern erst landen muss
+			{
+				player.set_pos(player.actual_pos_x(), normal_block.at(1).y_pos()); //setzt den Spieler ordentlich auf den Block
+				player.resetJumpTime();//Resete die Sprungdauer
+				player.jumpposition();//Setzt die Absrpunghöhe auf Höhe des Blockes
+			}
+			if (player.topBlock(normal_block,0)==false && player.topBlock(normal_block, 1) == false && player.get_jump() == false) //und der Spieler nicht abspringen will
 			{
 				player.drop(); //Spieler fällt
 			}
@@ -183,8 +184,8 @@ public:
 		pet_1.draw(player.direction()); //draw pet_1
 
 		background.draw(); //drawt den Background
-		normal_block.draw_Blocks(0,0,0); //drawt einen Block
-		normal_block.draw_Blocks(0,100,100);
+		normal_block.at(0).draw_Blocks(0,0,0); //drawt einen Block
+		normal_block.at(1).draw_Blocks(0,0,0);
 		
 	
 

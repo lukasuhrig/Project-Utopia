@@ -100,6 +100,7 @@ void Player:: resetJumpTime() //setzt die Sprungzeit wieder auf null
 	jumptime = 0;
 	droptime = 0;
 	jumping = false;
+	free = false;
 }
 bool Player::get_jump() //true, wenn der Spieler in der Luft ist
 {
@@ -121,4 +122,10 @@ void Player::score_set_down() {
 bool Player::isIdle() const
 {
 	return this->idle;
+}
+bool Player::topBlock(std::vector<Blocks> blockvec, uint16_t i) {
+	return(pos_y > (blockvec.at(i).y_pos() - block_tolerance) && //Begrenzung nach oben
+		pos_y < (blockvec.at(i).y_pos() + block_tolerance + blockvec.at(i).height()) && //Begrenzung nach unten
+		pos_x >(blockvec.at(i).x_pos() - block_tolerance) && //Begrenzun nach links
+		pos_x < (blockvec.at(i).x_pos() + blockvec.at(i).width() + block_tolerance));
 }

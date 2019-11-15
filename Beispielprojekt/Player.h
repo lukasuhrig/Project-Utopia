@@ -4,6 +4,7 @@
 #include <Gosu/AutoLink.hpp>
 #include "ZOrder.h"
 #include "Ground.h"
+#include "Block.h"
 
 class Player
 {
@@ -14,7 +15,7 @@ class Player
 	double rot;
 
 	bool idle;
-
+	bool free=true;
 	bool lookingRight;
 	float health;
 	long score;
@@ -25,6 +26,8 @@ class Player
 	bool jumping=false;
 	double droptime = 0;
 	Ground ground;
+
+	const double block_tolerance=10.0;
 	std::string score_number = "Score : ";
 
 public:
@@ -60,4 +63,5 @@ public:
 	void score_draw();
 	void score_set_up();
 	void score_set_down();
+	bool topBlock(std::vector<Blocks> Blockvec, uint16_t i);
 };

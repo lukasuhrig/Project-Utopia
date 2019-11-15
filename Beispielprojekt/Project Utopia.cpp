@@ -25,6 +25,8 @@
 // Simulationsgeschwindigkeit
 const double DT = 100.0;
 bool menuing =true;
+int64_t frames=0;
+int64_t playtime = -1;
 //FPS
 Fps fps;
 
@@ -76,13 +78,16 @@ public:
 	void update() override //ca. 60x pro Sekunde
 	{
 		mouse.mouse(input().mouse_x(), input().mouse_y());
-		if ((input().mouse_x() > 200.0 && input().mouse_x() < 200.0 + menu.Button_width() && input().mouse_y() > 400.0 && input().mouse_y() < 400.0 + menu.Button_heigth() && input().down(Gosu::MS_LEFT))||menuing==false) {
+		if (menu.pressedButton(mouse,input().down(Gosu::MS_LEFT),menu)||menuing==false) {
+			frames++;
+			if (frames % 60 == 0) {
+				playtime++;
+			}
 			menuing = false;
-	
+			player.score_set_down(playtime);
 			mouse.noMouse();
 			if (input().down(Gosu::KB_D) == true && input().down(Gosu::KB_A) == false) //Taste D und nicht Taste A
 			{
-				player.score_set_up();
 				//***************RECHTS*******************
 				if (player.actual_pos_x() <= (width() - 120))//wenn spieler in dem Feld ist, in dem er sich bewegen kann
 				{
@@ -98,7 +103,6 @@ public:
 			} 
 			if (input().down(Gosu::KB_A) == true && input().down(Gosu::KB_D) == false) //Taste A und nicht Taste D
 			{
-				player.score_set_down();
 				//***************LINKS*******************
 				if (player.actual_pos_x() >= 120)//wenn spieler in dem Feld ist, in dem er sich bewegen kann
 				{
@@ -184,8 +188,9 @@ public:
 		pet_1.draw(player.direction()); //draw pet_1
 
 		background.draw(); //drawt den Background
-		normal_block.at(0).draw_Blocks(0,0,0); //drawt einen Block
-		normal_block.at(1).draw_Blocks(0,0,0);
+		for (size_t i = 0; i < normal_block.size(); i++) {
+			normal_block.at(i).draw_Blocks(0, 0, 0); //drawt einen Block
+		}
 		
 	
 

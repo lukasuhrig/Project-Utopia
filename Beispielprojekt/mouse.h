@@ -11,4 +11,6 @@ public:
 	void mouse(double, double);
 	void draw();
 	void noMouse();
+	double mouse_x();
+	double mouse_y();
 };

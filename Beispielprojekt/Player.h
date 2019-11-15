@@ -18,7 +18,7 @@ class Player
 	bool free=true;
 	bool lookingRight;
 	float health;
-	long score;
+	int64_t score;
 	Gosu::Font score_draw1;
 	double jumptime = 0;
 	double jump_y;
@@ -28,13 +28,13 @@ class Player
 	Ground ground;
 
 	const double block_tolerance=10.0;
-	std::string score_number = "Score : ";
 
 public:
 	Player(): score_draw1(20)
 	{
 
-		pos_x = pos_y = score = rot =0;
+		pos_x = pos_y = rot =0;
+		score = 2000000;
 		jump_y = ground.get_Ground();
 		health = 100.0;
 		lookingRight = true;
@@ -61,7 +61,6 @@ public:
 	bool get_jump();
 	double get_jumptime();
 	void score_draw();
-	void score_set_up();
-	void score_set_down();
+	void score_set_down(double tiime);
 	bool topBlock(std::vector<Blocks> Blockvec, uint16_t i);
 };

@@ -2,6 +2,7 @@
 #include <Gosu/Gosu.hpp>
 #include <Gosu/AutoLink.hpp>
 #include "ZOrder.h"
+#include "mouse.h"
 class Menu{
 	Gosu::Image background_image;
 	Gosu::Image button_image;
@@ -17,6 +18,7 @@ public:
 	void Background();
 	void Button(double,double);
 	void Level(double,double,std::string);
+	bool Menu::pressedButton(Mouse mouse, bool ms_pressed, Menu menu);
 	double Button_heigth();
 	double Button_width();
 

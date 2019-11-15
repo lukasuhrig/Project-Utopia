@@ -14,3 +14,9 @@ void Mouse::noMouse() //schiebt den Mauszeiger aus dem Bild
 {
 	pos_x = 1000;
 }
+double Mouse::mouse_x() {
+	return pos_x;
+}
+double Mouse::mouse_y() {
+	return pos_y;
+}

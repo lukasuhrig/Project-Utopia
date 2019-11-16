@@ -25,6 +25,7 @@
 // Simulationsgeschwindigkeit
 const double DT = 100.0;
 bool menuing =true;
+bool backtomenu=false;
 bool Level1 = false;
 bool Level2 = false;
 bool Level3 = false;
@@ -117,43 +118,43 @@ public:
 		//Level2
 		Block2_1.set_pos(200, 380, 0.3, 0.3);
 		Block2_2.set_pos(200, 180, 0.3, 0.3);
-		normal_block2.push_back(Block1_1);
-		normal_block2.push_back(Block1_2);
+		normal_block2.push_back(Block2_1);
+		normal_block2.push_back(Block2_2);
 		//Level3
 		Block3_1.set_pos(300, 380, 0.3, 0.3);
 		Block3_2.set_pos(300, 180, 0.3, 0.3);
-		normal_block3.push_back(Block1_1);
-		normal_block3.push_back(Block1_2);
+		normal_block3.push_back(Block3_1);
+		normal_block3.push_back(Block3_2);
 		//Level4
 		Block4_1.set_pos(400, 380, 0.3, 0.3);
 		Block4_2.set_pos(400, 180, 0.3, 0.3);
-		normal_block4.push_back(Block1_1);
-		normal_block4.push_back(Block1_2);
+		normal_block4.push_back(Block4_1);
+		normal_block4.push_back(Block4_2);
 		//Level5
 		Block5_1.set_pos(500, 380, 0.3, 0.3);
 		Block5_2.set_pos(500, 180, 0.3, 0.3);
-		normal_block5.push_back(Block1_1);
-		normal_block5.push_back(Block1_2);
+		normal_block5.push_back(Block5_1);
+		normal_block5.push_back(Block5_2);
 		//Level6
 		Block6_1.set_pos(600, 380, 0.3, 0.3);
 		Block6_2.set_pos(600, 180, 0.3, 0.3);
-		normal_block6.push_back(Block1_1);
-		normal_block6.push_back(Block1_2);
+		normal_block6.push_back(Block6_1);
+		normal_block6.push_back(Block6_2);
 		//Level7
 		Block7_1.set_pos(700, 380, 0.3, 0.3);
 		Block7_2.set_pos(700, 180, 0.3, 0.3);
-		normal_block7.push_back(Block1_1);
-		normal_block7.push_back(Block1_2);
+		normal_block7.push_back(Block7_1);
+		normal_block7.push_back(Block7_2);
 		//Level8
 		Block8_1.set_pos(234, 280, 0.3, 0.3);
 		Block8_2.set_pos(234, 280, 0.3, 0.3);
-		normal_block8.push_back(Block1_1);
-		normal_block8.push_back(Block1_2);
+		normal_block8.push_back(Block8_1);
+		normal_block8.push_back(Block8_2);
 		//Level9
 		Block9_1.set_pos(400, 280, 0.3, 0.3);
 		Block9_2.set_pos(400, 280, 0.3, 0.3);
-		normal_block9.push_back(Block1_1);
-		normal_block9.push_back(Block1_2);
+		normal_block9.push_back(Block9_1);
+		normal_block9.push_back(Block9_2);
 		
 		//TEST
 		std::string filename_block = "Brick_Blocks.png";
@@ -165,43 +166,47 @@ public:
 	void update() override //ca. 60x pro Sekunde
 	{
 		mouse.mouse(input().mouse_x(), input().mouse_y());
-		{
-			if (menu.pressedButton(1, mouse, input().down(Gosu::MS_LEFT), menu) && menuing == true) {
+		if (menuing == true) {
+			backtomenu = false;
+			if (menu.pressedButton(1, mouse, input().down(Gosu::MS_LEFT), menu)) {
 				Level1 = true;
 				menuing = false;
+				graphics().draw_line(0, 0, Gosu::Color::RED, 800, 600, Gosu::Color::RED, Z_UI);
 			}
-			if (menu.pressedButton(2, mouse, input().down(Gosu::MS_LEFT), menu) && menuing == true) {
+			if (menu.pressedButton(2, mouse, input().down(Gosu::MS_LEFT), menu)) {
 				Level2 = true;
 				menuing = false;
 			}
-			if (menu.pressedButton(3, mouse, input().down(Gosu::MS_LEFT), menu) && menuing == true) {
+			if (menu.pressedButton(3, mouse, input().down(Gosu::MS_LEFT), menu)) {
 				Level3 = true;
 				menuing = false;
 			}
-			if (menu.pressedButton(4, mouse, input().down(Gosu::MS_LEFT), menu) && menuing == true) {
+			if (menu.pressedButton(4, mouse, input().down(Gosu::MS_LEFT), menu)) {
 				Level4 = true;
 				menuing = false;
 			}
-			if (menu.pressedButton(5, mouse, input().down(Gosu::MS_LEFT), menu) && menuing == true) {
+			if (menu.pressedButton(5, mouse, input().down(Gosu::MS_LEFT), menu)) {
 				Level5 = true;
 				menuing = false;
 			}
-			if (menu.pressedButton(6, mouse, input().down(Gosu::MS_LEFT), menu) && menuing == true) {
+			if (menu.pressedButton(6, mouse, input().down(Gosu::MS_LEFT), menu)) {
 				Level6 = true;
 				menuing = false;
 			}
-			if (menu.pressedButton(7, mouse, input().down(Gosu::MS_LEFT), menu) && menuing == true) {
+			if (menu.pressedButton(7, mouse, input().down(Gosu::MS_LEFT), menu)) {
 				Level7 = true;
 				menuing = false;
 			}
-			if (menu.pressedButton(8, mouse, input().down(Gosu::MS_LEFT), menu) && menuing == true) {
+			if (menu.pressedButton(8, mouse, input().down(Gosu::MS_LEFT), menu)) {
 				Level8 = true;
 				menuing = false;
 			}
-			if (menu.pressedButton(9, mouse, input().down(Gosu::MS_LEFT), menu) && menuing == true) {
+			if (menu.pressedButton(9, mouse, input().down(Gosu::MS_LEFT), menu)) {
 				Level9 = true;
 				menuing = false;
 			}
+		}
+		if (menuing == false) {
 			if (Level1 == true) {
 				frames++;
 				if (frames % 60 == 0) {
@@ -209,7 +214,6 @@ public:
 				}
 				menuing = false;
 				player.score_set_down(playtime);
-				mouse.noMouse();
 				if (input().down(Gosu::KB_D) == true && input().down(Gosu::KB_A) == false) //Taste D und nicht Taste A
 				{
 					//***************RECHTS*******************
@@ -297,7 +301,6 @@ public:
 				}
 				menuing = false;
 				player.score_set_down(playtime);
-				mouse.noMouse();
 				if (input().down(Gosu::KB_D) == true && input().down(Gosu::KB_A) == false) //Taste D und nicht Taste A
 				{
 					//***************RECHTS*******************
@@ -385,7 +388,6 @@ public:
 				}
 				menuing = false;
 				player.score_set_down(playtime);
-				mouse.noMouse();
 				if (input().down(Gosu::KB_D) == true && input().down(Gosu::KB_A) == false) //Taste D und nicht Taste A
 				{
 					//***************RECHTS*******************
@@ -473,7 +475,6 @@ public:
 				}
 				menuing = false;
 				player.score_set_down(playtime);
-				mouse.noMouse();
 				if (input().down(Gosu::KB_D) == true && input().down(Gosu::KB_A) == false) //Taste D und nicht Taste A
 				{
 					//***************RECHTS*******************
@@ -561,7 +562,6 @@ public:
 				}
 				menuing = false;
 				player.score_set_down(playtime);
-				mouse.noMouse();
 				if (input().down(Gosu::KB_D) == true && input().down(Gosu::KB_A) == false) //Taste D und nicht Taste A
 				{
 					//***************RECHTS*******************
@@ -649,7 +649,6 @@ public:
 				}
 				menuing = false;
 				player.score_set_down(playtime);
-				mouse.noMouse();
 				if (input().down(Gosu::KB_D) == true && input().down(Gosu::KB_A) == false) //Taste D und nicht Taste A
 				{
 					//***************RECHTS*******************
@@ -737,7 +736,6 @@ public:
 				}
 				menuing = false;
 				player.score_set_down(playtime);
-				mouse.noMouse();
 				if (input().down(Gosu::KB_D) == true && input().down(Gosu::KB_A) == false) //Taste D und nicht Taste A
 				{
 					//***************RECHTS*******************
@@ -825,7 +823,6 @@ public:
 				}
 				menuing = false;
 				player.score_set_down(playtime);
-				mouse.noMouse();
 				if (input().down(Gosu::KB_D) == true && input().down(Gosu::KB_A) == false) //Taste D und nicht Taste A
 				{
 					//***************RECHTS*******************
@@ -913,7 +910,6 @@ public:
 				}
 				menuing = false;
 				player.score_set_down(playtime);
-				mouse.noMouse();
 				if (input().down(Gosu::KB_D) == true && input().down(Gosu::KB_A) == false) //Taste D und nicht Taste A
 				{
 					//***************RECHTS*******************
@@ -994,16 +990,21 @@ public:
 
 				pet_1.update(player.direction(), player.actual_pos_x(), player.actual_pos_y(), player.isIdle()); //PET Animation
 			}
-		}//alles
+		}
+
 		if (menu.pressedMenuButton(mouse, input().down(Gosu::MS_LEFT)) && menuing == false) {
 			menuing = true;
+			backtomenu = true;
 		}
 		//Berechnet FPS
 		fps.update();
 	}
 	void draw() override //ca. 60x pro Sekunde
 	{
-		
+
+
+		//*****Die Blöcke müssen beim zurücksetzen in das menü noch gelöscht werden und der spieler und die Punktzahl zurückgesetzt werden
+
 		if (menuing == true) //wenn das Menü da sein soll
 		{
 			menu.Background();//drawt den Background
@@ -1026,54 +1027,52 @@ public:
 		if (menuing == false) {
 			menu.menu_button();
 		}
-		{
-			if (Level1 == true&&menuing==false) {
+		if (Level1 == true && menuing == false) {
 				for (size_t i = 0; i < normal_block1.size(); i++) {
-					normal_block1.at(i).draw_Blocks(0, 0, 0); //drawt einen Block
-
+					normal_block1.at(i).draw_Blocks(0); //drawt einen Block
 				}
-			}
-			if (Level2 == true&&menuing == false) {
-				for (size_t i = 0; i < normal_block2.size(); i++) {
-					normal_block2.at(i).draw_Blocks(0, 0, 0); //drawt einen Block
-				}
-			}
-			if (Level3 == true && menuing == false) {
-				for (size_t i = 0; i < normal_block3.size(); i++) {
-					normal_block3.at(i).draw_Blocks(0, 0, 0); //drawt einen Block
-				}
-			}
-			if (Level4 == true && menuing == false) {
-				for (size_t i = 0; i < normal_block4.size(); i++) {
-					normal_block4.at(i).draw_Blocks(0, 0, 0); //drawt einen Block
-				}
-			}
-			if (Level5 == true && menuing == false) {
-				for (size_t i = 0; i < normal_block5.size(); i++) {
-					normal_block5.at(i).draw_Blocks(0, 0, 0); //drawt einen Block
-				}
-			}
-			if (Level6 == true && menuing == false) {
-				for (size_t i = 0; i < normal_block6.size(); i++) {
-					normal_block6.at(i).draw_Blocks(0, 0, 0); //drawt einen Block
-				}
-			}
-			if (Level7 == true && menuing == false) {
-				for (size_t i = 0; i < normal_block7.size(); i++) {
-					normal_block7.at(i).draw_Blocks(0, 0, 0); //drawt einen Block
-				}
-			}
-			if (Level8 == true && menuing == false) {
-				for (size_t i = 0; i < normal_block8.size(); i++) {
-					normal_block8.at(i).draw_Blocks(0, 0, 0); //drawt einen Block
-				}
-			}
-			if (Level9 == true && menuing == false) {
-				for (size_t i = 0; i < normal_block9.size(); i++) {
-					normal_block9.at(i).draw_Blocks(0, 0, 0); //drawt einen Block
-				}
-			}
 		}
+		if (Level2 == true && menuing == false) {
+				for (size_t i = 0; i < normal_block2.size(); i++) {
+					normal_block2.at(i).draw_Blocks(1); //drawt einen Block
+				}
+		}
+		if (Level3 == true && menuing == false) {
+				for (size_t i = 0; i < normal_block3.size(); i++) {
+					normal_block3.at(i).draw_Blocks(0); //drawt einen Block
+				}
+		}
+		if (Level4 == true && menuing == false) {
+				for (size_t i = 0; i < normal_block4.size(); i++) {
+					normal_block4.at(i).draw_Blocks(0); //drawt einen Block
+				}
+		}
+		if (Level5 == true && menuing == false) {
+				for (size_t i = 0; i < normal_block5.size(); i++) {
+					normal_block5.at(i).draw_Blocks(0); //drawt einen Block
+				}
+		}
+		if (Level6 == true && menuing == false) {
+				for (size_t i = 0; i < normal_block6.size(); i++) {
+					normal_block6.at(i).draw_Blocks(0); //drawt einen Block
+				}
+		}
+		if (Level7 == true && menuing == false) {
+				for (size_t i = 0; i < normal_block7.size(); i++) {
+					normal_block7.at(i).draw_Blocks(0); //drawt einen Block
+				}
+		}
+		if (Level8 == true && menuing == false) {
+				for (size_t i = 0; i < normal_block8.size(); i++) {
+					normal_block8.at(i).draw_Blocks(0); //drawt einen Block
+				}
+		}
+		if (Level9 == true && menuing == false) {
+				for (size_t i = 0; i < normal_block9.size(); i++) {
+					normal_block9.at(i).draw_Blocks(0); //drawt einen Block
+				}
+			}
+		
 		
 	
 

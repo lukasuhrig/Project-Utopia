@@ -100,15 +100,6 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <Image Include="..\..\..\..\Background.png">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="Hero.png">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="background_new.png">
-      <Filter>Resource Files</Filter>
-    </Image>
     <Image Include="player_blue.png">
       <Filter>Resource Files</Filter>
     </Image>

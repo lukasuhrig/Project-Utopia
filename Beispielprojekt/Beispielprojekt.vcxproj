@@ -195,12 +195,9 @@
   <ItemGroup>
     <Image Include="..\..\..\..\..\..\..\Desktop\button.png" />
     <Image Include="..\..\..\..\..\..\..\Desktop\Menu_Background.png" />
-    <Image Include="..\..\..\..\Background.png" />
-    <Image Include="background_new.png" />
     <Image Include="background_v1.png" />
     <Image Include="Brick_Block.png" />
     <Image Include="clouds.png" />
-    <Image Include="Hero.png" />
     <Image Include="Normaler_Block.png" />
     <Image Include="pet_1.png" />
     <Image Include="player_blue.png" />

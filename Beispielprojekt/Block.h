@@ -19,12 +19,13 @@ public:
 	Animation_Blocks Animation_Block;
 	 Blocks()
 	{
-		Animation_Block.push_back(Gosu::Image("Brick_Block.png"));//Hier Bilder von Blöcken einfügen
+		Animation_Block.push_back(Gosu::Image("Brick_Block.png"));
+		Animation_Block.push_back(Gosu::Image("Normaler_Block.png"));//Hier Bilder von Blöcken einfügen
 	};
 	
 
 	void set_pos(double x, double y, double scal_x, double scal_y);
-	void draw_Blocks(int a, int b, int c);
+	void draw_Blocks(int a);
 	double x_pos();
 	double y_pos();
 	double width();

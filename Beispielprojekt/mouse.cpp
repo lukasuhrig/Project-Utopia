@@ -8,9 +8,11 @@ void Mouse::mouse(double x,double y) //Mausposition
 }
 void Mouse::draw()  //drawt den Mauszeiger
 {
-	mouse_image.draw_rot(pos_x, pos_y, Z_UI, 0, 0.5, 0.5, 0.05, 0.05);
+	mouse_image.draw_rot(pos_x, pos_y, Z_Mouse, 0, 0.5, 0.5, 0.05, 0.05);
 }
-void Mouse::noMouse() //schiebt den Mauszeiger aus dem Bild
-{
-	pos_x = 1000;
+double Mouse::mouse_x() {
+	return pos_x;
+}
+double Mouse::mouse_y() {
+	return pos_y;
 }

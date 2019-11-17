@@ -10,5 +10,6 @@ public:
 	Mouse() : mouse_image("pointerimg.png") {};
 	void mouse(double, double);
 	void draw();
-	void noMouse();
+	double mouse_x();
+	double mouse_y();
 };

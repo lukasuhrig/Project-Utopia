@@ -100,6 +100,7 @@ void Player:: resetJumpTime() //setzt die Sprungzeit wieder auf null
 	jumptime = 0;
 	droptime = 0;
 	jumping = false;
+	free = false;
 }
 bool Player::get_jump() //true, wenn der Spieler in der Luft ist
 {
@@ -107,18 +108,20 @@ bool Player::get_jump() //true, wenn der Spieler in der Luft ist
 }
 
 void Player::score_draw() {
-	score_draw1.draw(score_number, 600, 50, Z_PLAYER, 1, 1, Gosu::Color::RED, Gosu::AlphaMode::AM_DEFAULT);
 	std::string s = std::to_string(score);
-	score_draw1.draw(s, 660, 50, Z_PLAYER, 1, 1, Gosu::Color::RED, Gosu::AlphaMode::AM_DEFAULT);
+	score_draw1.draw("Score: "+s, 660, 50, Z_PLAYER, 1, 1, Gosu::Color::RED, Gosu::AlphaMode::AM_DEFAULT);
 }
 
-void Player::score_set_up() {
-	score++;
-}
-void Player::score_set_down() {
-	score--;
+void Player::score_set_down(double tiime) {
+	score=score-tiime;
 }
 bool Player::isIdle() const
 {
 	return this->idle;
+}
+bool Player::topBlock(std::vector<Blocks> blockvec, uint16_t i) {
+	return(pos_y > (blockvec.at(i).y_pos() - block_tolerance) && //Begrenzung nach oben
+		pos_y < (blockvec.at(i).y_pos() + block_tolerance + blockvec.at(i).height()) && //Begrenzung nach unten
+		pos_x >(blockvec.at(i).x_pos() - block_tolerance) && //Begrenzun nach links
+		pos_x < (blockvec.at(i).x_pos() + blockvec.at(i).width() + block_tolerance));
 }

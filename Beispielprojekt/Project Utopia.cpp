@@ -185,26 +185,7 @@ public:
 		background.draw(); //drawt den Background
 		normal_block.draw_Blocks(0,0,0); //drawt einen Block
 		normal_block.draw_Blocks(0,100,100);
-		normal_block2.draw_Blocks(0,0, 0);
-		normal_block2.draw_Blocks(0, 75, 0);
-		normal_block2.draw_Blocks(0, 75*2, 0);
-		normal_block2.draw_Blocks(0, 75*3, 0);
-		normal_block2.draw_Blocks(0, 75*4, 0);
-		normal_block2.draw_Blocks(0, 75 * 5, 0);
-		normal_block2.draw_Blocks(0, 75 * 6, 0);
-		normal_block2.draw_Blocks(0, 75 * 7, 0);
-		normal_block2.draw_Blocks(0, 75 * 8, 0);
-		normal_block2.draw_Blocks(0, 75 * 9, 0);
-		normal_block2.draw_Blocks(0, 75 * 10, 0);
-		normal_block2.draw_Blocks(0, 75 * 11, 0);
-		normal_block2.draw_Blocks(0, 75 * 12, 0);
-		normal_block2.draw_Blocks(0, 75 * 13, 0);
-		normal_block2.draw_Blocks(0, 75 * 14, 0);
-		normal_block2.draw_Blocks(0, 75 * 15, 0);
-		normal_block2.draw_Blocks(0, 75 * 16, 0);
-		normal_block2.draw_Blocks(0, 75 * 17, 0);
-		normal_block2.draw_Blocks(0, 75 * 18, 0);
-		normal_block2.draw_Blocks(0, 75 * 19, 0);
+		
 		//MERKER: Erstellen von Enum für Reihenfolge von Images/fonts
 		fps_anzeige.draw("FPS: " + std::to_string(fps.get()), 15, 15, Z_UI,
 			1, 1, Gosu::Color::RED);

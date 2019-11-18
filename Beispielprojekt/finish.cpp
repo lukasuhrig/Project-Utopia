@@ -1,11 +1,10 @@
 #include "stdafx.h"
 #include "finish.h"
 
-void finish::set_pos(double x, double y, double scal_x, double scal_y){
+void finish::set_pos(double x, double y){
 	pos_x = x;
 	pos_y = y;
-	scale_x = scal_x;
-	scale_y = scal_y;
+
 }
 void finish::draw_finish(int a){
 	animation_finish.at(a).draw_rot(pos_x, pos_y, Z_Blocks,
@@ -25,14 +24,23 @@ double finish::y_pos(){
 	return pos_y;
 }
 double finish::width(){
-	return scale_x * 250.0;
+	return scale_x * 1280.0;
 }
 double finish::height(){
-	return scale_y * 250.0;
+	return scale_y * 1136.0;
 }
 void finish::set_pos_left(){
-	pos_x = pos_x - 10;
+	pos_x = pos_x - 10.0;
 }
 void finish::set_pos_right(){
-	pos_x = pos_x + 10;
+	pos_x = pos_x + 10.0;
+}
+bool finish::reached_finish(double posx, double posy) {
+	if (posx > pos_x&& posy > pos_y&& posx < pos_x + width() && pos_y < pos_y + height()) {
+		return true;
+	}
+	else
+	{
+		return false;
+	}
 }

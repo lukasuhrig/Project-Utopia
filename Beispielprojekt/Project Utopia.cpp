@@ -56,7 +56,7 @@ public:
 	Background background;
 	Mouse mouse;
 	Ground ground;
-
+	
 	//Level1
 	std::vector<Blocks>normal_block1;
 	std::vector<finish>finish_1;
@@ -112,7 +112,7 @@ public:
 	Blocks Block9_1;
 	Blocks Block9_2;
 	finish finish9_1;
-
+	
 	//TEST
 	std::list<Cloud> clouds;
 	Animation cloud_anim;
@@ -135,63 +135,63 @@ public:
 		Block1_2.set_pos(100, 180, 0.3, 0.3);
 		normal_block1.push_back(Block1_1);
 		normal_block1.push_back(Block1_2);
-		finish1_1.set_pos(500, 500, 1, 1);
+		finish1_1.set_pos(500, 500);
 		finish_1.push_back(finish1_1);
 		//Level2
 		Block2_1.set_pos(200, 380, 0.3, 0.3);
 		Block2_2.set_pos(200, 180, 0.3, 0.3);
 		normal_block2.push_back(Block2_1);
 		normal_block2.push_back(Block2_2);
-		finish2_1.set_pos(500, 500, 1, 1);
+		finish2_1.set_pos(500, 500);
 		finish_2.push_back(finish2_1);
 		//Level3
 		Block3_1.set_pos(300, 380, 0.3, 0.3);
 		Block3_2.set_pos(300, 180, 0.3, 0.3);
 		normal_block3.push_back(Block3_1);
 		normal_block3.push_back(Block3_2);
-		finish3_1.set_pos(500, 500, 1, 1);
+		finish3_1.set_pos(500, 500);
 		finish_3.push_back(finish3_1);
 		//Level4
 		Block4_1.set_pos(400, 380, 0.3, 0.3);
 		Block4_2.set_pos(400, 180, 0.3, 0.3);
 		normal_block4.push_back(Block4_1);
 		normal_block4.push_back(Block4_2);
-		finish4_1.set_pos(500, 500, 1, 1);
+		finish4_1.set_pos(500, 500);
 		finish_4.push_back(finish4_1);
 		//Level5
 		Block5_1.set_pos(500, 380, 0.3, 0.3);
 		Block5_2.set_pos(500, 180, 0.3, 0.3);
 		normal_block5.push_back(Block5_1);
 		normal_block5.push_back(Block5_2);
-		finish5_1.set_pos(500, 500, 1, 1);
+		finish5_1.set_pos(500, 500);
 		finish_5.push_back(finish5_1);
 		//Level6
 		Block6_1.set_pos(600, 380, 0.3, 0.3);
 		Block6_2.set_pos(600, 180, 0.3, 0.3);
 		normal_block6.push_back(Block6_1);
 		normal_block6.push_back(Block6_2);
-		finish6_1.set_pos(500, 500, 1, 1);
+		finish6_1.set_pos(500, 500);
 		finish_6.push_back(finish6_1);
 		//Level7
 		Block7_1.set_pos(700, 380, 0.3, 0.3);
 		Block7_2.set_pos(700, 180, 0.3, 0.3);
 		normal_block7.push_back(Block7_1);
 		normal_block7.push_back(Block7_2);
-		finish7_1.set_pos(500, 500, 1,1);
+		finish7_1.set_pos(500, 500);
 		finish_7.push_back(finish7_1);
 		//Level8
 		Block8_1.set_pos(234, 280, 0.3, 0.3);
 		Block8_2.set_pos(234, 280, 0.3, 0.3);
 		normal_block8.push_back(Block8_1);
 		normal_block8.push_back(Block8_2);
-		finish8_1.set_pos(500, 500, 1, 1);
+		finish8_1.set_pos(500, 500);
 		finish_8.push_back(finish8_1);
 		//Level9
 		Block9_1.set_pos(400, 280, 0.3, 0.3);
 		Block9_2.set_pos(400, 280, 0.3, 0.3);
 		normal_block9.push_back(Block9_1);
 		normal_block9.push_back(Block9_2);
-		finish9_1.set_pos(500, 500, 1, 1);
+		finish9_1.set_pos(500, 500);
 		finish_9.push_back(finish9_1);
 		
 		//TEST
@@ -248,7 +248,7 @@ public:
 			}
 		}
 		if (menuing == false) {
-			if (Level1 == true) {
+			if (Level1 == true&&!finish_1.at(0).reached_finish(player.actual_pos_x(),player.actual_pos_y())) {
 				frames++;
 				if (frames % 60 == 0) {
 					playtime++;
@@ -339,7 +339,7 @@ public:
 
 				pet_1.update(player.direction(), player.actual_pos_x(), player.actual_pos_y(), player.isIdle()); //PET Animation
 			}
-			if (Level2 == true) {
+			if (Level2 == true && !finish_2.at(0).reached_finish(player.actual_pos_x(), player.actual_pos_y())) {
 				frames++;
 				if (frames % 60 == 0) {
 					playtime++;
@@ -428,7 +428,7 @@ public:
 
 				pet_1.update(player.direction(), player.actual_pos_x(), player.actual_pos_y(), player.isIdle()); //PET Animation
 			}
-			if (Level3 == true) {
+			if (Level3 == true && !finish_3.at(0).reached_finish(player.actual_pos_x(), player.actual_pos_y())) {
 				frames++;
 				if (frames % 60 == 0) {
 					playtime++;
@@ -517,7 +517,7 @@ public:
 
 				pet_1.update(player.direction(), player.actual_pos_x(), player.actual_pos_y(), player.isIdle()); //PET Animation
 			}
-			if (Level4 == true) {
+			if (Level4 == true && !finish_4.at(0).reached_finish(player.actual_pos_x(), player.actual_pos_y())) {
 				frames++;
 				if (frames % 60 == 0) {
 					playtime++;
@@ -606,7 +606,7 @@ public:
 
 				pet_1.update(player.direction(), player.actual_pos_x(), player.actual_pos_y(), player.isIdle()); //PET Animation
 			}
-			if (Level5 == true) {
+			if (Level5 == true && !finish_5.at(0).reached_finish(player.actual_pos_x(), player.actual_pos_y())) {
 				frames++;
 				if (frames % 60 == 0) {
 					playtime++;
@@ -695,7 +695,7 @@ public:
 
 				pet_1.update(player.direction(), player.actual_pos_x(), player.actual_pos_y(), player.isIdle()); //PET Animation
 			}
-			if (Level6 == true) {
+			if (Level6 == true && !finish_6.at(0).reached_finish(player.actual_pos_x(), player.actual_pos_y())) {
 				frames++;
 				if (frames % 60 == 0) {
 					playtime++;
@@ -784,7 +784,7 @@ public:
 
 				pet_1.update(player.direction(), player.actual_pos_x(), player.actual_pos_y(), player.isIdle()); //PET Animation
 			}
-			if (Level7 == true) {
+			if (Level7 == true && !finish_7.at(0).reached_finish(player.actual_pos_x(), player.actual_pos_y())) {
 				frames++;
 				if (frames % 60 == 0) {
 					playtime++;
@@ -873,7 +873,7 @@ public:
 
 				pet_1.update(player.direction(), player.actual_pos_x(), player.actual_pos_y(), player.isIdle()); //PET Animation
 			}
-			if (Level8 == true) {
+			if (Level8 == true && !finish_8.at(0).reached_finish(player.actual_pos_x(), player.actual_pos_y())) {
 				frames++;
 				if (frames % 60 == 0) {
 					playtime++;
@@ -962,7 +962,7 @@ public:
 
 				pet_1.update(player.direction(), player.actual_pos_x(), player.actual_pos_y(), player.isIdle()); //PET Animation
 			}
-			if (Level9 == true) {
+			if (Level9 == true && !finish_9.at(0).reached_finish(player.actual_pos_x(), player.actual_pos_y())) {
 				frames++;
 				if (frames % 60 == 0) {
 					playtime++;

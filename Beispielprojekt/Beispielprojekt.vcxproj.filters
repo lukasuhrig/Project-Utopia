@@ -136,5 +136,8 @@
     <Image Include="Tür.png">
       <Filter>Resource Files</Filter>
     </Image>
+    <Image Include="..\..\..\..\..\..\..\Desktop\checkered-flag-309862_1280.png">
+      <Filter>Resource Files</Filter>
+    </Image>
   </ItemGroup>
 </Project>

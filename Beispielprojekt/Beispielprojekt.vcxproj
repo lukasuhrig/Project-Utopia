@@ -196,6 +196,7 @@
   </ItemGroup>
   <ItemGroup>
     <Image Include="..\..\..\..\..\..\..\Desktop\button.png" />
+    <Image Include="..\..\..\..\..\..\..\Desktop\checkered-flag-309862_1280.png" />
     <Image Include="..\..\..\..\..\..\..\Desktop\Menu_Background.png" />
     <Image Include="background_v1.png" />
     <Image Include="Brick_Block.png" />

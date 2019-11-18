@@ -2,9 +2,9 @@
 #include "pet.h"
 #include <math.h>
 
-double animationSpeed = 2.5; //1.2
-double animationSpeedIdle = 0.25;
-double animationSpeed_x = 10;
+const double animationSpeed = 2.5; //1.2
+const double animationSpeedIdle = 0.25;
+const double animationSpeed_x = 10;
 
 double Pet::actual_pos_x() const
 {
@@ -54,15 +54,77 @@ void Pet::set_idle(bool state)
 
 void Pet::update(bool lookingRight, double player_x, double player_y, bool player_idle)
 {
+	double x_d = 0.0;
+	double y_d = 0.0;
+	double x = 0.0;
+	double y = 0.0;
 
-	double x_d = abs(pos_x - player_x);
-	double y_d = abs(pos_y - player_y);
-	double D = sqrt(x_d * x_d + y_d * y_d);
-	double x_n = x_d / D;
-	double y_n = y_d / D;
-	//this->pos_x = x_n * 2;
-	//this->pos_y = y_n * 2;
+	if (lookingRight == true) //wenn Spieler nach rechts schaut
+	{
+		x = (player_x - 80.0);
+		y = (player_y - 80.0);
 
+		x_d = abs(pos_x - (player_x - 80.0));
+		y_d = abs(pos_y - (player_y - 80.0));
+	}
+	else if (lookingRight == false) //wenn Spieler nach links schaut
+	{
+		x = (player_x + 80.0);
+		y = (player_y - 80.0);
+
+		x_d = abs(pos_x - (player_x + 80.0));
+		y_d = abs(pos_y - (player_y - 80.0));
+	}
+	double D = sqrt(x_d * x_d + y_d * y_d);	
+	if (lookingRight == true) //wenn Spieler nach rechts schaut
+	{
+		if ((pos_x == (player_x - 80.0)) && (pos_y - (player_y - 80.0)))
+		{
+			D = 0.0;
+			inCorrectPos = true;
+		}
+		else
+		{
+			inCorrectPos = false;
+		}
+	}
+	else if (lookingRight == false) //wenn Spieler nach links schaut
+	{
+		if ((pos_x == (player_x + 80.0)) && (pos_y - (player_y - 80.0)))
+		{
+			D = 0.0;
+			inCorrectPos = true;
+		}
+		else
+		{
+			inCorrectPos = false;
+		}
+	}
+
+	double x_n = 0.0;
+	double y_n = 0.0;
+
+	if (D != 0.0)
+	{
+		x_n = x_d / D;
+		y_n = y_d / D;
+	}
+
+	if (inCorrectPos == false)
+	{	
+		if (D > 0.0)
+		{
+			x = (pos_x + (x_n * animationSpeed));
+			y = (pos_y + (y_n * animationSpeed));
+
+		}
+		this->pos_x = x;
+		this->pos_y = y;
+	}
+
+
+
+/*
 	if (lookingRight == true) //wenn Spieler nach rechts schaut
 	{
 		this->pos_x = player_x - 80; //links vom Spieler setzen
@@ -127,6 +189,7 @@ void Pet::update(bool lookingRight, double player_x, double player_y, bool playe
 			this->pos_y = this->pos_y - animationSpeed; //spieler bewegt sich, also hat pet falsche position und muss spieler im Schnell-Modus hinterher
 		}
 	}
+	*/
 
 	if (this->pos_y <= (player_y - 85))
 	{

@@ -13,6 +13,10 @@
 #include <thread>
 #include <chrono>
 
+#include "m_time.h"
+
+#include <ctime>
+
 #include "ZOrder.h"
 #include "Player.h"
 #include "Background.h"
@@ -44,6 +48,8 @@ int64_t frames=0;
 int64_t playtime = 0;
 //FPS
 Fps fps;
+//time
+m_time zeit;
 
 //VOLUME/SOUND
 float master_vol = 1;
@@ -252,15 +258,19 @@ public:
 		}
 		if (menuing == false) {
 			if (Level1 == true&&!finish_1.at(0).reached_finish(player.actual_pos_x(),player.actual_pos_y())) {
-				frames++;
-				if (frames % 60 == 0) {
-					playtime++;
+				//frames++;
+
+				if ((zeit.oneSecond()) == true)
+				{
+					player.score_set_down(1);
 				}
-				if (!finish_1.at(0).reached_finish(player.actual_pos_x(), player.actual_pos_y())) {
+
+				/*if (!finish_1.at(0).reached_finish(player.actual_pos_x(), player.actual_pos_y())) {            // <--- was diese???
 					player.score_set_down(playtime);
-				}
+				}*/
+
 				menuing = false;
-				player.score_set_down(playtime);
+				
 				if (input().down(Gosu::KB_D) == true && input().down(Gosu::KB_A) == false) //Taste D und nicht Taste A
 				{
 					//***************RECHTS*******************
@@ -268,7 +278,7 @@ public:
 					{
 						player.turn_right();
 					}
-					if (player.actual_pos_x() > (width() - position_in_window))//wenn Spieler heruslaufen würde
+					if (player.actual_pos_x() >= (width() - position_in_window))//wenn Spieler heruslaufen würde
 					{
 						background.move_left();
 						normal_block1.at(0).set_pos_left();
@@ -331,7 +341,7 @@ public:
 				{
 					player.drop(); //Spieler fällt
 				}
-				if (player.actual_pos_y() > ground.get_Ground() + 2) //wenn der Spieler durch den Boden glitcht setzt es ihn wieder auf den Boden
+				if (player.actual_pos_y() > ground.get_Ground() + 5) //wenn der Spieler durch den Boden glitcht setzt es ihn wieder auf den Boden
 				{
 					player.set_pos(player.actual_pos_x(), ground.get_Ground());
 					player.jumpposition();
@@ -362,7 +372,7 @@ public:
 					{
 						player.turn_right();
 					}
-					if (player.actual_pos_x() > (width() - position_in_window))//wenn Spieler heruslaufen würde
+					if (player.actual_pos_x() >= (width() - position_in_window))//wenn Spieler heruslaufen würde
 					{
 						background.move_left();
 						normal_block2.at(0).set_pos_left();
@@ -1088,6 +1098,7 @@ public:
 		}
 		//Berechnet FPS
 		fps.update();
+		zeit.oneSecond();
 	}
 	void draw() override //ca. 60x pro Sekunde
 	{
@@ -1174,8 +1185,6 @@ public:
 		
 		
 	
-
-		//MERKER: Erstellen von Enum für Reihenfolge von Images/fonts
 		fps_anzeige.draw("FPS: " + std::to_string(fps.get()), 15, 15, Z_UI,
 			1, 1, Gosu::Color::RED);
 		ground.draw();

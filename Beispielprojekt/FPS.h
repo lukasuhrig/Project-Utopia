@@ -1,31 +1,14 @@
 #pragma once
 #include <Gosu/Gosu.hpp>
 #include <Gosu/AutoLink.hpp>
-class Interval
-{
-private:
-	unsigned int initial_;
+#include "interval.h"
 
-public:
-	inline Interval() : initial_(GetTickCount64())
-	{
-	}
-
-	virtual ~Interval()
-	{
-	}
-
-	inline unsigned int value() const
-	{
-		return GetTickCount64() - initial_;
-	}
-};
 class Fps
 {
 protected:
 	unsigned int m_fps;
 	unsigned int m_fpscount;
-	Interval m_fpsinterval;
+	interval m_fpsinterval;
 
 public:
 
@@ -46,7 +29,7 @@ public:
 
 			// reset the counter and the interval
 			m_fpscount = 0;
-			m_fpsinterval = Interval();
+			m_fpsinterval = interval();
 		}
 	}
 

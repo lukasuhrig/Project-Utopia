@@ -165,8 +165,10 @@
     <ClInclude Include="Animation.h" />
     <ClInclude Include="Ground.h" />
     <ClInclude Include="finish.h" />
+    <ClInclude Include="interval.h" />
     <ClInclude Include="mouse.h" />
     <ClInclude Include="mainmenu.h" />
+    <ClInclude Include="m_time.h" />
     <ClInclude Include="pet.h" />
     <ClInclude Include="ZOrder.h" />
     <ClInclude Include="Player.h" />
@@ -174,6 +176,8 @@
     <ClInclude Include="targetver.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="interval.cpp" />
+    <ClCompile Include="m_time.cpp" />
     <ClCompile Include="pet.cpp" />
     <ClCompile Include="Project Utopia.cpp" />
     <ClCompile Include="Player.cpp" />

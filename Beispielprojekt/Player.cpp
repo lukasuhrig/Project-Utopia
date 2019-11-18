@@ -19,7 +19,7 @@ void Player:: turn_left() //Spieler dreht sich nach links, läuft nach links und 
 	set_idle(false);
 
 	lookingRight = false;
-	pos_x = pos_x - 10;
+	this->pos_x = this->pos_x - 10;
 		
 }
 void Player:: turn_right() //Spieler dreht sich nach rechts, läuft nach rechts und Score zählt hoch
@@ -27,7 +27,7 @@ void Player:: turn_right() //Spieler dreht sich nach rechts, läuft nach rechts u
 	set_idle(false);
 
 	lookingRight = true;
-	pos_x = pos_x + 10;
+	this->pos_x = this->pos_x + 10;
 	
 }
 void Player:: jump() //Spieler springt
@@ -36,7 +36,7 @@ void Player:: jump() //Spieler springt
 
 	jumptime = jumptime + (1.0 / 60.0);
 	
-		pos_y = jump_y + jumptime * jumptime * gravity - 1000.0 * jumptime; //Sprungfunktion
+		this->pos_y = jump_y + jumptime * jumptime * gravity - 1000.0 * jumptime; //Sprungfunktion
 		jumping = true;//Springen =wahr
 }
 double Player::get_jumpposition() //returned die Absprunghöhe
@@ -48,7 +48,7 @@ void Player::drop() //Fallen
 	droptime = droptime + (1.0 / 60.0); //Fallzeit in Sekunden
 	if (pos_y < ground.get_Ground())  //wenn Spieler in der Luft
 	{
-		pos_y = jump_y + droptime * droptime * gravity; //Fallfunktion
+		this->pos_y = jump_y + droptime * droptime * gravity; //Fallfunktion
 	}
 }
 double Player:: get_jumptime() //returned die Sprungzeit
@@ -84,16 +84,16 @@ void Player:: draw() const //drawt den Spieler
 }
 void Player:: set_pos(double x, double y) //setzt die Position vom Spieler
 {
-	pos_x = x;
-	pos_y = y;
+	this->pos_x = x;
+	this->pos_y = y;
 }
 double Player:: actual_pos_x() const //returned die x Position des Spieler
 {
-	return pos_x;
+	return this->pos_x;
 }
 double Player:: actual_pos_y() const //returned die y Position des Spieler
 {
-	return pos_y;
+	return this->pos_y;
 }
 void Player:: resetJumpTime() //setzt die Sprungzeit wieder auf null
 {
@@ -112,8 +112,9 @@ void Player::score_draw() {
 	score_draw1.draw("Score: "+s, 660, 50, Z_PLAYER, 1, 1, Gosu::Color::RED, Gosu::AlphaMode::AM_DEFAULT);
 }
 
-void Player::score_set_down(double tiime) {
-	score=score-tiime;
+void Player::score_set_down(double p_per_sec) //tiime = wie viele punkte pro Sekunde abgezogen werden
+{
+	score=score - p_per_sec;
 }
 bool Player::isIdle() const
 {

@@ -171,7 +171,6 @@ public:
 			if (menu.pressedButton(1, mouse, input().down(Gosu::MS_LEFT), menu)) {
 				Level1 = true;
 				menuing = false;
-				graphics().draw_line(0, 0, Gosu::Color::RED, 800, 600, Gosu::Color::RED, Z_UI);
 			}
 			if (menu.pressedButton(2, mouse, input().down(Gosu::MS_LEFT), menu)) {
 				Level2 = true;

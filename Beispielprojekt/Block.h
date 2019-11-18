@@ -32,5 +32,5 @@ public:
 	double height();
 	void set_pos_left();
 	void set_pos_right();
-	void row_blocks(int a);
+
 };

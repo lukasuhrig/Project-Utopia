@@ -164,6 +164,7 @@
     <ClInclude Include="Cloud.h" />
     <ClInclude Include="Animation.h" />
     <ClInclude Include="Ground.h" />
+    <ClInclude Include="finish.h" />
     <ClInclude Include="mouse.h" />
     <ClInclude Include="mainmenu.h" />
     <ClInclude Include="pet.h" />
@@ -184,6 +185,7 @@
     <ClCompile Include="mainmenu.cpp" />
     <ClCompile Include="mouse.cpp" />
     <ClCompile Include="Ground.cpp" />
+    <ClCompile Include="finish.cpp" />
     <ClCompile Include="ZOrder.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
@@ -202,6 +204,7 @@
     <Image Include="pet_1.png" />
     <Image Include="player_blue.png" />
     <Image Include="pointerimg.png" />
+    <Image Include="Tür.png" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

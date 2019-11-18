@@ -57,6 +57,9 @@
     <ClInclude Include="Ground.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="finish.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -98,6 +101,9 @@
     <ClCompile Include="Ground.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="finish.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Image Include="player_blue.png">
@@ -125,6 +131,9 @@
       <Filter>Resource Files</Filter>
     </Image>
     <Image Include="background_v1.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Tür.png">
       <Filter>Resource Files</Filter>
     </Image>
   </ItemGroup>

@@ -34,7 +34,7 @@ public:
 	{
 
 		pos_x = pos_y = rot =0;
-		score = 2000000;
+		score = 20000;
 		jump_y = ground.get_Ground();
 		health = 100.0;
 		lookingRight = true;

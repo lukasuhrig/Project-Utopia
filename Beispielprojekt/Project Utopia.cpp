@@ -10,6 +10,9 @@
 #include <iostream>
 #include <ctime>
 
+#include <thread>
+#include <chrono>
+
 #include "ZOrder.h"
 #include "Player.h"
 #include "Background.h"
@@ -38,7 +41,7 @@ bool Level7 = false;
 bool Level8 = false;
 bool Level9 = false;
 int64_t frames=0;
-int64_t playtime = -1;
+int64_t playtime = 0;
 //FPS
 Fps fps;
 
@@ -253,6 +256,9 @@ public:
 				if (frames % 60 == 0) {
 					playtime++;
 				}
+				if (!finish_1.at(0).reached_finish(player.actual_pos_x(), player.actual_pos_y())) {
+					player.score_set_down(playtime);
+				}
 				menuing = false;
 				player.score_set_down(playtime);
 				if (input().down(Gosu::KB_D) == true && input().down(Gosu::KB_A) == false) //Taste D und nicht Taste A
@@ -344,6 +350,9 @@ public:
 				if (frames % 60 == 0) {
 					playtime++;
 				}
+				if (!finish_2.at(0).reached_finish(player.actual_pos_x(), player.actual_pos_y())) {
+					player.score_set_down(playtime);
+				}
 				menuing = false;
 				player.score_set_down(playtime);
 				if (input().down(Gosu::KB_D) == true && input().down(Gosu::KB_A) == false) //Taste D und nicht Taste A
@@ -432,6 +441,9 @@ public:
 				frames++;
 				if (frames % 60 == 0) {
 					playtime++;
+				}
+				if (!finish_3.at(0).reached_finish(player.actual_pos_x(), player.actual_pos_y())) {
+					player.score_set_down(playtime);
 				}
 				menuing = false;
 				player.score_set_down(playtime);
@@ -522,6 +534,9 @@ public:
 				if (frames % 60 == 0) {
 					playtime++;
 				}
+				if (!finish_4.at(0).reached_finish(player.actual_pos_x(), player.actual_pos_y())) {
+					player.score_set_down(playtime);
+				}
 				menuing = false;
 				player.score_set_down(playtime);
 				if (input().down(Gosu::KB_D) == true && input().down(Gosu::KB_A) == false) //Taste D und nicht Taste A
@@ -610,6 +625,9 @@ public:
 				frames++;
 				if (frames % 60 == 0) {
 					playtime++;
+				}
+				if (!finish_5.at(0).reached_finish(player.actual_pos_x(), player.actual_pos_y())) {
+					player.score_set_down(playtime);
 				}
 				menuing = false;
 				player.score_set_down(playtime);
@@ -700,6 +718,9 @@ public:
 				if (frames % 60 == 0) {
 					playtime++;
 				}
+				if (!finish_6.at(0).reached_finish(player.actual_pos_x(), player.actual_pos_y())) {
+					player.score_set_down(playtime);
+				}
 				menuing = false;
 				player.score_set_down(playtime);
 				if (input().down(Gosu::KB_D) == true && input().down(Gosu::KB_A) == false) //Taste D und nicht Taste A
@@ -789,6 +810,9 @@ public:
 				if (frames % 60 == 0) {
 					playtime++;
 				}
+				if (!finish_7.at(0).reached_finish(player.actual_pos_x(), player.actual_pos_y())) {
+					player.score_set_down(playtime);
+				}
 				menuing = false;
 				player.score_set_down(playtime);
 				if (input().down(Gosu::KB_D) == true && input().down(Gosu::KB_A) == false) //Taste D und nicht Taste A
@@ -877,6 +901,9 @@ public:
 				frames++;
 				if (frames % 60 == 0) {
 					playtime++;
+				}
+				if (!finish_8.at(0).reached_finish(player.actual_pos_x(), player.actual_pos_y())) {
+					player.score_set_down(playtime);
 				}
 				menuing = false;
 				player.score_set_down(playtime);
@@ -968,7 +995,9 @@ public:
 					playtime++;
 				}
 				menuing = false;
-				player.score_set_down(playtime);
+				if (!finish_9.at(0).reached_finish(player.actual_pos_x(), player.actual_pos_y())) {
+					player.score_set_down(playtime);
+				}
 				if (input().down(Gosu::KB_D) == true && input().down(Gosu::KB_A) == false) //Taste D und nicht Taste A
 				{
 					//***************RECHTS*******************
@@ -1167,6 +1196,10 @@ int main()
 {
 	GameWindow window;
 	window.show();
+
+	
+	//Sleep(1000);
+	//std::cout << "test" << std::endl;
 }
 
 

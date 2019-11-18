@@ -24,6 +24,7 @@
 #include "pet.h"
 
 // Simulationsgeschwindigkeit
+double position_in_window=400; // hier wird die Breite des Bildschirms bestimmt in welchem sich der Spieler frei bewegen kann ohne das der Hintergrund mitbewegt wird.
 const double DT = 100.0;
 bool menuing =true;
 bool backtomenu=false;
@@ -258,11 +259,11 @@ public:
 				if (input().down(Gosu::KB_D) == true && input().down(Gosu::KB_A) == false) //Taste D und nicht Taste A
 				{
 					//***************RECHTS*******************
-					if (player.actual_pos_x() <= (width() - 120))//wenn spieler in dem Feld ist, in dem er sich bewegen kann
+					if (player.actual_pos_x() <= (width() - position_in_window))//wenn spieler in dem Feld ist, in dem er sich bewegen kann
 					{
 						player.turn_right();
 					}
-					if (player.actual_pos_x() > (width() - 120))//wenn Spieler heruslaufen würde
+					if (player.actual_pos_x() > (width() - position_in_window))//wenn Spieler heruslaufen würde
 					{
 						background.move_left();
 						normal_block1.at(0).set_pos_left();
@@ -276,11 +277,11 @@ public:
 				if (input().down(Gosu::KB_A) == true && input().down(Gosu::KB_D) == false) //Taste A und nicht Taste D
 				{
 					//***************LINKS*******************
-					if (player.actual_pos_x() >= 120)//wenn spieler in dem Feld ist, in dem er sich bewegen kann
+					if (player.actual_pos_x() >= position_in_window)//wenn spieler in dem Feld ist, in dem er sich bewegen kann
 					{
 						player.turn_left();
 					}
-					if (player.actual_pos_x() < 120)//wenn Spieler heruslaufen würde
+					if (player.actual_pos_x() < position_in_window)//wenn Spieler heruslaufen würde
 					{
 						background.move_right();
 						normal_block1.at(0).set_pos_right();
@@ -349,11 +350,11 @@ public:
 				if (input().down(Gosu::KB_D) == true && input().down(Gosu::KB_A) == false) //Taste D und nicht Taste A
 				{
 					//***************RECHTS*******************
-					if (player.actual_pos_x() <= (width() - 120))//wenn spieler in dem Feld ist, in dem er sich bewegen kann
+					if (player.actual_pos_x() <= (width() - position_in_window))//wenn spieler in dem Feld ist, in dem er sich bewegen kann
 					{
 						player.turn_right();
 					}
-					if (player.actual_pos_x() > (width() - 120))//wenn Spieler heruslaufen würde
+					if (player.actual_pos_x() > (width() - position_in_window))//wenn Spieler heruslaufen würde
 					{
 						background.move_left();
 						normal_block2.at(0).set_pos_left();
@@ -365,11 +366,11 @@ public:
 				if (input().down(Gosu::KB_A) == true && input().down(Gosu::KB_D) == false) //Taste A und nicht Taste D
 				{
 					//***************LINKS*******************
-					if (player.actual_pos_x() >= 120)//wenn spieler in dem Feld ist, in dem er sich bewegen kann
+					if (player.actual_pos_x() >= position_in_window)//wenn spieler in dem Feld ist, in dem er sich bewegen kann
 					{
 						player.turn_left();
 					}
-					if (player.actual_pos_x() < 120)//wenn Spieler heruslaufen würde
+					if (player.actual_pos_x() < position_in_window)//wenn Spieler heruslaufen würde
 					{
 						background.move_right();
 						normal_block2.at(0).set_pos_right();
@@ -438,11 +439,11 @@ public:
 				if (input().down(Gosu::KB_D) == true && input().down(Gosu::KB_A) == false) //Taste D und nicht Taste A
 				{
 					//***************RECHTS*******************
-					if (player.actual_pos_x() <= (width() - 120))//wenn spieler in dem Feld ist, in dem er sich bewegen kann
+					if (player.actual_pos_x() <= (width() - position_in_window))//wenn spieler in dem Feld ist, in dem er sich bewegen kann
 					{
 						player.turn_right();
 					}
-					if (player.actual_pos_x() > (width() - 120))//wenn Spieler heruslaufen würde
+					if (player.actual_pos_x() > (width() - position_in_window))//wenn Spieler heruslaufen würde
 					{
 						background.move_left();
 						normal_block3.at(0).set_pos_left();
@@ -454,11 +455,11 @@ public:
 				if (input().down(Gosu::KB_A) == true && input().down(Gosu::KB_D) == false) //Taste A und nicht Taste D
 				{
 					//***************LINKS*******************
-					if (player.actual_pos_x() >= 120)//wenn spieler in dem Feld ist, in dem er sich bewegen kann
+					if (player.actual_pos_x() >= position_in_window)//wenn spieler in dem Feld ist, in dem er sich bewegen kann
 					{
 						player.turn_left();
 					}
-					if (player.actual_pos_x() < 120)//wenn Spieler heruslaufen würde
+					if (player.actual_pos_x() < position_in_window)//wenn Spieler heruslaufen würde
 					{
 						background.move_right();
 						normal_block3.at(0).set_pos_right();
@@ -527,11 +528,11 @@ public:
 				if (input().down(Gosu::KB_D) == true && input().down(Gosu::KB_A) == false) //Taste D und nicht Taste A
 				{
 					//***************RECHTS*******************
-					if (player.actual_pos_x() <= (width() - 120))//wenn spieler in dem Feld ist, in dem er sich bewegen kann
+					if (player.actual_pos_x() <= (width() - position_in_window))//wenn spieler in dem Feld ist, in dem er sich bewegen kann
 					{
 						player.turn_right();
 					}
-					if (player.actual_pos_x() > (width() - 120))//wenn Spieler heruslaufen würde
+					if (player.actual_pos_x() > (width() - position_in_window))//wenn Spieler heruslaufen würde
 					{
 						background.move_left();
 						normal_block4.at(0).set_pos_left();
@@ -543,11 +544,11 @@ public:
 				if (input().down(Gosu::KB_A) == true && input().down(Gosu::KB_D) == false) //Taste A und nicht Taste D
 				{
 					//***************LINKS*******************
-					if (player.actual_pos_x() >= 120)//wenn spieler in dem Feld ist, in dem er sich bewegen kann
+					if (player.actual_pos_x() >= position_in_window)//wenn spieler in dem Feld ist, in dem er sich bewegen kann
 					{
 						player.turn_left();
 					}
-					if (player.actual_pos_x() < 120)//wenn Spieler heruslaufen würde
+					if (player.actual_pos_x() < position_in_window)//wenn Spieler heruslaufen würde
 					{
 						background.move_right();
 						normal_block4.at(0).set_pos_right();
@@ -616,11 +617,11 @@ public:
 				if (input().down(Gosu::KB_D) == true && input().down(Gosu::KB_A) == false) //Taste D und nicht Taste A
 				{
 					//***************RECHTS*******************
-					if (player.actual_pos_x() <= (width() - 120))//wenn spieler in dem Feld ist, in dem er sich bewegen kann
+					if (player.actual_pos_x() <= (width() - position_in_window))//wenn spieler in dem Feld ist, in dem er sich bewegen kann
 					{
 						player.turn_right();
 					}
-					if (player.actual_pos_x() > (width() - 120))//wenn Spieler heruslaufen würde
+					if (player.actual_pos_x() > (width() - position_in_window))//wenn Spieler heruslaufen würde
 					{
 						background.move_left();
 						normal_block5.at(0).set_pos_left();
@@ -632,11 +633,11 @@ public:
 				if (input().down(Gosu::KB_A) == true && input().down(Gosu::KB_D) == false) //Taste A und nicht Taste D
 				{
 					//***************LINKS*******************
-					if (player.actual_pos_x() >= 120)//wenn spieler in dem Feld ist, in dem er sich bewegen kann
+					if (player.actual_pos_x() >= position_in_window)//wenn spieler in dem Feld ist, in dem er sich bewegen kann
 					{
 						player.turn_left();
 					}
-					if (player.actual_pos_x() < 120)//wenn Spieler heruslaufen würde
+					if (player.actual_pos_x() < position_in_window)//wenn Spieler heruslaufen würde
 					{
 						background.move_right();
 						normal_block5.at(0).set_pos_right();
@@ -705,11 +706,11 @@ public:
 				if (input().down(Gosu::KB_D) == true && input().down(Gosu::KB_A) == false) //Taste D und nicht Taste A
 				{
 					//***************RECHTS*******************
-					if (player.actual_pos_x() <= (width() - 120))//wenn spieler in dem Feld ist, in dem er sich bewegen kann
+					if (player.actual_pos_x() <= (width() - position_in_window))//wenn spieler in dem Feld ist, in dem er sich bewegen kann
 					{
 						player.turn_right();
 					}
-					if (player.actual_pos_x() > (width() - 120))//wenn Spieler heruslaufen würde
+					if (player.actual_pos_x() > (width() - position_in_window))//wenn Spieler heruslaufen würde
 					{
 						background.move_left();
 						normal_block6.at(0).set_pos_left();
@@ -721,11 +722,11 @@ public:
 				if (input().down(Gosu::KB_A) == true && input().down(Gosu::KB_D) == false) //Taste A und nicht Taste D
 				{
 					//***************LINKS*******************
-					if (player.actual_pos_x() >= 120)//wenn spieler in dem Feld ist, in dem er sich bewegen kann
+					if (player.actual_pos_x() >= position_in_window)//wenn spieler in dem Feld ist, in dem er sich bewegen kann
 					{
 						player.turn_left();
 					}
-					if (player.actual_pos_x() < 120)//wenn Spieler heruslaufen würde
+					if (player.actual_pos_x() < position_in_window)//wenn Spieler heruslaufen würde
 					{
 						background.move_right();
 						normal_block6.at(0).set_pos_right();
@@ -794,11 +795,11 @@ public:
 				if (input().down(Gosu::KB_D) == true && input().down(Gosu::KB_A) == false) //Taste D und nicht Taste A
 				{
 					//***************RECHTS*******************
-					if (player.actual_pos_x() <= (width() - 120))//wenn spieler in dem Feld ist, in dem er sich bewegen kann
+					if (player.actual_pos_x() <= (width() - position_in_window))//wenn spieler in dem Feld ist, in dem er sich bewegen kann
 					{
 						player.turn_right();
 					}
-					if (player.actual_pos_x() > (width() - 120))//wenn Spieler heruslaufen würde
+					if (player.actual_pos_x() > (width() - position_in_window))//wenn Spieler heruslaufen würde
 					{
 						background.move_left();
 						normal_block7.at(0).set_pos_left();
@@ -810,11 +811,11 @@ public:
 				if (input().down(Gosu::KB_A) == true && input().down(Gosu::KB_D) == false) //Taste A und nicht Taste D
 				{
 					//***************LINKS*******************
-					if (player.actual_pos_x() >= 120)//wenn spieler in dem Feld ist, in dem er sich bewegen kann
+					if (player.actual_pos_x() >= position_in_window)//wenn spieler in dem Feld ist, in dem er sich bewegen kann
 					{
 						player.turn_left();
 					}
-					if (player.actual_pos_x() < 120)//wenn Spieler heruslaufen würde
+					if (player.actual_pos_x() < position_in_window)//wenn Spieler heruslaufen würde
 					{
 						background.move_right();
 						normal_block7.at(0).set_pos_right();
@@ -883,11 +884,11 @@ public:
 				if (input().down(Gosu::KB_D) == true && input().down(Gosu::KB_A) == false) //Taste D und nicht Taste A
 				{
 					//***************RECHTS*******************
-					if (player.actual_pos_x() <= (width() - 120))//wenn spieler in dem Feld ist, in dem er sich bewegen kann
+					if (player.actual_pos_x() <= (width() - position_in_window))//wenn spieler in dem Feld ist, in dem er sich bewegen kann
 					{
 						player.turn_right();
 					}
-					if (player.actual_pos_x() > (width() - 120))//wenn Spieler heruslaufen würde
+					if (player.actual_pos_x() > (width() - position_in_window))//wenn Spieler heruslaufen würde
 					{
 						background.move_left();
 						normal_block8.at(0).set_pos_left();
@@ -899,11 +900,11 @@ public:
 				if (input().down(Gosu::KB_A) == true && input().down(Gosu::KB_D) == false) //Taste A und nicht Taste D
 				{
 					//***************LINKS*******************
-					if (player.actual_pos_x() >= 120)//wenn spieler in dem Feld ist, in dem er sich bewegen kann
+					if (player.actual_pos_x() >= position_in_window)//wenn spieler in dem Feld ist, in dem er sich bewegen kann
 					{
 						player.turn_left();
 					}
-					if (player.actual_pos_x() < 120)//wenn Spieler heruslaufen würde
+					if (player.actual_pos_x() < position_in_window)//wenn Spieler heruslaufen würde
 					{
 						background.move_right();
 						normal_block8.at(0).set_pos_right();
@@ -972,11 +973,11 @@ public:
 				if (input().down(Gosu::KB_D) == true && input().down(Gosu::KB_A) == false) //Taste D und nicht Taste A
 				{
 					//***************RECHTS*******************
-					if (player.actual_pos_x() <= (width() - 120))//wenn spieler in dem Feld ist, in dem er sich bewegen kann
+					if (player.actual_pos_x() <= (width() - position_in_window))//wenn spieler in dem Feld ist, in dem er sich bewegen kann
 					{
 						player.turn_right();
 					}
-					if (player.actual_pos_x() > (width() - 120))//wenn Spieler heruslaufen würde
+					if (player.actual_pos_x() > (width() - position_in_window))//wenn Spieler heruslaufen würde
 					{
 						background.move_left();
 						normal_block9.at(0).set_pos_left();
@@ -988,11 +989,11 @@ public:
 				if (input().down(Gosu::KB_A) == true && input().down(Gosu::KB_D) == false) //Taste A und nicht Taste D
 				{
 					//***************LINKS*******************
-					if (player.actual_pos_x() >= 120)//wenn spieler in dem Feld ist, in dem er sich bewegen kann
+					if (player.actual_pos_x() >= position_in_window)//wenn spieler in dem Feld ist, in dem er sich bewegen kann
 					{
 						player.turn_left();
 					}
-					if (player.actual_pos_x() < 120)//wenn Spieler heruslaufen würde
+					if (player.actual_pos_x() < position_in_window)//wenn Spieler heruslaufen würde
 					{
 						background.move_right();
 						normal_block9.at(0).set_pos_right();

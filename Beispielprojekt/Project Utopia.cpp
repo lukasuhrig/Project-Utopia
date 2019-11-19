@@ -258,7 +258,6 @@ public:
 		}
 		if (menuing == false) {
 			if (Level1 == true&&!finish_1.at(0).reached_finish(player.actual_pos_x(),player.actual_pos_y())) {
-				//frames++;
 
 				if ((zeit.oneSecond()) == true)
 				{
@@ -349,7 +348,7 @@ public:
 					clouds.push_back(Cloud(cloud_anim));
 				}
 
-				pet_1.update(player.direction(), player.actual_pos_x(), player.actual_pos_y(), player.isIdle()); //PET Animation
+				pet_1.update(player.direction(), player.actual_pos_x(), player.actual_pos_y()); //PET Animation
 			}
 			if (Level2 == true && !finish_2.at(0).reached_finish(player.actual_pos_x(), player.actual_pos_y())) {
 				if ((zeit.oneSecond()) == true)
@@ -438,7 +437,7 @@ public:
 					clouds.push_back(Cloud(cloud_anim));
 				}
 
-				pet_1.update(player.direction(), player.actual_pos_x(), player.actual_pos_y(), player.isIdle()); //PET Animation
+				pet_1.update(player.direction(), player.actual_pos_x(), player.actual_pos_y()); //PET Animation
 			}
 			if (Level3 == true && !finish_3.at(0).reached_finish(player.actual_pos_x(), player.actual_pos_y())) {
 				if ((zeit.oneSecond()) == true)
@@ -527,7 +526,7 @@ public:
 					clouds.push_back(Cloud(cloud_anim));
 				}
 
-				pet_1.update(player.direction(), player.actual_pos_x(), player.actual_pos_y(), player.isIdle()); //PET Animation
+				pet_1.update(player.direction(), player.actual_pos_x(), player.actual_pos_y()); //PET Animation
 			}
 			if (Level4 == true && !finish_4.at(0).reached_finish(player.actual_pos_x(), player.actual_pos_y())) {
 				if ((zeit.oneSecond()) == true)
@@ -616,7 +615,7 @@ public:
 					clouds.push_back(Cloud(cloud_anim));
 				}
 
-				pet_1.update(player.direction(), player.actual_pos_x(), player.actual_pos_y(), player.isIdle()); //PET Animation
+				pet_1.update(player.direction(), player.actual_pos_x(), player.actual_pos_y()); //PET Animation
 			}
 			if (Level5 == true && !finish_5.at(0).reached_finish(player.actual_pos_x(), player.actual_pos_y())) {
 				if ((zeit.oneSecond()) == true)
@@ -705,7 +704,7 @@ public:
 					clouds.push_back(Cloud(cloud_anim));
 				}
 
-				pet_1.update(player.direction(), player.actual_pos_x(), player.actual_pos_y(), player.isIdle()); //PET Animation
+				pet_1.update(player.direction(), player.actual_pos_x(), player.actual_pos_y()); //PET Animation
 			}
 			if (Level6 == true && !finish_6.at(0).reached_finish(player.actual_pos_x(), player.actual_pos_y())) {
 				if ((zeit.oneSecond()) == true)
@@ -794,7 +793,7 @@ public:
 					clouds.push_back(Cloud(cloud_anim));
 				}
 
-				pet_1.update(player.direction(), player.actual_pos_x(), player.actual_pos_y(), player.isIdle()); //PET Animation
+				pet_1.update(player.direction(), player.actual_pos_x(), player.actual_pos_y()); //PET Animation
 			}
 			if (Level7 == true && !finish_7.at(0).reached_finish(player.actual_pos_x(), player.actual_pos_y())) {
 				if ((zeit.oneSecond()) == true)
@@ -883,7 +882,7 @@ public:
 					clouds.push_back(Cloud(cloud_anim));
 				}
 
-				pet_1.update(player.direction(), player.actual_pos_x(), player.actual_pos_y(), player.isIdle()); //PET Animation
+				pet_1.update(player.direction(), player.actual_pos_x(), player.actual_pos_y()); //PET Animation
 			}
 			if (Level8 == true && !finish_8.at(0).reached_finish(player.actual_pos_x(), player.actual_pos_y())) {
 				if ((zeit.oneSecond()) == true)
@@ -972,7 +971,7 @@ public:
 					clouds.push_back(Cloud(cloud_anim));
 				}
 
-				pet_1.update(player.direction(), player.actual_pos_x(), player.actual_pos_y(), player.isIdle()); //PET Animation
+				pet_1.update(player.direction(), player.actual_pos_x(), player.actual_pos_y()); //PET Animation
 			}
 			if (Level9 == true && !finish_9.at(0).reached_finish(player.actual_pos_x(), player.actual_pos_y())) {
 				if ((zeit.oneSecond()) == true)
@@ -1059,7 +1058,7 @@ public:
 					clouds.push_back(Cloud(cloud_anim));
 				}
 
-				pet_1.update(player.direction(), player.actual_pos_x(), player.actual_pos_y(), player.isIdle()); //PET Animation
+				pet_1.update(player.direction(), player.actual_pos_x(), player.actual_pos_y()); //PET Animation
 			}
 		}
 
@@ -1230,10 +1229,6 @@ int main()
 {
 	GameWindow window;
 	window.show();
-
-	
-	//Sleep(1000);
-	//std::cout << "test" << std::endl;
 }
 
 

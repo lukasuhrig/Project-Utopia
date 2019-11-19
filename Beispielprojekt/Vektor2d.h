@@ -4,9 +4,11 @@
 
 class Vektor2d
 {
+
+public:
 	double x = 0.0;
 	double y = 0.0;
-public:
+
 	Vektor2d();
 	Vektor2d(double, double);
 	~Vektor2d();

@@ -170,6 +170,7 @@
     <ClInclude Include="mainmenu.h" />
     <ClInclude Include="m_time.h" />
     <ClInclude Include="pet.h" />
+    <ClInclude Include="vec2.h" />
     <ClInclude Include="ZOrder.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="stdafx.h" />
@@ -190,6 +191,7 @@
     <ClCompile Include="mouse.cpp" />
     <ClCompile Include="Ground.cpp" />
     <ClCompile Include="finish.cpp" />
+    <ClCompile Include="vec2.cpp" />
     <ClCompile Include="ZOrder.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>

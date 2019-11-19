@@ -1,9 +1,8 @@
 #pragma once
-#include <vector>
 #include <Gosu/Gosu.hpp>
 #include <Gosu/AutoLink.hpp>
 #include "ZOrder.h"
-
+#include "vec2.h"
 
 class Pet
 {
@@ -16,14 +15,11 @@ class Pet
 
 	bool idle;
 
-	bool inCorrectPos;
-
 public:
 	Pet()
 	{
 		movingUp = false;
 		idle = true;
-		inCorrectPos = false;
 		pet = Gosu::load_tiles("pet_1.png", 500, 500);
 	}
 
@@ -34,9 +30,15 @@ public:
 
 	void set_idle(bool state);
 
+	bool inCorrectPos(double player_x, double player_y, bool lookingRight);
+
+	void idleAnim(double player_x, double player_y, bool lookingRight);
+
+	void moveTo(Vector2 direction);
+
 	void draw(bool lookingRight);
 
-	void update(bool lookingRight, double player_x, double player_y, bool player_idle);
+	void update(bool lookingRight, double player_x, double player_y);
 
 };
 

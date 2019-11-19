@@ -2,9 +2,18 @@
 #include "pet.h"
 #include <math.h>
 
-const double animationSpeed = 2.5; //1.2
+const double animationSpeed = 3; //1.2
 const double animationSpeedIdle = 0.25;
-const double animationSpeed_x = 10;
+
+
+Vector2 normalize(const Vector2& source) //Einheitsvektor bilden
+{
+	float length = sqrt((source.X * source.X) + (source.Y * source.Y));
+	if (length != 0)
+		return Vector2(source.X / length, source.Y / length);
+	else
+		return source;
+}
 
 double Pet::actual_pos_x() const
 {
@@ -20,7 +29,6 @@ void Pet::set_pos(double x, double y)
 {
 	pos_x = x;
 	pos_y = y;
-	inCorrectPos = true;
 }
 
 void Pet::draw(bool lookingRight)
@@ -52,151 +60,110 @@ void Pet::set_idle(bool state)
 	this->idle = state;
 }
 
-void Pet::update(bool lookingRight, double player_x, double player_y, bool player_idle)
+bool Pet::inCorrectPos(double player_x, double player_y, bool lookingRight)
 {
-	double x_d = 0.0;
-	double y_d = 0.0;
-	double x = 0.0;
-	double y = 0.0;
-
-	if (lookingRight == true) //wenn Spieler nach rechts schaut
+	if (lookingRight == true)
 	{
-		x = (player_x - 80.0);
-		y = (player_y - 80.0);
-
-		x_d = abs(pos_x - (player_x - 80.0));
-		y_d = abs(pos_y - (player_y - 80.0));
-	}
-	else if (lookingRight == false) //wenn Spieler nach links schaut
-	{
-		x = (player_x + 80.0);
-		y = (player_y - 80.0);
-
-		x_d = abs(pos_x - (player_x + 80.0));
-		y_d = abs(pos_y - (player_y - 80.0));
-	}
-	double D = sqrt(x_d * x_d + y_d * y_d);	
-	if (lookingRight == true) //wenn Spieler nach rechts schaut
-	{
-		if ((pos_x == (player_x - 80.0)) && (pos_y - (player_y - 80.0)))
+		if ((this->pos_x == (player_x - 80.0)) && (this->pos_y >= (player_y - 85)) && (this->pos_y <= (player_y - 75)))
 		{
-			D = 0.0;
-			inCorrectPos = true;
+			return true;
 		}
 		else
 		{
-			inCorrectPos = false;
+			return false;
 		}
 	}
-	else if (lookingRight == false) //wenn Spieler nach links schaut
+	else if (lookingRight == false)
 	{
-		if ((pos_x == (player_x + 80.0)) && (pos_y - (player_y - 80.0)))
+		if ((this->pos_x == (player_x + 80.0)) && (this->pos_y >= (player_y - 85)) && (this->pos_y <= (player_y - 75)))
 		{
-			D = 0.0;
-			inCorrectPos = true;
+			return true;
 		}
 		else
 		{
-			inCorrectPos = false;
+			return false;
 		}
 	}
+}
 
-	double x_n = 0.0;
-	double y_n = 0.0;
-
-	if (D != 0.0)
+void Pet::idleAnim(double player_x, double player_y, bool lookingRight)
+{
+	if (inCorrectPos(player_x, player_y, lookingRight))
 	{
-		x_n = x_d / D;
-		y_n = y_d / D;
-	}
-
-	if (inCorrectPos == false)
-	{	
-		if (D > 0.0)
+		if (lookingRight == true)
 		{
-			x = (pos_x + (x_n * animationSpeed));
-			y = (pos_y + (y_n * animationSpeed));
-
-		}
-		this->pos_x = x;
-		this->pos_y = y;
-	}
-
-
-
-/*
-	if (lookingRight == true) //wenn Spieler nach rechts schaut
-	{
-		this->pos_x = player_x - 80; //links vom Spieler setzen
-
-		//this->pos_x = (pos_x + (x_n * animationSpeed_x));
-
-		if ((this->pos_y >= (player_y - 85)) && (this->pos_y <= (player_y - 75)))//wenn über Spieler links dann...
-		{
-			this->inCorrectPos = true; //dann ist in korrekter pos.
-			this->idle = true; //dann zustand idle setzen
-		}
-	}	
-	else if (lookingRight == false) //wenn Spieler nach links schaut
-	{
-
-		this->pos_x = player_x + 80; //rechts vom Spieler setzen
-
-		//this->pos_x = pos_x - (x_n * animationSpeed_x);
-
-		if ((this->pos_y >= (player_y - 85)) && (this->pos_y <= (player_y - 75))) //wenn über Spieler rechts dann...
-		{
-			this->inCorrectPos = true; //dann ist in korrekter pos.
-			this->idle = true; //dann zustand idle setzen
-		}
-	}
-	if (player_idle == true) //wenn Spieler untätig
-	{
-		if (inCorrectPos == true) //und pet in correct position
-		{
-			if (movingUp == false)
+			if ((this->pos_x == (player_x - 80)) && (this->pos_y == (player_y - 85)))
 			{
-				this->pos_y = this->pos_y + animationSpeedIdle; //Animation im Idle-Modus
+				movingUp = false;
 			}
-			else if (movingUp == true)
+			else if ((this->pos_x == (player_x - 80)) && (this->pos_y == (player_y - 75)))
 			{
-				this->pos_y = this->pos_y - animationSpeedIdle; //Animation im Idle-Modus
+				movingUp = true;
 			}
 		}
-		else if (inCorrectPos == false) //und pet in falscher position
+		else if (lookingRight == false)
 		{
-			if (movingUp == false)
+			if ((this->pos_x == (player_x + 80)) && (this->pos_y == (player_y - 85)))
 			{
-				this->pos_y = this->pos_y + animationSpeed; //Animation im Schnell-Modus, da nicht in korretker Pos.
+				movingUp = false;
 			}
-			else if (movingUp == true)
+			else if ((this->pos_x == (player_x + 80)) && (this->pos_y == (player_y - 75)))
 			{
-				this->pos_y = this->pos_y - animationSpeed; //Animation im Schnell-Modus, da nicht in korretker Pos.
+				movingUp = true;
 			}
 		}
+	}
 
-	}
-	else if(player_idle == false) //spieler bewegt sich
-	{
-		inCorrectPos = false; //pet falsche position setzen
+	Vector2 up;
+	up.X = 0;
+	up.Y = -1;
+	Vector2 down;
+	down.X = 0;
+	down.Y = 1;
 
-		if (movingUp == false)
-		{
-			this->pos_y = this->pos_y + animationSpeed; //spieler bewegt sich, also hat pet falsche position und muss spieler im Schnell-Modus hinterher
-		}
-		else if (movingUp == true)
-		{
-			this->pos_y = this->pos_y - animationSpeed; //spieler bewegt sich, also hat pet falsche position und muss spieler im Schnell-Modus hinterher
-		}
+	if (movingUp == true) //hoch
+	{
+		moveTo(up);
 	}
-	*/
+	else if (movingUp == false) //runter
+	{
+		moveTo(down);
+	}
+}
 
-	if (this->pos_y <= (player_y - 85))
+void Pet::moveTo(Vector2 direction_n) //Einheitsvektor, bewegt in Richtung X & Y mit animationSpeed
+{
+	this->pos_x = (actual_pos_x() + (direction_n.X * animationSpeed));
+	this->pos_y = (actual_pos_y() + (direction_n.Y * animationSpeed));
+}
+
+void Pet::update(bool lookingRight, double player_x, double player_y)
+{
+	Vector2 playerPosition;
+
+	if (lookingRight == true)
 	{
-		movingUp = false;
+		playerPosition.X = player_x - 80;
+		playerPosition.Y = player_y - 80;
 	}
-	else if (this->pos_y >= (player_y - 75))
+	else if (lookingRight == false)
 	{
-		movingUp = true;
+		playerPosition.X = player_x + 80;
+		playerPosition.Y = player_y - 80;
 	}
+
+	Vector2 petPos;
+	petPos.X = this->pos_x;
+	petPos.Y = this->pos_y;
+
+	Vector2 direction = normalize(playerPosition - petPos); //Einheitsvektor
+
+
+	if (inCorrectPos(player_x, player_y, lookingRight) == false) //wenn Pos nicht korrekt dann bewegen
+	{
+		moveTo(direction); //Bewegung in Richtung
+	}
+
+	//idleAnim(player_x, player_y, lookingRight); //Idle Animation funktioniert noch nicht
+
 }

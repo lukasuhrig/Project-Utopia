@@ -265,10 +265,6 @@ public:
 					player.score_set_down(1);
 				}
 
-				/*if (!finish_1.at(0).reached_finish(player.actual_pos_x(), player.actual_pos_y())) {            // <--- was diese???
-					player.score_set_down(playtime);
-				}*/
-
 				menuing = false;
 				
 				if (input().down(Gosu::KB_D) == true && input().down(Gosu::KB_A) == false) //Taste D und nicht Taste A
@@ -356,12 +352,9 @@ public:
 				pet_1.update(player.direction(), player.actual_pos_x(), player.actual_pos_y(), player.isIdle()); //PET Animation
 			}
 			if (Level2 == true && !finish_2.at(0).reached_finish(player.actual_pos_x(), player.actual_pos_y())) {
-				frames++;
-				if (frames % 60 == 0) {
-					playtime++;
-				}
-				if (!finish_2.at(0).reached_finish(player.actual_pos_x(), player.actual_pos_y())) {
-					player.score_set_down(playtime);
+				if ((zeit.oneSecond()) == true)
+				{
+					player.score_set_down(1);
 				}
 				menuing = false;
 				player.score_set_down(playtime);
@@ -448,12 +441,9 @@ public:
 				pet_1.update(player.direction(), player.actual_pos_x(), player.actual_pos_y(), player.isIdle()); //PET Animation
 			}
 			if (Level3 == true && !finish_3.at(0).reached_finish(player.actual_pos_x(), player.actual_pos_y())) {
-				frames++;
-				if (frames % 60 == 0) {
-					playtime++;
-				}
-				if (!finish_3.at(0).reached_finish(player.actual_pos_x(), player.actual_pos_y())) {
-					player.score_set_down(playtime);
+				if ((zeit.oneSecond()) == true)
+				{
+					player.score_set_down(1);
 				}
 				menuing = false;
 				player.score_set_down(playtime);
@@ -540,12 +530,9 @@ public:
 				pet_1.update(player.direction(), player.actual_pos_x(), player.actual_pos_y(), player.isIdle()); //PET Animation
 			}
 			if (Level4 == true && !finish_4.at(0).reached_finish(player.actual_pos_x(), player.actual_pos_y())) {
-				frames++;
-				if (frames % 60 == 0) {
-					playtime++;
-				}
-				if (!finish_4.at(0).reached_finish(player.actual_pos_x(), player.actual_pos_y())) {
-					player.score_set_down(playtime);
+				if ((zeit.oneSecond()) == true)
+				{
+					player.score_set_down(1);
 				}
 				menuing = false;
 				player.score_set_down(playtime);
@@ -632,12 +619,9 @@ public:
 				pet_1.update(player.direction(), player.actual_pos_x(), player.actual_pos_y(), player.isIdle()); //PET Animation
 			}
 			if (Level5 == true && !finish_5.at(0).reached_finish(player.actual_pos_x(), player.actual_pos_y())) {
-				frames++;
-				if (frames % 60 == 0) {
-					playtime++;
-				}
-				if (!finish_5.at(0).reached_finish(player.actual_pos_x(), player.actual_pos_y())) {
-					player.score_set_down(playtime);
+				if ((zeit.oneSecond()) == true)
+				{
+					player.score_set_down(1);
 				}
 				menuing = false;
 				player.score_set_down(playtime);
@@ -724,12 +708,9 @@ public:
 				pet_1.update(player.direction(), player.actual_pos_x(), player.actual_pos_y(), player.isIdle()); //PET Animation
 			}
 			if (Level6 == true && !finish_6.at(0).reached_finish(player.actual_pos_x(), player.actual_pos_y())) {
-				frames++;
-				if (frames % 60 == 0) {
-					playtime++;
-				}
-				if (!finish_6.at(0).reached_finish(player.actual_pos_x(), player.actual_pos_y())) {
-					player.score_set_down(playtime);
+				if ((zeit.oneSecond()) == true)
+				{
+					player.score_set_down(1);
 				}
 				menuing = false;
 				player.score_set_down(playtime);
@@ -816,12 +797,9 @@ public:
 				pet_1.update(player.direction(), player.actual_pos_x(), player.actual_pos_y(), player.isIdle()); //PET Animation
 			}
 			if (Level7 == true && !finish_7.at(0).reached_finish(player.actual_pos_x(), player.actual_pos_y())) {
-				frames++;
-				if (frames % 60 == 0) {
-					playtime++;
-				}
-				if (!finish_7.at(0).reached_finish(player.actual_pos_x(), player.actual_pos_y())) {
-					player.score_set_down(playtime);
+				if ((zeit.oneSecond()) == true)
+				{
+					player.score_set_down(1);
 				}
 				menuing = false;
 				player.score_set_down(playtime);
@@ -908,12 +886,9 @@ public:
 				pet_1.update(player.direction(), player.actual_pos_x(), player.actual_pos_y(), player.isIdle()); //PET Animation
 			}
 			if (Level8 == true && !finish_8.at(0).reached_finish(player.actual_pos_x(), player.actual_pos_y())) {
-				frames++;
-				if (frames % 60 == 0) {
-					playtime++;
-				}
-				if (!finish_8.at(0).reached_finish(player.actual_pos_x(), player.actual_pos_y())) {
-					player.score_set_down(playtime);
+				if ((zeit.oneSecond()) == true)
+				{
+					player.score_set_down(1);
 				}
 				menuing = false;
 				player.score_set_down(playtime);
@@ -1000,13 +975,9 @@ public:
 				pet_1.update(player.direction(), player.actual_pos_x(), player.actual_pos_y(), player.isIdle()); //PET Animation
 			}
 			if (Level9 == true && !finish_9.at(0).reached_finish(player.actual_pos_x(), player.actual_pos_y())) {
-				frames++;
-				if (frames % 60 == 0) {
-					playtime++;
-				}
-				menuing = false;
-				if (!finish_9.at(0).reached_finish(player.actual_pos_x(), player.actual_pos_y())) {
-					player.score_set_down(playtime);
+				if ((zeit.oneSecond()) == true)
+				{
+					player.score_set_down(1);
 				}
 				if (input().down(Gosu::KB_D) == true && input().down(Gosu::KB_A) == false) //Taste D und nicht Taste A
 				{
@@ -1095,6 +1066,16 @@ public:
 		if (menu.pressedMenuButton(mouse, input().down(Gosu::MS_LEFT)) && menuing == false) {
 			menuing = true;
 			backtomenu = true;
+			Level1 = false;
+			Level2 = false;
+			Level3 = false;
+			Level4 = false;
+			Level5 = false;
+			Level6 = false;
+			Level7 = false;
+			Level8 = false;
+			Level9 = false;
+
 		}
 		//Berechnet FPS
 		fps.update();

@@ -63,4 +63,5 @@ public:
 	void score_draw();
 	void score_set_down(double tiime);
 	bool topBlock(std::vector<Blocks> Blockvec, uint16_t i);
+	int64_t get_score();
 };

@@ -125,11 +125,14 @@ double Menu::Button_width() // returned die Breite des Buttons
 bool Menu::pressedButton(uint16_t lvl_num,Mouse mouse,bool ms_pressed,Menu menu) {
 	return (mouse.mouse_x() > Position_x(lvl_num) && mouse.mouse_x() < Position_x(lvl_num) + menu.Button_width() && mouse.mouse_y() > Position_y(lvl_num) && mouse.mouse_y() < Position_y(lvl_num) + menu.Button_heigth() && ms_pressed);
 }
-void Menu::menu_button() {
+void Menu::menu_button(double pos_x, double pos_y) {
 	menu.draw("MENU", 375, 10, Z_UI, 1.5, 1.5
 
 	);
 }
 bool Menu::pressedMenuButton(Mouse mouse, bool ms_pressed) {
 	return (mouse.mouse_x() > 375.0 && mouse.mouse_x() < 375.0 +50 && mouse.mouse_y() >10.0 && mouse.mouse_y() < 10.0 +70 && ms_pressed);
+}
+bool Menu::pressedwinMenuButton(Mouse mouse, bool ms_pressed) {
+	return (mouse.mouse_x() > 375.0 && mouse.mouse_x() < 375.0 + 50.0 && mouse.mouse_y() > 450.0 && mouse.mouse_y() < 450.0 + 70.0 && ms_pressed);
 }

@@ -126,3 +126,6 @@ bool Player::topBlock(std::vector<Blocks> blockvec, uint16_t i) {
 		pos_x >(blockvec.at(i).x_pos() - block_tolerance) && //Begrenzun nach links
 		pos_x < (blockvec.at(i).x_pos() + blockvec.at(i).width() + block_tolerance));
 }
+int64_t Player::get_score() {
+	return score;
+}

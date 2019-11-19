@@ -6,8 +6,8 @@ void finish::set_pos(double x, double y){
 	pos_y = y;
 
 }
-void finish::draw_finish(int a){
-	animation_finish.at(a).draw_rot(pos_x, pos_y, Z_Blocks,
+void finish::draw_finish(){
+	animation_finish.at(0).draw_rot(pos_x, pos_y, Z_Blocks,
 		// Blöcke sollen vor allem anderen auf dem Bildschirm angezeigt werden
 		0,
 		0,
@@ -43,4 +43,12 @@ bool finish::reached_finish(double posx, double posy) {
 	{
 		return false;
 	}
+}
+void finish::finished(int64_t score) {
+	animation_finish.at(1).draw_rot(
+		0, -100, Z_Menu_back, 0, 0, 0, 0.78, 0.78
+	);
+	std::string s = std::to_string(score);
+	score_show.draw("Score: " + s, 200, 80, Z_Menu_Text, 0, 3, 3);
+	menu.menu_button(375,450);
 }

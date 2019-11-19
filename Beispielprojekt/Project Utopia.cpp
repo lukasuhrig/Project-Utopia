@@ -1063,7 +1063,7 @@ public:
 			}
 		}
 
-		if (menu.pressedMenuButton(mouse, input().down(Gosu::MS_LEFT)) && menuing == false) {
+		if ((menu.pressedMenuButton(mouse, input().down(Gosu::MS_LEFT)) || menu.pressedwinMenuButton(mouse, input().down(Gosu::MS_LEFT)))&& menuing == false) {
 			menuing = true;
 			backtomenu = true;
 			Level1 = false;
@@ -1099,6 +1099,7 @@ public:
 			menu.Level(7, "Level7"); //drawt den Text für das Level
 			menu.Level(8, "Level8"); //drawt den Text für das Level
 			menu.Level(9, "Level9"); //drawt den Text für das Level
+			
 		}
 		mouse.draw();
 		player.draw(); //drawt den player
@@ -1106,65 +1107,108 @@ public:
 		pet_1.draw(player.direction()); //draw pet_1
 
 		background.draw(); //drawt den Background
-		if (menuing == false) {
+		if (menuing == false ) {
 			menu.menu_button();
 		}
 		if (Level1 == true && menuing == false) {
 				for (size_t i = 0; i < normal_block1.size(); i++) {
 					normal_block1.at(i).draw_Blocks(0); //drawt einen Block
 				}
-				finish_1.at(0).draw_finish(0);
+				finish_1.at(0).draw_finish();
 		}
 		if (Level2 == true && menuing == false) {
 				for (size_t i = 0; i < normal_block2.size(); i++) {
 					normal_block2.at(i).draw_Blocks(1); //drawt einen Block
 				}
-				finish_2.at(0).draw_finish(0);
+				finish_2.at(0).draw_finish();
 		}
 		if (Level3 == true && menuing == false) {
 				for (size_t i = 0; i < normal_block3.size(); i++) {
 					normal_block3.at(i).draw_Blocks(0); //drawt einen Block
 				}
-				finish_3.at(0).draw_finish(0);
+				finish_3.at(0).draw_finish();
 		}
 		if (Level4 == true && menuing == false) {
 				for (size_t i = 0; i < normal_block4.size(); i++) {
 					normal_block4.at(i).draw_Blocks(0); //drawt einen Block
 				}
-				finish_4.at(0).draw_finish(0);
+				finish_4.at(0).draw_finish();
 		}
 		if (Level5 == true && menuing == false) {
 				for (size_t i = 0; i < normal_block5.size(); i++) {
 					normal_block5.at(i).draw_Blocks(0); //drawt einen Block
 				}
-				finish_5.at(0).draw_finish(0);
+				finish_5.at(0).draw_finish();
 		}
 		if (Level6 == true && menuing == false) {
 				for (size_t i = 0; i < normal_block6.size(); i++) {
 					normal_block6.at(i).draw_Blocks(0); //drawt einen Block
 				}
-				finish_6.at(0).draw_finish(0);
+				finish_6.at(0).draw_finish();
 		}
 		if (Level7 == true && menuing == false) {
 				for (size_t i = 0; i < normal_block7.size(); i++) {
 					normal_block7.at(i).draw_Blocks(0); //drawt einen Block
 				}
-				finish_7.at(0).draw_finish(0);
+				finish_7.at(0).draw_finish();
 		}
 		if (Level8 == true && menuing == false) {
 				for (size_t i = 0; i < normal_block8.size(); i++) {
 					normal_block8.at(i).draw_Blocks(0); //drawt einen Block
 				}
-				finish_8.at(0).draw_finish(0);
+				finish_8.at(0).draw_finish();
 		}
 		if (Level9 == true && menuing == false) {
 				for (size_t i = 0; i < normal_block9.size(); i++) {
 					normal_block9.at(i).draw_Blocks(0); //drawt einen Block
 				}
-				finish_9.at(0).draw_finish(0);
+				finish_9.at(0).draw_finish();
 			}
 		
-		
+		if (finish_1.at(0).reached_finish(player.actual_pos_x(), player.actual_pos_y())&&menuing==false)  {
+			finish_1.at(0).finished(player.get_score());
+			
+		}
+		if (finish_2.at(0).reached_finish(player.actual_pos_x(), player.actual_pos_y()) && menuing == false) {
+			finish_2.at(0).finished(player.get_score());
+			
+
+		}
+		if (finish_3.at(0).reached_finish(player.actual_pos_x(), player.actual_pos_y()) && menuing == false) {
+			finish_3.at(0).finished(player.get_score());
+			
+
+		}
+		if (finish_4.at(0).reached_finish(player.actual_pos_x(), player.actual_pos_y()) && menuing == false) {
+			finish_4.at(0).finished(player.get_score());
+			
+
+		}
+		if (finish_5.at(0).reached_finish(player.actual_pos_x(), player.actual_pos_y()) && menuing == false) {
+			finish_5.at(0).finished(player.get_score());
+			
+
+		}
+		if (finish_6.at(0).reached_finish(player.actual_pos_x(), player.actual_pos_y()) && menuing == false) {
+			finish_6.at(0).finished(player.get_score());
+			
+
+		}
+		if (finish_7.at(0).reached_finish(player.actual_pos_x(), player.actual_pos_y()) && menuing == false) {
+			finish_7.at(0).finished(player.get_score());
+			
+
+		}
+		if (finish_8.at(0).reached_finish(player.actual_pos_x(), player.actual_pos_y()) && menuing == false) {
+			finish_8.at(0).finished(player.get_score());
+			
+
+		}
+		if (finish_9.at(0).reached_finish(player.actual_pos_x(), player.actual_pos_y())) {
+			finish_9.at(0).finished(player.get_score());
+			
+
+		}
 	
 		fps_anzeige.draw("FPS: " + std::to_string(fps.get()), 15, 15, Z_UI,
 			1, 1, Gosu::Color::RED);

@@ -24,7 +24,8 @@ public:
 	bool pressedButton(uint16_t lvl_num,Mouse mouse, bool ms_pressed, Menu menu);
 	double Button_heigth();
 	double Button_width();
-	void menu_button();
+	void menu_button(double pos_x = 375.0, double pos_y = 10.0);
 	bool pressedMenuButton(Mouse mouse, bool ms_pressed);
+	bool pressedwinMenuButton(Mouse mouse, bool ms_pressed);
 
 };

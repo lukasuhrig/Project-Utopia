@@ -3,8 +3,8 @@
 #include <math.h>
 #include "vec2.h"
 
-const double animationSpeed = 3; //1.2
-const double animationSpeedIdle = 0.25;
+const float animationSpeed = 3; //1.2
+const float animationSpeedIdle = 0.25;
 
 
 Vector2 normalize(const Vector2& source) //Einheitsvektor bilden
@@ -20,28 +20,32 @@ Vector2 normalize(const Vector2& source) //Einheitsvektor bilden
 	}
 }
 
+Vector2 Pet::actual_pos() const
+{
+	return petPos;
+}
 
 double Pet::actual_pos_x() const
 {
-	return pos_x;
+	return petPos.X;
 }
 
 double Pet::actual_pos_y() const
 {
-	return pos_y;
+	return petPos.Y;
 }
 
 void Pet::set_pos(const double& x, const double& y)
 {
-	pos_x = x;
-	pos_y = y;
+	this->petPos.X = x;
+	this->petPos.Y = y;
 }
 
 void Pet::draw(const bool& lookingRight)
 {
 	if (lookingRight == true) //wenn Spieler nach rechts schaut
 	{
-		pet.at(0).draw_rot(pos_x, pos_y, Z_PET,
+		pet.at(0).draw_rot(petPos.X, petPos.Y, Z_PET,
 			0,
 			0.5,
 			1,
@@ -51,7 +55,7 @@ void Pet::draw(const bool& lookingRight)
 	}
 	else if (lookingRight == false) //wenn Spieler nach links schaut
 	{
-		pet.at(1).draw_rot(pos_x, pos_y, Z_PET,
+		pet.at(1).draw_rot(petPos.X, petPos.Y, Z_PET,
 			0,
 			0.5,
 			1,
@@ -70,7 +74,7 @@ bool Pet::inCorrectPos(const double& player_x, const double& player_y, const boo
 {
 	if (lookingRight == true)
 	{
-		if ((this->pos_x == (player_x - 80.0)) && (this->pos_y > (player_y - 85)) && (this->pos_y < (player_y - 75)))
+		if ((this->petPos.X == (player_x - 80.0)) && (this->petPos.Y > (player_y - 85)) && (this->petPos.Y < (player_y - 75)))
 		{
 			return true;
 		}
@@ -81,7 +85,7 @@ bool Pet::inCorrectPos(const double& player_x, const double& player_y, const boo
 	}
 	else if (lookingRight == false)
 	{
-		if ((this->pos_x == (player_x + 80.0)) && (this->pos_y > (player_y - 85)) && (this->pos_y < (player_y - 75)))
+		if ((this->petPos.X == (player_x + 80.0)) && (this->petPos.Y > (player_y - 85)) && (this->petPos.Y < (player_y - 75)))
 		{
 			return true;
 		}
@@ -90,6 +94,7 @@ bool Pet::inCorrectPos(const double& player_x, const double& player_y, const boo
 			return false;
 		}
 	}
+	return false;
 }
 
 void Pet::idleAnim(const double& player_x, const double& player_y, const bool& lookingRight)
@@ -98,22 +103,22 @@ void Pet::idleAnim(const double& player_x, const double& player_y, const bool& l
 	{
 		if (lookingRight == true)
 		{
-			if ((this->pos_x == (player_x - 80)) && (this->pos_y == (player_y - 85)))
+			if ((this->petPos.X == (player_x - 80)) && (this->petPos.Y == (player_y - 85)))
 			{
 				movingUp = false;
 			}
-			else if ((this->pos_x == (player_x - 80)) && (this->pos_y == (player_y - 75)))
+			else if ((this->petPos.X == (player_x - 80)) && (this->petPos.Y == (player_y - 75)))
 			{
 				movingUp = true;
 			}
 		}
 		else if (lookingRight == false)
 		{
-			if ((this->pos_x == (player_x + 80)) && (this->pos_y == (player_y - 85)))
+			if ((this->petPos.X == (player_x + 80)) && (this->petPos.Y == (player_y - 85)))
 			{
 				movingUp = false;
 			}
-			else if ((this->pos_x == (player_x + 80)) && (this->pos_y == (player_y - 75)))
+			else if ((this->petPos.X == (player_x + 80)) && (this->petPos.Y == (player_y - 75)))
 			{
 				movingUp = true;
 			}
@@ -137,35 +142,33 @@ void Pet::idleAnim(const double& player_x, const double& player_y, const bool& l
 	}
 }
 
-void Pet::moveTo(const Vector2& direction_n) //Einheitsvektor, bewegt in Richtung X & Y mit animationSpeed
+void Pet::moveTo(Vector2& direction_n) //Einheitsvektor, bewegt in Richtung X & Y mit animationSpeed
 {
-	this->pos_x = (actual_pos_x() + (direction_n.X * animationSpeed));
-	this->pos_y = (actual_pos_y() + (direction_n.Y * animationSpeed));
+	this->petPos = (actual_pos() + (direction_n * animationSpeed));
 }
 
-void Pet::update(const bool& lookingRight, const  double& player_x, const double& player_y)
+void Pet::update(const bool& lookingRight, const  double& player_x, const double& player_y, const bool &playerIdle)
 {
 	Vector2 playerPosition;
 
 	if (lookingRight == true)
 	{
-		playerPosition.X = player_x - 80;
-		playerPosition.Y = player_y - 80;
+		playerPosition.X = float(player_x - 80);
+		playerPosition.Y = float(player_y - 80);
 	}
 	else if (lookingRight == false)
 	{
-		playerPosition.X = player_x + 80;
-		playerPosition.Y = player_y - 80;
+		playerPosition.X = float(player_x + 80);
+		playerPosition.Y = float(player_y - 80);
 	}
 
-	Vector2 petPos;
-	petPos.X = this->pos_x;
-	petPos.Y = this->pos_y;
+	Vector2 direction = (playerPosition - petPos);
+	direction.Normalize();
 
-	Vector2 direction = normalize(playerPosition - petPos); //Einheitsvektor
+//	Vector2 direction = Normalize(playerPosition - petPos); //Einheitsvektor
 
 
-	if (inCorrectPos(player_x, player_y, lookingRight) == false) //wenn Pos nicht korrekt dann bewegen
+	if ((inCorrectPos(player_x, player_y, lookingRight) == false)) //wenn Pos nicht korrekt dann bewegen
 	{
 		moveTo(direction); //Bewegung in Richtung
 	}

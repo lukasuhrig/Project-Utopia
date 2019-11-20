@@ -63,7 +63,7 @@ void Player:: draw() const //drawt den Spieler
 {
 	if (lookingRight == true) //wenn Spieler nach rechts schaut
 	{
-		character.at(1).draw_rot(pos_x, pos_y, Z_PLAYER,
+		character.at(1).draw_rot(this->pos_x, this->pos_y, Z_PLAYER,
 			0,
 			0.5,
 			1,
@@ -73,7 +73,7 @@ void Player:: draw() const //drawt den Spieler
 	}
 	else if (lookingRight == false) //wenn Spieler nach links schaut
 	{
-		character.at(0).draw_rot(pos_x, pos_y, Z_PLAYER,
+		character.at(0).draw_rot(this->pos_x, this->pos_y, Z_PLAYER,
 			0,
 			0.5,
 			1,
@@ -112,7 +112,7 @@ void Player::score_draw() {
 	score_draw1.draw("Score: "+s, 660, 50, Z_PLAYER, 1, 1, Gosu::Color::RED, Gosu::AlphaMode::AM_DEFAULT);
 }
 
-void Player::score_set_down(double p_per_sec) //tiime = wie viele punkte pro Sekunde abgezogen werden
+void Player::score_set_down(double p_per_sec) //p_per_sec = wie viele punkte pro Sekunde abgezogen werden
 {
 	score=score - p_per_sec;
 }

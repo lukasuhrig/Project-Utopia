@@ -119,9 +119,6 @@ public:
 	Blocks Block9_2;
 	finish finish9_1;
 	
-	//TEST
-	std::list<Cloud> clouds;
-	Animation cloud_anim;
 	//Animation_Blocks Animation_Block;
 	Menu menu;
 
@@ -132,7 +129,7 @@ public:
 		set_caption("Project Utopia");
 
 		player.set_pos(150, ground.get_Ground());
-		pet_1.set_pos((player.actual_pos_x()-80),(player.actual_pos_y()-80));
+		pet_1.set_pos((player.actual_pos_x() - 80), (player.actual_pos_y() - 80));
 
 		background.set_pos(300, ground.get_Ground());
 		//Auslagern sobald alles richtig funktioniert
@@ -200,10 +197,8 @@ public:
 		finish9_1.set_pos(500, 500);
 		finish_9.push_back(finish9_1);
 		
-		//TEST
+
 		std::string filename_block = "Brick_Blocks.png";
-		std::string filename = "clouds.png";
-		cloud_anim = Gosu::load_tiles(filename, 666, 300);
 
 	}
 
@@ -335,13 +330,7 @@ public:
 					player.jumpposition();
 				}
 
-				//TEST
-				if (std::rand() % 25 == 0 && clouds.size() < 5)
-				{
-					clouds.push_back(Cloud(cloud_anim));
-				}
-
-				pet_1.update(player.direction(), player.actual_pos_x(), player.actual_pos_y()); //PET Animation
+				pet_1.update(player.direction(), player.actual_pos_x(), player.actual_pos_y(), player.isIdle()); //PET Animation
 
 			}
 			if (game.get_Level(2) && !finish_2.at(0).reached_finish(player.actual_pos_x(), player.actual_pos_y())&&game.get_wonLevel(1)) {
@@ -425,13 +414,7 @@ public:
 					player.jumpposition();
 				}
 
-				//TEST
-				if (std::rand() % 25 == 0 && clouds.size() < 5)
-				{
-					clouds.push_back(Cloud(cloud_anim));
-				}
-
-				pet_1.update(player.direction(), player.actual_pos_x(), player.actual_pos_y()); //PET Animation
+				pet_1.update(player.direction(), player.actual_pos_x(), player.actual_pos_y(), player.isIdle()); //PET Animation
 			}
 			if (game.get_Level(3) && !finish_3.at(0).reached_finish(player.actual_pos_x(), player.actual_pos_y())&& game.get_wonLevel(2)) {
 				if ((zeit.milliSecond()) == true)
@@ -514,13 +497,7 @@ public:
 					player.jumpposition();
 				}
 
-				//TEST
-				if (std::rand() % 25 == 0 && clouds.size() < 5)
-				{
-					clouds.push_back(Cloud(cloud_anim));
-				}
-
-				pet_1.update(player.direction(), player.actual_pos_x(), player.actual_pos_y()); //PET Animation
+				pet_1.update(player.direction(), player.actual_pos_x(), player.actual_pos_y(), player.isIdle()); //PET Animation
 			}
 			if (game.get_Level(4) && !finish_4.at(0).reached_finish(player.actual_pos_x(), player.actual_pos_y())&& game.get_wonLevel(3)) {
 				if ((zeit.milliSecond()) == true)
@@ -603,13 +580,7 @@ public:
 					player.jumpposition();
 				}
 
-				//TEST
-				if (std::rand() % 25 == 0 && clouds.size() < 5)
-				{
-					clouds.push_back(Cloud(cloud_anim));
-				}
-
-				pet_1.update(player.direction(), player.actual_pos_x(), player.actual_pos_y()); //PET Animation
+				pet_1.update(player.direction(), player.actual_pos_x(), player.actual_pos_y(), player.isIdle()); //PET Animation
 			}
 			if (game.get_Level(5) && !finish_5.at(0).reached_finish(player.actual_pos_x(), player.actual_pos_y())&& game.get_wonLevel(4)) {
 				if ((zeit.milliSecond()) == true)
@@ -692,13 +663,7 @@ public:
 					player.jumpposition();
 				}
 
-				//TEST
-				if (std::rand() % 25 == 0 && clouds.size() < 5)
-				{
-					clouds.push_back(Cloud(cloud_anim));
-				}
-
-				pet_1.update(player.direction(), player.actual_pos_x(), player.actual_pos_y()); //PET Animation
+				pet_1.update(player.direction(), player.actual_pos_x(), player.actual_pos_y(), player.isIdle()); //PET Animation
 			}
 			if (game.get_Level(6) && !finish_6.at(0).reached_finish(player.actual_pos_x(), player.actual_pos_y())&& game.get_wonLevel(5)) {
 				if ((zeit.milliSecond()) == true)
@@ -781,13 +746,7 @@ public:
 					player.jumpposition();
 				}
 
-				//TEST
-				if (std::rand() % 25 == 0 && clouds.size() < 5)
-				{
-					clouds.push_back(Cloud(cloud_anim));
-				}
-
-				pet_1.update(player.direction(), player.actual_pos_x(), player.actual_pos_y()); //PET Animation
+				pet_1.update(player.direction(), player.actual_pos_x(), player.actual_pos_y(), player.isIdle()); //PET Animation
 			}
 			if (game.get_Level(7) && !finish_7.at(0).reached_finish(player.actual_pos_x(), player.actual_pos_y())&& game.get_wonLevel(6)) {
 				if ((zeit.milliSecond()) == true)
@@ -870,13 +829,7 @@ public:
 					player.jumpposition();
 				}
 
-				//TEST
-				if (std::rand() % 25 == 0 && clouds.size() < 5)
-				{
-					clouds.push_back(Cloud(cloud_anim));
-				}
-
-				pet_1.update(player.direction(), player.actual_pos_x(), player.actual_pos_y()); //PET Animation
+				pet_1.update(player.direction(), player.actual_pos_x(), player.actual_pos_y(), player.isIdle()); //PET Animation
 			}
 			if (game.get_Level(8) && !finish_8.at(0).reached_finish(player.actual_pos_x(), player.actual_pos_y())&& game.get_wonLevel(7)) {
 				if ((zeit.milliSecond()) == true)
@@ -959,13 +912,7 @@ public:
 					player.jumpposition();
 				}
 
-				//TEST
-				if (std::rand() % 25 == 0 && clouds.size() < 5)
-				{
-					clouds.push_back(Cloud(cloud_anim));
-				}
-
-				pet_1.update(player.direction(), player.actual_pos_x(), player.actual_pos_y()); //PET Animation
+				pet_1.update(player.direction(), player.actual_pos_x(), player.actual_pos_y(), player.isIdle()); //PET Animation
 			}
 			if (game.get_Level(9) && !finish_9.at(0).reached_finish(player.actual_pos_x(), player.actual_pos_y())&& game.get_wonLevel(8)) {
 				if ((zeit.milliSecond()) == true)
@@ -1046,13 +993,7 @@ public:
 					player.jumpposition();
 				}
 
-				//TEST
-				if (std::rand() % 25 == 0 && clouds.size() < 5)
-				{
-					clouds.push_back(Cloud(cloud_anim));
-				}
-
-				pet_1.update(player.direction(), player.actual_pos_x(), player.actual_pos_y()); //PET Animation
+				pet_1.update(player.direction(), player.actual_pos_x(), player.actual_pos_y(), player.isIdle()); //PET Animation
 			}
 		}
 
@@ -1244,16 +1185,8 @@ public:
 			finish_9.at(0).finished(player.get_score());
 		}
 	
-		fps_anzeige.draw("FPS: " + std::to_string(fps.get()), 15, 15, Z_UI,
-			1, 1, Gosu::Color::RED);
+		fps_anzeige.draw("FPS: " + std::to_string(fps.get()), 15, 15, Z_UI, 1, 1, Gosu::Color::RED);
 		ground.draw();
-		
-	
-		//TEST
-		for (Cloud& cloud : clouds) 
-		{
-			cloud.draw();
-		}
 	
 	}
 

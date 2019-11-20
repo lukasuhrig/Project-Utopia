@@ -39,6 +39,15 @@ bool backtomenu=false;
 
 
 bool won = false;
+bool won1= false;
+bool won2 = false;
+bool won3 = false;
+bool won4 = false;
+bool won5 = false;
+bool won6 = false;
+bool won7 = false;
+bool won8 = false;
+bool won9 = false;
 int64_t frames=0;
 int64_t playtime = 0;
 //FPS
@@ -250,7 +259,7 @@ public:
 			}
 		}
 		if (menuing == false) {
-			if (game.get_Level(1) &&!finish_1.at(0).reached_finish(player.actual_pos_x(),player.actual_pos_y())) {
+			if (game.get_Level(1) &&!finish_1.at(0).reached_finish(player.actual_pos_x(),player.actual_pos_y(),won1)) {
 
 				if ((zeit.milliSecond()) == true)
 				{
@@ -344,7 +353,7 @@ public:
 				pet_1.update(player.direction(), player.actual_pos_x(), player.actual_pos_y()); //PET Animation
 
 			}
-			if (game.get_Level(2) && !finish_2.at(0).reached_finish(player.actual_pos_x(), player.actual_pos_y())&&game.get_wonLevel(1)) {
+			if (game.get_Level(2) && !finish_2.at(0).reached_finish(player.actual_pos_x(), player.actual_pos_y(),won2)&&game.get_wonLevel(1)) {
 				if ((zeit.milliSecond()) == true)
 				{
 					player.score_set_down(1);
@@ -433,7 +442,7 @@ public:
 
 				pet_1.update(player.direction(), player.actual_pos_x(), player.actual_pos_y()); //PET Animation
 			}
-			if (game.get_Level(3) && !finish_3.at(0).reached_finish(player.actual_pos_x(), player.actual_pos_y())&& game.get_wonLevel(2)) {
+			if (game.get_Level(3) && !finish_3.at(0).reached_finish(player.actual_pos_x(), player.actual_pos_y(),won3)&& game.get_wonLevel(2)) {
 				if ((zeit.milliSecond()) == true)
 				{
 					player.score_set_down(1);
@@ -522,7 +531,7 @@ public:
 
 				pet_1.update(player.direction(), player.actual_pos_x(), player.actual_pos_y()); //PET Animation
 			}
-			if (game.get_Level(4) && !finish_4.at(0).reached_finish(player.actual_pos_x(), player.actual_pos_y())&& game.get_wonLevel(3)) {
+			if (game.get_Level(4) && !finish_4.at(0).reached_finish(player.actual_pos_x(), player.actual_pos_y(),won4)&& game.get_wonLevel(3)) {
 				if ((zeit.milliSecond()) == true)
 				{
 					player.score_set_down(1);
@@ -611,7 +620,7 @@ public:
 
 				pet_1.update(player.direction(), player.actual_pos_x(), player.actual_pos_y()); //PET Animation
 			}
-			if (game.get_Level(5) && !finish_5.at(0).reached_finish(player.actual_pos_x(), player.actual_pos_y())&& game.get_wonLevel(4)) {
+			if (game.get_Level(5) && !finish_5.at(0).reached_finish(player.actual_pos_x(), player.actual_pos_y(),won5)&& game.get_wonLevel(4)) {
 				if ((zeit.milliSecond()) == true)
 				{
 					player.score_set_down(1);
@@ -700,7 +709,7 @@ public:
 
 				pet_1.update(player.direction(), player.actual_pos_x(), player.actual_pos_y()); //PET Animation
 			}
-			if (game.get_Level(6) && !finish_6.at(0).reached_finish(player.actual_pos_x(), player.actual_pos_y())&& game.get_wonLevel(5)) {
+			if (game.get_Level(6) && !finish_6.at(0).reached_finish(player.actual_pos_x(), player.actual_pos_y(),won6)&& game.get_wonLevel(5)) {
 				if ((zeit.milliSecond()) == true)
 				{
 					player.score_set_down(1);
@@ -789,7 +798,7 @@ public:
 
 				pet_1.update(player.direction(), player.actual_pos_x(), player.actual_pos_y()); //PET Animation
 			}
-			if (game.get_Level(7) && !finish_7.at(0).reached_finish(player.actual_pos_x(), player.actual_pos_y())&& game.get_wonLevel(6)) {
+			if (game.get_Level(7) && !finish_7.at(0).reached_finish(player.actual_pos_x(), player.actual_pos_y(),won7)&& game.get_wonLevel(6)) {
 				if ((zeit.milliSecond()) == true)
 				{
 					player.score_set_down(1);
@@ -878,7 +887,7 @@ public:
 
 				pet_1.update(player.direction(), player.actual_pos_x(), player.actual_pos_y()); //PET Animation
 			}
-			if (game.get_Level(8) && !finish_8.at(0).reached_finish(player.actual_pos_x(), player.actual_pos_y())&& game.get_wonLevel(7)) {
+			if (game.get_Level(8) && !finish_8.at(0).reached_finish(player.actual_pos_x(), player.actual_pos_y(),won8)&& game.get_wonLevel(7)) {
 				if ((zeit.milliSecond()) == true)
 				{
 					player.score_set_down(1);
@@ -967,7 +976,7 @@ public:
 
 				pet_1.update(player.direction(), player.actual_pos_x(), player.actual_pos_y()); //PET Animation
 			}
-			if (game.get_Level(9) && !finish_9.at(0).reached_finish(player.actual_pos_x(), player.actual_pos_y())&& game.get_wonLevel(8)) {
+			if (game.get_Level(9) && !finish_9.at(0).reached_finish(player.actual_pos_x(), player.actual_pos_y(),won9)&& game.get_wonLevel(8)) {
 				if ((zeit.milliSecond()) == true)
 				{
 					player.score_set_down(1);
@@ -1060,48 +1069,68 @@ public:
 			menuing = true;
 			backtomenu = true;
 			for (int i = 1; i <= 9; i++) { game.set_Level(i, false); };
-			won = false;
+			
+			won1 = false;
+			won2 = false;
+			won3 = false;
+			won4 = false;
+			won5 = false;
+			won6 = false;
+			won7 = false;
+			won8 = false;
+			won9 = false;
 			player.reset(ground.get_Ground()-1);
 			background.reset(ground.get_Ground());
 			pet_1.set_pos((player.actual_pos_x() - 80), (player.actual_pos_y() - 80));
 			
 		}
-		if (finish_1.at(0).reached_finish(player.actual_pos_x(), player.actual_pos_y()) ||
-			finish_2.at(0).reached_finish(player.actual_pos_x(), player.actual_pos_y()) ||
-			finish_3.at(0).reached_finish(player.actual_pos_x(), player.actual_pos_y()) ||
-			finish_4.at(0).reached_finish(player.actual_pos_x(), player.actual_pos_y()) ||
-			finish_5.at(0).reached_finish(player.actual_pos_x(), player.actual_pos_y()) ||
-			finish_6.at(0).reached_finish(player.actual_pos_x(), player.actual_pos_y()) ||
-			finish_7.at(0).reached_finish(player.actual_pos_x(), player.actual_pos_y()) ||
-			finish_8.at(0).reached_finish(player.actual_pos_x(), player.actual_pos_y()) ||
-			finish_9.at(0).reached_finish(player.actual_pos_x(), player.actual_pos_y())) {
+		if (finish_1.at(0).reached_finish(player.actual_pos_x(), player.actual_pos_y(),won1) ||
+			finish_2.at(0).reached_finish(player.actual_pos_x(), player.actual_pos_y(),won2) ||
+			finish_3.at(0).reached_finish(player.actual_pos_x(), player.actual_pos_y(),won3) ||
+			finish_4.at(0).reached_finish(player.actual_pos_x(), player.actual_pos_y(),won4) ||
+			finish_5.at(0).reached_finish(player.actual_pos_x(), player.actual_pos_y(),won5) ||
+			finish_6.at(0).reached_finish(player.actual_pos_x(), player.actual_pos_y(),won6) ||
+			finish_7.at(0).reached_finish(player.actual_pos_x(), player.actual_pos_y(),won7) ||
+			finish_8.at(0).reached_finish(player.actual_pos_x(), player.actual_pos_y(),won8) ||
+			finish_9.at(0).reached_finish(player.actual_pos_x(), player.actual_pos_y(),won9)) {
 			for (int i = 1; i <= 9; i++) { game.set_Level(i, false); };
-			won = true;
+			
 		}
-		if (finish_1.at(0).reached_finish(player.actual_pos_x(), player.actual_pos_y())) {
+		if (finish_1.at(0).reached_finish(player.actual_pos_x(), player.actual_pos_y(),won1)) {
 			game.set_wonLevel(1,true);
-
+			won1 = true;
 		}
-		if (finish_2.at(0).reached_finish(player.actual_pos_x(), player.actual_pos_y())) {
+		if (finish_2.at(0).reached_finish(player.actual_pos_x(), player.actual_pos_y(),won2)) {
 			game.set_wonLevel(2, true);
+			won2 = true;
 		}
-		if (finish_3.at(0).reached_finish(player.actual_pos_x(), player.actual_pos_y())) {
+		if (finish_3.at(0).reached_finish(player.actual_pos_x(), player.actual_pos_y(),won3)) {
 			game.set_wonLevel(3, true);
+			won3 = true;
 		}
-		if (finish_4.at(0).reached_finish(player.actual_pos_x(), player.actual_pos_y())) {
+		if (finish_4.at(0).reached_finish(player.actual_pos_x(), player.actual_pos_y(),won4)) {
 			game.set_wonLevel(4, true);
+			won4 = true;
 		}
-		if (finish_5.at(0).reached_finish(player.actual_pos_x(), player.actual_pos_y())) {
+		if (finish_5.at(0).reached_finish(player.actual_pos_x(), player.actual_pos_y(),won5)) {
 			game.set_wonLevel(5, true);
+			won5 = true;
 		}
-		if (finish_6.at(0).reached_finish(player.actual_pos_x(), player.actual_pos_y())) {
+		if (finish_6.at(0).reached_finish(player.actual_pos_x(), player.actual_pos_y(),won6)) {
 			game.set_wonLevel(6, true);
+			won6 = true;
 		}
-		if (finish_7.at(0).reached_finish(player.actual_pos_x(), player.actual_pos_y())) {
+		if (finish_7.at(0).reached_finish(player.actual_pos_x(), player.actual_pos_y(),won7)) {
 			game.set_wonLevel(7, true);
+			won7 = true;
 		}
-		if (finish_8.at(0).reached_finish(player.actual_pos_x(), player.actual_pos_y())) {
+		if (finish_8.at(0).reached_finish(player.actual_pos_x(), player.actual_pos_y(),won8)) {
 			game.set_wonLevel(8, true);
+			won8 = true;
+		}
+		if (finish_9.at(0).reached_finish(player.actual_pos_x(), player.actual_pos_y(),won9)) {
+			game.set_wonLevel(8, true);
+			won9 = true;
 		}
 		//Berechnet FPS
 		fps.update();
@@ -1208,39 +1237,39 @@ public:
 				finish_9.at(0).draw_finish();
 			}
 		
-		if (finish_1.at(0).reached_finish(player.actual_pos_x(), player.actual_pos_y())&&menuing==false && won)  {
+		if (finish_1.at(0).reached_finish(player.actual_pos_x(), player.actual_pos_y(),won1)&&menuing==false && won1)  {
 			finish_1.at(0).finished(player.get_score());
 			
 		}
-		if (finish_2.at(0).reached_finish(player.actual_pos_x(), player.actual_pos_y()) && menuing == false && won) {
+		if (finish_2.at(0).reached_finish(player.actual_pos_x(), player.actual_pos_y(),won2) && menuing == false && won2) {
 			finish_2.at(0).finished(player.get_score());
 		
 		}
-		if (finish_3.at(0).reached_finish(player.actual_pos_x(), player.actual_pos_y()) && menuing == false && won) {
+		if (finish_3.at(0).reached_finish(player.actual_pos_x(), player.actual_pos_y(),won3) && menuing == false && won3) {
 			finish_3.at(0).finished(player.get_score());
 
 		}
-		if (finish_4.at(0).reached_finish(player.actual_pos_x(), player.actual_pos_y()) && menuing == false && won) {
+		if (finish_4.at(0).reached_finish(player.actual_pos_x(), player.actual_pos_y(),won4) && menuing == false && won4) {
 			finish_4.at(0).finished(player.get_score());
 
 		}
-		if (finish_5.at(0).reached_finish(player.actual_pos_x(), player.actual_pos_y()) && menuing == false && won) {
+		if (finish_5.at(0).reached_finish(player.actual_pos_x(), player.actual_pos_y(),won5) && menuing == false && won5) {
 			finish_5.at(0).finished(player.get_score());
 
 		}
-		if (finish_6.at(0).reached_finish(player.actual_pos_x(), player.actual_pos_y()) && menuing == false&&won) {
+		if (finish_6.at(0).reached_finish(player.actual_pos_x(), player.actual_pos_y(),won6) && menuing == false&&won6) {
 			finish_6.at(0).finished(player.get_score());
 
 		}
-		if (finish_7.at(0).reached_finish(player.actual_pos_x(), player.actual_pos_y()) && menuing == false && won) {
+		if (finish_7.at(0).reached_finish(player.actual_pos_x(), player.actual_pos_y(),won7) && menuing == false && won7) {
 			finish_7.at(0).finished(player.get_score());
 
 		}
-		if (finish_8.at(0).reached_finish(player.actual_pos_x(), player.actual_pos_y()) && menuing == false && won) {
+		if (finish_8.at(0).reached_finish(player.actual_pos_x(), player.actual_pos_y(),won8) && menuing == false && won8) {
 			finish_8.at(0).finished(player.get_score());
 
 		}
-		if (finish_9.at(0).reached_finish(player.actual_pos_x(), player.actual_pos_y())&&menuing==false && won) {
+		if (finish_9.at(0).reached_finish(player.actual_pos_x(), player.actual_pos_y(),won9)&&menuing==false && won9) {
 			finish_9.at(0).finished(player.get_score());
 		}
 	

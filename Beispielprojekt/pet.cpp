@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "pet.h"
 #include <math.h>
+#include "vec2.h"
 
 const double animationSpeed = 3; //1.2
 const double animationSpeedIdle = 0.25;
@@ -10,10 +11,15 @@ Vector2 normalize(const Vector2& source) //Einheitsvektor bilden
 {
 	float length = sqrt((source.X * source.X) + (source.Y * source.Y));
 	if (length != 0)
+	{
 		return Vector2(source.X / length, source.Y / length);
+	}
 	else
+	{
 		return source;
+	}
 }
+
 
 double Pet::actual_pos_x() const
 {
@@ -25,13 +31,13 @@ double Pet::actual_pos_y() const
 	return pos_y;
 }
 
-void Pet::set_pos(double x, double y)
+void Pet::set_pos(const double& x, const double& y)
 {
 	pos_x = x;
 	pos_y = y;
 }
 
-void Pet::draw(bool lookingRight)
+void Pet::draw(const bool& lookingRight)
 {
 	if (lookingRight == true) //wenn Spieler nach rechts schaut
 	{
@@ -55,16 +61,16 @@ void Pet::draw(bool lookingRight)
 	}
 }
 
-void Pet::set_idle(bool state)
+void Pet::set_idle(const bool& state)
 {
 	this->idle = state;
 }
 
-bool Pet::inCorrectPos(double player_x, double player_y, bool lookingRight)
+bool Pet::inCorrectPos(const double& player_x, const double& player_y, const bool& lookingRight) const
 {
 	if (lookingRight == true)
 	{
-		if ((this->pos_x == (player_x - 80.0)) && (this->pos_y >= (player_y - 85)) && (this->pos_y <= (player_y - 75)))
+		if ((this->pos_x == (player_x - 80.0)) && (this->pos_y > (player_y - 85)) && (this->pos_y < (player_y - 75)))
 		{
 			return true;
 		}
@@ -75,7 +81,7 @@ bool Pet::inCorrectPos(double player_x, double player_y, bool lookingRight)
 	}
 	else if (lookingRight == false)
 	{
-		if ((this->pos_x == (player_x + 80.0)) && (this->pos_y >= (player_y - 85)) && (this->pos_y <= (player_y - 75)))
+		if ((this->pos_x == (player_x + 80.0)) && (this->pos_y > (player_y - 85)) && (this->pos_y < (player_y - 75)))
 		{
 			return true;
 		}
@@ -86,7 +92,7 @@ bool Pet::inCorrectPos(double player_x, double player_y, bool lookingRight)
 	}
 }
 
-void Pet::idleAnim(double player_x, double player_y, bool lookingRight)
+void Pet::idleAnim(const double& player_x, const double& player_y, const bool& lookingRight)
 {
 	if (inCorrectPos(player_x, player_y, lookingRight))
 	{
@@ -131,13 +137,13 @@ void Pet::idleAnim(double player_x, double player_y, bool lookingRight)
 	}
 }
 
-void Pet::moveTo(Vector2 direction_n) //Einheitsvektor, bewegt in Richtung X & Y mit animationSpeed
+void Pet::moveTo(const Vector2& direction_n) //Einheitsvektor, bewegt in Richtung X & Y mit animationSpeed
 {
 	this->pos_x = (actual_pos_x() + (direction_n.X * animationSpeed));
 	this->pos_y = (actual_pos_y() + (direction_n.Y * animationSpeed));
 }
 
-void Pet::update(bool lookingRight, double player_x, double player_y)
+void Pet::update(const bool& lookingRight, const  double& player_x, const double& player_y)
 {
 	Vector2 playerPosition;
 

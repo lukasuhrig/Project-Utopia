@@ -35,9 +35,11 @@ void finish::set_pos_left(){
 void finish::set_pos_right(){
 	pos_x = pos_x + 10.0;
 }
-bool finish::reached_finish(double posx, double posy) {
-	if (posx > pos_x&& posy > pos_y&& posx < pos_x + width() && pos_y < pos_y + height()) {
-		return true;
+bool finish::reached_finish(double posx, double posy,bool won) {
+	if ( posx > pos_x && posy > pos_y&& posx < pos_x + width() && pos_y < pos_y + height() ) {
+		if (!won) {
+			return true;
+		}
 	}
 	else
 	{

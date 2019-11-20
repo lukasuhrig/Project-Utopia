@@ -26,19 +26,19 @@ public:
 	double actual_pos_x() const;
 	double actual_pos_y() const;
 
-	void set_pos(double x, double y);
+	void set_pos(const double &x, const double &y);
 
-	void set_idle(bool state);
+	void set_idle(const bool &state);
 
-	bool inCorrectPos(double player_x, double player_y, bool lookingRight);
+	bool inCorrectPos(const double &player_x, const double &player_y, const bool &lookingRight) const;
 
-	void idleAnim(double player_x, double player_y, bool lookingRight);
+	void idleAnim(const double &player_x, const double &player_y, const bool &lookingRight);
 
-	void moveTo(Vector2 direction);
+	void moveTo(const Vector2 &direction_n);
 
-	void draw(bool lookingRight);
+	void draw(const bool &lookingRight);
 
-	void update(bool lookingRight, double player_x, double player_y);
+	void update(const bool &lookingRight, const  double &player_x, const double &player_y);
 
 
 

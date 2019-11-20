@@ -27,6 +27,7 @@
 #include "mouse.h"
 #include "Ground.h"
 #include "finish.h"
+#include "Game.h"
 //#include "Vektor2d.h"
 #include "pet.h"
 
@@ -35,23 +36,7 @@ double position_in_window=400; // hier wird die Breite des Bildschirms bestimmt 
 const double DT = 100.0;
 bool menuing =true;
 bool backtomenu=false;
-bool Level1 = false;
-bool Level2 = false;
-bool Level3 = false;
-bool Level4 = false;
-bool Level5 = false;
-bool Level6 = false;
-bool Level7 = false;
-bool Level8 = false;
-bool Level9 = false;
-bool wLevel1 = false;
-bool wLevel2 = false;
-bool wLevel3 = false;
-bool wLevel4 = false;
-bool wLevel5 = false;
-bool wLevel6 = false;
-bool wLevel7 = false;
-bool wLevel8 = false;
+
 
 bool won = false;
 int64_t frames=0;
@@ -75,6 +60,7 @@ public:
 	Background background;
 	Mouse mouse;
 	Ground ground;
+	Game game;
 	Pet pet_1; //Erstellen Pet
 	
 	//Level1
@@ -227,48 +213,44 @@ public:
 		if (menuing == true) {
 			backtomenu = false;
 			if (menu.pressedButton(1, mouse, input().down(Gosu::MS_LEFT), menu)) {
-				Level1 = true;
-				menuing = false;
-			}
-			if (menu.pressedButton(1, mouse, input().down(Gosu::MS_LEFT), menu)) {
-				Level1= true;
+				game.set_Level(1, true);
 				menuing = false;
 			}
 			if (menu.pressedButton(2, mouse, input().down(Gosu::MS_LEFT), menu)) {
-				Level2 = true;
+				game.set_Level(2, true);
 				menuing = false;
 			}
 			if (menu.pressedButton(3, mouse, input().down(Gosu::MS_LEFT), menu)) {
-				Level3 = true;
+				game.set_Level(3, true);
 				menuing = false;
 			}
 			if (menu.pressedButton(4, mouse, input().down(Gosu::MS_LEFT), menu)) {
-				Level4 = true;
+				game.set_Level(4, true);
 				menuing = false;
 			}
 			if (menu.pressedButton(5, mouse, input().down(Gosu::MS_LEFT), menu)) {
-				Level5 = true;
+				game.set_Level(5, true);
 				menuing = false;
 			}
 			if (menu.pressedButton(6, mouse, input().down(Gosu::MS_LEFT), menu)) {
-				Level6 = true;
+				game.set_Level(6, true);
 				menuing = false;
 			}
 			if (menu.pressedButton(7, mouse, input().down(Gosu::MS_LEFT), menu)) {
-				Level7 = true;
+				game.set_Level(7, true);
 				menuing = false;
 			}
 			if (menu.pressedButton(8, mouse, input().down(Gosu::MS_LEFT), menu)) {
-				Level8 = true;
+				game.set_Level(8, true);
 				menuing = false;
 			}
 			if (menu.pressedButton(9, mouse, input().down(Gosu::MS_LEFT), menu)) {
-				Level9 = true;
+				game.set_Level(9, true);
 				menuing = false;
 			}
 		}
 		if (menuing == false) {
-			if (Level1 == true&&!finish_1.at(0).reached_finish(player.actual_pos_x(),player.actual_pos_y())) {
+			if (game.get_Level(1) &&!finish_1.at(0).reached_finish(player.actual_pos_x(),player.actual_pos_y())) {
 
 				if ((zeit.milliSecond()) == true)
 				{
@@ -362,7 +344,7 @@ public:
 				pet_1.update(player.direction(), player.actual_pos_x(), player.actual_pos_y()); //PET Animation
 
 			}
-			if (Level2 == true && !finish_2.at(0).reached_finish(player.actual_pos_x(), player.actual_pos_y())&&wLevel1) {
+			if (game.get_Level(2) && !finish_2.at(0).reached_finish(player.actual_pos_x(), player.actual_pos_y())&&game.get_wonLevel(1)) {
 				if ((zeit.milliSecond()) == true)
 				{
 					player.score_set_down(1);
@@ -451,7 +433,7 @@ public:
 
 				pet_1.update(player.direction(), player.actual_pos_x(), player.actual_pos_y()); //PET Animation
 			}
-			if (Level3 == true && !finish_3.at(0).reached_finish(player.actual_pos_x(), player.actual_pos_y())&&wLevel2) {
+			if (game.get_Level(3) && !finish_3.at(0).reached_finish(player.actual_pos_x(), player.actual_pos_y())&& game.get_wonLevel(2)) {
 				if ((zeit.milliSecond()) == true)
 				{
 					player.score_set_down(1);
@@ -540,7 +522,7 @@ public:
 
 				pet_1.update(player.direction(), player.actual_pos_x(), player.actual_pos_y()); //PET Animation
 			}
-			if (Level4 == true && !finish_4.at(0).reached_finish(player.actual_pos_x(), player.actual_pos_y())&&wLevel3) {
+			if (game.get_Level(4) && !finish_4.at(0).reached_finish(player.actual_pos_x(), player.actual_pos_y())&& game.get_wonLevel(3)) {
 				if ((zeit.milliSecond()) == true)
 				{
 					player.score_set_down(1);
@@ -629,7 +611,7 @@ public:
 
 				pet_1.update(player.direction(), player.actual_pos_x(), player.actual_pos_y()); //PET Animation
 			}
-			if (Level5 == true && !finish_5.at(0).reached_finish(player.actual_pos_x(), player.actual_pos_y())&&wLevel4) {
+			if (game.get_Level(5) && !finish_5.at(0).reached_finish(player.actual_pos_x(), player.actual_pos_y())&& game.get_wonLevel(4)) {
 				if ((zeit.milliSecond()) == true)
 				{
 					player.score_set_down(1);
@@ -718,7 +700,7 @@ public:
 
 				pet_1.update(player.direction(), player.actual_pos_x(), player.actual_pos_y()); //PET Animation
 			}
-			if (Level6 == true && !finish_6.at(0).reached_finish(player.actual_pos_x(), player.actual_pos_y())&&wLevel5) {
+			if (game.get_Level(6) && !finish_6.at(0).reached_finish(player.actual_pos_x(), player.actual_pos_y())&& game.get_wonLevel(5)) {
 				if ((zeit.milliSecond()) == true)
 				{
 					player.score_set_down(1);
@@ -807,7 +789,7 @@ public:
 
 				pet_1.update(player.direction(), player.actual_pos_x(), player.actual_pos_y()); //PET Animation
 			}
-			if (Level7 == true && !finish_7.at(0).reached_finish(player.actual_pos_x(), player.actual_pos_y())&&wLevel6) {
+			if (game.get_Level(7) && !finish_7.at(0).reached_finish(player.actual_pos_x(), player.actual_pos_y())&& game.get_wonLevel(6)) {
 				if ((zeit.milliSecond()) == true)
 				{
 					player.score_set_down(1);
@@ -896,7 +878,7 @@ public:
 
 				pet_1.update(player.direction(), player.actual_pos_x(), player.actual_pos_y()); //PET Animation
 			}
-			if (Level8 == true && !finish_8.at(0).reached_finish(player.actual_pos_x(), player.actual_pos_y())&&wLevel7) {
+			if (game.get_Level(8) && !finish_8.at(0).reached_finish(player.actual_pos_x(), player.actual_pos_y())&& game.get_wonLevel(7)) {
 				if ((zeit.milliSecond()) == true)
 				{
 					player.score_set_down(1);
@@ -985,7 +967,7 @@ public:
 
 				pet_1.update(player.direction(), player.actual_pos_x(), player.actual_pos_y()); //PET Animation
 			}
-			if (Level9 == true && !finish_9.at(0).reached_finish(player.actual_pos_x(), player.actual_pos_y())&&wLevel8) {
+			if (game.get_Level(9) && !finish_9.at(0).reached_finish(player.actual_pos_x(), player.actual_pos_y())&& game.get_wonLevel(8)) {
 				if ((zeit.milliSecond()) == true)
 				{
 					player.score_set_down(1);
@@ -1077,15 +1059,7 @@ public:
 		if ((menu.pressedMenuButton(mouse, input().down(Gosu::MS_LEFT)) || menu.pressedwinMenuButton(mouse, input().down(Gosu::MS_LEFT)))&& menuing == false) {
 			menuing = true;
 			backtomenu = true;
-			Level1 = false;
-			Level2 = false;
-			Level3 = false;
-			Level4 = false;
-			Level5 = false;
-			Level6 = false;
-			Level7 = false;
-			Level8 = false;
-			Level9 = false;
+			for (int i = 1; i <= 9; i++) { game.set_Level(i, false); };
 			won = false;
 			player.reset(ground.get_Ground()-1);
 			background.reset(ground.get_Ground());
@@ -1101,42 +1075,33 @@ public:
 			finish_7.at(0).reached_finish(player.actual_pos_x(), player.actual_pos_y()) ||
 			finish_8.at(0).reached_finish(player.actual_pos_x(), player.actual_pos_y()) ||
 			finish_9.at(0).reached_finish(player.actual_pos_x(), player.actual_pos_y())) {
-			Level1 = false;
-			Level2 = false;
-			Level3 = false;
-			Level4 = false;
-			Level5 = false;
-			Level6 = false;
-			Level7 = false;
-			Level8 = false;
-			Level9 = false;
-			
+			for (int i = 1; i <= 9; i++) { game.set_Level(i, false); };
 			won = true;
 		}
 		if (finish_1.at(0).reached_finish(player.actual_pos_x(), player.actual_pos_y())) {
-			wLevel1 = true;
+			game.set_wonLevel(1,true);
 
 		}
 		if (finish_2.at(0).reached_finish(player.actual_pos_x(), player.actual_pos_y())) {
-			wLevel2 = true;
+			game.set_wonLevel(2, true);
 		}
 		if (finish_3.at(0).reached_finish(player.actual_pos_x(), player.actual_pos_y())) {
-			wLevel3 = true;
+			game.set_wonLevel(3, true);
 		}
 		if (finish_4.at(0).reached_finish(player.actual_pos_x(), player.actual_pos_y())) {
-			wLevel4 = true;
+			game.set_wonLevel(4, true);
 		}
 		if (finish_5.at(0).reached_finish(player.actual_pos_x(), player.actual_pos_y())) {
-			wLevel5 = true;
+			game.set_wonLevel(5, true);
 		}
 		if (finish_6.at(0).reached_finish(player.actual_pos_x(), player.actual_pos_y())) {
-			wLevel6 = true;
+			game.set_wonLevel(6, true);
 		}
 		if (finish_7.at(0).reached_finish(player.actual_pos_x(), player.actual_pos_y())) {
-			wLevel7 = true;
+			game.set_wonLevel(7, true);
 		}
 		if (finish_8.at(0).reached_finish(player.actual_pos_x(), player.actual_pos_y())) {
-			wLevel8 = true;
+			game.set_wonLevel(8, true);
 		}
 		//Berechnet FPS
 		fps.update();
@@ -1156,28 +1121,28 @@ public:
 		{
 			menu.Background();//drawt den Background
 			menu.Level(1, "Level1"); //drawt den Text für das Level
-			if (wLevel1) {
+			if (game.get_wonLevel(1)) {
 				menu.Level(2, "Level2"); //drawt den Text für das Level
 			}
-			if (wLevel2) {
+			if (game.get_wonLevel(2)) {
 				menu.Level(3, "Level3"); //drawt den Text für das Level
 			}
-			if (wLevel3) {
+			if (game.get_wonLevel(3)) {
 				menu.Level(4, "Level4"); //drawt den Text für das Level
 			}
-			if (wLevel4) {
+			if (game.get_wonLevel(4)) {
 				menu.Level(5, "Level5"); //drawt den Text für das Level
 			}
-			if (wLevel5) {
+			if (game.get_wonLevel(5)) {
 				menu.Level(6, "Level6"); //drawt den Text für das Level
 			}
-			if (wLevel6) {
+			if (game.get_wonLevel(6)) {
 				menu.Level(7, "Level7"); //drawt den Text für das Level
 			}
-			if (wLevel7) {
+			if (game.get_wonLevel(7)) {
 				menu.Level(8, "Level8"); //drawt den Text für das Level
 			}
-			if (wLevel8) {
+			if (game.get_wonLevel(8)) {
 				menu.Level(9, "Level9"); //drawt den Text für das Level
 			}
 			
@@ -1188,55 +1153,55 @@ public:
 		if (menuing == false ) {
 			menu.menu_button();
 		}
-		if (Level1 == true && menuing == false) {
+		if (game.get_Level(1) && menuing == false) {
 				for (size_t i = 0; i < normal_block1.size(); i++) {
 					normal_block1.at(i).draw_Blocks(0); //drawt einen Block
 				}
 				finish_1.at(0).draw_finish();
 		}
-		if (Level2 == true && menuing == false) {
+		if (game.get_Level(2) && menuing == false) {
 				for (size_t i = 0; i < normal_block2.size(); i++) {
 					normal_block2.at(i).draw_Blocks(1); //drawt einen Block
 				}
 				finish_2.at(0).draw_finish();
 		}
-		if (Level3 == true && menuing == false) {
+		if (game.get_Level(3) && menuing == false) {
 				for (size_t i = 0; i < normal_block3.size(); i++) {
 					normal_block3.at(i).draw_Blocks(0); //drawt einen Block
 				}
 				finish_3.at(0).draw_finish();
 		}
-		if (Level4 == true && menuing == false) {
+		if (game.get_Level(4) && menuing == false) {
 				for (size_t i = 0; i < normal_block4.size(); i++) {
 					normal_block4.at(i).draw_Blocks(0); //drawt einen Block
 				}
 				finish_4.at(0).draw_finish();
 		}
-		if (Level5 == true && menuing == false) {
+		if (game.get_Level(5) && menuing == false) {
 				for (size_t i = 0; i < normal_block5.size(); i++) {
 					normal_block5.at(i).draw_Blocks(0); //drawt einen Block
 				}
 				finish_5.at(0).draw_finish();
 		}
-		if (Level6 == true && menuing == false) {
+		if (game.get_Level(6) && menuing == false) {
 				for (size_t i = 0; i < normal_block6.size(); i++) {
 					normal_block6.at(i).draw_Blocks(0); //drawt einen Block
 				}
 				finish_6.at(0).draw_finish();
 		}
-		if (Level7 == true && menuing == false) {
+		if (game.get_Level(7) && menuing == false) {
 				for (size_t i = 0; i < normal_block7.size(); i++) {
 					normal_block7.at(i).draw_Blocks(0); //drawt einen Block
 				}
 				finish_7.at(0).draw_finish();
 		}
-		if (Level8 == true && menuing == false) {
+		if (game.get_Level(8) && menuing == false) {
 				for (size_t i = 0; i < normal_block8.size(); i++) {
 					normal_block8.at(i).draw_Blocks(0); //drawt einen Block
 				}
 				finish_8.at(0).draw_finish();
 		}
-		if (Level9 == true && menuing == false) {
+		if (game.get_Level(9) && menuing == false) {
 				for (size_t i = 0; i < normal_block9.size(); i++) {
 					normal_block9.at(i).draw_Blocks(0); //drawt einen Block
 				}

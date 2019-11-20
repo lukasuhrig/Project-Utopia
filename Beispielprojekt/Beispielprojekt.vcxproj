@@ -165,6 +165,7 @@
     <ClInclude Include="Animation.h" />
     <ClInclude Include="Ground.h" />
     <ClInclude Include="finish.h" />
+    <ClInclude Include="Game.h" />
     <ClInclude Include="interval.h" />
     <ClInclude Include="mouse.h" />
     <ClInclude Include="mainmenu.h" />
@@ -191,6 +192,7 @@
     <ClCompile Include="mouse.cpp" />
     <ClCompile Include="Ground.cpp" />
     <ClCompile Include="finish.cpp" />
+    <ClCompile Include="Game.cpp" />
     <ClCompile Include="vec2.cpp" />
     <ClCompile Include="ZOrder.cpp" />
     <ClCompile Include="stdafx.cpp">

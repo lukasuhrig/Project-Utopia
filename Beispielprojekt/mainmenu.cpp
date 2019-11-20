@@ -29,86 +29,34 @@ void Menu::Level(uint16_t lvl_num, std::string lvl) //drawt die Levelbezeichnung
 	);
 }
 double Menu::Position_x(uint16_t lvl_num) {
-	//switch (lvl_num) {
-	//case 1: {return 100.0; break; }
-	//case 2: {return 300.0; break; }
-	//case 3: {return 500.0; break; }
-	//case 4: {return 100.0; break; }
-	//case 5: {return 300.0; break; }
-	//case 6: {return 500.0; break; }
-	//case 7: {return 100.0; break; }
-	//case 8: {return 300.0; break; }
-	//case 9: {return 500.0; break; }
-	//default: {return 0; }
-	//}
-	if (lvl_num == 1) {
-		return 100.0;
+	switch (lvl_num) {
+	case 1: {return 100.0; break; }
+	case 2: {return 300.0; break; }
+	case 3: {return 500.0; break; }
+	case 4: {return 100.0; break; }
+	case 5: {return 300.0; break; }
+	case 6: {return 500.0; break; }
+	case 7: {return 100.0; break; }
+	case 8: {return 300.0; break; }
+	case 9: {return 500.0; break; }
+	default: {return 0; }
 	}
-	if (lvl_num == 2) {
-		return 300.0;
-	}
-	if (lvl_num == 3) {
-		return 500.0;
-	}
-	if (lvl_num == 4) {
-		return 100.0;
-	}
-	if (lvl_num == 5) {
-		return 300.0;
-	}
-	if (lvl_num == 6) {
-		return 500.0;
-	}
-	if (lvl_num == 7) {
-		return 100.0;
-	}
-	if (lvl_num == 8) {
-		return 300.0;
-	}
-	if (lvl_num == 9) {
-		return 500.0;
-	}
+	
 	};
 double Menu::Position_y(uint16_t lvl_num) {
-	//switch (lvl_num) {
-	//case 1: {return 150.0; break; }
-	//case 2: {return 150.0; break; }
-	//case 3: {return 150.0; break; }
-	//case 4: {return 300.0; break; }
-	//case 5: {return 300.0; break; }
-	//case 6: {return 300.0; break; }
-	//case 7: {return 450.0; break; }
-	//case 8: {return 450.0; break; }
-	//case 9: {return 450.0; break; }
-	//default: {return 0; }
-	//}
-	if (lvl_num == 1) {
-		return 150.0;
+	switch (lvl_num) {
+	case 1: {return 150.0; break; }
+	case 2: {return 150.0; break; }
+	case 3: {return 150.0; break; }
+	case 4: {return 300.0; break; }
+	case 5: {return 300.0; break; }
+	case 6: {return 300.0; break; }
+	case 7: {return 450.0; break; }
+	case 8: {return 450.0; break; }
+	case 9: {return 450.0; break; }
+	default: {return 0; }
 	}
-	if (lvl_num == 2) {
-		return 150.0;
-	}
-	if (lvl_num == 3) {
-		return 150.0;
-	}
-	if (lvl_num == 4) {
-		return 300.0;
-	}
-	if (lvl_num == 5) {
-		return 300.0;
-	}
-	if (lvl_num == 6) {
-		return 300.0;
-	}
-	if (lvl_num == 7) {
-		return 450.0;
-	}
-	if (lvl_num == 8) {
-		return 450.0;
-	}
-	if (lvl_num == 9) {
-		return 450.0;
-	}
+
 
 };
 

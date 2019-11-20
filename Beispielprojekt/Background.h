@@ -2,6 +2,7 @@
 #include <Gosu/Gosu.hpp>
 #include <Gosu/AutoLink.hpp>
 #include "ZOrder.h"
+#include "Ground.h"
 class Background 
 {
 	Gosu::Image background_image;
@@ -17,4 +18,6 @@ public:
 	void move_right();
 	void draw();
 	void set_pos(double x, double y);
+	void reset(double ground);
 };
+

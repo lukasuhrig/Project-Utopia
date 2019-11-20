@@ -49,6 +49,6 @@ void finish::finished(int64_t score) {
 		0, -100, Z_Menu_back, 0, 0, 0, 0.78, 0.78
 	);
 	std::string s = std::to_string(score);
-	score_show.draw("Score: " + s, 200, 80, Z_Menu_Text, 0, 3, 3);
+	score_show.draw("Score: " + s, 230, 500, Z_Menu_Text, 3, 3, Gosu::Color::RED);
 	menu.menu_button(375,450);
 }

@@ -20,6 +20,33 @@ public:
 		}
 		return false;
 	}
+	bool halfSecond()
+	{
+		if (interval1.value() > 500)
+		{
+			interval1 = interval();
+			return true;
+		}
+		return false;
+	}
+	bool quarterSecond()
+	{
+		if (interval1.value() > 250)
+		{
+			interval1 = interval();
+			return true;
+		}
+		return false;
+	}
+	bool milliSecond()
+	{
+		if (interval1.value() > 1)
+		{
+			interval1 = interval();
+			return true;
+		}
+		return false;
+	}
 };
 
 

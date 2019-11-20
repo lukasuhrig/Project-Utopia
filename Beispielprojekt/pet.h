@@ -40,5 +40,7 @@ public:
 
 	void update(bool lookingRight, double player_x, double player_y);
 
+
+
 };
 

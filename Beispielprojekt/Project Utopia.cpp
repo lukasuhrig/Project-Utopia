@@ -44,6 +44,16 @@ bool Level6 = false;
 bool Level7 = false;
 bool Level8 = false;
 bool Level9 = false;
+bool wLevel1 = false;
+bool wLevel2 = false;
+bool wLevel3 = false;
+bool wLevel4 = false;
+bool wLevel5 = false;
+bool wLevel6 = false;
+bool wLevel7 = false;
+bool wLevel8 = false;
+
+bool won = false;
 int64_t frames=0;
 int64_t playtime = 0;
 //FPS
@@ -65,6 +75,7 @@ public:
 	Background background;
 	Mouse mouse;
 	Ground ground;
+	Pet pet_1; //Erstellen Pet
 	
 	//Level1
 	std::vector<Blocks>normal_block1;
@@ -128,7 +139,7 @@ public:
 	//Animation_Blocks Animation_Block;
 	Menu menu;
 
-	Pet pet_1; //Erstellen Pet
+	
 
 	GameWindow() : Window(800, 600),fps_anzeige(20)
 	{
@@ -259,7 +270,7 @@ public:
 		if (menuing == false) {
 			if (Level1 == true&&!finish_1.at(0).reached_finish(player.actual_pos_x(),player.actual_pos_y())) {
 
-				if ((zeit.oneSecond()) == true)
+				if ((zeit.milliSecond()) == true)
 				{
 					player.score_set_down(1);
 				}
@@ -349,9 +360,10 @@ public:
 				}
 
 				pet_1.update(player.direction(), player.actual_pos_x(), player.actual_pos_y()); //PET Animation
+
 			}
-			if (Level2 == true && !finish_2.at(0).reached_finish(player.actual_pos_x(), player.actual_pos_y())) {
-				if ((zeit.oneSecond()) == true)
+			if (Level2 == true && !finish_2.at(0).reached_finish(player.actual_pos_x(), player.actual_pos_y())&&wLevel1) {
+				if ((zeit.milliSecond()) == true)
 				{
 					player.score_set_down(1);
 				}
@@ -439,8 +451,8 @@ public:
 
 				pet_1.update(player.direction(), player.actual_pos_x(), player.actual_pos_y()); //PET Animation
 			}
-			if (Level3 == true && !finish_3.at(0).reached_finish(player.actual_pos_x(), player.actual_pos_y())) {
-				if ((zeit.oneSecond()) == true)
+			if (Level3 == true && !finish_3.at(0).reached_finish(player.actual_pos_x(), player.actual_pos_y())&&wLevel2) {
+				if ((zeit.milliSecond()) == true)
 				{
 					player.score_set_down(1);
 				}
@@ -528,8 +540,8 @@ public:
 
 				pet_1.update(player.direction(), player.actual_pos_x(), player.actual_pos_y()); //PET Animation
 			}
-			if (Level4 == true && !finish_4.at(0).reached_finish(player.actual_pos_x(), player.actual_pos_y())) {
-				if ((zeit.oneSecond()) == true)
+			if (Level4 == true && !finish_4.at(0).reached_finish(player.actual_pos_x(), player.actual_pos_y())&&wLevel3) {
+				if ((zeit.milliSecond()) == true)
 				{
 					player.score_set_down(1);
 				}
@@ -617,8 +629,8 @@ public:
 
 				pet_1.update(player.direction(), player.actual_pos_x(), player.actual_pos_y()); //PET Animation
 			}
-			if (Level5 == true && !finish_5.at(0).reached_finish(player.actual_pos_x(), player.actual_pos_y())) {
-				if ((zeit.oneSecond()) == true)
+			if (Level5 == true && !finish_5.at(0).reached_finish(player.actual_pos_x(), player.actual_pos_y())&&wLevel4) {
+				if ((zeit.milliSecond()) == true)
 				{
 					player.score_set_down(1);
 				}
@@ -706,8 +718,8 @@ public:
 
 				pet_1.update(player.direction(), player.actual_pos_x(), player.actual_pos_y()); //PET Animation
 			}
-			if (Level6 == true && !finish_6.at(0).reached_finish(player.actual_pos_x(), player.actual_pos_y())) {
-				if ((zeit.oneSecond()) == true)
+			if (Level6 == true && !finish_6.at(0).reached_finish(player.actual_pos_x(), player.actual_pos_y())&&wLevel5) {
+				if ((zeit.milliSecond()) == true)
 				{
 					player.score_set_down(1);
 				}
@@ -795,8 +807,8 @@ public:
 
 				pet_1.update(player.direction(), player.actual_pos_x(), player.actual_pos_y()); //PET Animation
 			}
-			if (Level7 == true && !finish_7.at(0).reached_finish(player.actual_pos_x(), player.actual_pos_y())) {
-				if ((zeit.oneSecond()) == true)
+			if (Level7 == true && !finish_7.at(0).reached_finish(player.actual_pos_x(), player.actual_pos_y())&&wLevel6) {
+				if ((zeit.milliSecond()) == true)
 				{
 					player.score_set_down(1);
 				}
@@ -884,8 +896,8 @@ public:
 
 				pet_1.update(player.direction(), player.actual_pos_x(), player.actual_pos_y()); //PET Animation
 			}
-			if (Level8 == true && !finish_8.at(0).reached_finish(player.actual_pos_x(), player.actual_pos_y())) {
-				if ((zeit.oneSecond()) == true)
+			if (Level8 == true && !finish_8.at(0).reached_finish(player.actual_pos_x(), player.actual_pos_y())&&wLevel7) {
+				if ((zeit.milliSecond()) == true)
 				{
 					player.score_set_down(1);
 				}
@@ -973,8 +985,8 @@ public:
 
 				pet_1.update(player.direction(), player.actual_pos_x(), player.actual_pos_y()); //PET Animation
 			}
-			if (Level9 == true && !finish_9.at(0).reached_finish(player.actual_pos_x(), player.actual_pos_y())) {
-				if ((zeit.oneSecond()) == true)
+			if (Level9 == true && !finish_9.at(0).reached_finish(player.actual_pos_x(), player.actual_pos_y())&&wLevel8) {
+				if ((zeit.milliSecond()) == true)
 				{
 					player.score_set_down(1);
 				}
@@ -1074,15 +1086,69 @@ public:
 			Level7 = false;
 			Level8 = false;
 			Level9 = false;
+			won = false;
+			player.reset(ground.get_Ground()-1);
+			background.reset(ground.get_Ground());
+			pet_1.set_pos((player.actual_pos_x() - 80), (player.actual_pos_y() - 80));
+			
+		}
+		if (finish_1.at(0).reached_finish(player.actual_pos_x(), player.actual_pos_y()) ||
+			finish_2.at(0).reached_finish(player.actual_pos_x(), player.actual_pos_y()) ||
+			finish_3.at(0).reached_finish(player.actual_pos_x(), player.actual_pos_y()) ||
+			finish_4.at(0).reached_finish(player.actual_pos_x(), player.actual_pos_y()) ||
+			finish_5.at(0).reached_finish(player.actual_pos_x(), player.actual_pos_y()) ||
+			finish_6.at(0).reached_finish(player.actual_pos_x(), player.actual_pos_y()) ||
+			finish_7.at(0).reached_finish(player.actual_pos_x(), player.actual_pos_y()) ||
+			finish_8.at(0).reached_finish(player.actual_pos_x(), player.actual_pos_y()) ||
+			finish_9.at(0).reached_finish(player.actual_pos_x(), player.actual_pos_y())) {
+			Level1 = false;
+			Level2 = false;
+			Level3 = false;
+			Level4 = false;
+			Level5 = false;
+			Level6 = false;
+			Level7 = false;
+			Level8 = false;
+			Level9 = false;
+			
+			won = true;
+		}
+		if (finish_1.at(0).reached_finish(player.actual_pos_x(), player.actual_pos_y())) {
+			wLevel1 = true;
 
+		}
+		if (finish_2.at(0).reached_finish(player.actual_pos_x(), player.actual_pos_y())) {
+			wLevel2 = true;
+		}
+		if (finish_3.at(0).reached_finish(player.actual_pos_x(), player.actual_pos_y())) {
+			wLevel3 = true;
+		}
+		if (finish_4.at(0).reached_finish(player.actual_pos_x(), player.actual_pos_y())) {
+			wLevel4 = true;
+		}
+		if (finish_5.at(0).reached_finish(player.actual_pos_x(), player.actual_pos_y())) {
+			wLevel5 = true;
+		}
+		if (finish_6.at(0).reached_finish(player.actual_pos_x(), player.actual_pos_y())) {
+			wLevel6 = true;
+		}
+		if (finish_7.at(0).reached_finish(player.actual_pos_x(), player.actual_pos_y())) {
+			wLevel7 = true;
+		}
+		if (finish_8.at(0).reached_finish(player.actual_pos_x(), player.actual_pos_y())) {
+			wLevel8 = true;
 		}
 		//Berechnet FPS
 		fps.update();
-		zeit.oneSecond();
+		zeit.milliSecond();
 	}
 	void draw() override //ca. 60x pro Sekunde
-	{
-
+	{	
+		mouse.draw();
+		player.draw(); //drawt den player
+		player.score_draw();
+		pet_1.draw(player.direction()); //draw pet_1
+		background.draw(); //drawt den Background
 
 		//*****Die Blöcke müssen beim zurücksetzen in das menü noch gelöscht werden und der spieler und die Punktzahl zurückgesetzt werden
 
@@ -1090,22 +1156,35 @@ public:
 		{
 			menu.Background();//drawt den Background
 			menu.Level(1, "Level1"); //drawt den Text für das Level
-			menu.Level(2, "Level2"); //drawt den Text für das Level
-			menu.Level(3, "Level3"); //drawt den Text für das Level
-			menu.Level(4, "Level4"); //drawt den Text für das Level
-			menu.Level(5, "Level5"); //drawt den Text für das Level
-			menu.Level(6, "Level6"); //drawt den Text für das Level
-			menu.Level(7, "Level7"); //drawt den Text für das Level
-			menu.Level(8, "Level8"); //drawt den Text für das Level
-			menu.Level(9, "Level9"); //drawt den Text für das Level
+			if (wLevel1) {
+				menu.Level(2, "Level2"); //drawt den Text für das Level
+			}
+			if (wLevel2) {
+				menu.Level(3, "Level3"); //drawt den Text für das Level
+			}
+			if (wLevel3) {
+				menu.Level(4, "Level4"); //drawt den Text für das Level
+			}
+			if (wLevel4) {
+				menu.Level(5, "Level5"); //drawt den Text für das Level
+			}
+			if (wLevel5) {
+				menu.Level(6, "Level6"); //drawt den Text für das Level
+			}
+			if (wLevel6) {
+				menu.Level(7, "Level7"); //drawt den Text für das Level
+			}
+			if (wLevel7) {
+				menu.Level(8, "Level8"); //drawt den Text für das Level
+			}
+			if (wLevel8) {
+				menu.Level(9, "Level9"); //drawt den Text für das Level
+			}
 			
 		}
-		mouse.draw();
-		player.draw(); //drawt den player
-		player.score_draw();
-		pet_1.draw(player.direction()); //draw pet_1
+		
 
-		background.draw(); //drawt den Background
+		
 		if (menuing == false ) {
 			menu.menu_button();
 		}
@@ -1164,49 +1243,40 @@ public:
 				finish_9.at(0).draw_finish();
 			}
 		
-		if (finish_1.at(0).reached_finish(player.actual_pos_x(), player.actual_pos_y())&&menuing==false)  {
+		if (finish_1.at(0).reached_finish(player.actual_pos_x(), player.actual_pos_y())&&menuing==false && won)  {
 			finish_1.at(0).finished(player.get_score());
 			
 		}
-		if (finish_2.at(0).reached_finish(player.actual_pos_x(), player.actual_pos_y()) && menuing == false) {
+		if (finish_2.at(0).reached_finish(player.actual_pos_x(), player.actual_pos_y()) && menuing == false && won) {
 			finish_2.at(0).finished(player.get_score());
-			
-
+		
 		}
-		if (finish_3.at(0).reached_finish(player.actual_pos_x(), player.actual_pos_y()) && menuing == false) {
+		if (finish_3.at(0).reached_finish(player.actual_pos_x(), player.actual_pos_y()) && menuing == false && won) {
 			finish_3.at(0).finished(player.get_score());
-			
 
 		}
-		if (finish_4.at(0).reached_finish(player.actual_pos_x(), player.actual_pos_y()) && menuing == false) {
+		if (finish_4.at(0).reached_finish(player.actual_pos_x(), player.actual_pos_y()) && menuing == false && won) {
 			finish_4.at(0).finished(player.get_score());
-			
 
 		}
-		if (finish_5.at(0).reached_finish(player.actual_pos_x(), player.actual_pos_y()) && menuing == false) {
+		if (finish_5.at(0).reached_finish(player.actual_pos_x(), player.actual_pos_y()) && menuing == false && won) {
 			finish_5.at(0).finished(player.get_score());
-			
 
 		}
-		if (finish_6.at(0).reached_finish(player.actual_pos_x(), player.actual_pos_y()) && menuing == false) {
+		if (finish_6.at(0).reached_finish(player.actual_pos_x(), player.actual_pos_y()) && menuing == false&&won) {
 			finish_6.at(0).finished(player.get_score());
-			
 
 		}
-		if (finish_7.at(0).reached_finish(player.actual_pos_x(), player.actual_pos_y()) && menuing == false) {
+		if (finish_7.at(0).reached_finish(player.actual_pos_x(), player.actual_pos_y()) && menuing == false && won) {
 			finish_7.at(0).finished(player.get_score());
-			
 
 		}
-		if (finish_8.at(0).reached_finish(player.actual_pos_x(), player.actual_pos_y()) && menuing == false) {
+		if (finish_8.at(0).reached_finish(player.actual_pos_x(), player.actual_pos_y()) && menuing == false && won) {
 			finish_8.at(0).finished(player.get_score());
-			
 
 		}
-		if (finish_9.at(0).reached_finish(player.actual_pos_x(), player.actual_pos_y())) {
+		if (finish_9.at(0).reached_finish(player.actual_pos_x(), player.actual_pos_y())&&menuing==false && won) {
 			finish_9.at(0).finished(player.get_score());
-			
-
 		}
 	
 		fps_anzeige.draw("FPS: " + std::to_string(fps.get()), 15, 15, Z_UI,

@@ -20,11 +20,11 @@ class Player
 	float health;
 	int64_t score;
 	Gosu::Font score_draw1;
-	double jumptime = 0;
+	double jumptime;
 	double jump_y;
 	double gravity = 1000.0;
 	bool jumping=false;
-	double droptime = 0;
+	double droptime;
 	Ground ground;
 
 	const double block_tolerance=10.0;
@@ -33,7 +33,7 @@ public:
 	Player(): score_draw1(20)
 	{
 
-		pos_x = pos_y = rot =0;
+		pos_x = pos_y = rot =jumptime=droptime=0;
 		score = 20000;
 		jump_y = ground.get_Ground();
 		health = 100.0;
@@ -64,4 +64,5 @@ public:
 	void score_set_down(double tiime);
 	bool topBlock(std::vector<Blocks> Blockvec, uint16_t i);
 	int64_t get_score();
+	void reset(double ground);
 };

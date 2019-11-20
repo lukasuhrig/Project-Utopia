@@ -9,6 +9,7 @@ void Background::move_right()
 	pos_x = pos_x + 10;					//Bewegen des HIntergrundes nach rechts -> wenn sich PLayer nach links bewegt
 }
 
+
 void Background::draw()
 {
 	if (int32_t(pos_x) % (2 * background_image.width()) == 0 && pos_x != 0) {
@@ -27,4 +28,8 @@ void Background::set_pos(double x, double y)
 {
 	pos_x = x;							//setzen der x Position des Hintergrundes 
 	pos_y = y;							//setzen der y Position des Hintergrundes
+}
+void Background::reset(double ground) {
+	pos_x = 300;
+	pos_y = ground;
 }

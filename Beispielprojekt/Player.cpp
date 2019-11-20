@@ -129,3 +129,12 @@ bool Player::topBlock(std::vector<Blocks> blockvec, uint16_t i) {
 int64_t Player::get_score() {
 	return score;
 }
+void Player::reset(double ground) {
+	rot = jumptime = droptime = 0;
+	score = 20000;
+	jump_y = ground;
+	health = 100.0;
+	lookingRight = true;
+	idle = true;
+	set_pos(150, ground);
+}

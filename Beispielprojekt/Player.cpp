@@ -59,6 +59,37 @@ void Player::jumpposition() //setzt die Sprungfunktion
 {
 	jump_y = pos_y;
 }
+
+void Player::shoot() //NICHT FERTIG!
+{
+	shooting = true;
+
+	if (shooting == true)
+	{
+		if (lookingRight == true) //wenn Spieler nach rechts schaut
+		{
+			shoot1_image.draw_rot((this->pos_x + 10), this->pos_y, Z_PLAYER,
+				0,
+				0.5,
+				1,
+				0.2, //Skalierung X
+				0.2 //Skalierung Y
+			);
+		}
+		else if (lookingRight == false) //wenn Spieler nach links schaut
+		{
+			shoot1_image.draw_rot((this->pos_x - 10), this->pos_y, Z_PLAYER,
+				0,
+				0.5,
+				1,
+				0.2, //Skalierung X
+				0.2 //Skalierung Y
+			);
+		}
+	}
+
+}
+
 void Player:: draw() const //drawt den Spieler
 {
 	if (lookingRight == true) //wenn Spieler nach rechts schaut

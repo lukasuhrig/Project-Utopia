@@ -10,7 +10,7 @@ class Background
 	double pos_y;
 	double shift = 0;						//soll den Hintergrund je nach position des Players verschieben
 public:
-	Background() : background_image("background_v1.png")
+	Background() : background_image("background_v2.png")
 	{
 		pos_x = pos_y = 0;					//initiieren der Hintergrundposition
 	}

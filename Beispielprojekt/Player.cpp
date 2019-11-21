@@ -65,8 +65,8 @@ void Player::shoot()
 {
 	shooting = true;
 
-	//If 1 Sekunde rum -> shooting = false
 
+	//so etwas wie "If 1 Sekunde rum -> shooting = false"
 }
 
 void Player:: draw() const //drawt den Spieler

@@ -27,7 +27,7 @@ public:
 	double height();
 	void set_pos_left();
 	void set_pos_right();
-	bool reached_finish(double posx, double posy,bool won);
+	bool reached_finish(double posx, double posy);
 	void finished(int64_t score);
 	
 };

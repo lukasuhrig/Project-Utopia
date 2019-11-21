@@ -265,9 +265,7 @@ public:
 		
 				if (input().down(Gosu::KB_SPACE) == true) //Taste SPACE
 				{
-				
-					//SHOOT
-
+					//player.shoot();
 				}
 
 				if (input().down(Gosu::KB_D) == true && input().down(Gosu::KB_A) == false) //Taste D und nicht Taste A

@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "Player.h"
 
+
 bool Player::direction() const
 {
 	return this->lookingRight;
@@ -60,33 +61,11 @@ void Player::jumpposition() //setzt die Sprungfunktion
 	jump_y = pos_y;
 }
 
-void Player::shoot() //NICHT FERTIG!
+void Player::shoot() 
 {
 	shooting = true;
 
-	if (shooting == true)
-	{
-		if (lookingRight == true) //wenn Spieler nach rechts schaut
-		{
-			shoot1_image.draw_rot((this->pos_x + 10), this->pos_y, Z_PLAYER,
-				0,
-				0.5,
-				1,
-				0.2, //Skalierung X
-				0.2 //Skalierung Y
-			);
-		}
-		else if (lookingRight == false) //wenn Spieler nach links schaut
-		{
-			shoot1_image.draw_rot((this->pos_x - 10), this->pos_y, Z_PLAYER,
-				0,
-				0.5,
-				1,
-				0.2, //Skalierung X
-				0.2 //Skalierung Y
-			);
-		}
-	}
+	//If 1 Sekunde rum -> shooting = false
 
 }
 
@@ -111,6 +90,29 @@ void Player:: draw() const //drawt den Spieler
 			0.2, //Skalierung Charakter X
 			0.2 //Skalierung Charakter Y
 		);
+	}
+	if (this->shooting == true)
+	{
+		if (lookingRight == true) //wenn Spieler nach rechts schaut
+		{
+			shoot1_image.draw_rot((this->pos_x + 25), (this->pos_y - 35), Z_PLAYER,
+				0,
+				0,
+				0.5,
+				0.7, //Skalierung X
+				0.7 //Skalierung Y
+			);
+		}
+		else if (lookingRight == false) //wenn Spieler nach links schaut
+		{
+			shoot1_image.draw_rot((this->pos_x - 25), (this->pos_y - 35), Z_PLAYER,
+				0,
+				1,
+				0.5,
+				0.7, //Skalierung X
+				0.7 //Skalierung Y
+			);
+		}
 	}
 }
 void Player:: set_pos(double x, double y) //setzt die Position vom Spieler

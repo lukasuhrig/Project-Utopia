@@ -10,9 +10,6 @@ class Pet
 
 	Vector2 petPos;
 
-	//double pos_x;
-	//double pos_y;
-
 	bool movingUp;
 
 	bool idle;
@@ -43,7 +40,7 @@ public:
 
 	void update(const bool &lookingRight, const  double &player_x, const double &player_y, const bool &playerIdle);
 
-
+	void reset(const bool& lookingRight, const  double& player_x, const double& player_y);
 
 };
 

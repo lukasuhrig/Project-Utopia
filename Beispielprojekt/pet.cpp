@@ -74,7 +74,7 @@ bool Pet::inCorrectPos(const double& player_x, const double& player_y, const boo
 {
 	if (lookingRight == true)
 	{
-		if ((this->petPos.X == (player_x - 80.0)) && (this->petPos.Y > (player_y - 85)) && (this->petPos.Y < (player_y - 75)))
+		if ((this->petPos.X <= (player_x - 79.0)) && ((this->petPos.X >= (player_x - 81.0)) && (this->petPos.Y >= (player_y - 85)) && (this->petPos.Y <= (player_y - 75))))
 		{
 			return true;
 		}
@@ -85,7 +85,7 @@ bool Pet::inCorrectPos(const double& player_x, const double& player_y, const boo
 	}
 	else if (lookingRight == false)
 	{
-		if ((this->petPos.X == (player_x + 80.0)) && (this->petPos.Y > (player_y - 85)) && (this->petPos.Y < (player_y - 75)))
+		if ((this->petPos.X >= (player_x + 79.0)) && (this->petPos.X <= (player_x + 81)) && (this->petPos.Y >= (player_y - 85)) && (this->petPos.Y <= (player_y - 75)))
 		{
 			return true;
 		}
@@ -99,29 +99,26 @@ bool Pet::inCorrectPos(const double& player_x, const double& player_y, const boo
 
 void Pet::idleAnim(const double& player_x, const double& player_y, const bool& lookingRight)
 {
-	if (inCorrectPos(player_x, player_y, lookingRight))
+	if (lookingRight == true)
 	{
-		if (lookingRight == true)
+		if ((this->petPos.X == (player_x - 80)) && (this->petPos.Y == (player_y - 85)))
 		{
-			if ((this->petPos.X == (player_x - 80)) && (this->petPos.Y == (player_y - 85)))
-			{
-				movingUp = false;
-			}
-			else if ((this->petPos.X == (player_x - 80)) && (this->petPos.Y == (player_y - 75)))
-			{
-				movingUp = true;
-			}
+			movingUp = false;
 		}
-		else if (lookingRight == false)
+		else if ((this->petPos.X == (player_x - 80)) && (this->petPos.Y == (player_y - 75)))
 		{
-			if ((this->petPos.X == (player_x + 80)) && (this->petPos.Y == (player_y - 85)))
-			{
-				movingUp = false;
-			}
-			else if ((this->petPos.X == (player_x + 80)) && (this->petPos.Y == (player_y - 75)))
-			{
-				movingUp = true;
-			}
+			movingUp = true;
+		}
+	}
+	else if (lookingRight == false)
+	{
+		if ((this->petPos.X == (player_x + 80)) && (this->petPos.Y == (player_y - 85)))
+		{
+			movingUp = false;
+		}
+		else if ((this->petPos.X == (player_x + 80)) && (this->petPos.Y == (player_y - 75)))
+		{
+			movingUp = true;
 		}
 	}
 
@@ -149,30 +146,47 @@ void Pet::moveTo(Vector2& direction_n) //Einheitsvektor, bewegt in Richtung X & 
 
 void Pet::update(const bool& lookingRight, const  double& player_x, const double& player_y, const bool &playerIdle)
 {
-	Vector2 playerPosition;
-
-	if (lookingRight == true)
-	{
-		playerPosition.X = float(player_x - 80);
-		playerPosition.Y = float(player_y - 80);
-	}
-	else if (lookingRight == false)
-	{
-		playerPosition.X = float(player_x + 80);
-		playerPosition.Y = float(player_y - 80);
-	}
-
-	Vector2 direction = (playerPosition - petPos);
-	direction.Normalize();
-
-//	Vector2 direction = Normalize(playerPosition - petPos); //Einheitsvektor
-
-
 	if ((inCorrectPos(player_x, player_y, lookingRight) == false)) //wenn Pos nicht korrekt dann bewegen
 	{
+		Vector2 playerPosition;
+
+		if (lookingRight == true)
+		{
+			playerPosition.X = float(player_x - 80);
+			playerPosition.Y = float(player_y - 80);
+		}
+		else if (lookingRight == false)
+		{
+			playerPosition.X = float(player_x + 80);
+			playerPosition.Y = float(player_y - 80);
+		}
+
+		Vector2 direction = (playerPosition - petPos);
+		direction.Normalize();
+
+
 		moveTo(direction); //Bewegung in Richtung
 	}
 
 	//idleAnim(player_x, player_y, lookingRight); //Idle Animation funktioniert noch nicht
+
+}
+
+void Pet::reset(const bool& lookingRight, const  double& player_x, const double& player_y)
+{
+	if (lookingRight == true)
+	{
+		this->petPos.X = (player_x - 80);
+		this->petPos.Y = (player_y - 80);
+	}
+	else if (lookingRight == false)
+	{
+		this->petPos.X = (player_x + 80);
+		this->petPos.Y = (player_y - 80);
+	}
+
+	this->idle = true;
+
+	this->movingUp = false;
 
 }

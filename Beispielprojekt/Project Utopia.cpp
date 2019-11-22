@@ -137,7 +137,7 @@ public:
 	{
 		set_caption("Project Utopia");
 
-		player.set_pos(150, ground.get_Ground());
+		player.set_pos(400, ground.get_Ground());
 		pet_1.set_pos((player.actual_pos_x() - 80), (player.actual_pos_y() - 80));
 
 		background.set_pos(300, ground.get_Ground());
@@ -1025,46 +1025,38 @@ public:
 
 		if (finish_1.at(0).reached_finish(player.actual_pos_x(), player.actual_pos_y())&&game.get_Level(1)) {
 			game.set_wonLevel(1,true);
-			game.set_Level(1, false);
+			
 		}
 		if (finish_2.at(0).reached_finish(player.actual_pos_x(), player.actual_pos_y()) && game.get_Level(2)) {
 			game.set_wonLevel(2, true);
-			game.set_Level(2, false);
 
 		}
 		if (finish_3.at(0).reached_finish(player.actual_pos_x(), player.actual_pos_y()) && game.get_Level(3)) {
 			game.set_wonLevel(3, true);
-			game.set_Level(3, false);
 
 		}
 		if (finish_4.at(0).reached_finish(player.actual_pos_x(), player.actual_pos_y()) && game.get_Level(4)) {
 			game.set_wonLevel(4, true);
-			game.set_Level(4, false);
 
 		}
 		if (finish_5.at(0).reached_finish(player.actual_pos_x(), player.actual_pos_y()) && game.get_Level(5)) {
 			game.set_wonLevel(5, true);
-			game.set_Level(5, false);
 
 		}
 		if (finish_6.at(0).reached_finish(player.actual_pos_x(), player.actual_pos_y()) && game.get_Level(6)) {
 			game.set_wonLevel(6, true);
-			game.set_Level(6, false);
 
 		}
 		if (finish_7.at(0).reached_finish(player.actual_pos_x(), player.actual_pos_y()) && game.get_Level(7)) {
 			game.set_wonLevel(7, true);
-			game.set_Level(7, false);
 
 		}
 		if (finish_8.at(0).reached_finish(player.actual_pos_x(), player.actual_pos_y()) && game.get_Level(8)) {
 			game.set_wonLevel(8, true);
-			game.set_Level(8, false);
 
 		}
 		if (finish_9.at(0).reached_finish(player.actual_pos_x(), player.actual_pos_y()) && game.get_Level(9)) {
 			game.set_wonLevel(8, true);
-			game.set_Level(9, false);
 
 		}
 		//Berechnet FPS
@@ -1172,39 +1164,39 @@ public:
 				finish_9.at(0).draw_finish();
 			}
 		
-		if (finish_1.at(0).reached_finish(player.actual_pos_x(), player.actual_pos_y())&&menuing==false)  {
+		if (finish_1.at(0).reached_finish(player.actual_pos_x(), player.actual_pos_y())&&game.get_Level(1)&&menuing==false)  {
 			finish_1.at(0).finished(player.get_score());
 			
 		}
-		if (finish_2.at(0).reached_finish(player.actual_pos_x(), player.actual_pos_y()) && menuing == false) {
+		if (finish_2.at(0).reached_finish(player.actual_pos_x(), player.actual_pos_y()) && game.get_Level(2) && menuing == false) {
 			finish_2.at(0).finished(player.get_score());
 		
 		}
-		if (finish_3.at(0).reached_finish(player.actual_pos_x(), player.actual_pos_y()) && menuing == false) {
+		if (finish_3.at(0).reached_finish(player.actual_pos_x(), player.actual_pos_y()) && game.get_Level(3) && menuing == false) {
 			finish_3.at(0).finished(player.get_score());
 
 		}
-		if (finish_4.at(0).reached_finish(player.actual_pos_x(), player.actual_pos_y()) && menuing == false) {
+		if (finish_4.at(0).reached_finish(player.actual_pos_x(), player.actual_pos_y()) && game.get_Level(4) && menuing == false) {
 			finish_4.at(0).finished(player.get_score());
 
 		}
-		if (finish_5.at(0).reached_finish(player.actual_pos_x(), player.actual_pos_y()) && menuing == false) {
+		if (finish_5.at(0).reached_finish(player.actual_pos_x(), player.actual_pos_y()) && game.get_Level(5) && menuing == false) {
 			finish_5.at(0).finished(player.get_score());
 
 		}
-		if (finish_6.at(0).reached_finish(player.actual_pos_x(), player.actual_pos_y()) && menuing == false) {
+		if (finish_6.at(0).reached_finish(player.actual_pos_x(), player.actual_pos_y()) && game.get_Level(6) && menuing == false) {
 			finish_6.at(0).finished(player.get_score());
 
 		}
-		if (finish_7.at(0).reached_finish(player.actual_pos_x(), player.actual_pos_y()) && menuing == false) {
+		if (finish_7.at(0).reached_finish(player.actual_pos_x(), player.actual_pos_y()) && game.get_Level(7)&&menuing == false) {
 			finish_7.at(0).finished(player.get_score());
 
 		}
-		if (finish_8.at(0).reached_finish(player.actual_pos_x(), player.actual_pos_y()) && menuing == false) {
+		if (finish_8.at(0).reached_finish(player.actual_pos_x(), player.actual_pos_y()) && game.get_Level(8)&&menuing == false) {
 			finish_8.at(0).finished(player.get_score());
 
 		}
-		if (finish_9.at(0).reached_finish(player.actual_pos_x(), player.actual_pos_y())&&menuing==false ) {
+		if (finish_9.at(0).reached_finish(player.actual_pos_x(), player.actual_pos_y()) && game.get_Level(9) &&menuing==false ) {
 			finish_9.at(0).finished(player.get_score());
 		}
 	

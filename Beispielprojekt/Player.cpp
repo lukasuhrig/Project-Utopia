@@ -169,5 +169,5 @@ void Player::reset(double ground) {
 	health = 100.0;
 	lookingRight = true;
 	idle = true;
-	set_pos(150, ground);
+	set_pos(400, ground);
 }

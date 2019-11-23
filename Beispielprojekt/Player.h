@@ -28,6 +28,7 @@ class Player
 	double jump_y;
 	double gravity = 1000.0;
 	bool jumping=false;
+	bool dropping = false;
 	double droptime;
 	Ground ground;
 
@@ -63,12 +64,13 @@ public:
 	void resetJumpTime();
 	void jumpposition();
 	void drop();
+	bool get_drop();
 	double get_jumpposition();
 	bool get_jump();
 	double get_jumptime();
 	void score_draw();
 	void score_set_down(double tiime);
-	bool topBlock(std::vector<Blocks> Blockvec, uint16_t i);
+	bool topBlock(std::vector<Blocks> blockvec, int16_t i);
 	int64_t get_score();
 	void reset(double ground);
 };

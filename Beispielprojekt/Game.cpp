@@ -1,7 +1,7 @@
 #include "stdafx.h"
 #include "Game.h"
 
-
+//**********************  LEVELMANAGMENT  ***************
 void Game::set_Level(int16_t lvl, bool b) {
 	switch (lvl) {
 	case 1: {Level1 = b; break; }
@@ -15,19 +15,7 @@ void Game::set_Level(int16_t lvl, bool b) {
 	case 9: {Level9 = b; break; }
 	}
 }
-void Game::set_wonLevel(int16_t lvl, bool b) {
-	switch (lvl) {
-	case 1: {wonLevel1 = b; break; }
-	case 2: {wonLevel2 = b; break; }
-	case 3: {wonLevel3 = b; break; }
-	case 4: {wonLevel4 = b; break; }
-	case 5: {wonLevel5 = b; break; }
-	case 6: {wonLevel6 = b; break; }
-	case 7: {wonLevel7 = b; break; }
-	case 8: {wonLevel8 = b; break; }
-	case 9: {wonLevel9 = b; break; }
-	}
-}
+
 bool Game::get_Level(int16_t lvl) {
 	switch (lvl) {
 	case 1: {return Level1; break; }
@@ -41,6 +29,21 @@ bool Game::get_Level(int16_t lvl) {
 	case 9: {return Level9; break; }
 	}
 }
+
+void Game::set_wonLevel(int16_t lvl, bool b) {
+	switch (lvl) {
+	case 1: {wonLevel1 = b; break; }
+	case 2: {wonLevel2 = b; break; }
+	case 3: {wonLevel3 = b; break; }
+	case 4: {wonLevel4 = b; break; }
+	case 5: {wonLevel5 = b; break; }
+	case 6: {wonLevel6 = b; break; }
+	case 7: {wonLevel7 = b; break; }
+	case 8: {wonLevel8 = b; break; }
+	case 9: {wonLevel9 = b; break; }
+	}
+}
+
 bool Game::get_wonLevel(int64_t lvl) {
 	switch (lvl) {
 	case 1: {return wonLevel1; break; }

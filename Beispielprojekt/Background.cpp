@@ -1,15 +1,8 @@
 #include "stdafx.h"
 #include "Background.h"
-void Background:: move_left()
-{
-	pos_x = pos_x - 10;					//Bewegen des HIntergrundes nach links -> wenn sich PLayer nach rechts bewegt
-}
-void Background::move_right()
-{
-	pos_x = pos_x + 10;					//Bewegen des HIntergrundes nach rechts -> wenn sich PLayer nach links bewegt
-}
 
 
+//*****************************  DRAW  ********************
 void Background::draw()
 {
 	if (int32_t(pos_x) % (2 * background_image.width()) == 0 && pos_x != 0) {
@@ -24,11 +17,25 @@ void Background::draw()
 	background_image.draw_rot(pos_x + shift + (3.0 * double(background_image.width())), pos_y, Z_BACKGROUND, 0.0, 0.5, 1);
 	// verschiedene Hintergruünde, die die Lücken decken sollen
 }
+
+//***********************  POSITION  *********************
+void Background::move_left()
+{
+	pos_x = pos_x - 10;					//Bewegen des HIntergrundes nach links -> wenn sich PLayer nach rechts bewegt
+}
+
+void Background::move_right()
+{
+	pos_x = pos_x + 10;					//Bewegen des HIntergrundes nach rechts -> wenn sich PLayer nach links bewegt
+}
+
 void Background::set_pos(double x, double y)
 {
 	pos_x = x;							//setzen der x Position des Hintergrundes 
 	pos_y = y;							//setzen der y Position des Hintergrundes
 }
+
+//**********************  RESET  ************************
 void Background::reset(double ground) {
 	pos_x = 300;
 	pos_y = ground;

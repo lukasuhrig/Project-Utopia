@@ -1,6 +1,10 @@
 #include "stdafx.h"
 #include "Ground.h"
 
+
+
+
+//*****************  DRAW  ********************
 void Ground::draw() {
 	gnd.draw_quad//drawt Boden
 	(
@@ -11,6 +15,8 @@ void Ground::draw() {
 		Z_BACKGROUND
 	);
 }
+
+//****************  GROUNDHEIGHT  **************
 double Ground::get_Ground() {
 	return ground;
 }

@@ -1,6 +1,19 @@
 #include "stdafx.h"
 #include "Player.h"
+#include "interval.h"
 
+interval interval_; //für Zeitberechnung
+
+void Player::stopShooting()
+{
+	if (interval_.value() > 800) //alle 0,8s stoppt er
+	{
+		interval_ = interval();
+
+		this->shooting = false;
+
+	}
+}
 
 //**************************  DRAW  **********************
 void Player::draw() const //drawt den Spieler
@@ -29,7 +42,7 @@ void Player::draw() const //drawt den Spieler
 	{
 		if (lookingRight == true) //wenn Spieler nach rechts schaut
 		{
-			shoot1_image.draw_rot((this->pos_x + 25), (this->pos_y - 35), Z_PLAYER,
+			shoot_image.at(0).draw_rot((this->pos_x + 22), (this->pos_y - 35), Z_PLAYER,
 				0,
 				0,
 				0.5,
@@ -39,7 +52,7 @@ void Player::draw() const //drawt den Spieler
 		}
 		else if (lookingRight == false) //wenn Spieler nach links schaut
 		{
-			shoot1_image.draw_rot((this->pos_x - 25), (this->pos_y - 35), Z_PLAYER,
+			shoot_image.at(1).draw_rot((this->pos_x - 22), (this->pos_y - 35), Z_PLAYER,
 				0,
 				1,
 				0.5,
@@ -165,9 +178,6 @@ double Player::actual_pos_y() const //returned die y Position des Spieler
 void Player::shoot()
 {
 	shooting = true;
-
-
-	//so etwas wie "If 1 Sekunde rum -> shooting = false"
 }
 
 //***************************  PET  **********************
@@ -206,3 +216,11 @@ void Player::reset(double ground) {
 	idle = true;
 	set_pos(400, ground);
 }
+
+
+void Player::update()
+{
+	stopShooting();
+
+	//mehr sachen die bei update rein passen würden
+}	

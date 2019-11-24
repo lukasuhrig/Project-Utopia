@@ -9,8 +9,7 @@
 class Player
 {
 	std::vector<Gosu::Image> character;
-
-	Gosu::Image shoot1_image;
+	std::vector<Gosu::Image> shoot_image;
 
 	double pos_x;
 	double pos_y;
@@ -35,7 +34,7 @@ class Player
 	const double block_tolerance=10.0;
 
 public:
-	Player(): score_draw1(20), shoot1_image("shoot1.png")
+	Player(): score_draw1(20)
 	{
 		pos_x = pos_y = rot =jumptime=droptime=0;
 		score = 20000;
@@ -45,6 +44,7 @@ public:
 		idle = true;
 		shooting = false;
 		character = Gosu::load_tiles("player_blue.png", 400, 483);
+		shoot_image = Gosu::load_tiles("shoot_v1.png", 100, 31);
 	}
 	void stop();
 	void turn_left();
@@ -73,4 +73,7 @@ public:
 	bool topBlock(std::vector<Blocks> blockvec, int16_t i);
 	int64_t get_score();
 	void reset(double ground);
+
+	void update();
+	void stopShooting();
 };

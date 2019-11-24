@@ -15,7 +15,6 @@
 
 #include "m_time.h"
 
-#include <ctime>
 
 #include "ZOrder.h"
 #include "Player.h"
@@ -265,7 +264,7 @@ public:
 		
 				if (input().down(Gosu::KB_SPACE) == true) //Taste SPACE
 				{
-					//player.shoot();
+					player.shoot();
 				}
 
 				if (input().down(Gosu::KB_D) == true && input().down(Gosu::KB_A) == false) //Taste D und nicht Taste A
@@ -1062,6 +1061,9 @@ public:
 		//Berechnet FPS
 		fps.update();
 		zeit.milliSecond();
+
+		//update für player
+		player.update();
 	}
 	void draw() override //ca. 60x pro Sekunde
 	{	

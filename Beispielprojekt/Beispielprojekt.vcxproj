@@ -215,7 +215,7 @@
     <Image Include="pet_1.png" />
     <Image Include="player_blue.png" />
     <Image Include="pointerimg.png" />
-    <Image Include="shoot1.png" />
+    <Image Include="shoot_v1.png" />
     <Image Include="Tür.png" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

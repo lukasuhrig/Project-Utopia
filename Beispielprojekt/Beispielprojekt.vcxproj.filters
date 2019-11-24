@@ -169,7 +169,7 @@
     <Image Include="background_v2.png">
       <Filter>Resource Files</Filter>
     </Image>
-    <Image Include="shoot1.png">
+    <Image Include="shoot_v1.png">
       <Filter>Resource Files</Filter>
     </Image>
   </ItemGroup>

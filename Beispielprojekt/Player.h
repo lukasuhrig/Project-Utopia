@@ -65,6 +65,7 @@ public:
 	void jumpposition();
 	void drop();
 	bool get_drop();
+	void set_drop(bool b);
 	double get_jumpposition();
 	bool get_jump();
 	double get_jumptime();

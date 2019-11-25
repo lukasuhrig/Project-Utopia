@@ -123,8 +123,8 @@ void Player::resetJumpTime() //setzt die Sprungzeit wieder auf null
 {
 	jumptime = 0;
 	droptime = 0;
-	jumping = false;
 	dropping = false;
+	jumping = false;
 	free = false;
 }
 
@@ -146,6 +146,9 @@ void Player::drop() //Fallen
 
 bool Player::get_drop() {
 	return dropping;
+}
+void Player::set_drop(bool b) {
+	dropping = b;
 }
 
 //***************************  COLLISION  ****************

@@ -305,7 +305,7 @@ public:
 				{
 					player.stop();
 				}
-				if (input().down(Gosu::KB_W) == true || player.get_jump() == true) //wenn Taste W gedrückt wurde, oder die Sprungfunktion noch nicht beendet wurde
+				if ((input().down(Gosu::KB_W) == true || player.get_jump() == true)/* && player.get_drop()==false*/) //wenn Taste W gedrückt wurde, oder die Sprungfunktion noch nicht beendet wurde
 				{
 					player.jump();//Spieler läuft Sprungfunktion ab
 				}
@@ -317,23 +317,24 @@ public:
 				{
 					player.set_idle(false);
 				}
-				if (player.actual_pos_y() >= (ground.get_Ground() - 1)) //Wenn Spieler den Boden wieder berührt
+				if (player.actual_pos_y() >= (ground.get_Ground() - 5)) //Wenn Spieler den Boden wieder berührt
 				{
 					player.resetJumpTime();//Resete die Sprungdauer
 				}
-				if (player.topBlock(normal_block1, 0) && player.get_jumptime() > 0.5)//sodass er nicht gleich mit der Sprungfunktion ab dem block weitermacht, sondern erst landen muss
+				if (player.topBlock(normal_block1, 0) && (player.get_jumptime() > 0.5 || player.get_drop()==true))//sodass er nicht gleich mit der Sprungfunktion ab dem block weitermacht, sondern erst landen muss
 				{
 					player.set_pos(player.actual_pos_x(), normal_block1.at(0).y_pos()); //setzt den Spieler ordentlich auf den Block
 					player.resetJumpTime();//Resete die Sprungdauer
 					player.jumpposition();//Setzt die Absrpunghöhe auf Höhe des Blockes
 				}
-				if (player.topBlock(normal_block1, 1) && player.get_jumptime() > 0.5)//sodass er nicht gleich mit der Sprungfunktion ab dem block weitermacht, sondern erst landen muss
+				if (player.topBlock(normal_block1, 1) && (player.get_jumptime() > 0.5 || player.get_drop() == true))//sodass er nicht gleich mit der Sprungfunktion ab dem block weitermacht, sondern erst landen muss
 				{
 					player.set_pos(player.actual_pos_x(), normal_block1.at(1).y_pos()); //setzt den Spieler ordentlich auf den Block
 					player.resetJumpTime();//Resete die Sprungdauer
 					player.jumpposition();//Setzt die Absrpunghöhe auf Höhe des Blockes
+
 				}
-				if (player.topBlock(normal_block1, 0) == false && player.topBlock(normal_block1, 1) == false && player.get_jump() == false) //und der Spieler nicht abspringen will
+				if (player.topBlock(normal_block1, 0) == false && player.topBlock(normal_block1, 1) == false && player.get_jump() == false && player.actual_pos_y()<ground.get_Ground()+3) //und der Spieler nicht abspringen will
 				{
 					player.drop(); //Spieler fällt
 				}
@@ -341,6 +342,7 @@ public:
 				{
 					player.set_pos(player.actual_pos_x(), ground.get_Ground());
 					player.jumpposition();
+					
 				}
 
 				pet_1.update(player.direction(), player.actual_pos_x(), player.actual_pos_y(), player.isIdle()); //PET Animation

@@ -160,6 +160,7 @@
   <ItemGroup>
     <ClInclude Include="Background.h" />
     <ClInclude Include="Block.h" />
+    <ClInclude Include="character.h" />
     <ClInclude Include="FPS.h" />
     <ClInclude Include="Cloud.h" />
     <ClInclude Include="Animation.h" />
@@ -178,6 +179,7 @@
     <ClInclude Include="targetver.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="character.cpp" />
     <ClCompile Include="interval.cpp" />
     <ClCompile Include="m_time.cpp" />
     <ClCompile Include="pet.cpp" />

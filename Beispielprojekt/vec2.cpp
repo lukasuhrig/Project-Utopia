@@ -21,7 +21,7 @@ Vector2::Vector2()
 // ****************************************************************
 // * Constructor.  Initializes both components to value.
 // ****************************************************************
-Vector2::Vector2(float value)
+Vector2::Vector2(double value)
 {
 	X = value;
 	Y = value;
@@ -31,7 +31,7 @@ Vector2::Vector2(float value)
 // * Constructor.  Initializes the X component to value1,
 // * the Y component to value2
 // ****************************************************************
-Vector2::Vector2(float value1, float value2)
+Vector2::Vector2(double value1, double value2)
 {
 	X = value1;
 	Y = value2;
@@ -75,7 +75,7 @@ Vector2 Vector2::operator- (Vector2 param)
 // *
 // * Returns: The product of the current instance and param.
 // ****************************************************************
-Vector2 Vector2::operator* (float param)
+Vector2 Vector2::operator* (double param)
 {
 	Vector2 temp;
 
@@ -107,7 +107,7 @@ Vector2 Vector2::operator* (Vector2 param)
 // *
 // * Returns: The quotient of the current instance and param.
 // ****************************************************************
-Vector2 Vector2::operator/ (float param)
+Vector2 Vector2::operator/ (double param)
 {
 	Vector2 temp;
 
@@ -190,7 +190,7 @@ Vector2 Vector2::Subtract(Vector2 value1, Vector2 value2)
 // *
 // * Returns: The product of value and scaleFactor.
 // ****************************************************************
-Vector2 Vector2::Multiply(Vector2 value, float scaleFactor)
+Vector2 Vector2::Multiply(Vector2 value, double scaleFactor)
 {
 	Vector2 temp;
 
@@ -220,7 +220,7 @@ Vector2 Vector2::Multiply(Vector2 value1, Vector2 value2)
 // *
 // * Returns: The quotient of value and scaleFactor.
 // ****************************************************************
-Vector2 Vector2::Divide(Vector2 value, float scaleFactor)
+Vector2 Vector2::Divide(Vector2 value, double scaleFactor)
 {
 	Vector2 temp;
 
@@ -264,9 +264,9 @@ bool Vector2::Equals(Vector2 other)
 // * Returns: A float that represents the dot product of
 // *          value1 and value2.
 // ****************************************************************
-float Vector2::Dot(Vector2 value1, Vector2 value2)
+double Vector2::Dot(Vector2 value1, Vector2 value2)
 {
-	float temp;
+	double temp;
 
 	temp = (value1.X * value2.X) + (value1.Y * value2.Y);
 
@@ -278,7 +278,7 @@ float Vector2::Dot(Vector2 value1, Vector2 value2)
 // *
 // * Returns: Nothing.
 // ****************************************************************
-void Vector2::Scale(float scaleFactor)
+void Vector2::Scale(double scaleFactor)
 {
 	X *= scaleFactor;
 	Y *= scaleFactor;
@@ -407,7 +407,7 @@ Vector2 Vector2::Clamp(Vector2 value, Vector2 min, Vector2 max)
 // *
 // * Returns: The linear interpolation of the two vectors.
 // ****************************************************************
-Vector2 Vector2::Lerp(Vector2 value1, Vector2 value2, float amount)
+Vector2 Vector2::Lerp(Vector2 value1, Vector2 value2, double amount)
 {
 	Vector2 temp;
 
@@ -433,7 +433,7 @@ Vector2 Vector2::Lerp(Vector2 value1, Vector2 value2, float amount)
 // *
 // * Returns: Nothing.
 // ****************************************************************
-void Vector2::Rotate(float angle)
+void Vector2::Rotate(double angle)
 {
 	Vector2 temp(X, Y);
 	angle = (2 * PI) - angle;
@@ -454,7 +454,7 @@ void Vector2::Rotate(float angle)
 // *
 // * Returns: The rotated vector.
 // ****************************************************************
-Vector2 Vector2::Rotate(Vector2 value, float angle)
+Vector2 Vector2::Rotate(Vector2 value, double angle)
 {
 	Vector2 temp;
 	angle = (2 * PI) - angle;
@@ -471,7 +471,7 @@ Vector2 Vector2::Rotate(Vector2 value, float angle)
 // *
 // * Returns: Nothing.
 // ****************************************************************
-void Vector2::RotateAboutTarget(Vector2 target, float angle)
+void Vector2::RotateAboutTarget(Vector2 target, double angle)
 {
 	Vector2 temp;
 
@@ -489,7 +489,7 @@ void Vector2::RotateAboutTarget(Vector2 target, float angle)
 // *
 // * Returns: The rotated vector.
 // ****************************************************************
-Vector2 Vector2::RotateAboutTarget(Vector2 source, Vector2 target, float angle)
+Vector2 Vector2::RotateAboutTarget(Vector2 source, Vector2 target, double angle)
 {
 	Vector2 temp;
 
@@ -504,7 +504,7 @@ Vector2 Vector2::RotateAboutTarget(Vector2 source, Vector2 target, float angle)
 // *
 // * Returns: The length of the vector.
 // ****************************************************************
-float Vector2::Length()
+double Vector2::Length()
 {
 	return sqrt((X * X) + (Y * Y));
 }
@@ -515,9 +515,9 @@ float Vector2::Length()
 // *
 // * Returns: The length to the power of two of the vector.
 // ****************************************************************
-float Vector2::LengthSquared()
+double Vector2::LengthSquared()
 {
-	float temp;
+	double temp;
 
 	temp = sqrt((X * X) + (Y * Y));
 

@@ -20,7 +20,7 @@ void Player::draw() const //drawt den Spieler
 {
 	if (lookingRight == true) //wenn Spieler nach rechts schaut
 	{
-		character.at(1).draw_rot(this->charPos.X, this->charPos.Y, Z_PLAYER,
+		character_image.at(1).draw_rot(this->charPos.X, this->charPos.Y, Z_PLAYER,
 			0,
 			0.5,
 			1,
@@ -30,7 +30,7 @@ void Player::draw() const //drawt den Spieler
 	}
 	else if (lookingRight == false) //wenn Spieler nach links schaut
 	{
-		character.at(0).draw_rot(this->charPos.X, this->charPos.Y, Z_PLAYER,
+		character_image.at(0).draw_rot(this->charPos.X, this->charPos.Y, Z_PLAYER,
 			0,
 			0.5,
 			1,
@@ -64,11 +64,20 @@ void Player::draw() const //drawt den Spieler
 }
 
 double Player::height() {
-	return scale_y + character.at(0).height();
+	return scale_y + character_image.at(0).height();
 }
 
 double Player::width() {
-	return scale_x + character.at(0).width();
+	return scale_x + character_image.at(0).width();
+}
+
+bool Player::blockhit(std::vector<Blocks> blockvec, int16_t i) {
+	return(//HÖhe und Breite noch vom falschen block vermutlich
+		(this->getPos().Y + height()) >= blockvec.at(i).y_pos() && //Begrenzung nach oben
+		this->getPos().Y <= (blockvec.at(i).y_pos() + blockvec.at(i).height()) && //Begrenzung nach unten
+		(this->getPos().X + width()) >= (blockvec.at(i).x_pos()) && //Begrenzun nach links
+		this->getPos().X <= (blockvec.at(i).x_pos() + blockvec.at(i).width())
+		);
 }
 
 void Player::stop() //Spieler hält an

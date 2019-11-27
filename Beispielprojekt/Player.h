@@ -9,7 +9,7 @@
 
 class Player : public character
 {
-	std::vector<Gosu::Image> character;
+	std::vector<Gosu::Image> character_image;
 	std::vector<Gosu::Image> shoot_image;
 
 
@@ -48,7 +48,7 @@ public:
 		jump_y = ground.get_Ground();
 		health = 100.0;
 		shooting = false;
-		character = Gosu::load_tiles("player_blue.png", 400, 483);
+		character_image = Gosu::load_tiles("player_blue.png", 400, 483);
 		shoot_image = Gosu::load_tiles("shoot_v1.png", 100, 31);
 		
 	}
@@ -71,7 +71,12 @@ public:
 	void score_draw();
 	void score_set_down(double tiime);
 	bool topBlock(std::vector<Blocks> blockvec, int16_t i);
+
+	double width();
+	double height();
+
 	bool blockhit(std::vector<Blocks> blockvec, int16_t i);
+
 	int64_t get_score();
 	void reset(double ground);
 

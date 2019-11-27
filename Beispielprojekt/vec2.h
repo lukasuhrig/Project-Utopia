@@ -18,32 +18,32 @@ class Vector2
 {
 
 public:
-	float X, Y;
+	double X, Y;
 
 	Vector2();
-	Vector2(float);
-	Vector2(float, float);
+	Vector2(double);
+	Vector2(double, double);
 	~Vector2() {};
 
 	Vector2 operator + (Vector2);
 	Vector2 operator - (Vector2);
-	Vector2 operator * (float);
+	Vector2 operator * (double);
 	Vector2 operator * (Vector2);
-	Vector2 operator / (float);
+	Vector2 operator / (double);
 	Vector2 operator / (Vector2);
 	bool operator == (Vector2);
 	bool operator != (Vector2);
 
 	static Vector2 Add(Vector2, Vector2);
 	static Vector2 Subtract(Vector2, Vector2);
-	static Vector2 Multiply(Vector2, float);
+	static Vector2 Multiply(Vector2, double);
 	static Vector2 Multiply(Vector2, Vector2);
-	static Vector2 Divide(Vector2, float);
+	static Vector2 Divide(Vector2, double);
 	static Vector2 Divide(Vector2, Vector2);
 	bool Equals(Vector2);
 
-	static float Dot(Vector2, Vector2);
-	void Scale(float);
+	static double Dot(Vector2, Vector2);
+	void Scale(double);
 
 	void Normalize();
 
@@ -54,15 +54,15 @@ public:
 	static Vector2 Max(Vector2, Vector2);
 	static Vector2 Clamp(Vector2, Vector2, Vector2);
 
-	static Vector2 Lerp(Vector2, Vector2, float);
+	static Vector2 Lerp(Vector2, Vector2, double);
 
-	void Rotate(float);
-	static Vector2 Rotate(Vector2, float);
-	void RotateAboutTarget(Vector2, float);
-	static Vector2 RotateAboutTarget(Vector2, Vector2, float);
+	void Rotate(double);
+	static Vector2 Rotate(Vector2, double);
+	void RotateAboutTarget(Vector2, double);
+	static Vector2 RotateAboutTarget(Vector2, Vector2, double);
 
-	float Length();
-	float LengthSquared();
+	double Length();
+	double LengthSquared();
 
 	void Negate();
 

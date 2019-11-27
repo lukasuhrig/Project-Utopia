@@ -24,8 +24,8 @@ void Player::draw() const //drawt den Spieler
 			0,
 			0.5,
 			1,
-			0.2, //Skalierung Charakter X
-			0.2 //Skalierung Charakter Y
+			scale_x, //Skalierung Charakter X
+			scale_y //Skalierung Charakter Y
 		);
 	}
 	else if (lookingRight == false) //wenn Spieler nach links schaut
@@ -34,8 +34,8 @@ void Player::draw() const //drawt den Spieler
 			0,
 			0.5,
 			1,
-			0.2, //Skalierung Charakter X
-			0.2 //Skalierung Charakter Y
+			scale_x, //Skalierung Charakter X
+			scale_y //Skalierung Charakter Y
 		);
 	}
 	if (this->shooting == true)
@@ -61,6 +61,14 @@ void Player::draw() const //drawt den Spieler
 			);
 		}
 	}
+}
+
+double Player::height() {
+	return scale_y + character.at(0).height();
+}
+
+double Player::width() {
+	return scale_x + character.at(0).width();
 }
 
 void Player::stop() //Spieler hält an
@@ -130,10 +138,10 @@ void Player::set_drop(bool b) {
 //***************************  COLLISION  ****************
 bool Player::topBlock(std::vector<Blocks> blockvec, int16_t i) {
 
-	return(this->charPos.Y > (blockvec.at(i).y_pos() - block_tolerance) && //Begrenzung nach oben
-		this->charPos.Y < (blockvec.at(i).y_pos() + block_tolerance + blockvec.at(i).height()) && //Begrenzung nach unten
-		this->charPos.X >(blockvec.at(i).x_pos() - block_tolerance) && //Begrenzun nach links
-		this->charPos.X < (blockvec.at(i).x_pos() + blockvec.at(i).width() + block_tolerance));
+	return(this->getPos().Y > (blockvec.at(i).y_pos() - block_tolerance) && //Begrenzung nach oben
+		this->getPos().Y < (blockvec.at(i).y_pos() + block_tolerance + blockvec.at(i).height()) && //Begrenzung nach unten
+		this->getPos().X >(blockvec.at(i).x_pos() - block_tolerance) && //Begrenzun nach links
+		this->getPos().X < (blockvec.at(i).x_pos() + blockvec.at(i).width() + block_tolerance));
 }
 
 //***************************  SHOOT  ********************

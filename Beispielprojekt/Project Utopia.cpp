@@ -34,7 +34,7 @@ double position_in_window=400; // hier wird die Breite des Bildschirms bestimmt 
 const double DT = 100.0;
 bool menuing =true;
 bool backtomenu=false;
-
+bool nohit=true;
 
 bool won = false;
 bool won1= false;
@@ -74,7 +74,9 @@ public:
 
 	//Level1
 	std::vector<Blocks>normal_block1;
+	std::vector<Blocks>hit_block1;
 	std::vector<finish>finish_1;
+	Blocks Blog1_1;
 	Blocks Block1_1;
 	Blocks Block1_2;
 	finish finish1_1;
@@ -144,6 +146,8 @@ public:
 		//Level1
 		Block1_1.set_pos(100, 380, 0.3, 0.3);
 		Block1_2.set_pos(100, 180, 0.3, 0.3);
+		Blog1_1.set_pos(3000, 500, 0.3, 0.3);
+		hit_block1.push_back(Blog1_1);
 		normal_block1.push_back(Block1_1);
 		normal_block1.push_back(Block1_2);
 		finish1_1.set_pos(500, 500);
@@ -258,7 +262,7 @@ public:
 				player.shoot();
 			}
 
-			if (input().down(Gosu::KB_D) == true && input().down(Gosu::KB_A) == false) //Taste D und nicht Taste A
+			if (input().down(Gosu::KB_D) == true && input().down(Gosu::KB_A) == false&&nohit) //Taste D und nicht Taste A
 			{
 				//***************RECHTS*******************
 				if (player.getPos().X <= (width() - position_in_window))//wenn spieler in dem Feld ist, in dem er sich bewegen kann
@@ -271,6 +275,10 @@ public:
 					for(size_t i=0;i<normal_block1.size();i++)
 					{
 						normal_block1.at(i).set_pos_left(); 
+					}
+					for (size_t i = 0; i < hit_block1.size(); i++)
+					{
+						hit_block1.at(i).set_pos_left();
 					}
 					for (size_t i = 0; i < normal_block2.size(); i++)
 					{
@@ -319,7 +327,7 @@ public:
 				}
 
 			}
-			if (input().down(Gosu::KB_A) == true && input().down(Gosu::KB_D) == false) //Taste A und nicht Taste D
+			if (input().down(Gosu::KB_A) == true && input().down(Gosu::KB_D) == false&&nohit) //Taste A und nicht Taste D
 			{
 				//***************LINKS*******************
 				if (player.getPos().X >= position_in_window)//wenn spieler in dem Feld ist, in dem er sich bewegen kann
@@ -332,6 +340,10 @@ public:
 					for (size_t i = 0; i < normal_block1.size(); i++)
 					{
 						normal_block1.at(i).set_pos_right();
+					}
+					for (size_t i = 0; i < hit_block1.size(); i++)
+					{
+						hit_block1.at(i).set_pos_right();
 					}
 					for (size_t i = 0; i < normal_block2.size(); i++)
 					{
@@ -380,11 +392,7 @@ public:
 				}
 
 			}
-			if (input().down(Gosu::KB_A) == true && input().down(Gosu::KB_D) == true) // Wenn Taste A und D gedrückt werden, stoppt der Spieler
-			{
-				player.stop();
-			}
-			if ((input().down(Gosu::KB_W) == true || player.get_jump() == true)/* && player.get_drop()==false*/) //wenn Taste W gedrückt wurde, oder die Sprungfunktion noch nicht beendet wurde
+			if ((input().down(Gosu::KB_W) == true || player.get_jump() == true)) //wenn Taste W gedrückt wurde, oder die Sprungfunktion noch nicht beendet wurde
 			{
 				player.jump();//Spieler läuft Sprungfunktion ab
 			}
@@ -417,7 +425,15 @@ public:
 				}
 
 				menuing = false;
-		
+				
+				for (size_t i = 0; i < hit_block1.size(); i++) {
+					if (player.blockhit(hit_block1, i)) {
+						nohit=false;
+					}
+					else {
+						nohit = true;
+					}
+				}
 				
 				if (player.topBlock(normal_block1, 0) && (player.get_jumptime() > 0.5 || player.get_drop()==true))//sodass er nicht gleich mit der Sprungfunktion ab dem block weitermacht, sondern erst landen muss
 				{
@@ -651,6 +667,9 @@ public:
 			for (size_t i = 0; i < normal_block1.size(); i++) {
 				normal_block1.at(i).reset();
 			}
+			for (size_t i = 0; i < hit_block1.size(); i++) {
+				hit_block1.at(i).reset();
+			}
 			for (size_t i = 0; i < normal_block2.size(); i++) {
 				normal_block2.at(i).reset();
 			}
@@ -798,6 +817,9 @@ public:
 		if (game.get_Level(1) && menuing == false) {
 				for (size_t i = 0; i < normal_block1.size(); i++) {
 					normal_block1.at(i).draw_Blocks(0); //drawt einen Block
+				}
+				for (size_t i = 0; i < hit_block1.size(); i++) {
+					hit_block1.at(i).draw_Blocks(1); //drawt einen Block
 				}
 				finish_1.at(0).draw_finish();
 		}

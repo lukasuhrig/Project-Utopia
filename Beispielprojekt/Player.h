@@ -14,7 +14,8 @@ class Player
 	double pos_x;
 	double pos_y;
 	double rot;
-
+	const double scale_x=0.2;
+	const double scale_y=0.2;
 	bool shooting;
 
 	bool idle;
@@ -45,6 +46,7 @@ public:
 		shooting = false;
 		character = Gosu::load_tiles("player_blue.png", 400, 483);
 		shoot_image = Gosu::load_tiles("shoot_v1.png", 100, 31);
+		
 	}
 	void stop();
 	void turn_left();
@@ -57,6 +59,8 @@ public:
 
 	void jump();
 	void draw() const;
+	double height();
+	double width();
 	void set_pos(double x, double y);
 	double actual_pos_x() const;
 	double actual_pos_y() const;
@@ -72,6 +76,7 @@ public:
 	void score_draw();
 	void score_set_down(double tiime);
 	bool topBlock(std::vector<Blocks> blockvec, int16_t i);
+	bool blockhit(std::vector<Blocks> blockvec, int16_t i);
 	int64_t get_score();
 	void reset(double ground);
 

@@ -24,8 +24,8 @@ void Player::draw() const //drawt den Spieler
 			0,
 			0.5,
 			1,
-			0.2, //Skalierung Charakter X
-			0.2 //Skalierung Charakter Y
+			scale_x, //Skalierung Charakter X
+			scale_y //Skalierung Charakter Y
 		);
 	}
 	else if (lookingRight == false) //wenn Spieler nach links schaut
@@ -34,8 +34,8 @@ void Player::draw() const //drawt den Spieler
 			0,
 			0.5,
 			1,
-			0.2, //Skalierung Charakter X
-			0.2 //Skalierung Charakter Y
+			scale_x, //Skalierung Charakter X
+			scale_y //Skalierung Charakter Y
 		);
 	}
 	if (this->shooting == true)
@@ -61,6 +61,14 @@ void Player::draw() const //drawt den Spieler
 			);
 		}
 	}
+}
+
+double Player::height() {
+	return scale_y + character.at(0).height();
+}
+
+double Player::width() {
+	return scale_x + character.at(0).width();
 }
 
 //***************************  MOVE  *********************
@@ -159,6 +167,16 @@ bool Player::topBlock(std::vector<Blocks> blockvec, int16_t i) {
 		pos_x >(blockvec.at(i).x_pos() - block_tolerance) && //Begrenzun nach links
 		pos_x < (blockvec.at(i).x_pos() + blockvec.at(i).width() + block_tolerance));
 }
+
+bool Player:: blockhit(std::vector<Blocks> blockvec, int16_t i) {
+	return(//HÖhe und Breite noch vom falschen block vermutlich
+		(pos_y + height())>= blockvec.at(i).y_pos() && //Begrenzung nach oben
+		pos_y <= (blockvec.at(i).y_pos() + blockvec.at(i).height()) && //Begrenzung nach unten
+		(pos_x + width())>= (blockvec.at(i).x_pos()) && //Begrenzun nach links
+		pos_x <= (blockvec.at(i).x_pos() + blockvec.at(i).width())
+		);
+}
+
 
 //***************************  POSITION  *****************
 void Player::set_pos(double x, double y) //setzt die Position vom Spieler

@@ -9,7 +9,9 @@ class Blocks
 {
 	std::vector<Gosu::Image> Block; // hier werden alle Images gespeichert, die Images sollten eine ähnliche größe haben.
 	double pos_x=0.0;
+	double urpos_x = 0.0;
 	double pos_y=0.0;
+	double urpos_y = 0.0;
 	double block_look=0.0;		// Nummer des Images welches man aufrufen will
 	double scale_x;
 	double scale_y;
@@ -32,5 +34,5 @@ public:
 	double height();
 	void set_pos_left();
 	void set_pos_right();
-
+	void reset();
 };

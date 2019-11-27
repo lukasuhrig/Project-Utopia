@@ -27,8 +27,8 @@ void finish::finished(int64_t score) {
 
 //****************  POSITION  ****************
 void finish::set_pos(double x, double y){
-	pos_x = x;
-	pos_y = y;
+	pos_x = urpos_x=x;
+	pos_y = urpos_y= y;
 
 }
 
@@ -46,6 +46,11 @@ void finish::set_pos_left() {
 
 void finish::set_pos_right() {
 	pos_x = pos_x + 10.0;
+}
+
+void finish::reset() {
+	pos_x = urpos_x;
+	pos_y = urpos_y;
 }
 
 //****************  DIMENSIONS  ****************

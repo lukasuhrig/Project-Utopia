@@ -19,8 +19,8 @@ void Blocks::draw_Blocks(int a) {
 
 //****************  POSITION  ***********
 void Blocks:: set_pos(double x, double y, double scal_x, double scal_y) {
-	pos_x = x;
-	pos_y = y;
+	pos_x = urpos_x = x;
+	pos_y = urpos_y = y;
 	scale_x = scal_x;
 	scale_y = scal_y;
 };
@@ -41,6 +41,11 @@ double Blocks::x_pos() {
 
 double Blocks::y_pos() {
 	return pos_y;
+}
+
+void Blocks::reset() {
+	pos_x = urpos_x;
+	pos_y = urpos_y;
 }
 
 //****************  DIMENSIONS  ********

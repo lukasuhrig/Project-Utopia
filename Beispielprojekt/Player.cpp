@@ -20,7 +20,7 @@ void Player::draw() const //drawt den Spieler
 {
 	if (lookingRight == true) //wenn Spieler nach rechts schaut
 	{
-		character.at(1).draw_rot(this->pos_x, this->pos_y, Z_PLAYER,
+		character.at(1).draw_rot(this->charPos.X, this->charPos.Y, Z_PLAYER,
 			0,
 			0.5,
 			1,
@@ -30,7 +30,7 @@ void Player::draw() const //drawt den Spieler
 	}
 	else if (lookingRight == false) //wenn Spieler nach links schaut
 	{
-		character.at(0).draw_rot(this->pos_x, this->pos_y, Z_PLAYER,
+		character.at(0).draw_rot(this->charPos.X, this->charPos.Y, Z_PLAYER,
 			0,
 			0.5,
 			1,
@@ -42,7 +42,7 @@ void Player::draw() const //drawt den Spieler
 	{
 		if (lookingRight == true) //wenn Spieler nach rechts schaut
 		{
-			shoot_image.at(0).draw_rot((this->pos_x + 22), (this->pos_y - 35), Z_PLAYER,
+			shoot_image.at(0).draw_rot((this->charPos.X + 22), (this->charPos.Y - 35), Z_PLAYER,
 				0,
 				0,
 				0.5,
@@ -52,7 +52,7 @@ void Player::draw() const //drawt den Spieler
 		}
 		else if (lookingRight == false) //wenn Spieler nach links schaut
 		{
-			shoot_image.at(1).draw_rot((this->pos_x - 22), (this->pos_y - 35), Z_PLAYER,
+			shoot_image.at(1).draw_rot((this->charPos.X - 22), (this->charPos.Y - 35), Z_PLAYER,
 				0,
 				1,
 				0.5,
@@ -63,34 +63,10 @@ void Player::draw() const //drawt den Spieler
 	}
 }
 
-//***************************  MOVE  *********************
-void Player::turn_left() //Spieler dreht sich nach links, läuft nach links und Score zählt runter
-{
-	set_idle(false);
-
-	lookingRight = false;
-	this->pos_x = this->pos_x - 10;
-
-}
-
-void Player::turn_right() //Spieler dreht sich nach rechts, läuft nach rechts und Score zählt hoch
-{
-	set_idle(false);
-
-	lookingRight = true;
-	this->pos_x = this->pos_x + 10;
-
-}
-
 void Player::stop() //Spieler hält an
 {
-	pos_x = pos_x;
-	pos_y = pos_y;
-}
-
-bool Player::direction() const
-{
-	return this->lookingRight;
+	this->charPos.X = charPos.X; //was auch immer das macht
+	this->charPos.Y = charPos.Y;
 }
 
 //***************************  Y-CONTROL  ****************
@@ -100,13 +76,13 @@ void Player::jump() //Spieler springt
 
 	jumptime = jumptime + (1.0 / 60.0);
 
-	this->pos_y = jump_y + jumptime * jumptime * gravity - 1000.0 * jumptime; //Sprungfunktion
+	this->charPos.Y = jump_y + jumptime * jumptime * gravity - 1000.0 * jumptime; //Sprungfunktion
 	jumping = true;//Springen =wahr
 }
 
 void Player::jumpposition() //setzt die Sprungfunktion
 {
-	jump_y = pos_y;
+	jump_y = this->charPos.Y;
 }
 
 double Player::get_jumpposition() //returned die Absprunghöhe
@@ -137,9 +113,9 @@ bool Player::get_jump() //true, wenn der Spieler in der Luft ist
 void Player::drop() //Fallen
 {
 	droptime = droptime + (1.0 / 60.0); //Fallzeit in Sekunden
-	if (pos_y < ground.get_Ground())  //wenn Spieler in der Luft
+	if (this->charPos.Y < ground.get_Ground())  //wenn Spieler in der Luft
 	{
-		this->pos_y = jump_y + droptime * droptime * gravity; //Fallfunktion
+		this->charPos.Y = jump_y + droptime * droptime * gravity; //Fallfunktion
 	}
 	dropping = true;
 }
@@ -154,44 +130,16 @@ void Player::set_drop(bool b) {
 //***************************  COLLISION  ****************
 bool Player::topBlock(std::vector<Blocks> blockvec, int16_t i) {
 
-	return(pos_y > (blockvec.at(i).y_pos() - block_tolerance) && //Begrenzung nach oben
-		pos_y < (blockvec.at(i).y_pos() + block_tolerance + blockvec.at(i).height()) && //Begrenzung nach unten
-		pos_x >(blockvec.at(i).x_pos() - block_tolerance) && //Begrenzun nach links
-		pos_x < (blockvec.at(i).x_pos() + blockvec.at(i).width() + block_tolerance));
-}
-
-//***************************  POSITION  *****************
-void Player::set_pos(double x, double y) //setzt die Position vom Spieler
-{
-	this->pos_x = x;
-	this->pos_y = y;
-}
-
-double Player::actual_pos_x() const //returned die x Position des Spieler
-{
-	return this->pos_x;
-}
-
-double Player::actual_pos_y() const //returned die y Position des Spieler
-{
-	return this->pos_y;
+	return(this->charPos.Y > (blockvec.at(i).y_pos() - block_tolerance) && //Begrenzung nach oben
+		this->charPos.Y < (blockvec.at(i).y_pos() + block_tolerance + blockvec.at(i).height()) && //Begrenzung nach unten
+		this->charPos.X >(blockvec.at(i).x_pos() - block_tolerance) && //Begrenzun nach links
+		this->charPos.X < (blockvec.at(i).x_pos() + blockvec.at(i).width() + block_tolerance));
 }
 
 //***************************  SHOOT  ********************
 void Player::shoot()
 {
 	shooting = true;
-}
-
-//***************************  PET  **********************
-void Player::set_idle(bool state)
-{
-	this->idle = state;
-}
-
-bool Player::isIdle() const
-{
-	return this->idle;
 }
 
 //***************************  SCORE  ********************

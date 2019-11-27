@@ -5,21 +5,21 @@
 #include "ZOrder.h"
 #include "Ground.h"
 #include "Block.h"
+#include "character.h"
 
-class Player
+class Player : public character
 {
 	std::vector<Gosu::Image> character;
 	std::vector<Gosu::Image> shoot_image;
 
-	double pos_x;
-	double pos_y;
+
 	double rot;
 
 	bool shooting;
 
-	bool idle;
 	bool free=true;
-	bool lookingRight;
+
+
 	float health;
 	int64_t score;
 	Gosu::Font score_draw1;
@@ -34,33 +34,30 @@ class Player
 	const double block_tolerance=10.0;
 
 public:
-	Player(): score_draw1(20)
+	explicit Player() : score_draw1(20)
 	{
-		pos_x = pos_y = rot =jumptime=droptime=0;
+		charPos.X = charPos.Y = 0;
+		spawnPos.X = 0; //hier noch beim konstruktor werte übergeben
+		spawnPos.Y = 0; //hier noch beim konstruktor werte übergeben
+		lookingRight = true;
+		idle = true;
+
+		rot =jumptime=droptime=0;
 		score = 20000;
 		jump_y = ground.get_Ground();
 		health = 100.0;
-		lookingRight = true;
-		idle = true;
 		shooting = false;
 		character = Gosu::load_tiles("player_blue.png", 400, 483);
 		shoot_image = Gosu::load_tiles("shoot_v1.png", 100, 31);
 	}
 	void stop();
-	void turn_left();
-	void turn_right();
 
 	void shoot();
 
-	void set_idle(bool state);
-	bool isIdle() const;
 
 	void jump();
 	void draw() const;
-	void set_pos(double x, double y);
-	double actual_pos_x() const;
-	double actual_pos_y() const;
-	bool direction() const;
+
 	void resetJumpTime();
 	void jumpposition();
 	void drop();

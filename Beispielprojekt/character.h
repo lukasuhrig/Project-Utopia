@@ -6,6 +6,9 @@
 
 class character
 {
+
+protected:
+
 	Vector2 charPos;
 
 	Vector2 spawnPos;
@@ -14,22 +17,22 @@ class character
 	bool lookingRight;
 
 public:
-	character(double spawn_X, double spawn_Y)
+	character()
 	{
-		spawnPos.X = spawn_X;
-		spawnPos.Y = spawn_Y;		
+		spawnPos.X = 0;
+		spawnPos.Y = 0;		
 		charPos.X = charPos.Y = 0;
 		idle = true;
 		lookingRight = true;
 	}
 
-	void set_pos(double &x, double &y);
+	void set_pos(double x, double y);
 
 	void spawn();
 
-	void turn_left(double &vel);
-	void turn_right(double& vel);
-	void set_idle(bool &state);
+	void turn_left(double vel);
+	void turn_right(double vel);
+	void set_idle(bool state);
 	bool isIdle() const;
 
 	Vector2 getPos() const;

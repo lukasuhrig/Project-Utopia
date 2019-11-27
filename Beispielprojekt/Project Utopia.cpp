@@ -27,7 +27,6 @@
 #include "Ground.h"
 #include "finish.h"
 #include "Game.h"
-//#include "Vektor2d.h"
 #include "pet.h"
 
 // Simulationsgeschwindigkeit
@@ -57,20 +56,22 @@ m_time zeit;
 //VOLUME/SOUND
 float master_vol = 1;
 
+
+
 class GameWindow : public Gosu::Window
 {
 	Gosu::Font fps_anzeige;
 
 public:
 
-
-	Player player;
 	Background background;
 	Mouse mouse;
 	Ground ground;
 	Game game;
+	Player player;
 	Pet pet_1; //Erstellen Pet
-	
+
+
 	//Level1
 	std::vector<Blocks>normal_block1;
 	std::vector<finish>finish_1;
@@ -130,14 +131,13 @@ public:
 	//Animation_Blocks Animation_Block;
 	Menu menu;
 
-	
 
 	GameWindow() : Window(800, 600),fps_anzeige(20)
 	{
 		set_caption("Project Utopia");
 
 		player.set_pos(400, ground.get_Ground());
-		pet_1.set_pos((player.actual_pos_x() - 80), (player.actual_pos_y() - 80));
+		pet_1.set_pos((player.getPos().X - 80), (player.getPos().Y - 80));
 
 		background.set_pos(300, ground.get_Ground());
 		//Auslagern sobald alles richtig funktioniert
@@ -261,11 +261,11 @@ public:
 			if (input().down(Gosu::KB_D) == true && input().down(Gosu::KB_A) == false) //Taste D und nicht Taste A
 			{
 				//***************RECHTS*******************
-				if (player.actual_pos_x() <= (width() - position_in_window))//wenn spieler in dem Feld ist, in dem er sich bewegen kann
+				if (player.getPos().X <= (width() - position_in_window))//wenn spieler in dem Feld ist, in dem er sich bewegen kann
 				{
-					player.turn_right();
+					player.turn_right(10);
 				}
-				if (player.actual_pos_x() >= (width() - position_in_window))//wenn Spieler heruslaufen würde
+				if (player.getPos().X >= (width() - position_in_window))//wenn Spieler heruslaufen würde
 				{
 					background.move_left();
 					for(size_t i=0;i<normal_block1.size();i++)
@@ -322,11 +322,11 @@ public:
 			if (input().down(Gosu::KB_A) == true && input().down(Gosu::KB_D) == false) //Taste A und nicht Taste D
 			{
 				//***************LINKS*******************
-				if (player.actual_pos_x() >= position_in_window)//wenn spieler in dem Feld ist, in dem er sich bewegen kann
+				if (player.getPos().X >= position_in_window)//wenn spieler in dem Feld ist, in dem er sich bewegen kann
 				{
-					player.turn_left();
+					player.turn_left(10);
 				}
-				if (player.actual_pos_x() < position_in_window)//wenn Spieler heruslaufen würde
+				if (player.getPos().X < position_in_window)//wenn Spieler heruslaufen würde
 				{
 					background.move_right();
 					for (size_t i = 0; i < normal_block1.size(); i++)
@@ -396,20 +396,20 @@ public:
 			{
 				player.set_idle(false);
 			}
-			if (player.actual_pos_y() >= (ground.get_Ground() - 5)) //Wenn Spieler den Boden wieder berührt
+			if (player.getPos().Y >= (ground.get_Ground() - 5)) //Wenn Spieler den Boden wieder berührt
 			{
 				player.resetJumpTime();//Resete die Sprungdauer
 			}
-			if (player.actual_pos_y() > ground.get_Ground() + 5) //wenn der Spieler durch den Boden glitcht setzt es ihn wieder auf den Boden
+			if (player.getPos().Y > ground.get_Ground() + 5) //wenn der Spieler durch den Boden glitcht setzt es ihn wieder auf den Boden
 			{
-				player.set_pos(player.actual_pos_x(), ground.get_Ground());
+				player.set_pos(player.getPos().X, ground.get_Ground());
 				player.jumpposition();
 
 			}
 
-			pet_1.update(player.direction(), player.actual_pos_x(), player.actual_pos_y(), player.isIdle()); //PET Animation
+			pet_1.update(player.direction(), player.getPos().X, player.getPos().Y, player.isIdle()); //PET Animation
 
-			if (game.get_Level(1) &&!finish_1.at(0).reached_finish(player.actual_pos_x(),player.actual_pos_y())) {
+			if (game.get_Level(1) &&!finish_1.at(0).reached_finish(player.getPos().X,player.getPos().Y)) {
 
 				if ((zeit.milliSecond()) == true)
 				{
@@ -421,24 +421,24 @@ public:
 				
 				if (player.topBlock(normal_block1, 0) && (player.get_jumptime() > 0.5 || player.get_drop()==true))//sodass er nicht gleich mit der Sprungfunktion ab dem block weitermacht, sondern erst landen muss
 				{
-					player.set_pos(player.actual_pos_x(), normal_block1.at(0).y_pos()); //setzt den Spieler ordentlich auf den Block
+					player.set_pos(player.getPos().X, normal_block1.at(0).y_pos()); //setzt den Spieler ordentlich auf den Block
 					player.resetJumpTime();//Resete die Sprungdauer
 					player.jumpposition();//Setzt die Absrpunghöhe auf Höhe des Blockes
 				}
 				if (player.topBlock(normal_block1, 1) && (player.get_jumptime() > 0.5 || player.get_drop() == true))//sodass er nicht gleich mit der Sprungfunktion ab dem block weitermacht, sondern erst landen muss
 				{
-					player.set_pos(player.actual_pos_x(), normal_block1.at(1).y_pos()); //setzt den Spieler ordentlich auf den Block
+					player.set_pos(player.getPos().X, normal_block1.at(1).y_pos()); //setzt den Spieler ordentlich auf den Block
 					player.resetJumpTime();//Resete die Sprungdauer
 					player.jumpposition();//Setzt die Absrpunghöhe auf Höhe des Blockes
 
 				}
-				if (player.topBlock(normal_block1, 0) == false && player.topBlock(normal_block1, 1) == false && player.get_jump() == false && player.actual_pos_y()<ground.get_Ground()+3) //und der Spieler nicht abspringen will
+				if (player.topBlock(normal_block1, 0) == false && player.topBlock(normal_block1, 1) == false && player.get_jump() == false && player.getPos().Y<ground.get_Ground()+3) //und der Spieler nicht abspringen will
 				{
 					player.drop(); //Spieler fällt
 				}
 			
 			}
-			if (game.get_Level(2) && !finish_2.at(0).reached_finish(player.actual_pos_x(), player.actual_pos_y())&&game.get_wonLevel(1)) {
+			if (game.get_Level(2) && !finish_2.at(0).reached_finish(player.getPos().X, player.getPos().Y)&&game.get_wonLevel(1)) {
 				if ((zeit.milliSecond()) == true)
 				{
 					player.score_set_down(1);
@@ -447,13 +447,13 @@ public:
 				
 				if (player.topBlock(normal_block2, 0) && player.get_jumptime() > 0.5)//sodass er nicht gleich mit der Sprungfunktion ab dem block weitermacht, sondern erst landen muss
 				{
-					player.set_pos(player.actual_pos_x(), normal_block2.at(0).y_pos()); //setzt den Spieler ordentlich auf den Block
+					player.set_pos(player.getPos().X, normal_block2.at(0).y_pos()); //setzt den Spieler ordentlich auf den Block
 					player.resetJumpTime();//Resete die Sprungdauer
 					player.jumpposition();//Setzt die Absrpunghöhe auf Höhe des Blockes
 				}
 				if (player.topBlock(normal_block2, 1) && player.get_jumptime() > 0.5)//sodass er nicht gleich mit der Sprungfunktion ab dem block weitermacht, sondern erst landen muss
 				{
-					player.set_pos(player.actual_pos_x(), normal_block2.at(1).y_pos()); //setzt den Spieler ordentlich auf den Block
+					player.set_pos(player.getPos().X, normal_block2.at(1).y_pos()); //setzt den Spieler ordentlich auf den Block
 					player.resetJumpTime();//Resete die Sprungdauer
 					player.jumpposition();//Setzt die Absrpunghöhe auf Höhe des Blockes
 				}
@@ -463,7 +463,7 @@ public:
 				}
 			
 			}
-			if (game.get_Level(3) && !finish_3.at(0).reached_finish(player.actual_pos_x(), player.actual_pos_y())&& game.get_wonLevel(2)) {
+			if (game.get_Level(3) && !finish_3.at(0).reached_finish(player.getPos().X, player.getPos().Y)&& game.get_wonLevel(2)) {
 				if ((zeit.milliSecond()) == true)
 				{
 					player.score_set_down(1);
@@ -472,13 +472,13 @@ public:
 				
 				if (player.topBlock(normal_block3, 0) && player.get_jumptime() > 0.5)//sodass er nicht gleich mit der Sprungfunktion ab dem block weitermacht, sondern erst landen muss
 				{
-					player.set_pos(player.actual_pos_x(), normal_block3.at(0).y_pos()); //setzt den Spieler ordentlich auf den Block
+					player.set_pos(player.getPos().X, normal_block3.at(0).y_pos()); //setzt den Spieler ordentlich auf den Block
 					player.resetJumpTime();//Resete die Sprungdauer
 					player.jumpposition();//Setzt die Absrpunghöhe auf Höhe des Blockes
 				}
 				if (player.topBlock(normal_block3, 1) && player.get_jumptime() > 0.5)//sodass er nicht gleich mit der Sprungfunktion ab dem block weitermacht, sondern erst landen muss
 				{
-					player.set_pos(player.actual_pos_x(), normal_block3.at(1).y_pos()); //setzt den Spieler ordentlich auf den Block
+					player.set_pos(player.getPos().X, normal_block3.at(1).y_pos()); //setzt den Spieler ordentlich auf den Block
 					player.resetJumpTime();//Resete die Sprungdauer
 					player.jumpposition();//Setzt die Absrpunghöhe auf Höhe des Blockes
 				}
@@ -488,7 +488,7 @@ public:
 				}
 				
 			}
-			if (game.get_Level(4) && !finish_4.at(0).reached_finish(player.actual_pos_x(), player.actual_pos_y())&& game.get_wonLevel(3)) {
+			if (game.get_Level(4) && !finish_4.at(0).reached_finish(player.getPos().X, player.getPos().Y)&& game.get_wonLevel(3)) {
 				if ((zeit.milliSecond()) == true)
 				{
 					player.score_set_down(1);
@@ -497,13 +497,13 @@ public:
 				
 				if (player.topBlock(normal_block4, 0) && player.get_jumptime() > 0.5)//sodass er nicht gleich mit der Sprungfunktion ab dem block weitermacht, sondern erst landen muss
 				{
-					player.set_pos(player.actual_pos_x(), normal_block4.at(0).y_pos()); //setzt den Spieler ordentlich auf den Block
+					player.set_pos(player.getPos().X, normal_block4.at(0).y_pos()); //setzt den Spieler ordentlich auf den Block
 					player.resetJumpTime();//Resete die Sprungdauer
 					player.jumpposition();//Setzt die Absrpunghöhe auf Höhe des Blockes
 				}
 				if (player.topBlock(normal_block4, 1) && player.get_jumptime() > 0.5)//sodass er nicht gleich mit der Sprungfunktion ab dem block weitermacht, sondern erst landen muss
 				{
-					player.set_pos(player.actual_pos_x(), normal_block4.at(1).y_pos()); //setzt den Spieler ordentlich auf den Block
+					player.set_pos(player.getPos().X, normal_block4.at(1).y_pos()); //setzt den Spieler ordentlich auf den Block
 					player.resetJumpTime();//Resete die Sprungdauer
 					player.jumpposition();//Setzt die Absrpunghöhe auf Höhe des Blockes
 				}
@@ -513,7 +513,7 @@ public:
 				}
 				
 			}
-			if (game.get_Level(5) && !finish_5.at(0).reached_finish(player.actual_pos_x(), player.actual_pos_y())&& game.get_wonLevel(4)) {
+			if (game.get_Level(5) && !finish_5.at(0).reached_finish(player.getPos().X, player.getPos().X)&& game.get_wonLevel(4)) {
 				if ((zeit.milliSecond()) == true)
 				{
 					player.score_set_down(1);
@@ -522,13 +522,13 @@ public:
 				
 				if (player.topBlock(normal_block5, 0) && player.get_jumptime() > 0.5)//sodass er nicht gleich mit der Sprungfunktion ab dem block weitermacht, sondern erst landen muss
 				{
-					player.set_pos(player.actual_pos_x(), normal_block5.at(0).y_pos()); //setzt den Spieler ordentlich auf den Block
+					player.set_pos(player.getPos().X, normal_block5.at(0).y_pos()); //setzt den Spieler ordentlich auf den Block
 					player.resetJumpTime();//Resete die Sprungdauer
 					player.jumpposition();//Setzt die Absrpunghöhe auf Höhe des Blockes
 				}
 				if (player.topBlock(normal_block5, 1) && player.get_jumptime() > 0.5)//sodass er nicht gleich mit der Sprungfunktion ab dem block weitermacht, sondern erst landen muss
 				{
-					player.set_pos(player.actual_pos_x(), normal_block5.at(1).y_pos()); //setzt den Spieler ordentlich auf den Block
+					player.set_pos(player.getPos().X, normal_block5.at(1).y_pos()); //setzt den Spieler ordentlich auf den Block
 					player.resetJumpTime();//Resete die Sprungdauer
 					player.jumpposition();//Setzt die Absrpunghöhe auf Höhe des Blockes
 				}
@@ -538,7 +538,7 @@ public:
 				}
 				
 			}
-			if (game.get_Level(6) && !finish_6.at(0).reached_finish(player.actual_pos_x(), player.actual_pos_y())&& game.get_wonLevel(5)) {
+			if (game.get_Level(6) && !finish_6.at(0).reached_finish(player.getPos().X, player.getPos().Y)&& game.get_wonLevel(5)) {
 				if ((zeit.milliSecond()) == true)
 				{
 					player.score_set_down(1);
@@ -547,13 +547,13 @@ public:
 				
 				if (player.topBlock(normal_block6, 0) && player.get_jumptime() > 0.5)//sodass er nicht gleich mit der Sprungfunktion ab dem block weitermacht, sondern erst landen muss
 				{
-					player.set_pos(player.actual_pos_x(), normal_block6.at(0).y_pos()); //setzt den Spieler ordentlich auf den Block
+					player.set_pos(player.getPos().X, normal_block6.at(0).y_pos()); //setzt den Spieler ordentlich auf den Block
 					player.resetJumpTime();//Resete die Sprungdauer
 					player.jumpposition();//Setzt die Absrpunghöhe auf Höhe des Blockes
 				}
 				if (player.topBlock(normal_block6, 1) && player.get_jumptime() > 0.5)//sodass er nicht gleich mit der Sprungfunktion ab dem block weitermacht, sondern erst landen muss
 				{
-					player.set_pos(player.actual_pos_x(), normal_block6.at(1).y_pos()); //setzt den Spieler ordentlich auf den Block
+					player.set_pos(player.getPos().X, normal_block6.at(1).y_pos()); //setzt den Spieler ordentlich auf den Block
 					player.resetJumpTime();//Resete die Sprungdauer
 					player.jumpposition();//Setzt die Absrpunghöhe auf Höhe des Blockes
 				}
@@ -563,7 +563,7 @@ public:
 				}
 			
 			}
-			if (game.get_Level(7) && !finish_7.at(0).reached_finish(player.actual_pos_x(), player.actual_pos_y())&& game.get_wonLevel(6)) {
+			if (game.get_Level(7) && !finish_7.at(0).reached_finish(player.getPos().X, player.getPos().X)&& game.get_wonLevel(6)) {
 				if ((zeit.milliSecond()) == true)
 				{
 					player.score_set_down(1);
@@ -572,13 +572,13 @@ public:
 			
 				if (player.topBlock(normal_block7, 0) && player.get_jumptime() > 0.5)//sodass er nicht gleich mit der Sprungfunktion ab dem block weitermacht, sondern erst landen muss
 				{
-					player.set_pos(player.actual_pos_x(), normal_block7.at(0).y_pos()); //setzt den Spieler ordentlich auf den Block
+					player.set_pos(player.getPos().X, normal_block7.at(0).y_pos()); //setzt den Spieler ordentlich auf den Block
 					player.resetJumpTime();//Resete die Sprungdauer
 					player.jumpposition();//Setzt die Absrpunghöhe auf Höhe des Blockes
 				}
 				if (player.topBlock(normal_block7, 1) && player.get_jumptime() > 0.5)//sodass er nicht gleich mit der Sprungfunktion ab dem block weitermacht, sondern erst landen muss
 				{
-					player.set_pos(player.actual_pos_x(), normal_block7.at(1).y_pos()); //setzt den Spieler ordentlich auf den Block
+					player.set_pos(player.getPos().X, normal_block7.at(1).y_pos()); //setzt den Spieler ordentlich auf den Block
 					player.resetJumpTime();//Resete die Sprungdauer
 					player.jumpposition();//Setzt die Absrpunghöhe auf Höhe des Blockes
 				}
@@ -588,7 +588,7 @@ public:
 				}
 			
 			}
-			if (game.get_Level(8) && !finish_8.at(0).reached_finish(player.actual_pos_x(), player.actual_pos_y())&& game.get_wonLevel(7)) {
+			if (game.get_Level(8) && !finish_8.at(0).reached_finish(player.getPos().X, player.getPos().Y)&& game.get_wonLevel(7)) {
 				if ((zeit.milliSecond()) == true)
 				{
 					player.score_set_down(1);
@@ -597,13 +597,13 @@ public:
 				
 				if (player.topBlock(normal_block8, 0) && player.get_jumptime() > 0.5)//sodass er nicht gleich mit der Sprungfunktion ab dem block weitermacht, sondern erst landen muss
 				{
-					player.set_pos(player.actual_pos_x(), normal_block8.at(0).y_pos()); //setzt den Spieler ordentlich auf den Block
+					player.set_pos(player.getPos().X, normal_block8.at(0).y_pos()); //setzt den Spieler ordentlich auf den Block
 					player.resetJumpTime();//Resete die Sprungdauer
 					player.jumpposition();//Setzt die Absrpunghöhe auf Höhe des Blockes
 				}
 				if (player.topBlock(normal_block8, 1) && player.get_jumptime() > 0.5)//sodass er nicht gleich mit der Sprungfunktion ab dem block weitermacht, sondern erst landen muss
 				{
-					player.set_pos(player.actual_pos_x(), normal_block8.at(1).y_pos()); //setzt den Spieler ordentlich auf den Block
+					player.set_pos(player.getPos().X, normal_block8.at(1).y_pos()); //setzt den Spieler ordentlich auf den Block
 					player.resetJumpTime();//Resete die Sprungdauer
 					player.jumpposition();//Setzt die Absrpunghöhe auf Höhe des Blockes
 				}
@@ -613,7 +613,7 @@ public:
 				}
 			
 			}
-			if (game.get_Level(9) && !finish_9.at(0).reached_finish(player.actual_pos_x(), player.actual_pos_y())&& game.get_wonLevel(8)) {
+			if (game.get_Level(9) && !finish_9.at(0).reached_finish(player.getPos().X, player.getPos().Y)&& game.get_wonLevel(8)) {
 				if ((zeit.milliSecond()) == true)
 				{
 					player.score_set_down(1);
@@ -621,13 +621,13 @@ public:
 				
 				if (player.topBlock(normal_block9, 0) && player.get_jumptime() > 0.5)//sodass er nicht gleich mit der Sprungfunktion ab dem block weitermacht, sondern erst landen muss
 				{
-					player.set_pos(player.actual_pos_x(), normal_block9.at(0).y_pos()); //setzt den Spieler ordentlich auf den Block
+					player.set_pos(player.getPos().X, normal_block9.at(0).y_pos()); //setzt den Spieler ordentlich auf den Block
 					player.resetJumpTime();//Resete die Sprungdauer
 					player.jumpposition();//Setzt die Absrpunghöhe auf Höhe des Blockes
 				}
 				if (player.topBlock(normal_block9, 1) && player.get_jumptime() > 0.5)//sodass er nicht gleich mit der Sprungfunktion ab dem block weitermacht, sondern erst landen muss
 				{
-					player.set_pos(player.actual_pos_x(), normal_block9.at(1).y_pos()); //setzt den Spieler ordentlich auf den Block
+					player.set_pos(player.getPos().X, normal_block9.at(1).y_pos()); //setzt den Spieler ordentlich auf den Block
 					player.resetJumpTime();//Resete die Sprungdauer
 					player.jumpposition();//Setzt die Absrpunghöhe auf Höhe des Blockes
 				}
@@ -646,7 +646,7 @@ public:
 			for (int i = 1; i <= 9; i++) { game.set_Level(i, false); };
 			player.reset(ground.get_Ground()-1);
 			background.reset(ground.get_Ground());
-			pet_1.set_pos((player.actual_pos_x() - 80), (player.actual_pos_y() - 80));
+			pet_1.set_pos((player.getPos().X - 80), (player.getPos().Y - 80));
 			{
 			for (size_t i = 0; i < normal_block1.size(); i++) {
 				normal_block1.at(i).reset();
@@ -706,39 +706,39 @@ public:
 		}
 	
 
-		if (finish_1.at(0).reached_finish(player.actual_pos_x(), player.actual_pos_y())&&game.get_Level(1)) {
+		if (finish_1.at(0).reached_finish(player.getPos().X, player.getPos().Y)&&game.get_Level(1)) {
 			game.set_wonLevel(1,true);
 			won = true;
 		}
-		if (finish_2.at(0).reached_finish(player.actual_pos_x(), player.actual_pos_y()) && game.get_Level(2)) {
+		if (finish_2.at(0).reached_finish(player.getPos().X, player.getPos().Y) && game.get_Level(2)) {
 			game.set_wonLevel(2, true);
 			won = true;
 		}
-		if (finish_3.at(0).reached_finish(player.actual_pos_x(), player.actual_pos_y()) && game.get_Level(3)) {
+		if (finish_3.at(0).reached_finish(player.getPos().X, player.getPos().Y) && game.get_Level(3)) {
 			game.set_wonLevel(3, true);
 			won = true;
 		}
-		if (finish_4.at(0).reached_finish(player.actual_pos_x(), player.actual_pos_y()) && game.get_Level(4)) {
+		if (finish_4.at(0).reached_finish(player.getPos().X, player.getPos().Y) && game.get_Level(4)) {
 			game.set_wonLevel(4, true);
 			won = true;
 		}
-		if (finish_5.at(0).reached_finish(player.actual_pos_x(), player.actual_pos_y()) && game.get_Level(5)) {
+		if (finish_5.at(0).reached_finish(player.getPos().X, player.getPos().Y) && game.get_Level(5)) {
 			game.set_wonLevel(5, true);
 			won = true;
 		}
-		if (finish_6.at(0).reached_finish(player.actual_pos_x(), player.actual_pos_y()) && game.get_Level(6)) {
+		if (finish_6.at(0).reached_finish(player.getPos().X, player.getPos().Y) && game.get_Level(6)) {
 			game.set_wonLevel(6, true);
 			won = true;
 		}
-		if (finish_7.at(0).reached_finish(player.actual_pos_x(), player.actual_pos_y()) && game.get_Level(7)) {
+		if (finish_7.at(0).reached_finish(player.getPos().X, player.getPos().Y) && game.get_Level(7)) {
 			game.set_wonLevel(7, true);
 			won = true;
 		}
-		if (finish_8.at(0).reached_finish(player.actual_pos_x(), player.actual_pos_y()) && game.get_Level(8)) {
+		if (finish_8.at(0).reached_finish(player.getPos().X, player.getPos().Y) && game.get_Level(8)) {
 			game.set_wonLevel(8, true);
 			won = true;
 		}
-		if (finish_9.at(0).reached_finish(player.actual_pos_x(), player.actual_pos_y()) && game.get_Level(9)) {
+		if (finish_9.at(0).reached_finish(player.getPos().X, player.getPos().Y) && game.get_Level(9)) {
 			game.set_wonLevel(8, true);
 			won = true;
 		}
@@ -850,39 +850,39 @@ public:
 				finish_9.at(0).draw_finish();
 			}
 		
-		if (finish_1.at(0).reached_finish(player.actual_pos_x(), player.actual_pos_y())&&game.get_Level(1)&&menuing==false)  {
+		if (finish_1.at(0).reached_finish(player.getPos().X, player.getPos().Y)&&game.get_Level(1)&&menuing==false)  {
 			finish_1.at(0).finished(player.get_score());
 			
 		}
-		if (finish_2.at(0).reached_finish(player.actual_pos_x(), player.actual_pos_y()) && game.get_Level(2) && menuing == false) {
+		if (finish_2.at(0).reached_finish(player.getPos().X, player.getPos().Y) && game.get_Level(2) && menuing == false) {
 			finish_2.at(0).finished(player.get_score());
 		
 		}
-		if (finish_3.at(0).reached_finish(player.actual_pos_x(), player.actual_pos_y()) && game.get_Level(3) && menuing == false) {
+		if (finish_3.at(0).reached_finish(player.getPos().X, player.getPos().Y) && game.get_Level(3) && menuing == false) {
 			finish_3.at(0).finished(player.get_score());
 
 		}
-		if (finish_4.at(0).reached_finish(player.actual_pos_x(), player.actual_pos_y()) && game.get_Level(4) && menuing == false) {
+		if (finish_4.at(0).reached_finish(player.getPos().X, player.getPos().Y) && game.get_Level(4) && menuing == false) {
 			finish_4.at(0).finished(player.get_score());
 
 		}
-		if (finish_5.at(0).reached_finish(player.actual_pos_x(), player.actual_pos_y()) && game.get_Level(5) && menuing == false) {
+		if (finish_5.at(0).reached_finish(player.getPos().X, player.getPos().Y) && game.get_Level(5) && menuing == false) {
 			finish_5.at(0).finished(player.get_score());
 
 		}
-		if (finish_6.at(0).reached_finish(player.actual_pos_x(), player.actual_pos_y()) && game.get_Level(6) && menuing == false) {
+		if (finish_6.at(0).reached_finish(player.getPos().X, player.getPos().Y) && game.get_Level(6) && menuing == false) {
 			finish_6.at(0).finished(player.get_score());
 
 		}
-		if (finish_7.at(0).reached_finish(player.actual_pos_x(), player.actual_pos_y()) && game.get_Level(7)&&menuing == false) {
+		if (finish_7.at(0).reached_finish(player.getPos().X, player.getPos().Y) && game.get_Level(7)&&menuing == false) {
 			finish_7.at(0).finished(player.get_score());
 
 		}
-		if (finish_8.at(0).reached_finish(player.actual_pos_x(), player.actual_pos_y()) && game.get_Level(8)&&menuing == false) {
+		if (finish_8.at(0).reached_finish(player.getPos().X, player.getPos().Y) && game.get_Level(8)&&menuing == false) {
 			finish_8.at(0).finished(player.get_score());
 
 		}
-		if (finish_9.at(0).reached_finish(player.actual_pos_x(), player.actual_pos_y()) && game.get_Level(9) &&menuing==false ) {
+		if (finish_9.at(0).reached_finish(player.getPos().X, player.getPos().Y) && game.get_Level(9) &&menuing==false ) {
 			finish_9.at(0).finished(player.get_score());
 		}
 	

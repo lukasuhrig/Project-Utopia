@@ -1,7 +1,7 @@
 #include "stdafx.h"
 #include "character.h"
 
-void character::set_pos(double& x, double& y)
+void character::set_pos(double x, double y)
 {
 	this->charPos.X = x;
 	this->charPos.Y = y;
@@ -12,7 +12,7 @@ void character::spawn()
 	set_pos(this->spawnPos.X, this->spawnPos.Y);
 }
 
-void character::turn_left(double& vel)
+void character::turn_left(double vel)
 {
 	this->idle = false;
 
@@ -20,15 +20,15 @@ void character::turn_left(double& vel)
 	this->charPos.X = this->charPos.X - vel;
 }
 
-void character::turn_right(double& vel)
+void character::turn_right(double vel)
 {
 	this->idle = false;
 
-	lookingRight = false;
+	lookingRight = true;
 	this->charPos.X = this->charPos.X + vel;
 }
 
-void character::set_idle(bool &state)
+void character::set_idle(bool state)
 {
 	this->idle = state;
 }

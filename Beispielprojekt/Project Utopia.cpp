@@ -262,7 +262,7 @@ public:
 				player.shoot();
 			}
 
-			if (input().down(Gosu::KB_D) == true && input().down(Gosu::KB_A) == false&&nohit) //Taste D und nicht Taste A
+			if (input().down(Gosu::KB_D) == true && input().down(Gosu::KB_A) == false) //Taste D und nicht Taste A
 			{
 				//***************RECHTS*******************
 				if (player.getPos().X <= (width() - position_in_window))//wenn spieler in dem Feld ist, in dem er sich bewegen kann
@@ -327,7 +327,7 @@ public:
 				}
 
 			}
-			if (input().down(Gosu::KB_A) == true && input().down(Gosu::KB_D) == false&&nohit) //Taste A und nicht Taste D
+			if (input().down(Gosu::KB_A) == true && input().down(Gosu::KB_D) == false) //Taste A und nicht Taste D
 			{
 				//***************LINKS*******************
 				if (player.getPos().X >= position_in_window)//wenn spieler in dem Feld ist, in dem er sich bewegen kann
@@ -426,14 +426,7 @@ public:
 
 				menuing = false;
 				
-				for (size_t i = 0; i < hit_block1.size(); i++) {
-					if (player.blockhit(hit_block1, i)) {
-						nohit=false;
-					}
-					else {
-						nohit = true;
-					}
-				}
+				
 				
 				if (player.topBlock(normal_block1, 0) && (player.get_jumptime() > 0.5 || player.get_drop()==true))//sodass er nicht gleich mit der Sprungfunktion ab dem block weitermacht, sondern erst landen muss
 				{

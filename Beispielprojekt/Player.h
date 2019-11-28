@@ -75,8 +75,10 @@ public:
 	double width();
 	double height();
 
-	bool blockhit(std::vector<Blocks> blockvec, int16_t i);
-
+	bool leftblockhit(std::vector<Blocks> blockvec, int16_t i);
+	bool rightblockhit(std::vector<Blocks> blockvec, int16_t i);
+	bool topblockhit(std::vector<Blocks> blockvec, int16_t i);
+	bool bottomblockhit(std::vector<Blocks> blockvec, int16_t i);
 	int64_t get_score();
 	void reset(double ground);
 

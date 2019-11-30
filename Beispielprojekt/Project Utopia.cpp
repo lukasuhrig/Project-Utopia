@@ -133,7 +133,6 @@ public:
 	//Animation_Blocks Animation_Block;
 	Menu menu;
 
-
 	GameWindow() : Window(800, 600),fps_anzeige(20)
 	{
 		set_caption("Project Utopia");

@@ -149,7 +149,7 @@ public:
 		hit_block1.push_back(Blog1_1);
 		normal_block1.push_back(Block1_1);
 		normal_block1.push_back(Block1_2);
-		finish1_1.set_pos(500, 500);
+		finish1_1.set_pos(500, 530);
 		finish_1.push_back(finish1_1);
 		//Level2
 		Block2_1.set_pos(200, 380, 0.3, 0.3);

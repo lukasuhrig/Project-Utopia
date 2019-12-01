@@ -16,7 +16,8 @@ class finish {
 public:
 	finish():score_show(20)
 	{
-		animation_finish.push_back(Gosu::Image("checkered-flag-309862_1280.png"));
+		animation_finish.push_back(Gosu::Image("checkpoint_v1.png"));
+//		animation_finish.push_back(Gosu::Image("checkered-flag-309862_1280.png"));
 		animation_finish.push_back(Gosu::Image("winningscreen.png"));
 
 	};

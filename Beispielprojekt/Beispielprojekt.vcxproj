@@ -211,7 +211,9 @@
     <Image Include="..\..\..\..\..\..\..\Desktop\winningscreen.png" />
     <Image Include="background_v1.png" />
     <Image Include="background_v2.png" />
+    <Image Include="block_v1.png" />
     <Image Include="Brick_Block.png" />
+    <Image Include="checkpoint_v1.png" />
     <Image Include="clouds.png" />
     <Image Include="Normaler_Block.png" />
     <Image Include="pet_1.png" />

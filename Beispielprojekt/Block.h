@@ -21,7 +21,8 @@ public:
 	Animation_Blocks Animation_Block;
 	 Blocks()
 	{
-		Animation_Block.push_back(Gosu::Image("Brick_Block.png"));
+		Animation_Block.push_back(Gosu::Image("block_v1.png"));
+	//	Animation_Block.push_back(Gosu::Image("Brick_Block.png"));
 		Animation_Block.push_back(Gosu::Image("Normaler_Block.png"));//Hier Bilder von Blöcken einfügen
 	};
 	

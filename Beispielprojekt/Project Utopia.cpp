@@ -74,11 +74,29 @@ public:
 
 	//Level1
 	std::vector<Blocks>normal_block1;
-	std::vector<Blocks>hit_block1;
+	
 	std::vector<finish>finish_1;
-	Blocks Blog1_1;
+
 	Blocks Block1_1;
 	Blocks Block1_2;
+	Blocks Block1_3;
+	Blocks Block1_4;
+	Blocks Block1_5;
+	Blocks Block1_6;
+	Blocks Block1_7;
+	Blocks Block1_8;
+	Blocks Block1_9;
+	Blocks Block1_10;
+	Blocks Block1_11;
+	Blocks Block1_12;
+	Blocks Block1_13;
+	Blocks Block1_14;
+	Blocks Block1_15;
+	Blocks Block1_16;
+	Blocks Block1_17;
+	Blocks Block1_18;
+	Blocks Block1_19;
+	Blocks Block1_20;
 	finish finish1_1;
 
 	//Level2
@@ -144,12 +162,50 @@ public:
 		background.set_pos(300, ground.get_Ground());
 		//Auslagern sobald alles richtig funktioniert
 		//Level1
-		Block1_1.set_pos(100, 380, 0.3, 0.3);
-		Block1_2.set_pos(100, 180, 0.3, 0.3);
-		Blog1_1.set_pos(3000, 500, 0.3, 0.3);
-		hit_block1.push_back(Blog1_1);
+		Block1_1.set_pos(000, 380, 0.3, 0.3);
+		Block1_2.set_pos(100, 280, 0.3, 0.3);
+		Block1_3.set_pos(300, 280, 0.3, 0.3);
+		Block1_4.set_pos(600, 280, 0.3, 0.3);
+		Block1_5.set_pos(1000, 280, 0.3, 0.3);
+		Block1_6.set_pos(1500, 280, 0.3, 0.3);
+		Block1_7.set_pos(2100, 280, 0.3, 0.3);
+		Block1_8.set_pos(2800, 280, 0.3, 0.3);
+		Block1_9.set_pos(3600, 280, 0.3, 0.3);
+		Block1_10.set_pos(4500, 280, 0.3, 0.3);
+		Block1_11.set_pos(5500, 280, 0.3, 0.3);
+		Block1_12.set_pos(6600, 280, 0.3, 0.3);
+		Block1_13.set_pos(7800, 280, 0.3, 0.3);
+		Block1_14.set_pos(9100, 280, 0.3, 0.3);
+		Block1_15.set_pos(10500, 280, 0.3, 0.3);
+		Block1_16.set_pos(12000, 280, 0.3, 0.3);
+		Block1_17.set_pos(13600, 280, 0.3, 0.3);
+		Block1_18.set_pos(15300, 280, 0.3, 0.3);
+		Block1_19.set_pos(17100, 280, 0.3, 0.3);
+		Block1_20.set_pos(19000, 280, 0.3, 0.3);
+
+
+
+
 		normal_block1.push_back(Block1_1);
 		normal_block1.push_back(Block1_2);
+		normal_block1.push_back(Block1_3);
+		normal_block1.push_back(Block1_4);
+		normal_block1.push_back(Block1_5);
+		normal_block1.push_back(Block1_6);
+		normal_block1.push_back(Block1_7);
+		normal_block1.push_back(Block1_8);
+		normal_block1.push_back(Block1_9);
+		normal_block1.push_back(Block1_10);
+		normal_block1.push_back(Block1_11);
+		normal_block1.push_back(Block1_12);
+		normal_block1.push_back(Block1_13);
+		normal_block1.push_back(Block1_14);
+		normal_block1.push_back(Block1_15);
+		normal_block1.push_back(Block1_16);
+		normal_block1.push_back(Block1_17);
+		normal_block1.push_back(Block1_18);
+		normal_block1.push_back(Block1_19);
+		normal_block1.push_back(Block1_20);
 		finish1_1.set_pos(500, 500);
 		finish_1.push_back(finish1_1);
 		//Level2
@@ -276,10 +332,7 @@ public:
 					{
 						normal_block1.at(i).set_pos_left(); 
 					}
-					for (size_t i = 0; i < hit_block1.size(); i++)
-					{
-						hit_block1.at(i).set_pos_left();
-					}
+					
 					for (size_t i = 0; i < normal_block2.size(); i++)
 					{
 						normal_block2.at(i).set_pos_left();
@@ -341,10 +394,7 @@ public:
 					{
 						normal_block1.at(i).set_pos_right();
 					}
-					for (size_t i = 0; i < hit_block1.size(); i++)
-					{
-						hit_block1.at(i).set_pos_right();
-					}
+					
 					for (size_t i = 0; i < normal_block2.size(); i++)
 					{
 						normal_block2.at(i).set_pos_right();
@@ -428,20 +478,38 @@ public:
 				
 				
 				
-				if (player.topBlock(normal_block1, 0) && (player.get_jumptime() > 0.5 || player.get_drop()==true))//sodass er nicht gleich mit der Sprungfunktion ab dem block weitermacht, sondern erst landen muss
-				{
-					player.set_pos(player.getPos().X, normal_block1.at(0).y_pos()); //setzt den Spieler ordentlich auf den Block
-					player.resetJumpTime();//Resete die Sprungdauer
-					player.jumpposition();//Setzt die Absrpunghöhe auf Höhe des Blockes
-				}
-				if (player.topBlock(normal_block1, 1) && (player.get_jumptime() > 0.5 || player.get_drop() == true))//sodass er nicht gleich mit der Sprungfunktion ab dem block weitermacht, sondern erst landen muss
-				{
-					player.set_pos(player.getPos().X, normal_block1.at(1).y_pos()); //setzt den Spieler ordentlich auf den Block
-					player.resetJumpTime();//Resete die Sprungdauer
-					player.jumpposition();//Setzt die Absrpunghöhe auf Höhe des Blockes
+				
+				for (size_t i = 0; i < normal_block1.size(); i++) {
+					if (player.topBlock(normal_block1, i) && (player.get_jumptime() > 0.5 || player.get_drop() == true))//sodass er nicht gleich mit der Sprungfunktion ab dem block weitermacht, sondern erst landen muss
+					{
+						player.set_pos(player.getPos().X, normal_block1.at(i).y_pos()); //setzt den Spieler ordentlich auf den Block
+						player.resetJumpTime();//Resete die Sprungdauer
+						player.jumpposition();//Setzt die Absrpunghöhe auf Höhe des Blockes
 
+					}
 				}
-				if (player.topBlock(normal_block1, 0) == false && player.topBlock(normal_block1, 1) == false && player.get_jump() == false && player.getPos().Y<ground.get_Ground()+3) //und der Spieler nicht abspringen will
+				
+				if (player.topBlock(normal_block1, 0) == false && 
+					player.topBlock(normal_block1, 1) == false && 
+					player.topBlock(normal_block1, 2) == false && 
+					player.topBlock(normal_block1, 3) == false && 
+					player.topBlock(normal_block1, 4) == false && 
+					player.topBlock(normal_block1, 5)== false && 
+					player.topBlock(normal_block1, 6) == false && 
+					player.topBlock(normal_block1, 7) == false && 
+					player.topBlock(normal_block1, 8)== false && 
+					player.topBlock(normal_block1, 9) == false && 
+					player.topBlock(normal_block1, 10) == false && 
+					player.topBlock(normal_block1, 11) == false && 
+					player.topBlock(normal_block1, 12) == false && 
+					player.topBlock(normal_block1, 13) == false && 
+					player.topBlock(normal_block1, 14) == false && 
+					player.topBlock(normal_block1, 15) == false && 
+					player.topBlock(normal_block1, 16) == false && 
+					player.topBlock(normal_block1, 17) == false && 
+					player.topBlock(normal_block1, 18) == false &&
+					player.topBlock(normal_block1, 19) == false &&
+					player.get_jump() == false && player.getPos().Y<ground.get_Ground()+3) //und der Spieler nicht abspringen will
 				{
 					player.drop(); //Spieler fällt
 				}
@@ -648,74 +716,72 @@ public:
 			}
 		}
 
-		if ((menu.pressedMenuButton(mouse, input().down(Gosu::MS_LEFT)) || menu.pressedwinMenuButton(mouse, input().down(Gosu::MS_LEFT)))&& menuing == false) {
+		if ((menu.pressedMenuButton(mouse, input().down(Gosu::MS_LEFT)) || menu.pressedwinMenuButton(mouse, input().down(Gosu::MS_LEFT))) && menuing == false) {
 			menuing = true;
 			won = false;
 			backtomenu = true;
 			for (int i = 1; i <= 9; i++) { game.set_Level(i, false); };
-			player.reset(ground.get_Ground()-1);
+			player.reset(ground.get_Ground() - 1);
 			background.reset(ground.get_Ground());
 			pet_1.set_pos((player.getPos().X - 80), (player.getPos().Y - 80));
 			{
-			for (size_t i = 0; i < normal_block1.size(); i++) {
-				normal_block1.at(i).reset();
-			}
-			for (size_t i = 0; i < hit_block1.size(); i++) {
-				hit_block1.at(i).reset();
-			}
-			for (size_t i = 0; i < normal_block2.size(); i++) {
-				normal_block2.at(i).reset();
-			}
-			for (size_t i = 0; i < normal_block3.size(); i++) {
-				normal_block3.at(i).reset();
-			}
-			for (size_t i = 0; i < normal_block4.size(); i++) {
-				normal_block4.at(i).reset();
-			}
-			for (size_t i = 0; i < normal_block5.size(); i++) {
-				normal_block5.at(i).reset();
-			}
-			for (size_t i = 0; i < normal_block6.size(); i++) {
-				normal_block6.at(i).reset();
-			}
-			for (size_t i = 0; i < normal_block7.size(); i++) {
-				normal_block7.at(i).reset();
-			}
-			for (size_t i = 0; i < normal_block8.size(); i++) {
-				normal_block8.at(i).reset();
-			}
-			for (size_t i = 0; i < normal_block9.size(); i++) {
-				normal_block9.at(i).reset();
-			}
-			for (size_t i = 0; i < finish_1.size(); i++) {
-				finish_1.at(i).reset();
-			}
-			for (size_t i = 0; i < finish_2.size(); i++) {
-				finish_2.at(i).reset();
-			}
-			for (size_t i = 0; i < finish_3.size(); i++) {
-				finish_3.at(i).reset();
-			}
-			for (size_t i = 0; i < finish_4.size(); i++) {
-				finish_4.at(i).reset();
-			}
-			for (size_t i = 0; i < finish_5.size(); i++) {
-				finish_5.at(i).reset();
-			}
-			for (size_t i = 0; i < finish_6.size(); i++) {
-				finish_6.at(i).reset();
-			}
-			for (size_t i = 0; i < finish_7.size(); i++) {
-				finish_7.at(i).reset();
-			}
-			for (size_t i = 0; i < finish_8.size(); i++) {
-				finish_8.at(i).reset();
-			}
-			for (size_t i = 0; i < finish_9.size(); i++) {
-				finish_9.at(i).reset();
-			}
+				for (size_t i = 0; i < normal_block1.size(); i++) {
+					normal_block1.at(i).reset();
+				}
+			
+				for (size_t i = 0; i < normal_block2.size(); i++) {
+					normal_block2.at(i).reset();
+				}
+				for (size_t i = 0; i < normal_block3.size(); i++) {
+					normal_block3.at(i).reset();
+				}
+				for (size_t i = 0; i < normal_block4.size(); i++) {
+					normal_block4.at(i).reset();
+				}
+				for (size_t i = 0; i < normal_block5.size(); i++) {
+					normal_block5.at(i).reset();
+				}
+				for (size_t i = 0; i < normal_block6.size(); i++) {
+					normal_block6.at(i).reset();
+				}
+				for (size_t i = 0; i < normal_block7.size(); i++) {
+					normal_block7.at(i).reset();
+				}
+				for (size_t i = 0; i < normal_block8.size(); i++) {
+					normal_block8.at(i).reset();
+				}
+				for (size_t i = 0; i < normal_block9.size(); i++) {
+					normal_block9.at(i).reset();
+				}
+				for (size_t i = 0; i < finish_1.size(); i++) {
+					finish_1.at(i).reset();
+				}
+				for (size_t i = 0; i < finish_2.size(); i++) {
+					finish_2.at(i).reset();
+				}
+				for (size_t i = 0; i < finish_3.size(); i++) {
+					finish_3.at(i).reset();
+				}
+				for (size_t i = 0; i < finish_4.size(); i++) {
+					finish_4.at(i).reset();
+				}
+				for (size_t i = 0; i < finish_5.size(); i++) {
+					finish_5.at(i).reset();
+				}
+				for (size_t i = 0; i < finish_6.size(); i++) {
+					finish_6.at(i).reset();
+				}
+				for (size_t i = 0; i < finish_7.size(); i++) {
+					finish_7.at(i).reset();
+				}
+				for (size_t i = 0; i < finish_8.size(); i++) {
+					finish_8.at(i).reset();
+				}
+				for (size_t i = 0; i < finish_9.size(); i++) {
+					finish_9.at(i).reset();
+				}
 			}//RESET
-		}
+		};
 	
 
 		if (finish_1.at(0).reached_finish(player.getPos().X, player.getPos().Y)&&game.get_Level(1)) {
@@ -811,9 +877,7 @@ public:
 				for (size_t i = 0; i < normal_block1.size(); i++) {
 					normal_block1.at(i).draw_Blocks(0); //drawt einen Block
 				}
-				for (size_t i = 0; i < hit_block1.size(); i++) {
-					hit_block1.at(i).draw_Blocks(1); //drawt einen Block
-				}
+				
 				finish_1.at(0).draw_finish();
 		}
 		if (game.get_Level(2) && menuing == false) {

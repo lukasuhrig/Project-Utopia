@@ -178,5 +178,11 @@
     <Image Include="shoot_v1.png">
       <Filter>Resource Files</Filter>
     </Image>
+    <Image Include="block_v1.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="checkpoint_v1.png">
+      <Filter>Resource Files</Filter>
+    </Image>
   </ItemGroup>
 </Project>

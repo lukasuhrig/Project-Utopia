@@ -21,7 +21,6 @@ class Player : public character
 	bool free=true;
 
 
-	float health;
 	int64_t score;
 	Gosu::Font score_draw1;
 	double jumptime;
@@ -35,11 +34,11 @@ class Player : public character
 	const double block_tolerance=10.0;
 
 public:
-	explicit Player() : score_draw1(20)
+	Player() : score_draw1(20)
 	{
 		charPos.X = charPos.Y = 0;
-		spawnPos.X = 0; //hier noch beim konstruktor werte übergeben
-		spawnPos.Y = 0; //hier noch beim konstruktor werte übergeben
+		spawnPos.X = 0;
+		spawnPos.Y = 0;
 		lookingRight = true;
 		idle = true;
 

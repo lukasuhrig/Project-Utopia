@@ -16,11 +16,14 @@ protected:
 	bool idle;
 	bool lookingRight;
 
+	float health;
+
 public:
 	character()
 	{
 		spawnPos.X = 0;
 		spawnPos.Y = 0;		
+		health = 100.0;
 		charPos.X = charPos.Y = 0;
 		idle = true;
 		lookingRight = true;

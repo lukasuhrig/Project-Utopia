@@ -455,7 +455,7 @@ public:
 				player.resetJumpTime();//Resete die Sprungdauer
 			}
 
-			pet_1.update(player.direction(), player.getPos().X,player.getPos().Y, player.isIdle()); //PET Animation
+			pet_1.update(player.direction(), player.getPos(), player.isIdle()); //PET Animation
 
 			if (game.get_Level(1) &&!finish_1.at(0).reached_finish(player.getPos().X,player.getPos().Y)) {
 

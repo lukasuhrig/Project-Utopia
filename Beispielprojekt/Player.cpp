@@ -71,15 +71,6 @@ double Player::width() {
 	return scale_x + character_image.at(0).width();
 }
 
-bool Player::blockhit(std::vector<Blocks> blockvec, int16_t i) {
-	return(//HÖhe und Breite noch vom falschen block vermutlich
-		(this->getPos().Y + height()) >= blockvec.at(i).y_pos() && //Begrenzung nach oben
-		this->getPos().Y <= (blockvec.at(i).y_pos() + blockvec.at(i).height()) && //Begrenzung nach unten
-		(this->getPos().X + width()) >= (blockvec.at(i).x_pos()) && //Begrenzun nach links
-		this->getPos().X <= (blockvec.at(i).x_pos() + blockvec.at(i).width())
-		);
-}
-
 void Player::stop() //Spieler hält an
 {
 	this->charPos.X = charPos.X; //was auch immer das macht
@@ -148,9 +139,60 @@ void Player::set_drop(bool b) {
 bool Player::topBlock(std::vector<Blocks> blockvec, int16_t i) {
 
 	return(this->getPos().Y > (blockvec.at(i).y_pos() - block_tolerance) && //Begrenzung nach oben
-		this->getPos().Y < (blockvec.at(i).y_pos() + block_tolerance + blockvec.at(i).height()) && //Begrenzung nach unten
+		this->getPos().Y < (blockvec.at(i).y_pos() + block_tolerance) && //Begrenzung nach unten
 		this->getPos().X >(blockvec.at(i).x_pos() - block_tolerance) && //Begrenzun nach links
 		this->getPos().X < (blockvec.at(i).x_pos() + blockvec.at(i).width() + block_tolerance));
+}
+bool Player::topblockhit(std::vector<Blocks> blockvec, int16_t i) {
+	return(
+		(this->getPos().Y > (blockvec.at(i).y_pos() - block_tolerance) && //Begrenzung nach oben
+			this->getPos().Y <= (blockvec.at(i).y_pos()) && //Begrenzung nach unten
+			((this->getPos().X + width()/2.0) >=(blockvec.at(i).x_pos()) && //Begrenzun nach links
+			(this->getPos().X + width()/2.0) <= (blockvec.at(i).x_pos() + blockvec.at(i).width()))||
+			((this->getPos().X - width() / 2.0) >= (blockvec.at(i).x_pos()) && //Begrenzun nach links
+			(this->getPos().X - width() / 2.0) <= (blockvec.at(i).x_pos() + blockvec.at(i).width()))||
+			((this->getPos().X) >= (blockvec.at(i).x_pos()) && //Begrenzun nach links
+			(this->getPos().X) <= (blockvec.at(i).x_pos() + blockvec.at(i).width()))
+			)
+		);
+}
+bool Player::leftblockhit(std::vector<Blocks> blockvec, int16_t i) {
+	return(
+		
+		(this->getPos().X + width()/2.0) >= (blockvec.at(i).x_pos()) && //Begrenzun nach links
+		(this->getPos().X+width()/2.0)< (blockvec.at(i).x_pos()+block_tolerance)&&
+		((this->getPos().Y) >= blockvec.at(i).y_pos() && //Begrenzung nach oben
+		this->getPos().Y <= (blockvec.at(i).y_pos() + blockvec.at(i).height()))||
+		((this->getPos().Y + height()) >= blockvec.at(i).y_pos() && //Begrenzung nach oben
+		(this->getPos().Y + height()) <= (blockvec.at(i).y_pos() + blockvec.at(i).height())) ||
+		((this->getPos().Y + height()/2) >= blockvec.at(i).y_pos() && //Begrenzung nach oben
+		(this->getPos().Y + height() / 2) <= (blockvec.at(i).y_pos() + blockvec.at(i).height())) 
+		//Begrenzung nach unten
+		);
+}
+bool Player::rightblockhit(std::vector<Blocks> blockvec, int16_t i) {
+	return(//HÖhe und Breite noch vom falschen block vermutlich
+		(this->getPos().X - width() / 2.0) > (blockvec.at(i).x_pos()+blockvec.at(i).width()+ block_tolerance) && //Begrenzun nach links
+		(this->getPos().X - width() / 2.0) <= (blockvec.at(i).x_pos() +blockvec.at(i).width()) &&
+		((this->getPos().Y) >= blockvec.at(i).y_pos() && //Begrenzung nach oben
+		this->getPos().Y <= (blockvec.at(i).y_pos() + blockvec.at(i).height())) ||
+		((this->getPos().Y + height()) >= blockvec.at(i).y_pos() && //Begrenzung nach oben
+		(this->getPos().Y + height()) <= (blockvec.at(i).y_pos() + blockvec.at(i).height())) ||
+		((this->getPos().Y + height() / 2) >= blockvec.at(i).y_pos() && //Begrenzung nach oben
+		(this->getPos().Y + height() / 2) <= (blockvec.at(i).y_pos() + blockvec.at(i).height()))
+		);
+}
+bool Player::bottomblockhit(std::vector<Blocks> blockvec, int16_t i) {
+	return(//HÖhe und Breite noch vom falschen block vermutlich
+		this->getPos().Y-height() < (blockvec.at(i).y_pos()+blockvec.at(i).height() + block_tolerance) && //Begrenzung nach oben
+		this->getPos().Y-height() >= (blockvec.at(i).y_pos() + blockvec.at(i).height()) && //Begrenzung nach unten
+		((this->getPos().X + width() / 2.0) >= (blockvec.at(i).x_pos()) && //Begrenzun nach links
+		(this->getPos().X + width() / 2.0) <= (blockvec.at(i).x_pos() + blockvec.at(i).width())) ||
+		((this->getPos().X - width() / 2.0) >= (blockvec.at(i).x_pos()) && //Begrenzun nach links
+		(this->getPos().X - width() / 2.0) <= (blockvec.at(i).x_pos() + blockvec.at(i).width())) ||
+		((this->getPos().X) >= (blockvec.at(i).x_pos()) && //Begrenzun nach links
+		(this->getPos().X) <= (blockvec.at(i).x_pos() + blockvec.at(i).width()))
+		);
 }
 
 //***************************  SHOOT  ********************

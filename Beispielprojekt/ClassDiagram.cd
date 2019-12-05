@@ -1,0 +1,137 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="GameWindow">
+    <Position X="6.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>IwAQKAAgEoEAAAAAiAIAQEgCQQBAAACJAAAgEABE/Ps=</HashCode>
+      <FileName>Project Utopia.cpp</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Background">
+    <Position X="3" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAJAECAAAAAAAAAaAAAAAAAAAAAAAAAAgAAAAAAA=</HashCode>
+      <FileName>Background.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Blocks">
+    <Position X="4.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AQQEABIEAAAAAAQAQACAEAAAEAAAgAAA4AAGABAAIAA=</HashCode>
+      <FileName>Block.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="character">
+    <Position X="0.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQIAQAEQAACYAACAgQAAAABAAAIAAAAAAQAAAAEAAg=</HashCode>
+      <FileName>character.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Fps">
+    <Position X="3" Y="4" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAgAAAAAAAAAAAAAAASAAAAAAAAAAAAIAAAAAUAAA=</HashCode>
+      <FileName>FPS.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Cloud">
+    <Position X="8.25" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAABAAAAAAAAAAAAKAAIAQAAAAAAAAAABgAAAAAAA=</HashCode>
+      <FileName>Cloud.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Ground">
+    <Position X="10" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAQAIAAAAAAAAAAAAIAAAAAAAAAAAAAAAABAAAAEAA=</HashCode>
+      <FileName>Ground.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="finish">
+    <Position X="8.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AQYAABIEIAAAAAQAQECAAAgGEAAAgAQAYAAGiAAAAAA=</HashCode>
+      <FileName>finish.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Game">
+    <Position X="4.75" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAEAAIAAAAAAAAAAAAAAAAAAAAgAAEABAAAAAAAAEAA=</HashCode>
+      <FileName>Game.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="interval">
+    <Position X="10" Y="3" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAACACAAAAAACAAAAAAgAAAAAA=</HashCode>
+      <FileName>interval.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Mouse">
+    <Position X="11.75" Y="8" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAABBgAAAAAAAAQAOAAEAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>mouse.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Menu">
+    <Position X="10" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>BAAwAAAAEAABAAAACIIAAAhECA4IAAABAAAgAAAQAAE=</HashCode>
+      <FileName>mainmenu.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="m_time">
+    <Position X="11.75" Y="5.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAIAAAAAACAAAEAAAAACAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>m_time.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Pet">
+    <Position X="11.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AgQAAAAEAAAASAAAAgoAAAAAAAAgAAAACAABgAAEAQE=</HashCode>
+      <FileName>pet.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Vector2">
+    <Position X="13.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAIIAAABARABABAEkAIDAQBAGQAAAAAAgAAkAAAAYIA=</HashCode>
+      <FileName>vec2.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Player">
+    <Position X="0.5" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAASQgqGAAAgAEQAUAKIAOACAISgRkAAABC2AQCUACA=</HashCode>
+      <FileName>Player.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Typedef Name="Animation_Blocks" Collapsed="true">
+    <Position X="4.75" Y="10.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Block.h</FileName>
+    </TypeIdentifier>
+  </Typedef>
+  <Typedef Name="Animation" Collapsed="true">
+    <Position X="3" Y="9.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Animation.h</FileName>
+    </TypeIdentifier>
+  </Typedef>
+  <Enum Name="ZOrder">
+    <Position X="3" Y="6.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AQAAAAAAACAgQEAAAAIAgAAAAAAAAAAAAAEAAAAAgAA=</HashCode>
+      <FileName>ZOrder.h</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

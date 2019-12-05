@@ -3,6 +3,8 @@
 #include <math.h>
 #include "vec2.h"
 
+void normalize(Vector2& source);
+
 const float animationSpeed = 3; //1.2
 const float animationSpeedIdle = 0.25;
 
@@ -32,7 +34,7 @@ bool Pet::inCorrectPos(const double& player_x, const double& player_y, const boo
 {
 	if (lookingRight == true)
 	{
-		if ((this->petPos.X <= (player_x - 79.0)) && ((this->petPos.X >= (player_x - 81.0)) && (this->petPos.Y >= (player_y - 85)) && (this->petPos.Y <= (player_y - 75))))
+		if ((this->petPos.X <= (player_x - 79.0)) && (this->petPos.X >= (player_x - 81.0)) && (this->petPos.Y >= (player_y - 85)) && (this->petPos.Y <= (player_y - 75)))
 		{
 			return true;
 		}
@@ -58,7 +60,7 @@ bool Pet::inCorrectPos(const double& player_x, const double& player_y, const boo
 //********************  MOVE  ************************
 void Pet::moveTo(Vector2& direction_n) //Einheitsvektor, bewegt in Richtung X & Y mit animationSpeed
 {
-	this->petPos = (actual_pos() + (direction_n * animationSpeed));
+	this->petPos = (actual_pos() + (direction_n * float(animationSpeed)));
 }
 
 //********************  DRAW  ************************
@@ -107,25 +109,26 @@ void Pet::reset(const bool& lookingRight, const  double& player_x, const double&
 }
 
 //********************  UPDATE  **********************
-void Pet::update(const bool& lookingRight, const  double& player_x, const double& player_y, const bool& playerIdle)
+void Pet::update(const bool& lookingRight, const Vector2& playerPos, const bool& playerIdle)
 {
-	if ((inCorrectPos(player_x, player_y, lookingRight) == false)) //wenn Pos nicht korrekt dann bewegen
+	if ((inCorrectPos(playerPos.X, playerPos.Y, lookingRight) == false)) //wenn Pos nicht korrekt dann bewegen
 	{
-		Vector2 playerPosition;
+		Vector2 playerPosition; //die Position oben rechts bzw. oben links
 
 		if (lookingRight == true)
 		{
-			playerPosition.X = float(player_x - 80);
-			playerPosition.Y = float(player_y - 80);
+			playerPosition.X = float(playerPos.X - 80);
+			playerPosition.Y = float(playerPos.Y - 80);
 		}
 		else if (lookingRight == false)
 		{
-			playerPosition.X = float(player_x + 80);
-			playerPosition.Y = float(player_y - 80);
+			playerPosition.X = float(playerPos.X + 80);
+			playerPosition.Y = float(playerPos.Y - 80);
 		}
 
 		Vector2 direction = (playerPosition - petPos);
-		direction.Normalize();
+		normalize(direction);
+		//direction.Normalize();
 
 
 		moveTo(direction); //Bewegung in Richtung
@@ -145,22 +148,22 @@ void Pet::idleAnim(const double& player_x, const double& player_y, const bool& l
 {
 	if (lookingRight == true)
 	{
-		if ((this->petPos.X == (player_x - 80)) && (this->petPos.Y == (player_y - 85)))
+		if ((this->petPos.X <= (player_x - 79.0)) && (this->petPos.X >= (player_x - 81.0)) && (this->petPos.Y <= (player_y - 85)))
 		{
 			movingUp = false;
 		}
-		else if ((this->petPos.X == (player_x - 80)) && (this->petPos.Y == (player_y - 75)))
+		else if ((this->petPos.X <= (player_x - 79.0)) && (this->petPos.X >= (player_x - 81.0)) && (this->petPos.Y >= (player_y - 75)))
 		{
 			movingUp = true;
 		}
 	}
 	else if (lookingRight == false)
 	{
-		if ((this->petPos.X == (player_x + 80)) && (this->petPos.Y == (player_y - 85)))
+		if ((this->petPos.X <= (player_x + 79.0)) && (this->petPos.X >= (player_x + 81.0)) && (this->petPos.Y <= (player_y - 85)))
 		{
 			movingUp = false;
 		}
-		else if ((this->petPos.X == (player_x + 80)) && (this->petPos.Y == (player_y - 75)))
+		else if ((this->petPos.X <= (player_x + 79.0)) && (this->petPos.X >= (player_x + 81.0)) && (this->petPos.Y >= (player_y - 75)))
 		{
 			movingUp = true;
 		}
@@ -184,15 +187,16 @@ void Pet::idleAnim(const double& player_x, const double& player_y, const bool& l
 }
 
 //********************  VECTOR  **********************
-Vector2 normalize(const Vector2& source) //Einheitsvektor bilden
+void normalize(Vector2& source) //Einheitsvektor bilden
 {
 	float length = sqrt((source.X * source.X) + (source.Y * source.Y));
 	if (length != 0)
 	{
-		return Vector2(source.X / length, source.Y / length);
+		source.X = float(source.X / length);
+		source.Y = float(source.Y / length);
 	}
 	else
 	{
-		return source;
+		return;
 	}
 }

@@ -17,6 +17,8 @@ class Player : public character
 	const double scale_x=0.2;
 	const double scale_y=0.2;
 	bool shooting;
+	double right;
+	double left;
 
 	bool free=true;
 
@@ -41,7 +43,7 @@ public:
 		spawnPos.Y = 0;
 		lookingRight = true;
 		idle = true;
-
+		left = right = 0;
 		rot =jumptime=droptime=0;
 		score = 20000;
 		jump_y = ground.get_Ground();
@@ -73,7 +75,6 @@ public:
 
 	double width();
 	double height();
-
 	bool leftblockhit(std::vector<Blocks> blockvec, int16_t i);
 	bool rightblockhit(std::vector<Blocks> blockvec, int16_t i);
 	bool topblockhit(std::vector<Blocks> blockvec, int16_t i);

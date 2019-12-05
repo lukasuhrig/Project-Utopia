@@ -120,12 +120,13 @@ bool Player::get_jump() //true, wenn der Spieler in der Luft ist
 
 void Player::drop() //Fallen
 {
+	dropping = true;
 	droptime = droptime + (1.0 / 60.0); //Fallzeit in Sekunden
 	if (this->charPos.Y < ground.get_Ground())  //wenn Spieler in der Luft
 	{
 		this->charPos.Y = jump_y + droptime * droptime * gravity; //Fallfunktion
 	}
-	dropping = true;
+	
 }
 
 bool Player::get_drop() {

@@ -452,7 +452,7 @@ public:
 			{
 				player.set_pos(player.getPos().X, ground.get_Ground());
 				player.jumpposition();
-
+				player.resetJumpTime();//Resete die Sprungdauer
 			}
 
 			pet_1.update(player.direction(), player.getPos(), player.isIdle()); //PET Animation
@@ -527,6 +527,7 @@ public:
 				if (player.topBlock(normal_block2, 0) == false && player.topBlock(normal_block2, 1) == false && player.get_jump() == false) //und der Spieler nicht abspringen will
 				{
 					player.drop(); //Spieler fällt
+
 				}
 			
 			}

@@ -55,11 +55,11 @@ void finish::reset() {
 
 //****************  DIMENSIONS  ****************
 double finish::width(){
-	return scale_x * 1280.0;
+	return scale_x * 999;
 }
 
 double finish::height(){
-	return scale_y * 1136.0;
+	return scale_y *614 ;
 }
 
 //***************  FINISHED?  ******************

@@ -196,7 +196,7 @@ public:
 		normal_block1.push_back(Block1_18);
 		normal_block1.push_back(Block1_19);
 		normal_block1.push_back(Block1_20);
-		finish1_1.set_pos(500, 500);
+		finish1_1.set_pos(3400, 100);
 		finish_1.push_back(finish1_1);
 		//Level2
 		Block2_1.set_pos(200, 380, 0.3, 0.3);

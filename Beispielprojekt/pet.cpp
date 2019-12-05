@@ -109,21 +109,21 @@ void Pet::reset(const bool& lookingRight, const  double& player_x, const double&
 }
 
 //********************  UPDATE  **********************
-void Pet::update(const bool& lookingRight, const  double& player_x, const double& player_y, const bool& playerIdle)
+void Pet::update(const bool& lookingRight, const Vector2& playerPos, const bool& playerIdle)
 {
-	if ((inCorrectPos(player_x, player_y, lookingRight) == false)) //wenn Pos nicht korrekt dann bewegen
+	if ((inCorrectPos(playerPos.X, playerPos.Y, lookingRight) == false)) //wenn Pos nicht korrekt dann bewegen
 	{
-		Vector2 playerPosition;
+		Vector2 playerPosition; //die Position oben rechts bzw. oben links
 
 		if (lookingRight == true)
 		{
-			playerPosition.X = float(player_x - 80);
-			playerPosition.Y = float(player_y - 80);
+			playerPosition.X = float(playerPos.X - 80);
+			playerPosition.Y = float(playerPos.Y - 80);
 		}
 		else if (lookingRight == false)
 		{
-			playerPosition.X = float(player_x + 80);
-			playerPosition.Y = float(player_y - 80);
+			playerPosition.X = float(playerPos.X + 80);
+			playerPosition.Y = float(playerPos.Y - 80);
 		}
 
 		Vector2 direction = (playerPosition - petPos);

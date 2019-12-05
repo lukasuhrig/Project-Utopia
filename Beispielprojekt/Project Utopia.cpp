@@ -205,7 +205,7 @@ public:
 		normal_block1.push_back(Block1_18);
 		normal_block1.push_back(Block1_19);
 		normal_block1.push_back(Block1_20);
-		finish1_1.set_pos(500, 500);
+		finish1_1.set_pos(3500, 200);
 		finish_1.push_back(finish1_1);
 		//Level2
 		Block2_1.set_pos(200, 380, 0.3, 0.3);
@@ -453,15 +453,15 @@ public:
 			{
 				player.set_idle(false);
 			}
-			if (player.getPos().Y >= (ground.get_Ground() - 5)) //Wenn Spieler den Boden wieder berührt
+			/*if (player.getPos().Y >= (ground.get_Ground() - 5)) //Wenn Spieler den Boden wieder berührt
 			{
 				player.resetJumpTime();//Resete die Sprungdauer
-			}
+			}*/
 			if (player.getPos().Y > ground.get_Ground() + 5) //wenn der Spieler durch den Boden glitcht setzt es ihn wieder auf den Boden
 			{
 				player.set_pos(player.getPos().X, ground.get_Ground());
 				player.jumpposition();
-
+				player.resetJumpTime();//Resete die Sprungdauer
 			}
 
 			pet_1.update(player.direction(), player.getPos().X, player.getPos().Y, player.isIdle()); //PET Animation
@@ -536,6 +536,7 @@ public:
 				if (player.topBlock(normal_block2, 0) == false && player.topBlock(normal_block2, 1) == false && player.get_jump() == false) //und der Spieler nicht abspringen will
 				{
 					player.drop(); //Spieler fällt
+
 				}
 			
 			}

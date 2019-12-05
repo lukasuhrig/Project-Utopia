@@ -55,11 +55,11 @@ void finish::reset() {
 
 //****************  DIMENSIONS  ****************
 double finish::width(){
-	return scale_x * 999;
+	return scale_x * animation_finish.at(0).width();
 }
 
 double finish::height(){
-	return scale_y *614 ;
+	return scale_y * animation_finish.at(0).height();
 }
 
 //***************  FINISHED?  ******************

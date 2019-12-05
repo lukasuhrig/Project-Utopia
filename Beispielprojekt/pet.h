@@ -38,7 +38,7 @@ public:
 
 	void draw(const bool &lookingRight);
 
-	void update(const bool &lookingRight, const  double &player_x, const double &player_y, const bool &playerIdle);
+	void update(const bool &lookingRight, const Vector2& playerPos, const bool &playerIdle);
 
 	void reset(const bool& lookingRight, const  double& player_x, const double& player_y);
 

@@ -37,15 +37,6 @@ bool backtomenu=false;
 bool nohit=true;
 
 bool won = false;
-bool won1= false;
-bool won2 = false;
-bool won3 = false;
-bool won4 = false;
-bool won5 = false;
-bool won6 = false;
-bool won7 = false;
-bool won8 = false;
-bool won9 = false;
 int64_t frames=0;
 int64_t playtime = 0;
 //FPS
@@ -404,11 +395,11 @@ public:
 			{
 				player.set_idle(false);
 			}
-			if (player.getPos().Y >= (ground.get_Ground() - 5)) //Wenn Spieler den Boden wieder berührt
+			if (player.getPos().Y >= (ground.get_Ground() )) //Wenn Spieler den Boden wieder berührt
 			{
 				player.resetJumpTime();//Resete die Sprungdauer
 			}
-			if (player.getPos().Y > ground.get_Ground() + 5) //wenn der Spieler durch den Boden glitcht setzt es ihn wieder auf den Boden
+			if (player.getPos().Y > ground.get_Ground() ) //wenn der Spieler durch den Boden glitcht setzt es ihn wieder auf den Boden
 			{
 				player.set_pos(player.getPos().X, ground.get_Ground());
 				player.jumpposition();

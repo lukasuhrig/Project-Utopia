@@ -9,7 +9,7 @@ void finish::draw_finish() {
 		// Blöcke sollen vor allem anderen auf dem Bildschirm angezeigt werden
 		0,
 		0,
-		0.25,
+		0,
 		scale_x, //Skalierung Charakter X
 		scale_y //Skalierung Charakter Y
 	);

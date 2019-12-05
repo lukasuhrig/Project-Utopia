@@ -79,15 +79,7 @@ public:
 	Blocks Block1_9;
 	Blocks Block1_10;
 	Blocks Block1_11;
-	Blocks Block1_12;
-	Blocks Block1_13;
-	Blocks Block1_14;
-	Blocks Block1_15;
-	Blocks Block1_16;
-	Blocks Block1_17;
-	Blocks Block1_18;
-	Blocks Block1_19;
-	Blocks Block1_20;
+
 	finish finish1_1;
 
 	//Level2
@@ -160,18 +152,10 @@ public:
 		Block1_6.set_pos(1500, 280, 0.3, 0.3);
 		Block1_7.set_pos(2100, 280, 0.3, 0.3);
 		Block1_8.set_pos(2800, 280, 0.3, 0.3);
-		Block1_9.set_pos(3600, 280, 0.3, 0.3);
-		Block1_10.set_pos(4500, 280, 0.3, 0.3);
-		Block1_11.set_pos(5500, 280, 0.3, 0.3);
-		Block1_12.set_pos(6600, 280, 0.3, 0.3);
-		Block1_13.set_pos(7800, 280, 0.3, 0.3);
-		Block1_14.set_pos(9100, 280, 0.3, 0.3);
-		Block1_15.set_pos(10500, 280, 0.3, 0.3);
-		Block1_16.set_pos(12000, 280, 0.3, 0.3);
-		Block1_17.set_pos(13600, 280, 0.3, 0.3);
-		Block1_18.set_pos(15300, 280, 0.3, 0.3);
-		Block1_19.set_pos(17100, 280, 0.3, 0.3);
-		Block1_20.set_pos(19000, 280, 0.3, 0.3);
+		Block1_9.set_pos(3300, 220, 0.3, 0.3);
+		Block1_10.set_pos(3300+Block1_9.width(), 220, 0.3, 0.3);
+		Block1_11.set_pos(3300+Block1_9.width()*2, 220, 0.3, 0.3);
+		
 
 
 
@@ -187,16 +171,8 @@ public:
 		normal_block1.push_back(Block1_9);
 		normal_block1.push_back(Block1_10);
 		normal_block1.push_back(Block1_11);
-		normal_block1.push_back(Block1_12);
-		normal_block1.push_back(Block1_13);
-		normal_block1.push_back(Block1_14);
-		normal_block1.push_back(Block1_15);
-		normal_block1.push_back(Block1_16);
-		normal_block1.push_back(Block1_17);
-		normal_block1.push_back(Block1_18);
-		normal_block1.push_back(Block1_19);
-		normal_block1.push_back(Block1_20);
-		finish1_1.set_pos(3400, 100);
+
+		finish1_1.set_pos(3300+Block1_9.width(), 224-finish1_1.height());
 		finish_1.push_back(finish1_1);
 		//Level2
 		Block2_1.set_pos(200, 380, 0.3, 0.3);
@@ -489,16 +465,7 @@ public:
 					player.topBlock(normal_block1, 7) == false && 
 					player.topBlock(normal_block1, 8)== false && 
 					player.topBlock(normal_block1, 9) == false && 
-					player.topBlock(normal_block1, 10) == false && 
-					player.topBlock(normal_block1, 11) == false && 
-					player.topBlock(normal_block1, 12) == false && 
-					player.topBlock(normal_block1, 13) == false && 
-					player.topBlock(normal_block1, 14) == false && 
-					player.topBlock(normal_block1, 15) == false && 
-					player.topBlock(normal_block1, 16) == false && 
-					player.topBlock(normal_block1, 17) == false && 
-					player.topBlock(normal_block1, 18) == false &&
-					player.topBlock(normal_block1, 19) == false &&
+					player.topBlock(normal_block1, 10) == false &&
 					player.get_jump() == false && player.getPos().Y<ground.get_Ground()+3) //und der Spieler nicht abspringen will
 				{
 					player.drop(); //Spieler fällt

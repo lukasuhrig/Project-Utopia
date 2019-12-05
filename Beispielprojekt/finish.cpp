@@ -64,7 +64,7 @@ double finish::height(){
 
 //***************  FINISHED?  ******************
 bool finish::reached_finish(double posx, double posy) {
-	if ( (posx > pos_x) && (posy > pos_y) && (posx < (pos_x + width())) && (pos_y < (pos_y + height())) ) {
+	if ( (posx > pos_x) && (posy > pos_y) && (posx < (pos_x + width())) && (posy < (pos_y + height())) ) {
 		
 			return true;
 		
